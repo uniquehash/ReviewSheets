@@ -1,7 +1,7 @@
 # ReviewSheets
 Hey guys!
 
-If you find any of this stuff useful give me a shoutout and a follow @otwizb!
+If you find any of this stuff useful please give me a shoutout and a follow @otwizb!
 
 These are all my review sheets and notes from college. 
 Right now I've added the majority of my CS stuff that I could easily find.
