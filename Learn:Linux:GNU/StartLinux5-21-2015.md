@@ -2,7 +2,7 @@
 Think of this as a working journal of my experience going though 
 ####**The Linux Command Line** Second Internet Edition by **_William E. Shotts, Jr._**
 #####Note: I have read, or at least skimmed every link posted.
-
+#####Note: I will link to extra resources every time a new term is mentioned, however when transitioning to a new chapter it will be assumed that you no longer need the link and I will cease to link. 
 
 ##Contents 
 - [Preface](#preface)
@@ -61,7 +61,21 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * basically [terminal](http://en.wikipedia.org/wiki/GNOME_Terminal) interacts with the [the shell](http://en.wikipedia.org/wiki/Shell_(computing)) which in turn interacts with the operating system.
 
 **shell prompt**:
-* appears in your terminal looks like this [```<span style="color:red">helpless</span>```@hh: ~]$
+* in your terminal it should looks like this `helpless@hh-machine: ~$`
+	* in this example **helpless** is the **username**.
+	* *hh-machine* is the name of the machine.
+	* the $ indicates where the cursor should be and where user input starts 
+		* if instead of a $ you see a # then the [terminal](http://en.wikipedia.org/wiki/GNOME_Terminal) session has [superuser](http://en.wikipedia.org/wiki/Superuser) privileges
+			* a [superuser](http://en.wikipedia.org/wiki/Superuser) is user account with the ability to make system-wide changes, i.e. change and potentially fuck up your configuration for good, be careful.
+* this is a shell prompt within a directory `helpless@hh-machine: ~/Desktop$~
+	* **helpless** is still the **username**.
+	* *hh-machine* is still the name of the machine.
+	* __*/Desktop*__ indicates the current directory we are in, which in this case is Desktop.
+	* the $ still indicates where the cursor should be and where user input starts 
+* to copy-paste select something you wish to copy with the mouse left click and then press the center button (likely to be your scroll wheel) to paste directly at the cursor location.
+
+
+
 
 
 
