@@ -84,7 +84,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 #### What is the Shell Simple Commands
 
 | Command | Description |
-| ------: | ----------: |
+| ------: | ----------- |
 | date    | displays the current time and date |
 | cal     | displays the calendar of the current month |
 | df      | displays the current amount of free space on your disk drives |
