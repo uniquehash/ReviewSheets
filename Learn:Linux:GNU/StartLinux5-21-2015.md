@@ -1,6 +1,7 @@
 #Learn Linux one mistake at a time
 Think of this as a working journal of my experience going though 
 ####**The Linux Command Line** Second Internet Edition by **_William E. Shotts, Jr._**
+#####Note: I have read, or at least skimmed every link posted.
 
 
 ##Contents 
@@ -40,5 +41,23 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * The [GNU also has a website](http://www.gnu.org/), i'm including them here because from a novices perspective they seem rather tied together
 
 ## Learning the Shell
+
+**[The shell](http://en.wikipedia.org/wiki/Shell_(computing))**:
+* a program that takes keyboard commands as inputs and passes them to the operating system
+* Most Linux/GNU ditributions use bash a program developed and supplied by the GNU Project Ubuntu is no different
+* [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) stands for "Bourne Again SHell" which is play on words on the original Unix shell program written by Steven Bourne called sh
+	* [Shellshock](http://en.wikipedia.org/wiki/Shellshock_(software_bug)) is a family of security bugs discovered in September 2014. Essentially [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) was vulnerable to [executing arbitary commands](http://en.wikipedia.org/wiki/Arbitrary_code_execution), allowing aggressors unauthorized access to computer systems. 
+	* [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) is mostly [POSIX](http://en.wikipedia.org/wiki/POSIX) complient
+
+**[POSIX](http://en.wikipedia.org/wiki/POSIX)**:
+* Stands for Portable Operating System Interface 
+* Standards specified by [IEEE Computer Society](http://en.wikipedia.org/wiki/IEEE_Computer_Society) for maintaining compatibility between operating systems
+	* [IEEE Computer Society](http://en.wikipedia.org/wiki/IEEE_Computer_Society) is essentially a worldwide organization that establishes standards and is importante, it's structurally similar to the [WHO](http://en.wikipedia.org/wiki/World_Health_Organization), but for Computer and Information Science
+
+**[terminal](http://en.wikipedia.org/wiki/GNOME_Terminal)**:
+* Actually called [gnome-terminal](http://en.wikipedia.org/wiki/GNOME_Terminal), but generally shortened to [terminal](http://en.wikipedia.org/wiki/GNOME_Terminal)
+* This is our interface to interact with the shell
+* basically [terminal](http://en.wikipedia.org/wiki/GNOME_Terminal) interacts with the shell which inturn interacts with the operating system
+
 
 
