@@ -7,8 +7,8 @@ Think of this as a working journal of my experience going through
 ##Contents 
 - [Preface](#preface)
 - [Learning the shell](#learning-the-shell)
-	- [What is the Shell: Background](#what-is-the-shell/Background)
-	- [What is the Shell: Simple Commands](#what-is-the-shell/simple-commands)
+	- [What is the Shell: Background](#what-is-the-shell/background)
+	- [What is the Shell: Simple Commands](#what-is-the-shell/a)
 
 ## Preface 
 
@@ -81,7 +81,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 **directory**:
 * We will go over this in more detail later. For right now think of it as a folder you put stuff in, like files and other folders.
 
-#### What is the Shell/Simple Commands 
+#### What is the Shell/a
 
 
 
