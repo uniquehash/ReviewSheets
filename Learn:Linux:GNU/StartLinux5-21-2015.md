@@ -124,10 +124,10 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * At any time during navigation we can only see the directory above us, and the directories below us. 
 	* In other words we only have access to the parent and children of the directory we are in. 
 * We must then have a method for figuring out which directory in the File System Tree we are in. 
-``` 
-helpless@hh ~$ pwd
-/home/helpless
-```	
+* ```
+	helpless@hh ~$ pwd
+	/home/helpless
+  ```	
 
 
 
