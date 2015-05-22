@@ -8,7 +8,7 @@ Think of this as a working journal of my experience going though
 
 ## Preface 
 
-Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!!
+Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More details about transitioning to Linux/GNU](https://docs.google.com/document/d/19kndLz7T1OYaKNly9aNF880eBuECQFKQMKMmvUgof3U/edit?hl=en&forcehl=1)
 
 ###Further reading 
 
@@ -23,6 +23,9 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!!
 * Launched the GNU Project and founded the Free Software Foundation 
 * Developed the GNU Compiler Collection (gcc), GNU Emacs, and GNU General Public Liscense
 * I was to engrossed to take notes sorry.... hahaha look him up on [wikipedia](http://en.wikipedia.org/wiki/Richard_Stallman)
+* There is a bit of a naming contreversy on what to call this operating system, whether it be GNU/Linux, Linux/GNU, or Linux
+	* GNU has a [FAQ on their perspective](http://www.gnu.org/gnu/gnu-linux-faq.html)
+* [Stallman's take](http://www.gnu.org/gnu/why-gnu-linux.html) on why to call it GNU/Linux
  
 **[GNU General Public License](http://en.wikipedia.org/wiki/GNU_General_Public_License)**:
 * Most widely used free software license which gurantees end users the freedoms to use, study, share, and modify the software
@@ -31,4 +34,8 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!!
 
 **[Free Software Foundation](http://en.wikipedia.org/wiki/Free_Software_Foundation)**:
 * 501(c)(3) non-profit organization founded by Richard Stallman to support the free software movement 
-* 
+* Basically a non-profit to promote and finance all aspects of the free software movement, if you digested the other wiki's this is less interesting
+* The [Free Software Foundation has a website](http://www.fsf.org/)
+* The [GNU also has a website](http://www.gnu.org/), i'm including them here because from a novices perspective they seem rather tied together
+
+
