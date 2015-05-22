@@ -47,7 +47,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 
 ### What is the Shell Background
 
-**[The shell](http://en.wikipedia.org/wiki/Shell_(computing))**:
+**[the shell](http://en.wikipedia.org/wiki/Shell_(computing))**:
 * a program that takes keyboard commands as inputs and passes them to the operating system.
 * Most Linux/GNU ditributions use [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)), a program developed and supplied by the GNU Project. Ubuntu is no different.
 * [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) stands for "Bourne Again SHell" which is play on words on the original Unix shell program written by [Steven Bourne](http://en.wikipedia.org/wiki/Stephen_R._Bourne) called the [Bourne shell (sh)](http://en.wikipedia.org/wiki/Bourne_shell).
@@ -97,7 +97,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 
 ### Navigation Background 
 
-**The File System Tree**:
+**the File System Tree**:
 * I could not find a good graphical explanation of general hierarchical directory structure so I made my own. 
 * The Linux file system is organized in a tree like pattern of directories.
 * The file system is divised in parent, children and sibling relationships. 
@@ -124,10 +124,9 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * At any time during navigation we can only see the directory above us, and the directories below us. 
 	* In other words we only have access to the parent and children of the directory we are in. 
 * We must then have a method for figuring out which directory in the File System Tree we are in. 
-	* ``` bash
-	helpless@hh ~$ pwd
-	/home/helpless
-	```
+	*     helpless@hh ~$ pwd
+	      /home/helpless
+	
 
 
 
