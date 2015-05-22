@@ -60,5 +60,8 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * This is our interface to interact with the [the shell](http://en.wikipedia.org/wiki/Shell_(computing)).
 * basically [terminal](http://en.wikipedia.org/wiki/GNOME_Terminal) interacts with the [the shell](http://en.wikipedia.org/wiki/Shell_(computing)) which in turn interacts with the operating system.
 
+**shell prompt**:
+* appears in your terminal looks like this `[```<span style="color:red">helpless</span>```@hh: ~]$`
+
 
 
