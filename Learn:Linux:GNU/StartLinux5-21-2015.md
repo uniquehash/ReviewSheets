@@ -6,7 +6,7 @@ Think of this as a working journal of my experience going though
 ##Contents 
 - Pre-face (#Pre-face)
 
-##Pre-face 
+#Pre-face 
 
 Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!!
 
