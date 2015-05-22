@@ -66,13 +66,15 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 	* *hh-machine* is the name of the machine.
 	* the $ indicates where the cursor should be and where user input starts 
 		* if instead of a $ you see a # then the [terminal](http://en.wikipedia.org/wiki/GNOME_Terminal) session has [superuser](http://en.wikipedia.org/wiki/Superuser) privileges
-			* a [superuser](http://en.wikipedia.org/wiki/Superuser) is user account with the ability to make system-wide changes, i.e. change and potentially fuck up your configuration for good, be careful.
-* this is a shell prompt within a directory `helpless@hh-machine: ~/Desktop$~
+			* a [superuser](http://en.wikipedia.org/wiki/Superuser) is a user account with the ability to make system-wide changes, i.e. change and potentially fuck up your configuration for good, be careful.
+* this is a shell prompt within a directory `helpless@hh-machine: ~/Desktop$`
 	* **helpless** is still the **username**.
 	* *hh-machine* is still the name of the machine.
 	* __*/Desktop*__ indicates the current directory we are in, which in this case is Desktop.
 	* the $ still indicates where the cursor should be and where user input starts 
-* to copy-paste select something you wish to copy with the mouse left click and then press the center button (likely to be your scroll wheel) to paste directly at the cursor location.
+* copy-paste: select something you wish to copy with the mouse left click and then press the center button (likely to be your scroll wheel) to paste directly at the cursor location.
+
+**directory**:
 
 
 
