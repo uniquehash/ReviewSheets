@@ -9,6 +9,7 @@ Think of this as a working journal of my experience going through
 - [Learning the shell](#learning-the-shell)
 	- [What is the Shell: Background](#what-is-the-shell-background)
 	- [What is the Shell: Simple Commands](#what-is-the-shell-simple-commands)
+	- [Navigation](#navigation-background)
 
 ## Preface 
 
@@ -93,6 +94,42 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
  | exit    | end's the terminal session and closes the terminal window |
 
 * Woah you just issued your first commands through the command line, congrats you're on the road to mastering the CLI and Linux/GNU
+
+### Navigation Background 
+
+**The File System Tree**:
+* I could not find a good graphical explanation of general hierarchical directory structure so I made my own. 
+* The Linux file system is organized in a tree like pattern of directories.
+* The file system is divised in parent, children and sibling relationships. 
+	* All parents have children.
+	* Children can have siblings, but are not required to. 
+	* Children can be parents, but are not required to. 
+	* All parents are in turn children of other parents.
+	* The analogy here is that of a family tree.
+		* You have parents.
+		* You may have siblings, or you may not.
+		* One day you may have children, or you may not (or maybe you already do have children).
+		* Your parents have parents, and may or may not have siblings with no children. 
+* All of this is a lot clearer in the graphical explanation if you click the link.
+* [Ubuntu like all Linux systems also has a hierarchical tree structure](https://help.ubuntu.com/community/LinuxFilesystemTreeOverview).
+
+**directory**:
+* A directory simply put is a container with an identifier. 
+* You put files in them to make it easy to find and retrieve the files at a later date by using the identifier.
+* They allow to organize files in a way that makes sense. 
+* You can nest directories in other directories, which creates a hierarchy of directory, which can be represented with a tree like diagram, hence The File System Tree.
+
+**current working directory**:
+* We navigate the file system by moving up and down directories to access, retrieve, and edit file at different locations in the File Sytstem Tree. 
+* At any time during navigation we can only see the directory above us, and the directories below us. 
+	* In other words we only have access to the parent and children of the directory we are in. 
+* We must then have a method for figuring out which directory in the File System Tree we are in. 
+	* ``` bash
+	helpless@hh ~$ pwd
+	/home/helpless
+	```
+
+
 
 
 
