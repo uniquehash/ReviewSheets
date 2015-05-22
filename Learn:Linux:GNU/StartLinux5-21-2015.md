@@ -1,8 +1,13 @@
-#Learn Linux a mistake at a time
+#Learn Linux one mistake at a time
+#####Think of this as a working journal of my experience going though **The Linux Command Line** Second Internet Edition by **_William E. Shotts, Jr._**
+
+
+##Contents 
+- Pre-face 
 
 ##Pre-face 
 
-Just downloaded Ubuntu, and got my *wifi* working wooooooooo!!!!!!
+Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!!
 
 ###Further reading 
 
