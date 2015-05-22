@@ -5,12 +5,13 @@ Think of this as a working journal of my experience going though
 
 ##Contents 
 - [Preface](#preface)
+- [Learning the shell](#learning-the-shell)
 
-## Preface 
+### Preface 
 
 Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More details about transitioning to Linux/GNU](https://docs.google.com/document/d/19kndLz7T1OYaKNly9aNF880eBuECQFKQMKMmvUgof3U/edit?hl=en&forcehl=1)
 
-###Brushing up on history
+####Brushing up on history
 
 **[Linus Benedict Torvalds](http://en.wikipedia.org/wiki/Linus_Torvalds)**: 
 * Principle force behind development of the Linux kernel.
@@ -37,5 +38,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * Basically a non-profit to promote and finance all aspects of the free software movement, if you digested the other wiki's this is less interesting
 * The [Free Software Foundation has a website](http://www.fsf.org/)
 * The [GNU also has a website](http://www.gnu.org/), i'm including them here because from a novices perspective they seem rather tied together
+
+## Learning the Shell e
 
 
