@@ -6,7 +6,7 @@ Think of this as a working journal of my experience going though
 ##Contents 
 - [Preface](#preface)
 
-## Preface 
+# Preface 
 
 Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!!
 
