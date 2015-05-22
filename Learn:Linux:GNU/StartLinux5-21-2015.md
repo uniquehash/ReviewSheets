@@ -56,8 +56,8 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 
 **[terminal](http://en.wikipedia.org/wiki/GNOME_Terminal)**:
 * Actually called [gnome-terminal](http://en.wikipedia.org/wiki/GNOME_Terminal), but generally shortened to [terminal](http://en.wikipedia.org/wiki/GNOME_Terminal)
-* This is our interface to interact with the [The shell](http://en.wikipedia.org/wiki/Shell_(computing))
-* basically [terminal](http://en.wikipedia.org/wiki/GNOME_Terminal) interacts with the [The shell](http://en.wikipedia.org/wiki/Shell_(computing)) which inturn interacts with the operating system
+* This is our interface to interact with the [the shell](http://en.wikipedia.org/wiki/Shell_(computing))
+* basically [terminal](http://en.wikipedia.org/wiki/GNOME_Terminal) interacts with the [the shell](http://en.wikipedia.org/wiki/Shell_(computing)) which inturn interacts with the operating system
 
 
 
