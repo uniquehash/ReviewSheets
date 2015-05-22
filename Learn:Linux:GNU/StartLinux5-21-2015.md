@@ -1,5 +1,6 @@
 #Learn Linux one mistake at a time
-#####Think of this as a working journal of my experience going though **The Linux Command Line** Second Internet Edition by **_William E. Shotts, Jr._**
+#####Think of this as a working journal of my experience going though **The Linux Command Line** 
+Second Internet Edition by **_William E. Shotts, Jr._**
 
 
 ##Contents 
