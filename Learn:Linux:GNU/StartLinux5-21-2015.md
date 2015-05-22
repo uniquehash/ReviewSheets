@@ -82,16 +82,17 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * We will go over this in more detail later. For right now think of it as a folder you put stuff in, like files and other folders.
 
 #### What is the Shell Simple Commands
+* Type the commands below in your terminal window and see what they do!
 
-| Command | Description |
-| ------: | ----------- |
-| date    | displays the current time and date |
-| cal     | displays the calendar of the current month |
-| df      | displays the current amount of free space on your disk drives |
-| free    | displays the amount of free memory your machine has |
-| exit    | end's the terminal session and closes the terminal window |
+* | Command | Description |
+ | ------: | ----------- |
+ | date    | displays the current time and date |
+ | cal     | displays the calendar of the current month |
+ | df      | displays the current amount of free space on your disk drives |
+ | free    | displays the amount of free memory your machine has |
+ | exit    | end's the terminal session and closes the terminal window |
 
-
+* Woah you just issued your first commands through the command line, congrats you're on the road to mastering the CLI and Linux/GNU
 
 
 
