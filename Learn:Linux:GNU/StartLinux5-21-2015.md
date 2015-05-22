@@ -7,6 +7,8 @@ Think of this as a working journal of my experience going though
 ##Contents 
 - [Preface](#preface)
 - [Learning the shell](#learning-the-shell)
+	- [What is the Shell: Background](#what-is-the-shell:-Background)
+	- [What is the Shell: Simple Commands](#what-is-the-shell:-simple-commands)
 
 ## Preface 
 
@@ -42,6 +44,8 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 
 ## Learning the Shell
 
+### What is the Shell: Background
+
 **[The shell](http://en.wikipedia.org/wiki/Shell_(computing))**:
 * a program that takes keyboard commands as inputs and passes them to the operating system.
 * Most Linux/GNU ditributions use [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)), a program developed and supplied by the GNU Project. Ubuntu is no different.
@@ -75,6 +79,9 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * copy-paste: select something you wish to copy with the mouse left click and then press the center button (likely to be your scroll wheel) to paste directly at the cursor location.
 
 **directory**:
+* We will go over this in more detail later. For right now think of it as a folder you put stuff in, like files and other folders.
+
+#### What is the Shell: Simple Commands 
 
 
 
