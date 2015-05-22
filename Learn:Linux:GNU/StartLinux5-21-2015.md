@@ -4,7 +4,7 @@ Think of this as a working journal of my experience going though
 
 
 ##Contents 
-- [Preface](#preface)
+- [preface](#preface)
 
 # preface 
 
