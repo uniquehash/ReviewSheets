@@ -1,5 +1,5 @@
 #Learn Linux one mistake at a time
-Think of this as a working journal of my experience going though 
+Think of this as a working journal of my experience going through 
 ####**The Linux Command Line** Second Internet Edition by **_William E. Shotts, Jr._**
 #####Note: I have read, or at least skimmed every link posted.
 #####Note: I will link to extra resources every time a new term is mentioned, however when transitioning to a new chapter it will be assumed that you no longer need the link and I will cease to link. 
@@ -7,8 +7,8 @@ Think of this as a working journal of my experience going though
 ##Contents 
 - [Preface](#preface)
 - [Learning the shell](#learning-the-shell)
-	- [What is the Shell: Background](#what-is-the-shell:-Background)
-	- [What is the Shell: Simple Commands](#what-is-the-shell:-simple-commands)
+	- [What is the Shell: Background](#what-is-the-shell/Background)
+	- [What is the Shell: Simple Commands](#what-is-the-shell/simple-commands)
 
 ## Preface 
 
@@ -44,7 +44,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 
 ## Learning the Shell
 
-### What is the Shell: Background
+### What is the Shell/Background
 
 **[The shell](http://en.wikipedia.org/wiki/Shell_(computing))**:
 * a program that takes keyboard commands as inputs and passes them to the operating system.
@@ -81,7 +81,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 **directory**:
 * We will go over this in more detail later. For right now think of it as a folder you put stuff in, like files and other folders.
 
-#### What is the Shell: Simple Commands 
+#### What is the Shell/Simple Commands 
 
 
 
