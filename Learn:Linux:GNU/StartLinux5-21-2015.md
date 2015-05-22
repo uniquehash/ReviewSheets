@@ -49,7 +49,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 	* [Shellshock](http://en.wikipedia.org/wiki/Shellshock_(software_bug)) is a family of security bugs discovered in September 2014. Essentially [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) was vulnerable to [executing arbitary commands](http://en.wikipedia.org/wiki/Arbitrary_code_execution), allowing aggressors unauthorized access to computer systems. 
 	* [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) is mostly [POSIX](http://en.wikipedia.org/wiki/POSIX) complient.
 	* Wanna know if you are running bash? type 
-	''' echo $BASH_VERSION ''' 
+	    echo $BASH_VERSION
 	it will return your bash version number, if it comes back empty you are not running bash.
 
 **[POSIX](http://en.wikipedia.org/wiki/POSIX)**:
