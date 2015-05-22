@@ -10,7 +10,7 @@ Think of this as a working journal of my experience going though
 
 Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More details about transitioning to Linux/GNU](https://docs.google.com/document/d/19kndLz7T1OYaKNly9aNF880eBuECQFKQMKMmvUgof3U/edit?hl=en&forcehl=1)
 
-###Further reading 
+###Brushing up on history
 
 **[Linus Benedict Torvalds](http://en.wikipedia.org/wiki/Linus_Torvalds)**: 
 * Principle force behind development of the Linux kernel.
