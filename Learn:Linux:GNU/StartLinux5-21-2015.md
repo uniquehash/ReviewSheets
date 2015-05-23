@@ -125,9 +125,12 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 	* In other words we only have access to the parent and children of the directory we are in. 
 * We must then have a method for figuring out which directory in the File System Tree we are in. 
 ```
-	helpless@hh ~$ pwd
+	helpless@hh: ~$ pwd
 	/home/helpless
 ```	
+* This is called the current working directory and is the output of the `pwd` command.
+* This particular directory is the one we find ourselves in when we first log in and is known as the home directory.
+
 
 
 
