@@ -207,8 +207,8 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 
  	 | argument | Description | Syntex |
  	 | -------: | ---------- | ------ |
- 	 |  		| displays all the non-hidden files and directories contained<br> in the working directory | `helpless@hh-machine:~$ ls` |
- 	 | -a 		| displays all the files and directories contained in the working<br> directory including the hidden ones | `helpless@hh-machine:~$ ls -a` |
+ 	 |  		| displays all the non-hidden files and<br> directories contained in the working directory | `helpless@hh-machine:~$ ls` |
+ 	 | -a 		| displays all the files and directories contained <br>in the working directory including the hidden ones | `helpless@hh-machine:~$ ls -a` |
 
 
 
