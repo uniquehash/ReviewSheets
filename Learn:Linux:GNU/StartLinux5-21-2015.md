@@ -163,11 +163,11 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * Generally recomended to not mess around with it and to do most work under a normal user account.
 	* Any valid command run by the superuser will be run without question, meaning that typological issues can cause irreversable dammage. As such it is recomended to work using a normal user account and to carefully use the superuser account when system-wide changes must be done. 
 * The command sudo is used to run commands as a superuser 
-	```
+```
 	helpless@hh-machine:~$ sudo pwd
 	[sudo] password for helpless: [enter user password here]
 	 /home/helpless
-	```
+```
 * In this case there is no difference in using `sudo` for the `pwd` command because the pwd does not need superuser privaleges to run, but a different command which needs superuser privilages would not run without it. 
 	* If a command that needs superuser privaleges is run from a regular user without using sudo the system will output `Permission denied`.
 
