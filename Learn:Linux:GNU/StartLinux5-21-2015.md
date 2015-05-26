@@ -250,7 +250,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * The word argument will now be shortened to arg
 * as an exersize you should take a piece of paper and use a combination of the `cd` and `ls` cmd to figure out the structure of the File System Tree.
 	* Draw each directory as a circle and connect them in the correct hierarchy. 
-
+		* Similar to [what I did](https://drive.google.com/file/d/0B-1wnpl3HILibEVFRGE3LW9Xams/view?usp=sharing).
 
 
 
