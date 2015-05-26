@@ -146,7 +146,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * The first and top-most directory in the file system tree.
 * It is the ancestor of all the directories and files in the system, the eve of the File System Tree.
 * [The root directory is nameless](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) and is represented as an emoty space before a /. 
-* Lets break down the absolute path ` /home/helpless`
+* Lets break down the absolute path ` ``/home/helpless`
 	* ` ` before the `/` is an empty string representing the [root directory](http://en.wikipedia.org/wiki/Root_directory).
 	* `/` is a deliminator showing that `home` is a child of ` `([the root directory](http://en.wikipedia.org/wiki/Root_directory)). 
 		* `home` is a directory that contains the home directories of every user registered with the linux machine, in this case there is only one registered user and we have chosen to call this user "helpless"
