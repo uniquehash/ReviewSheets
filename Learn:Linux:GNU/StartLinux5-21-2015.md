@@ -101,7 +101,8 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 ### Navigation Background 
 
 **the File System Tree**:
-* I could not find a good graphical explanation of general hierarchical directory structure so I made my own. 
+* I could not find a good graphical explanation of the file system tree so [I made my own](https://drive.google.com/file/d/0B-1wnpl3HILibEVFRGE3LW9Xams/view?usp=sharing).
+	* If you have trouble understanding it go through the rest of the chapter and then come back to it.  
 * The Linux file system is organized in a tree like pattern of directories.
 * The file system is divised in parent, children and sibling relationships. 
 	* All parents have children.
@@ -249,6 +250,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * The word argument will now be shortened to arg
 * as an exersize you should take a piece of paper and use a combination of the `cd` and `ls` cmd to figure out the structure of the File System Tree.
 	* Draw each directory as a circle and connect them in the correct hierarchy. 
+
 
 
 
