@@ -247,8 +247,10 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * We refer to the nameless root directory as ` ``/`.
 * The word command will now be shortened to cmd 
 * The word argument will now be shortened to arg
-* as an exersize you should take a piece of paper and use the `cd` command to figure out the structure of the File System Tree.
+* as an exersize you should take a piece of paper and use a combination of the `cd` and `ls` cmd to figure out the structure of the File System Tree.
 	* Draw each directory as a circle and connect them in the correct hierarchy. 
+
+
 
 
 
