@@ -209,6 +209,11 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
  	 |  		| displays all the non-hidden files and directories contained in the working directory | `helpless@hh-machine:~$ ls` |
  	 | -a 		| displays all the files and directories contained in the working directory including the hidden ones | `helpless@hh-machine:~$ ls -a` |
 
+ 	 | Command | Description | Syntex |
+ 	 | ------: | ---------- | ------------ | 
+ 	 | pwd    | outputs the current working directory | `helpless@hh-machine:~$ pwd` |
+ 	 | [ls](#ls)     | outputs a list of all the files and directories in<br> the current working directory | `helpless@hh-machine:~$ ls` |
+ 	 | cd      | changes the working directory to the directory <br>of the path provided| `helpless@hh-machine:~$ cd Desktop` |
 
 
  
