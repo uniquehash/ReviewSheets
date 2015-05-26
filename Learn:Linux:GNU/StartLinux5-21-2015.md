@@ -215,13 +215,14 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 	* the path can be either relative or absolute
 * Use `cd` command to go to the `Desktop` directory.
 	* relative path:
+	
 	 ```
 	 helpless@hh-machine:~$ cd Desktop
 	 helpless@hh-machine:~/Desktop$ 
 	 ```
 	* absolute path:
 	 ```
-		helpless@hh-machine:~$ cd /home/helpless/Desktop<br>
+		helpless@hh-machine:~$ cd /home/helpless/Desktop <br>
 		helpless@hh-machine:~/Desktop$ 
 	 ```
 	* note that the current working directory is displayed after the `:` between the `~` and `$`. After `cd Desktop` the current working directory is changed to `/Desktop`.
