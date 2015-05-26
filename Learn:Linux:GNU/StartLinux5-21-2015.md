@@ -226,7 +226,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 		helpless@hh-machine:~$ cd /home/helpless/Desktop
 		helpless@hh-machine:~/Desktop$ 
 	 ```
-	* note that the current working directory is displayed after the `:` between the `~` and `$`. After `cd Desktop` the current working directory is changed to `/Desktop`.
+	* note that the current working directory is displayed after the `:` between the `~` and `$`. After `cd Desktop` the current working directory is changed from the `~` directory (home directory) to the `~/Desktop` directory (the Desktop directory within the home directory).
 		* The `~` symbol refers to and is interchangble with the home directory of the current user. 
 * Use the `ls` command to convince yourself that you have indeed changed directories.
 * The `./` symbol refers to and is interchangable with the current working directory
