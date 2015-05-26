@@ -9,7 +9,9 @@ Think of this as a working journal of my experience going through
 - [Learning the shell](#learning-the-shell)
 	- [What is the Shell: Background](#what-is-the-shell-background)
 	- [What is the Shell: Simple Commands](#what-is-the-shell-simple-commands)
-	- [Navigation](#navigation-background)
+	- [Navigation: Background](#navigation-background)
+	- [Navigation: Simple Commands](#navigation-simple-commands)
+
 
 ## Preface 
 
@@ -141,6 +143,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * relative path:
 	* a path that shows how to get from the current working directory to a specific location or file.
 	* For example `helpless/Desktop` is the relative path from the home directory to your Desktop directory, which if you are following us using Ubuntu, will be the file system directory that contains everything you see on your desktop.
+	* The `.` symbol refers to the working directory and the `..` symbol refers to the working directories parrent directory.
 
 **[root directory](http://en.wikipedia.org/wiki/Root_directory)**: 
 * The first and top-most directory in the file system tree.
@@ -162,7 +165,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * Can be known as root, administrator, admin, or supervisor. 
 * Generally recomended to not mess around with it and to do most work under a normal user account.
 	* Any valid command run by the superuser will be run without question, meaning that typological issues can cause irreversable dammage. As such it is recomended to work using a normal user account and to carefully use the superuser account when system-wide changes must be done. 
-* The command sudo is used to run commands as a superuser 
+* The command `sudo` is used to run commands as a superuser 
 ```
 	helpless@hh-machine:~$ sudo pwd
 	[sudo] password for helpless: [enter user password here]
@@ -170,6 +173,20 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 ```
 * In this case there is no difference in using `sudo` for the `pwd` command because the pwd does not need superuser privaleges to run, but a different command which needs superuser privilages would not run without it. 
 	* If a command that needs superuser privaleges is run from a regular user without using sudo the system will output `Permission denied`.
+
+### Navigation Simple Commands 
+* Type the commands below in your terminal window and see what they do!
+
+ | Command | Description | Syntex |
+ | ------: | ---------- | ------ | 
+ | pwd    | outputs the current working directory | `helpless@hh-machine:~$ pwd` |
+ | [ls](#ls)     | outputs a list of all the files and directories in the current working directory | `helpless@hh-machine:~$ ls` |
+ | cd      | changes the working directory to the directory of the path provided| `helpless@hh-machine:~$ cd Desktop` |
+ 
+ ###### ls
+
+ 
+
 
 
 
