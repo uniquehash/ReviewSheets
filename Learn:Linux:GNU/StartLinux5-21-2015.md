@@ -125,7 +125,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 	* In other words we only have access to the parent and children of the directory we are in. 
 * We must then have a method for figuring out which directory in the File System Tree we are in. 
 ```
-	helpless@hh: ~$ pwd
+	helpless@hh-machine:~$ pwd
 	/home/helpless
 ```	
 * The `pwd` command outputs something called a [path](http://en.wikipedia.org/wiki/Path_(computing)) to the terminal, more info below.
