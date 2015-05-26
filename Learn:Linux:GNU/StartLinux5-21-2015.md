@@ -11,6 +11,7 @@ Think of this as a working journal of my experience going through
 	- [What is the Shell: Simple Commands](#what-is-the-shell-simple-commands)
 	- [Navigation: Background](#navigation-background)
 	- [Navigation: Simple Commands](#navigation-simple-commands)
+	- [Navigation: Notes For The Future](#navigation-notes-for-the-future)
 
 
 ## Preface 
@@ -226,7 +227,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 		helpless@hh-machine:~$ cd /home/helpless/Desktop
 		helpless@hh-machine:~/Desktop$ 
 	 ```
-	* note that the current working directory is displayed after the `:` between the `~` and `$`. After `cd Desktop` the current working directory is changed from the `~` directory (home directory) to the `~/Desktop` directory (the Desktop directory within the home directory).
+	* note that the current working directory is displayed after the `:` and before the `$`. After `cd Desktop` the current working directory is changed from the `~` directory (home directory) to the `~/Desktop` directory (the Desktop directory within the home directory).
 		* The `~` symbol refers to and is interchangble with the home directory of the current user. 
 * Use the `ls` command to convince yourself that you have indeed changed directories.
 * The `./` symbol refers to and is interchangable with the current working directory
@@ -242,11 +243,12 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
  | .. | changes the current working directory to the parent<br> directory of the current working directory | `helpless@hh-machine:~$ cd ..` |
  | // | changes the current working directory <br>to the [nameless root directory](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) ` ``/` | `helpless@hh-machine:~$ cd //` |
 
-
- 
-
-
-
+### Navigation: Notes For The Future
+* We refer to the nameless root directory as ` ``/`.
+* The word command will now be shortened to cmd 
+* The word argument will now be shortened to arg
+* as an exersize you should take a piece of paper and use the `cd` command to figure out the structure of the File System Tree.
+	* Draw each directory as a circle and connect them in the correct hierarchy. 
 
 
 
