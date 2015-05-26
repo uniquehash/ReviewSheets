@@ -181,9 +181,9 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
  | ------: | ---------- | ------------ | 
  | pwd    | outputs the current working directory | `helpless@hh-machine:~$ pwd` |
  | [ls](#ls)     | outputs a list of all the files and directories in<br> the current working directory | `helpless@hh-machine:~$ ls` |
- | cd      | changes the working directory to the directory <br>of the path provided| `helpless@hh-machine:~$ cd Desktop` |
+ | [cd](#cd)      | changes the working directory to the directory <br>of the path provided| `helpless@hh-machine:~$ cd Desktop` |
  
-###### **ls**:
+###### ls:
 * displays a list of all the files and directories in the current working directory.
 ```
 	helpless@hh-machine:~$ ls
@@ -210,6 +210,34 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
  	 |  		| displays all the non-hidden files and<br> directories contained in the working directory | `helpless@hh-machine:~$ ls` |
  	 | -a 		| displays all the files and directories contained <br>in the working directory including the hidden ones | `helpless@hh-machine:~$ ls -a` |
 
+###### cd:
+* Changes the working directory to the directory of the path provided 
+	* the path can be either relative or absolute
+* Use `cd` command to go to the `Desktop` directory.
+	* relative path:
+	 ```
+		helpless@hh-machine:~$ cd Desktop
+		helpless@hh-machine:~/Desktop$ 
+	 ```
+	* absolute path:
+	 ```
+		helpless@hh-machine:~$ cd /home/helpless/Desktop
+		helpless@hh-machine:~/Desktop$ 
+	 ```
+	* note that the current working directory is displayed between the `~` and `$` after the `:`, after `cd Desktop` the current working directory is changed to `/Desktop`.
+		* The `~` symbol refers to and is interchangble with the home directory of the current user. 
+* Use the `ls` command to convince yourself that you have indeed changed directories.
+* The `./` symbol refers to and is interchangable with the current working directory
+* The `cd` command can also be passed arguments. 
+ | argument | Description | Syntex |
+ | -------: | ---------- | ------ |
+ |  		| changes the current working directory to the home directory | `helpless@hh-machine:~$ cd` |
+ | ./*path*	| changes the current working to the directory of the path provided | `helpless@hh-machine:~$ cd ./Desktop` |
+ | - | changes the current working directory to the previous working directory | `helpless@hh-machine:~$ cd -` |
+ | ~ | changes the current working directory to the home directory | `helpless@hh-machine:~$ cd ~` |
+ | ~*user_name* | changes the current working directory to the home directory of the user provided | `helpless@hh-machine:~$ cd ~helpless` |
+ | .. | changes the current working directory to the parent directory of the current working directory | `helpless@hh-machine:~$ cd ..` |
+ | // | changes the current working directory to the [nameless root directory](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) ` ``/` | `helpless@hh-machine:~$ cd //` |
 
 
  
