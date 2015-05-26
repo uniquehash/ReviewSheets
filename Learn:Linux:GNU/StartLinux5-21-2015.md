@@ -153,8 +153,8 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 		* `/` is a deliminator showing that `helpless` is a child of `home`. 
 			* `helpless` is the home directory of the user "helpless", it contains all the configurations and files associated with this user.
 * **Be careful**, one of the childreen of the [nameless root directory](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) ` ` is called "root".
-	* This "root" directory contains the home directory of the superuser and it's absolute path is ` ``/root`.
-	* To avoid confusion in the future we will refer to the [nameless root directory](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) as ` /` and the "root" directory as ` /root`.
+	* This "root" directory contains the home directory of the superuser and it's absolute path is `/root`.
+	* To avoid confusion in the future we will refer to the [nameless root directory](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) as ` ``/` and the "root" directory as ` /root`.
 
 
 
