@@ -216,19 +216,20 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * Use `cd` command to go to the `Desktop` directory.
 	* relative path:
 	 ```
-		helpless@hh-machine:~$ cd Desktop
-		helpless@hh-machine:~/Desktop$ 
+	 helpless@hh-machine:~$ cd Desktop
+	 helpless@hh-machine:~/Desktop$ 
 	 ```
 	* absolute path:
 	 ```
-		helpless@hh-machine:~$ cd /home/helpless/Desktop
+		helpless@hh-machine:~$ cd /home/helpless/Desktop<br>
 		helpless@hh-machine:~/Desktop$ 
 	 ```
-	* note that the current working directory is displayed between the `~` and `$` after the `:`, after `cd Desktop` the current working directory is changed to `/Desktop`.
+	* note that the current working directory is displayed after the `:` between the `~` and `$`. After `cd Desktop` the current working directory is changed to `/Desktop`.
 		* The `~` symbol refers to and is interchangble with the home directory of the current user. 
 * Use the `ls` command to convince yourself that you have indeed changed directories.
 * The `./` symbol refers to and is interchangable with the current working directory
 * The `cd` command can also be passed arguments. 
+
  | argument | Description | Syntex |
  | -------: | ---------- | ------ |
  |  		| changes the current working directory to the home directory | `helpless@hh-machine:~$ cd` |
