@@ -178,12 +178,13 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * Type the commands below in your terminal window and see what they do!
 
  | Command | Description | Syntex |
- | ------: | ---------- | ------ | 
+ | ------: | ---------- | ------------ | 
  | pwd    | outputs the current working directory | `helpless@hh-machine:~$ pwd` |
  | [ls](#ls)     | outputs a list of all the files and directories in the current working directory | `helpless@hh-machine:~$ ls` |
- | cd      | changes the working directory to the directory of the path provided| `helpless@hh-machine:~$ cd Desktop` |
+ | cd      | changes the working directory to the directory <br> of the path provided| `helpless@hh-machine:~$ cd Desktop` |
  
  ###### ls:
+ * 
 
  
 
