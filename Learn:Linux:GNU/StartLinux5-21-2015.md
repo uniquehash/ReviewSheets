@@ -66,7 +66,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * basically [terminal](http://en.wikipedia.org/wiki/GNOME_Terminal) interacts with the [the shell](http://en.wikipedia.org/wiki/Shell_(computing)) which in turn interacts with the operating system.
 
 **shell prompt**:
-* in your terminal it should looks like this `helpless@hh-machine: ~$`
+* in your terminal it should looks like this `helpless@hh-machine:~$`
 	* in this example **helpless** is the **username**.
 	* *hh-machine* is the name of the machine.
 	* the $ indicates where the cursor should be and where user input starts 
@@ -85,13 +85,13 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 #### What is the Shell Simple Commands
 * Type the commands below in your terminal window and see what they do!
 
- | Command | Description |
- | ------: | ----------- |
- | date    | displays the current time and date |
- | cal     | displays the calendar of the current month |
- | df      | displays the current amount of free space on your disk drives |
- | free    | displays the amount of free memory your machine has |
- | exit    | end's the terminal session and closes the terminal window |
+ | Command | Description | Syntex |
+ | ------: | ----------: | -----: | 
+ | date    | displays the current time and date | `helpless@hh-machine:~$ date` |
+ | cal     | displays the calendar of the current month | `helpless@hh-machine:~$ cal` |
+ | df      | displays the current amount of free space on your disk drives | `helpless@hh-machine:~$ df` |
+ | free    | displays the amount of free memory your machine has | `helpless@hh-machine:~$ free` |
+ | exit    | end's the terminal session and closes the terminal window | `helpless@hh-machine:~$ exit` |
 
 * Woah you just issued your first commands through the command line, congrats you're on the road to mastering the CLI and Linux/GNU
 
