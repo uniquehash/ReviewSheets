@@ -204,6 +204,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 	.cache         .ecryptfs  .macromedia      Templates
 	```
 	* arguments that the `ls` command can be passed
+	
  	 | argument | Description | Syntex |
  	 | -------: | ----------: | ------ |
  	 |  		| displays all the non-hidden files and directories contained in the working directory | `helpless@hh-machine:~$ ls` |
