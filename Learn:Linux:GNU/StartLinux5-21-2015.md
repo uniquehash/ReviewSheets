@@ -184,7 +184,32 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
  | cd      | changes the working directory to the directory <br>of the path provided| `helpless@hh-machine:~$ cd Desktop` |
  
 ###### **ls**:
-* displays a list of all the files and directories in the current working directory 
+* displays a list of all the files and directories in the current working directory.
+```
+	helpless@hh-machine:~$ ls
+	Desktop    Downloads 		  Music 	  Public   Videos 
+	Documents  examples.desktop  Pictures   Templates
+```
+* This is all the files and directories contained in the home directory ` ``/home/helpless`.
+* Commands can be passed arguments to change the behavior of the program. 
+	* Files that contain "." as the first character of their name are hidden by default. To see them we must pass `ls` the `-a` argument. 
+	```
+	helpless@hh-machine:~$ ls -a
+	. 			   .compiz    example.desktop  .mozilla  Videos
+	..	    	   .config    .gconf		   Music	 .wicd
+	.adobe		   .dbus 	  .gksu.lock 	   Pictures  .Xauthority
+	.bash_history  Desktop    .gvfs			   .Private  .Xsession-errors
+	.bash_logout   Documents  .ICEauthority    .profile  .Xsession-errors.old
+	.bashrc        Downloads  .local	       Public
+	.cache         .ecryptfs  .macromedia      Templates
+	```
+	* arguments that the `ls` command can be passed
+ 	 | argument | Description | Syntex |
+ 	 | -------: | ----------: | ------ |
+ 	 |  | displays all the non-hidden files and directories contained in the working directory | `helpless@hh-machine:~$ ls` |
+ 	 | -a | displays all the files and directories contained in the working directory including the hidden ones | `helpless@hh-machine:~$ ls -a` |
+ 	 
+
 
  
 
