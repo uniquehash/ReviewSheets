@@ -217,12 +217,13 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 	* relative path:
 	
 	 ```
-	 helpless@hh-machine:~$ cd Desktop
-	 helpless@hh-machine:~/Desktop$ 
+	 	helpless@hh-machine:~$ cd Desktop
+	 	helpless@hh-machine:~/Desktop$ 
 	 ```
 	* absolute path:
+
 	 ```
-		helpless@hh-machine:~$ cd /home/helpless/Desktop <br>
+		helpless@hh-machine:~$ cd /home/helpless/Desktop
 		helpless@hh-machine:~/Desktop$ 
 	 ```
 	* note that the current working directory is displayed after the `:` between the `~` and `$`. After `cd Desktop` the current working directory is changed to `/Desktop`.
