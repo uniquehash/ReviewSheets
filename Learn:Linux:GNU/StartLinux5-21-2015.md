@@ -85,7 +85,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 #### What is the Shell Simple Commands
 * Type the commands below in your terminal window and see what they do!
 
-* | Command | Description |
+ | Command | Description |
  | ------: | ----------- |
  | date    | displays the current time and date |
  | cal     | displays the calendar of the current month |
@@ -128,8 +128,32 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 	helpless@hh: ~$ pwd
 	/home/helpless
 ```	
-* This is called the current working directory and is the output of the `pwd` command.
+* The `pwd` command outputs something called a [path](http://en.wikipedia.org/wiki/Path_(computing)) to the terminal, more info below.
+* The path that the `pwd` command outputs is called the current working directory, and is always whatever directory we are currently in.
 * This particular directory is the one we find ourselves in when we first log in and is known as the home directory.
+
+**[path](http://en.wikipedia.org/wiki/Path_(computing))**:
+* Is a specific location in the file system.
+* absolute path:
+	* a path that shows how to get from the [root directory](http://en.wikipedia.org/wiki/Root_directory) to a specified location or file, more info below.
+	* For example: `/home/helpless` is a absolute path from the root directory to our home directory.
+* relative path:
+	* a path that shows how to get from the current working directory to a specific location or file.
+	* For example `helpless/Desktop` is a relative path from the home directory to your Desktop directory, which if you are following us using Ubuntu, will be the file system directory that contains everything you see on your desktop.
+
+**[root directory](http://en.wikipedia.org/wiki/Root_directory)**: 
+* The first and top-most directory in the file system tree.
+* It is the ancestor of all the directories and files in the system, the eve of the hierarchical file system.
+* [The root directory is nameless](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) and is represented as an emoty space before a /. 
+* Lets break down the absolute path `/home/helpless`
+	* ` ` before the `/` is an empty string representing the [root directory](http://en.wikipedia.org/wiki/Root_directory).
+	* `/` is a deliminator showing that `home` is a child of ` `([the root directory](http://en.wikipedia.org/wiki/Root_directory)). 
+		* `home` is a directory that contains the home directories of every user registered with the linux machine, in this case the only one registered user and we have chosen to call this user "helpless"
+		* `/` is a deliminator showing that `helpless` is a child of `home`. 
+			* `helpless` is the home directory of the user "helpless", it contains all the configurations and files associated with this user.
+* Be careful, one of the childreen of the [nameless root directory](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) ` ` is called "root".
+	* This "root" directory contains the home directory of the superuser and it's absolute path is ` /root`.
+	* To avoid confusion in the future we will refer to the [nameless root directory](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) as ` /` and the "root" directory as ` /root`.
 
 
 
