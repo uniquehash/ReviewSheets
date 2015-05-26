@@ -234,13 +234,13 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 
  | argument | Description | Syntex |
  | -------: | ---------- | ------ |
- |  		| changes the current working directory to the home directory | `helpless@hh-machine:~$ cd` |
- | ./*path*	| changes the current working to the directory of the path provided | `helpless@hh-machine:~$ cd ./Desktop` |
- | - | changes the current working directory to the previous working directory | `helpless@hh-machine:~$ cd -` |
+ |  		| changes the current working directory to the home<br> directory | `helpless@hh-machine:~$ cd` |
+ | ./*path*	| changes the current working to the directory of the path<br> provided | `helpless@hh-machine:~$ cd ./Desktop` |
+ | - | changes the current working directory to the previous <br>working directory | `helpless@hh-machine:~$ cd -` |
  | ~ | changes the current working directory to the home directory | `helpless@hh-machine:~$ cd ~` |
- | ~*user_name* | changes the current working directory to the home directory of the user provided | `helpless@hh-machine:~$ cd ~helpless` |
- | .. | changes the current working directory to the parent directory of the current working directory | `helpless@hh-machine:~$ cd ..` |
- | // | changes the current working directory to the [nameless root directory](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) ` ``/` | `helpless@hh-machine:~$ cd //` |
+ | ~*user_name* | changes the current working directory to the home directory<br> of the user provided | `helpless@hh-machine:~$ cd ~helpless` |
+ | .. | changes the current working directory to the parent directory<br> of the current working directory | `helpless@hh-machine:~$ cd ..` |
+ | // | changes the current working directory to the<br> [nameless root directory](http://teaching.idallen.com/cst8207/12f/notes/160_pathnames.html#the-root-directory-has-no-name) ` ``/` | `helpless@hh-machine:~$ cd //` |
 
 
  
