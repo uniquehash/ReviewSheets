@@ -86,7 +86,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 * Type the commands below in your terminal window and see what they do!
 
  | Command | Description | Syntex |
- | ------: | ----------: | -----: | 
+ | ------: | ---------- | ------ | 
  | date    | displays the current time and date | `helpless@hh-machine:~$ date` |
  | cal     | displays the calendar of the current month | `helpless@hh-machine:~$ cal` |
  | df      | displays the current amount of free space on your disk drives | `helpless@hh-machine:~$ df` |
