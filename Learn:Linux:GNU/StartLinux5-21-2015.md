@@ -12,7 +12,7 @@ Think of this as a working journal of my experience going through
 	- [Navigation: Background](#navigation-background)
 	- [Navigation: Simple Commands](#navigation-simple-commands)
 	- [Navigation: Notes For The Future](#navigation-notes-for-the-future)
-
+	- [Exploring The System](#exploring-the-system)
 
 ## Preface 
 
@@ -194,7 +194,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 ```
 * This is all the files and directories contained in the home directory ` ``/home/helpless`.
 * Commands can be passed arguments to change the behavior of the program. 
-	* Files that contain "." as the first character of their name are hidden by default. To see them we must pass `ls` the `-a` argument. 
+	* Files that contain "." as the first character of their name are hidden by default. To see them we must pass `ls` the `-a` option. 
 	```
 	helpless@hh-machine:~$ ls -a
 	. 			   .compiz    example.desktop  .mozilla  Videos
@@ -205,9 +205,9 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 	.bashrc        Downloads  .local	       Public
 	.cache         .ecryptfs  .macromedia      Templates
 	```
-	* arguments that the `ls` command can be passed
+	* options that the `ls` command can be passed
 
- 	 | argument | Description | Syntex |
+ 	 | Options | Description | Syntex |
  	 | -------: | ---------- | ------ |
  	 |  		| displays all the non-hidden files and<br> directories contained in the working directory | `helpless@hh-machine:~$ ls` |
  	 | -a 		| displays all the files and directories contained <br>in the working directory including the hidden ones | `helpless@hh-machine:~$ ls -a` |
@@ -252,6 +252,7 @@ Just downloaded Ubuntu, and got my **wifi** working wooooooooo!!!!!! [More detai
 	* Draw each directory as a circle and connect them in the correct hierarchy. 
 		* Similar to [what I did](https://drive.google.com/file/d/0B-1wnpl3HILibEVFRGE3LW9Xams/view?usp=sharing).
 
+### Exploring The System
 
 
 
