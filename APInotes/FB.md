@@ -2,6 +2,7 @@
 
 
 ## js SDK initialization 
+* Make sure to register and retrieve your application id before you start!
 * Below is initialization code from the FB documentation
  ```JavaScript
  <script type="text/javascript">
@@ -45,7 +46,7 @@
         firstLinkedScript.parentNode.insertBefore(fbSDKjs, firstLinkedScript);
     } (document, 'script', 'facebook-jssdk') );
  ```
- * Make sure to register and retrieve your application id before you start!
+ * Now let's look at it line by line 
  ```javascript
  	(function(yourDocument, scriptTag, arbritaryId){
  ```
