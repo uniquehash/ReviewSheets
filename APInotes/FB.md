@@ -11,7 +11,7 @@
     window.fbAsyncInit = function() {
     	FB.init({
         	appId      : 'your-app-id',
-        	xfbml      : false,
+        	xfbml      : true,
         	version    : 'v2.3'
       	});
     }; //end of the fbAsyncInit
@@ -32,7 +32,7 @@
     window.fbAsyncInit = function() {
     	FB.init({
         	appId      : 'your-app-id', //you need to enter your applications id here
-        	xfbml      : false,
+        	xfbml      : true,
         	version    : 'v2.3'
       	});
     }; //end of the fbAsyncInit
@@ -42,7 +42,7 @@
 	    var fbSDKjs, firstLinkedScript = yourDocument.getElementsByTagName(scriptTag)[0];
       	if (yourDocument.getElementById(arbritaryId)){return;} 
     	fbSDKjs = yourDocument.createElement(scriptTag); fbSDKjs.id = arbritaryId;
-    	fbSDKjs.src = "http://connect.facebook.net/en_US/sdk.js";
+    	fbSDKjs.src = "https://connect.facebook.net/en_US/sdk.js";
         firstLinkedScript.parentNode.insertBefore(fbSDKjs, firstLinkedScript);
     } (document, 'script', 'facebook-jssdk') );
  ```
@@ -103,7 +103,7 @@
     window.fbAsyncInit = function() {
     	FB.init({
         	appId      : 'your-app-id', //you need to enter your applications id here
-        	xfbml      : false,
+        	xfbml      : true,
         	version    : 'v2.3'
       	});
     
@@ -155,6 +155,9 @@
  	* if the status is `not_authorized` then we print to the console that the end user needs to log into the app!
  	* if the status is anything other then the above options, then we print to the console that the end user needs to log into Facebook!
  * Note: I placed this code in a script tag before the the `</body>` tag but this code could of been placed anywhere 
+
+### [Logging in the end user](https://developers.facebook.com/docs/facebook-login/login-flow-for-web/#logindialog)
+* 
 
 
 
