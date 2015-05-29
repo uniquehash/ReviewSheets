@@ -1,9 +1,9 @@
 #Notes on using FB 
 
 
-## js SDK initialization 
+## [js SDK initialization](https://developers.facebook.com/docs/javascript/quickstart/v2.1)
 * Make sure to register and retrieve your application id before you start!
-* Below is initialization code from the FB documentation
+* Below is initialization code from the [FB documentation](https://developers.facebook.com/docs/javascript/quickstart/v2.1)
  ```JavaScript
  <script type="text/javascript">
     
@@ -14,7 +14,7 @@
         	xfbml      : false,
         	version    : 'v2.3'
       	});
-    };
+    }; //end of the fbAsyncInit
 
     (function(d, s, id){
         	var js, fjs = d.getElementsByTagName(s)[0];
@@ -35,7 +35,7 @@
         	xfbml      : false,
         	version    : 'v2.3'
       	});
-    };
+    }; //end of the fbAsyncInit
 
     //I'm gonna go through the code from here line by line
 	(function(yourDocument, scriptTag, arbritaryId){
@@ -84,20 +84,77 @@
  ```javascript
    	firstLinkedScript.parentNode.insertBefore(fbSDKjs, firstLinkedScript);
  ```
- 	* [parentNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode) gets the parent of the firstLinkedScript element, this parent is the HEAD element. 
- 	* [insertBefore](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore) function inserts the first argument(fbSDKjs) right before the second argument(firstLinkedScript);
- 	* we have to call the function from firstLinkedScript parent node because the element is inserted as a child of the node that calls the function, thus would not work if the caller was not the parent of the referenced node (second argument)
+ * [parentNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode) gets the parent of the firstLinkedScript element, this parent is the HEAD element. 
+ * [insertBefore](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore) function inserts the first argument(fbSDKjs) right before the second argument(firstLinkedScript);
+ * we have to call the function from firstLinkedScript parent node because the element is inserted as a child of the node that calls the function, thus would not work if the caller was not the parent of the referenced node (second argument)
  ```javascript
     } (document, 'script', 'facebook-jssdk') );
  ```
  * the arguments that will be passed to the annonymous function 
 
+* Now we have initialized the SDK we can start using it!
 
+## Loging in with FaceBook 
 
+### [Checking the login status](https://developers.facebook.com/docs/facebook-login/login-flow-for-web/#checklogin)
+* For to check to see if the end user is logged into facebook we are going to have to add code to the `window.fbAsyncInit` function.
+```JavaScript
+    //initiates the fb login and passes it parameters 
+    window.fbAsyncInit = function() {
+    	FB.init({
+        	appId      : 'your-app-id', //you need to enter your applications id here
+        	xfbml      : false,
+        	version    : 'v2.3'
+      	});
+    
+    	//this had to be in the fbAsyncInit function otherwise the FB object is not recognized 
+    	FB.getLoginStatus(function(response) {
 
+            //handles the callback from the response, the response is a JSON object 
+            statusChangeCallback(response);
+    	});
 
+    }; //end of the fbAsyncInit
+```
+ * The FB.getLoginStatus retrieves a [JSON](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/) object
+ * This JSON object has two properties 
+ 	* status: the status of the end user using the app 
+ 		* **connected**: The end user is logged into Facebook and your app
+ 		* **not_authorized**: The end user is logged into Facebook but not your app
+ 		* **unknown**: The end user is not logged into Facebook at all
+ 	* authResponse: has a value if the status property of the response is **connected** otherwise it is undefined. It contains
+ 		* **accessToken**: an access token for end user using the app
+ 		* **expiresIn**: the amount of time in milli seconds that the **accessToken** will expire and must be renewed
+ 		* **signedRequest**: a signed parameter with information about the end user using the app
+ 		* **userID**: the ID of the end user
+ * Now we must create the function to handle the response, we pass JSON object to the `statusChangeCallback(response)` function through the response variable
+```javascript
+   		<script type="text/javascript">
+	        //this called with the response from FB from the check login status function 
+	        function statusChangeCallback(response) {
+	            console.log('statusChangeCallback');
+	            console.log(response);	   
 
-
+	            if (response.status === 'connected') {
+	                console.log("The end user is logged into Facebook!");
+	            }
+	            else if (response.status === 'not_authorized') {
+	                console.log("The end user has not logged into your app!");
+	            } 
+	            else {
+	                console.log("The end user is not logged into Facebook at all!");
+	            }
+	        }
+        </script>
+	</body>
+```
+ * This code is pretty self explanatory! But we are going to through it anyway. 
+ * First we print to the console the JSON object we received from FB
+ * Then we check the status property of the JSON object
+ 	* if the status is `connected` then we print to the console that the end user is logged in!
+ 	* if the status is `not_authorized` then we print to the console that the end user needs to log into the app!
+ 	* if the status is anything other then the above options, then we print to the console that the end user needs to log into Facebook!
+ * Note: I placed this code in a script tag before the the `</body>` tag but this code could of been placed anywhere 
 
 
 
