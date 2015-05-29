@@ -25,6 +25,8 @@
  ```
 * Below is my version, same code just renamed some of the variables for better clarity 
  ```javascript
+ <script type="text/javascript">
+
     //initiates the fb login and passes it parameters 
     window.fbAsyncInit = function() {
     	FB.init({
