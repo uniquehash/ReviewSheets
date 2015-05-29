@@ -97,7 +97,7 @@
 ## Loging in with FaceBook 
 
 ### [Checking the login status](https://developers.facebook.com/docs/facebook-login/login-flow-for-web/#checklogin)
-* For to check to see if the end user is logged into facebook we are going to have to add code to the `window.fbAsyncInit` function.
+* To check to see if the end user is logged into facebook we are going to have to add code to the `window.fbAsyncInit` function.
 ```JavaScript
     //initiates the fb login and passes it parameters 
     window.fbAsyncInit = function() {
@@ -116,9 +116,9 @@
 
     }; //end of the fbAsyncInit
 ```
- * The FB.getLoginStatus retrieves a [JSON](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/) object
- * This JSON object has two properties 
- 	* status: the status of the end user using the app 
+ * The FB.getLoginStatus function retrieves a [JSON](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/) object
+ * This [JSON](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/) object has two properties 
+ 	* status: the current login status of the end user using the app 
  		* **connected**: The end user is logged into Facebook and your app
  		* **not_authorized**: The end user is logged into Facebook but not your app
  		* **unknown**: The end user is not logged into Facebook at all
@@ -127,7 +127,7 @@
  		* **expiresIn**: the amount of time in milli seconds that the **accessToken** will expire and must be renewed
  		* **signedRequest**: a signed parameter with information about the end user using the app
  		* **userID**: the ID of the end user
- * Now we must create the function to handle the response, we pass JSON object to the `statusChangeCallback(response)` function through the response variable
+ * Now we must create the function to handle the response, we pass the [JSON](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/) object to the `statusChangeCallback(response)` function through the response variable
 ```javascript
    		<script type="text/javascript">
 	        //this called with the response from FB from the check login status function 
@@ -149,8 +149,8 @@
 	</body>
 ```
  * This code is pretty self explanatory! But we are going to through it anyway. 
- * First we print to the console the JSON object we received from FB
- * Then we check the status property of the JSON object
+ * First we print to the console the [JSON](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/) object we received from FB
+ * Then we check the status property of the [JSON](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/) object
  	* if the status is `connected` then we print to the console that the end user is logged in!
  	* if the status is `not_authorized` then we print to the console that the end user needs to log into the app!
  	* if the status is anything other then the above options, then we print to the console that the end user needs to log into Facebook!
