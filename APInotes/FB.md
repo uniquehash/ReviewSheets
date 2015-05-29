@@ -84,9 +84,9 @@
  ```javascript
    	firstLinkedScript.parentNode.insertBefore(fbSDKjs, firstLinkedScript);
  ```
- * [parentNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode) gets the parent of the firstLinkedScript element, this parent is the HEAD element. 
- * [insertBefore](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore) function inserts the first argument(fbSDKjs) right before the second argument(firstLinkedScript);
- * we have to call the function from firstLinkedScript parent node because the element is inserted as a child of the node that calls the function, thus would not work if the caller was not the parent of the referenced node (second argument)
+ 	* [parentNode](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode) gets the parent of the firstLinkedScript element, this parent is the HEAD element. 
+ 	* [insertBefore](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore) function inserts the first argument(fbSDKjs) right before the second argument(firstLinkedScript);
+ 	* we have to call the function from firstLinkedScript parent node because the element is inserted as a child of the node that calls the function, thus would not work if the caller was not the parent of the referenced node (second argument)
  ```javascript
     } (document, 'script', 'facebook-jssdk') );
  ```
