@@ -3,7 +3,7 @@
 
 ## js SDK initialization 
 * Below is initialization code from the FB documentation
- ```
+ ```JavaScript
  <script type="text/javascript">
     
     //initiates the fb login and passes it parameters 
@@ -24,7 +24,7 @@
     } (document, 'script', 'facebook-jssdk') );
  ```
 * Below is my version, same code just renamed some of the variables for better clarity 
- ```
+ ```javascript
     //initiates the fb login and passes it parameters 
     window.fbAsyncInit = function() {
     	FB.init({
