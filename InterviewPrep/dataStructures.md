@@ -7,7 +7,7 @@ Review of Data Structures
 ## Stacks
 * Big-O facts 
  | Time Complexity | Space Complexity |
- | :----- | :----- | 
+ | ----- | ----- | 
  | kfhfso | sfhsohofs|
 
 
