@@ -9,7 +9,7 @@ Review of Data Structures
 
  | Time Complexity | 2 |
  | --------------- | --- |
- | 1 			   | 
+ | 1 			   | --- |
  | ----- |
  | fjpjpgjpj |
 
