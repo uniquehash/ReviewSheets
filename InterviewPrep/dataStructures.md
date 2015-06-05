@@ -8,6 +8,4 @@ Review of Data Structures
 * Big-O facts 
  | Time Complexity | Space Complexity |
  | :----- | :----- | 
- | Average | Worst | Worst | 
- | :------ | :---- | :---- |
  
