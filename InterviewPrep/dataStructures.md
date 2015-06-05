@@ -6,11 +6,15 @@ Review of Data Structures
 
 ## Stacks
 * Big-O facts 
+	* Average Time Complexity 
+	
+ 	 | Access | Search | Insertion | Deletion |
+ 	 | :----- | :----- | :-------- | :------- |
+ 	 | O(n)   | O(n)   | O(1)	   | O(1)	  |
+ 
+ 	* Worst Time Complexity
 
- | Time Complexity | 2 |
- | --------------- | --- |
- | 1 			   | --- |
- | ----- | -- | 
- | fjpjpgjpj |
-
+ 	 | Access | Search | Insertion | Deletion | 
+ 	 | :----- | :----- | :-------- | :------- |  
+ 	 | O(n)   | O(n)   | O(1)	   | O(1)	  | 
  
