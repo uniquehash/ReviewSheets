@@ -7,10 +7,10 @@ Review of Data Structures
 ## Stacks
 * Big-O facts 
 
- | Time Complexity | Space Complexity |
- | :----- | :----- | 
- | Average | Worst | Worst | 
- | :------ | :---- | :---- |
+ | Time Complexity |
+ | :----- | 
+ | Average | Worst |
+ | :------ | :---- | 
  | Access | Search | Insertion | Deletion | Access | Search | Insertion | Deletion |
  | :------ | :---- | :---- | :------ | :---- | :---- | :------ | :---- | :---- |
  | date    | displays the current time and date | `helpless@hh-machine:~$ date` |
