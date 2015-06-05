@@ -7,8 +7,8 @@ Review of Data Structures
 ## Stacks
 * Big-O facts 
 
- | Time Complexity | | | | | | |
- | :----- | -- | -- | -- | -- | -- | 
+ | Time Complexity | 2 | 3 | 4 | 5 | 6 | 7 |
+ | :----- | -- | -- | -- | -- | -- | -- |
  | Average | Worst |
  | :------ | :---- | 
  | Access | Search | Insertion | Deletion | Access | Search | Insertion | Deletion |
