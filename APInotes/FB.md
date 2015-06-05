@@ -98,6 +98,7 @@
 
 ### [Checking the login status](https://developers.facebook.com/docs/facebook-login/login-flow-for-web/#checklogin)
 * To check to see if the end user is logged into facebook we are going to have to add code to the `window.fbAsyncInit` function.
+
 ```JavaScript
     //initiates the fb login and passes it parameters 
     window.fbAsyncInit = function() {
@@ -116,6 +117,7 @@
 
     }; //end of the fbAsyncInit
 ```
+ * The FB.getLoginStatus function has to be inside the window.fbAsyncInit annonymous function otherwise the FB object will not be recognized. 
  * The FB.getLoginStatus function retrieves a [JSON](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/) object
  * This [JSON](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/) object has two properties 
  	* status: the current login status of the end user using the app 
