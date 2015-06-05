@@ -7,7 +7,7 @@ Review of Data Structures
 ## Stacks
 * Big-O facts 
 
- | Time Complexity | fsnfl2 |
+ | Time Complexity | f2 |
  | --------------- | ------ |
  | 1 			   | 2 |
 
