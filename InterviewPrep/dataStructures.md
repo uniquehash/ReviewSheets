@@ -8,7 +8,7 @@ Review of Data Structures
 * Big-O facts 
 
  | Time Complexity | 2 |
- | --------------- | ------ |
+ | --------------- | - |
  | 1 			   | 2 |
 
  | Command | Description | Syntex |
