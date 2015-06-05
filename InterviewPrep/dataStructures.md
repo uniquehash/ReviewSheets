@@ -10,8 +10,6 @@ Review of Data Structures
  | :----- | :----- | 
  | Average | Worst | Worst | 
  | :------ | :---- | :---- |
- | Access | Search | Insertion | Deletion | Access | Search | Insertion | Deletion |
- | :------ | :---- | :---- | :------ | :---- | :---- | :------ | :---- | :---- |
  | date    | displays the current time and date | `helpless@hh-machine:~$ date` |
  | cal     | displays the calendar of the current month | `helpless@hh-machine:~$ cal` |
  | df      | displays the current amount of free space on your disk drives | `helpless@hh-machine:~$ df` |
