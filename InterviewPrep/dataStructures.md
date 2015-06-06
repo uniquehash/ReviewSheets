@@ -1,7 +1,7 @@
 # Data structures 
 
-Review of Data Structures 
-**Note**: When in doubt use hashes
+Review of Data Structures <br>
+**Note**: When in doubt use hashes <br>
 **Note**: More detail and graphics will be added in the future for the momment bare neccesities. 
 
 ## Stacks
@@ -32,7 +32,7 @@ Review of Data Structures
 	* `isEmpty()`:
 		* tests to see if the stack is empty. `return` nothing 
 	* `size()`:
-		* `return` the number of items in the stack. 
+		* `return` the number of elements in the stack. 
 * Python implementation of a stack
  
  ```python
@@ -82,7 +82,7 @@ Review of Data Structures
 	* `isEmpty()`:
 		* tests to see if the queue is empty. `return` nothing 
 	* `size()`:
-		* `return` the number of items in the queue. 
+		* `return` the number of elements in the queue. 
 * Python implementation of a queue
  
  ```python
@@ -102,5 +102,19 @@ Review of Data Structures
     def size(self):
         return len(self.elements)
  ```
+
+ ## Bags
+ * A Bag object is an unordered collection of zero+ elements, generally you do not remove elements from bags. 
+ * Example: a book-bag, school-bag, trash-bag
+ * Basic functions (Name will vary depending on implementation, function will not)
+	* `Bag()`: 
+		* creates a new empty bag object. `return` an empty bag.
+	* `add(item)`:
+		* adds a new element `item` to the bag. `return` nothing.
+	* `isEmpty()`:
+		* tests to see if the bag is empty. `return` nothing 
+	* `size()`:
+		* `return` the number of elements in the bag. 
+
 
 
