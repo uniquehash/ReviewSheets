@@ -159,7 +159,11 @@
  * Note: I placed this code in a script tag before the the `</body>` tag but this code could of been placed anywhere 
 
 ### [Logging in the end user](https://developers.facebook.com/docs/facebook-login/login-flow-for-web/#logindialog)
-* 
+* There are two way to log a end user into Facebook. The easy way and the hard way. 
+    * The easy way is to simply use Facebook's built in html button that is part of the SDK.
+```html
+    <fb:login-button scope="public_profile, email" onlogin="checkLoginState();"></fb:login-button>
+```
 
 
 
