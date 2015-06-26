@@ -175,9 +175,9 @@
         * **onlogin**:  A JavaScript function to trigger when the login process is complete, similar to the native onclick attribute
     * out sample Facebook button is shown below. 
 
-```html
+ ```html
     <fb:login-button data-scope="public_profile, email" data-size="xlarge" onlogin="checkLoginState();"></fb:login-button>
-```
+ ```
     * here we are asking for permission to access the end users public profile and email, we selected the largest size button available, and we trigger our checkLoginState function after the user completes the login, to make sure the login was successful. 
 
 
