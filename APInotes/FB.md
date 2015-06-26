@@ -163,7 +163,8 @@
     * The easy way is to simply use [Facebook's built in html button](https://developers.facebook.com/docs/plugins/login-button) that is part of the SDK.
 ```html
     <fb:login-button></fb:login-button>
-```
+``` 
+
     * The code above will generate a completely functional Facebook login button that end users can use to log into their Facbook
     account and by extension your Facebook app. 
     * Using the Facebook button above however does leave something to be desired. As you may have imagined the Facebook button has many available attributes we can add on to it, a full description available in the [documentation](https://developers.facebook.com/docs/plugins/login-button). 
@@ -172,12 +173,12 @@
         * **data-size**: The size of our Facebook button
         * **onlogin**:  A JavaScript function to trigger when the login process is complete, similar to the native onclick attribute
     * out sample Facebook button is shown below. 
-````html
+```html
     <fb:login-button data-scope="public_profile, email" data-size="xlarge" onlogin="checkLoginState();"></fb:login-button>
-````
+```
     * here we are asking for permission to access the end users public profile and email, we selected the largest size button available, and we trigger our checkLoginState function after the user completes the login, to make sure the login was successful. 
 
-    
+
 
 
 
