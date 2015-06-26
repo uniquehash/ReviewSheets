@@ -162,9 +162,9 @@
 * There are two way to log a end user into Facebook. The easy way and the hard way. 
     * The easy way is to simply use [Facebook's built in html button](https://developers.facebook.com/docs/plugins/login-button) that is part of the SDK.
 
-```
+ ```html
     <fb:login-button></fb:login-button>
-``` 
+ ``` 
 
     * The code above will generate a completely functional Facebook login button that end users can use to log into their Facbook
     account and by extension your Facebook app. 
