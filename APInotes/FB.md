@@ -175,10 +175,15 @@
         * out sample Facebook button is shown below. 
 
      ```html
-        <fb:login-button data-scope="public_profile, email" data-size="xlarge" onlogin="checkLoginState();"></fb:login-button>
+        <fb:login-button data-scope="public_profile, email" data-size="xlarge" onlogin="FB.getLoginStatus();"></fb:login-button>
      ```
         * here we are asking for permission to access the end users public profile and email, we selected the largest size button available, and we trigger our checkLoginState function after the user completes the login, to make sure the login was successful. 
- *
+    * The hard way is to use a normal html button and add the login logic programically. 
+        * The first step is to write a function to check if the end user is logged into Facebook or not. We will put it after statusChangeCallback()
+        ```javascript
+        
+
+        ```
 
 
 
