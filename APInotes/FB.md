@@ -179,11 +179,86 @@
      ```
         * here we are asking for permission to access the end users public profile and email, we selected the largest size button available, and we trigger our checkLoginState function after the user completes the login, to make sure the login was successful. 
     * The hard way is to use a normal html button and add the login logic programically. 
-        * The first step is to write a function to check if the end user is logged into Facebook or not. We will put it after statusChangeCallback()
+        * The first step is to write a function to check if the end user is logged into Facebook or not. We will put it after statusChangeCallback() function. Having this function will allow us to check if the user is logged in every time we click the button. 
         ```javascript
-        
-
+            function checkLoginState() {         
+                // here we call the FB.getLoginStatus function from the FB SKD.
+                // this will retrieve the login status, and send the response through our statusChangeCallback() function
+                FB.getLoginStatus(function(response) {                    
+                  statusChangeCallback(response);   
+                });
+            }
         ```
+        * We are essentially just doing the same thing we do in the FB.init() function.
+            * We call the FB.getLoginStatus() function from the FB SDK and then pass the response from Facebook to the statusChangeCallback() funtion that we built to handle the response that we receive from Facebook.            
+        * Next we need to prompt the user to login into Facebook if they are not currently logged in. To do this we edit the checkLoginState() function. 
+        ```javascript
+                function checkLoginState() {
+                    // here we call the FB.getLoginStatus function from the FB SKD.
+                    // this will retrieve the login status, and send the response through our statusChangeCallback() function
+                    FB.getLoginStatus(function(response) {                                                      
+                      // if the response is not_authorized then we launch the Login logic so that the user may give our app the 
+                      // appropriate permissions                       
+                      if (response.status === "not_authorized")
+                      {
+                        FB.login(function (secondResponse){                                                   
+                        }, 
+                        //we pass the permissions that we request from the end user, which are the public_profile and email
+                        {scope:"public_profile, email"});
+                      }
+                      else{}
+                      // if the response is unknown then we know that the end user is not logged into Facebook, so we launch the
+                      // Login logic so that the user may login to Facebook and give our app appropriate permissions they have not yet
+                      if (response.status === "unknown"){
+                        FB.login(function (secondResponse){   
+                        },
+                        //we pass the permissions that we request from the end user, which are the public_profile and email
+                        {scope:"public_profile, email"});
+                      }             
+                    });
+                } 
+        ```
+        * We check the status of the end user wihtin the response object, if the end user is not logged into Facebook, or they are not logged into our app then we call the FB.login() function that prompts the end user to login to Facebook.
+        * As you may have noticed there is a small issue. After we login to Facebook there is nothing letting us know whether the login was sucessful! To correct this we must add calls to our statusChangeCallback() function after logging in. 
+        ```javascript 
+            function checkLoginState() {
+
+                // here we call the FB.getLoginStatus function from the FB SKD.
+                // this will retrieve the login status, and send the response through our statusChangeCallback() function
+                FB.getLoginStatus(function(response) {                                                      
+                  
+                  // if the response is not_authorized then we launch the Login logic so that the user may give our app the 
+                  // appropriate permissions 
+                  
+                  if (response.status === "not_authorized")
+                  {
+
+                    FB.login(function (secondResponse){                                              
+                        //we call the statusChangeCallback() function again to handle the response that the Login logic generates 
+                        statusChangeCallback(secondResponse);                  
+                    }, 
+                    //we pass the permissions that we request from the end user, which are the public_profile and email
+                    {scope:"public_profile, email"});
+                  }
+                  else{}
+
+                  // if the response is unknown then we know that the end user is not logged into Facebook, so we launch the
+                  // Login logic so that the user may login to Facebook and give our app appropriate permissions they have not yet
+                  if (response.status === "unknown"){
+                    FB.login(function (secondResponse){   
+                        //we call the statusChangeCallback() function again to handle the response that the Login logic generates 
+                        statusChangeCallback(secondResponse);                  
+                    },
+                    //we pass the permissions that we request from the end user, which are the public_profile and email
+                    {scope:"public_profile, email"});
+                  }             
+                });
+            } 
+        ```
+        * By calling the statusChangeCallback() function and passing it the secondReponse parameter that the FB.login() function receives we are able to handle the response from Facebook without adding any new code!
+
+    * Now we are able to successfully have our users login into our Facebook application. This gives us permission to start making API calls and retrieve some of the users Facebook data. We do this using the [Graph API](https://developers.facebook.com/docs/graph-api/using-graph-api/v2.3).
+
 
 
 
