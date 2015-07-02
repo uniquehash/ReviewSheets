@@ -56,27 +56,27 @@
 			gem 'sinatra'			
 		```
 	* Now we bundle our app using the bundler gem that we installed we have to bundle our app in the terminal
-		`$ bundle install`
+		* `$ bundle install`
 
 ### Setup Git 
 	* Now we must create a Git repo in our current directory 
-		`$ git init`
+		* `$ git init`
 	* Then we add all the files in the directory to the next commit 
-		`$ git add .`
+		* `$ git add .`
 	* Finally we add the new commit to our repo with a message 
-		`$ git commit - "init"`
+		* `$ git commit - "init"`
 
 ### Working with heroku 
 	* If we haven't yet we must sign up for heroku and create an account
 	* Next we login to our heroku by entering our credentials via CLI 
-		`$ heroku login`
+		* `$ heroku login`
 		* This enables all of the heroku tools in our git repo, please make sure to have a Git repo initialized before preceding 
 	* We must create our heroku app via CLI 
-		`$ heroku create` 
+		* `$ heroku create` 
 	* Then push our Git repo to our heroku app 
-		`$ git push heroku master`
+		* `$ git push heroku master`
 	* Finally we must check to see if our heroku hosted ruby sinatra app is working
-		`$ heroku open`
+		* `$ heroku open`
 
 # It works!!!!
 
