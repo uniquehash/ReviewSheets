@@ -59,24 +59,26 @@
 		* `$ bundle install`
 
 ### Setup Git 
-	* Now we must create a Git repo in our current directory 
-		* `$ git init`
-	* Then we add all the files in the directory to the next commit 
-		* `$ git add .`
-	* Finally we add the new commit to our repo with a message 
-		* `$ git commit - "init"`
+
+* Now we must create a Git repo in our current directory 
+	* `$ git init`
+* Then we add all the files in the directory to the next commit 
+	* `$ git add .`
+* Finally we add the new commit to our repo with a message 
+	* `$ git commit - "init"`
 
 ### Working with heroku 
-	* If we haven't yet we must sign up for heroku and create an account
-	* Next we login to our heroku by entering our credentials via CLI 
-		* `$ heroku login`
-		* This enables all of the heroku tools in our git repo, please make sure to have a Git repo initialized before preceding 
-	* We must create our heroku app via CLI 
-		* `$ heroku create` 
-	* Then push our Git repo to our heroku app 
-		* `$ git push heroku master`
-	* Finally we must check to see if our heroku hosted ruby sinatra app is working
-		* `$ heroku open`
+
+* If we haven't yet we must sign up for heroku and create an account
+* Next we login to our heroku by entering our credentials via CLI 
+	* `$ heroku login`
+	* This enables all of the heroku tools in our git repo, please make sure to have a Git repo initialized before preceding 
+* We must create our heroku app via CLI 
+	* `$ heroku create` 
+* Then push our Git repo to our heroku app 
+	* `$ git push heroku master`
+* Finally we must check to see if our heroku hosted ruby sinatra app is working
+	* `$ heroku open`
 
 # It works!!!!
 
