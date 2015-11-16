@@ -125,6 +125,25 @@
 		* apps can use a standard DTD to verify that the data received from outside world is valid
 		* used to verify your own data 
 
+### XML Validators 
+	* XML software stops processing if it detects an error in XML
+	* online validating tools exist
+
+### XML DTD 
+	DTD defines the structure of an XML document with legal elements 
+		<!DOCTYPE note
+		[
+			<!ELEMENT note (to, from, heading, body)>
+			<!ELEMENT to (#PCDATA)>
+			<!ELEMENT from (#PCDATA)>
+			<!ELEMENT heading (#PCDATA)>
+			<!ELEMENT body (#PCDATA)>
+		]>
+
+	DOCTYPE decleration come after XML decleration
+		<!DOCTYPE note SYSTEM "Note.dtd">
+
+
 
 
 
