@@ -296,7 +296,3 @@ some ruby Symbols
 		Option to the render command that renders without markdown
 
 
-
-
-
-
