@@ -12,7 +12,7 @@ Learning from the big nerd ranch book. Exploring objective-C, this is going to b
 ####Vocabulary 
 
 * Workspace window
-** Interface for creating and managing projects
+	* Interface for creating and managing projects
 
 Projects 
 A main unit of development in Xcode
