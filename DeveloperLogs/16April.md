@@ -4,15 +4,15 @@
 Learning from the big nerd ranch book. Exploring objective-C, this is going to be annoyingly fun, yet another language hahaha. Will be keeping track of different abstractions and how the whole system works together. I need to follow my own advice and ask the tutorial questions. I need to record all my questions. 
 
 ####Question 
-What is the architecture of and app lifecycle of an iOS app?
-What is the Xcode workspace window?
-MVC is a design pattern, what is a design pattern?
-What are other design patterns?
+* What is the architecture of and app lifecycle of an iOS app?
+* What is the Xcode workspace window?
+* MVC is a design pattern, what is a design pattern?
+* What are other design patterns?
 
 ####Vocabulary 
 
-Workspace window
-Interface for creating and managing projects
+* Workspace window
+** Interface for creating and managing projects
 
 Projects 
 A main unit of development in Xcode
