@@ -151,14 +151,153 @@ To run through a quick overview so far. Basically css rules are made of selector
 
 Oh god now im gonna be post editiing previous days because of not finishing topics, and continuity of thought. eh fuck it. Today we learn about CSS architecture from this [philip walton article](http://philipwalton.com/articles/css-architecture/).
 
+Okay so basically css architecture is like any other architecture and you should not be dumb about it. be smart, code smart, debug dumb. biggest take away is to seperate your concerns as in presentation and content and functionality and structure should not be touching each other. aim to achieve the awkwardness of a middle school dance.
+
+
+
 * Goals of Good CSS Architecture
 	* predictable
 		* css rules behave as expected
 		* adding or updating rules does not affect unexpected parts of the site
-		test one
 	* reusable
-		* 
+		* css rules should be abstract and decoupled such that new components can be built quickly from existing parts without having to recode patterns and problems already solved
 	* maintainable
+		* adding rules and components to a page should not break any existing components 
+	* scalable 
+		* css should be easily managable by a single person or large engineering team
+		* the css architecture is easily approachable without requiring a large learning curve
+		* 
 
+* CSS architecture bad practices 
+	* modifying components based on who their parents are
+		* sometimes there are visual elements that all look the same except one. 
+			* bad idea: 
+				* attempt to find a unique parent for the instance or create one and write a new rule to handle it 
+			* why its a bad idea
+				* the visual element created will not be predictable, it will have different behavior depending on where it is placed
+				* not reusable or scalable custom code will be needed to handle different context 
+				* not maintainable because during a redesign several rules would have to be updated, and someone naive to the codebase would have no fucking clue where that shit is 
+	* overly complicated selectors 
+		* attempting to keep html free from css markup
+			* bad idea:
+				* using long chains of type selectors 
+			* why its a bad idea
+				* its not predictable, since the css becomes tightly coupled with the html, and the html will change
+				* its not reusable the selectors are pointing to an exact location in the html, meaning that they cannot be transplaced 
+				* not maintainable or scalable since any change in the html will break the css rules 
+	* overly generic class names
+		* it is common to scope components sub-elements inside the components class name
+			* bad idea: 
+				* the parent component is used as a main scope followed by the smaller sub-scopes in the css rules
+			* why its a bad news bear <i should have bear going rahhhhhhh here>
+				* so the style of the subscopes wont spill into other rules but other rules could spill into them
+				* generic class names lead to unpredictable css
+	* making a rule do too much
+		* coupling layout and styling 
+			* bad idea:
+				* having a rule that gives an element its look as well as its position 
+			* why its a no no no no
+				* basically its not predictable or reusable since if you reuse the class somewhere else for styling it will have the layout rule associated with it most likely fucking everything up, and if you want to reuse the layout component it will have the styling fucking everything up
+	* determined root cause of all this evil
+		* the bad practices place too much of the styling burden on css
+		* html and css need to work together to do cool shit not placing the styling burden to heavily on either
 
+* The "enlightend" path to css 
+	* css should assume as little of the html structure as possible
+	* css should define how a set of visual elements look and those elements should look as they are defined 
+		* if a component should look different in a different scenario it should be called something different and the html shuold reflect that
+	* css creates preset elements to be used by the html, the css essentially builds building blocks for html to use
+	
+* Best practices 
+	* be intentional 
+		* do one thing and do it right, essentially each visual element should be its own distinct entity and named appropriately
+	* separate your concerns 
+		* css components should be modular, they should know how to style themselves but not get to heavy into layout
+	* namespace your classes
+		* use naming conventions to namespace subelements of a main element
+	* extend components with modifier classes 
+		* each context that affect presentation should have its own modifier classe
+	* organize your css into a logical structure 
+		* organize css rules into four different categories 
+			* base
+				* reset rules 
+				* element defaults 
+			* layout 
+				* positioning of site-wide elements 
+				* generic layout helpers like grid systems
+			* modules 
+				* modules are reusible visual elements
+					* components 
+						* standalone visual elements 
+						* example:
+							* modal dialog box
+					* templates
+						* building blocks
+						* do not stand on their own 
+						* do not describe look and feel 		
+						* single repeatable patterns that can be put together to form a component
+						* mostly used by preprocessors 	 
+			* state
+				* styling that can be toggled on or off by js
+	* use classes for styling and styling only 
+		* all non-styled classes should have a prefix which describe its purpose 
+			* js classes should have a prefix of .js-header for example 
+			* support can be used for extra functionality
+		* do not couple functionality and styling 
+			* the same class should not be used as both a js hook and a css hook
+	* name your classes with a logical structure 
+		* each type of class should have a seperate naming convention 
+			* example:
+			```
+				/* a component */
+				.button-group {}
+				
+				/* a component modifier (modifying .button) */
+				.button--primary {}
+				
+				/* a component sub-object (lives within .button) */
+				.button__icon {}
+				
+				/* layout rules */
+				.l-layout-method {}
+				.grid {}
+			
+				/* state rules  */
+				.is-state-type {}
+			
+				/* non-styled javascript hooks  */ 
+				.js-action-name {}
+			```
 
+* tools to make your css life easier
+	* preprocessors
+		* help you write css faster not better
+		* do not use features that  
+			* nest rules purely for code organization 
+			* use a mixin if you are not passing an argument, mixins without arguments are better used as templates that can be extended
+			* use @extend on a selector that is not a single class 
+			* use @extend for UI components in component modifier rules because you will lose the inheritance chain 
+		* awesome features 
+			* @extend
+				* used to inherit rules of a previous css rule
+				* should not extend anything that needs to be targeted by js at anypoint 
+				* extend is great for templates 
+			* %placeholder
+	* css lint
+		* points out problems with css code. 
+			* basic syntax chekcing 
+			* applying a set of rules to code that look for problematic patterns or signs of inefficiency 	
+		* anti-patterns 
+			* no IDs in selectors
+			* no non-semantic type selectors in any multi-part rule
+			* do not use more than 2 combinators in a selector
+			* do not allow any class names that begin with "js-"
+			* warn if frequently using layout and positioning for non "l-" prefixed rules
+			* warn if a class defined by itself is later redefined as a child of something else 
+	* html inspector 	
+		* anti-patterns 
+			* warn if the same ID is used more than once on a page
+			* do not use any classes that are not mentioned in any stylesheet or pass a whitelist
+			* modifier classes should not be used without their base class
+			* sub-object classes should not be used when no ancestor contains the base class
+			* plain old div or span elements without classes attached should notbe used in the html
