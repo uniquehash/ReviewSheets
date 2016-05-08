@@ -137,4 +137,28 @@ To run through a quick overview so far. Basically css rules are made of selector
 							`a:visited`
 						
  					 
-							
+						
+
+
+
+
+
+
+
+
+
+# May 8th - CSS
+
+Oh god now im gonna be post editiing previous days because of not finishing topics, and continuity of thought. eh fuck it. Today we learn about CSS architecture from this [philip walton article](http://philipwalton.com/articles/css-architecture/).
+
+* Goals of Good CSS Architecture
+	* predictable
+		* css rules behave as expected
+		* adding or updating rules does not affect unexpected parts of the site
+		test one
+	* reusable
+		* 
+	* maintainable
+
+
+
