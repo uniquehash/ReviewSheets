@@ -54,7 +54,7 @@ Well now it seems im on a weird path to learning css for the front-end things. G
 	* a name explicitly located within a namespace 
 	* meaning that identical identifiers and classes can be used for multiple namespaces as long as they are denoted by the appropriate namespace
 	* this is done by indicating the appropriate namespace followed by "|" and then the selector
-	'''
+	```
 		* with namespace declarations
 			@namespace veritas "http://veritas.catchme.com";
 			* @namespace "https://example.com/var";
@@ -67,7 +67,7 @@ Well now it seems im on a weird path to learning css for the front-end things. G
 				represents the name C in any namespace, including no namespace
 			D
 				represents the name D in the https://example.com/var namespace 		
-	'''	
+	```	
 
 * [selector](https://www.w3.org/TR/css3-selectors/) 
 	* selectors are used to select which elements in the DOM created by html are to be styled 
