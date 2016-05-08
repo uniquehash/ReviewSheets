@@ -40,6 +40,11 @@ alright today im gonna get the project running. got it all almost going except g
 
 Well now it seems im on a weird path to learning css for the front-end things. Good opportunity to learn design in general while im at it sooooo im gonna do that. 
 
+#### Questions 
+
+* what is a DIALOGUE element?
+
+
 #### Vocab
 
 * stylesheet
@@ -55,10 +60,10 @@ Well now it seems im on a weird path to learning css for the front-end things. G
 	* meaning that identical identifiers and classes can be used for multiple namespaces as long as they are denoted by the appropriate namespace
 	* this is done by indicating the appropriate namespace followed by "|" and then the selector
 	```
-		* with namespace declarations
+		with namespace declarations
 			@namespace veritas "http://veritas.catchme.com";
-			* @namespace "https://example.com/var";
-		* selecting between the different namespaces would be done as so 
+			@namespace "https://example.com/var";
+		selecting between the different namespaces would be done as so 
 			veritas|A	
 				represents name A in the http//veritas.catchme.com namespace
 			|B 
@@ -78,10 +83,53 @@ Well now it seems im on a weird path to learning css for the front-end things. G
 			* simple selector 
 				* type selector 
 					* the name of a DOM element type, specified by css qualified names
-						* css qualified names
-							* a name explicitly located within a namespace
-							* meaning that identical identifiers and classes can be used for multiple namespaces as long as they are denoted by the appropriate name space
-								* this is done by indicating the appropriate namespace followed by "|" and then the simple selector
-								
+						* h1, span, div			
 				* universal selector 
-					
+					* represents name of any element, specified by css qualified names
+					* is essentially a wild card symbol
+					* denoted by the "*" symbol
+				* attribute selectors
+					* the attribute of elements can be used to select elements 
+					* select by attribute presence
+						`h1[title]`
+					* select by attribute presense and exact-match value
+						`span[val="yes i am"]`
+					* select multiple elements by presence and or value
+						`span[hello="world"][goodbye]`
+					* select by attribute with presence and partial-match value using the "~" symbol
+						`a[rel~="copyright"]`
+					* select by attribute with presence and exact-match or exact-match followed by "-" value using the "|" symbol
+						`a[hreflang|="en"]`
+					* select by attribute with presence and exact-match prefix value using the "^" symbol
+						`object[type^="image/"]`
+					* select by attribute with presence and exact-match suffix value using the "$" symbol
+						`a[href$=".html"]`
+					* select by attribute with presence and contains an exact-match substring using the "*" symbol
+						`p[title*="hello"]`
+				* class selectors 
+					* the class attribute of elements can be used to select elements 
+					* select by class presence 
+						`.pastry {color: green}`
+					* select by class presence for all elements with a particular name
+						`h1.pastry {color:green}`
+					* since the class attribute is an attribute, all the methods of attribute selection work for class selection
+				* ID selectors 
+					* the id attribute of an element can be used to select the element 
+					* an id should only be assigned to a single element 
+					* select by id presence 
+						`#chapter1`
+					* select by id presence for all elements with a particular name
+						`h1#chapter1`
+				* pseudo-classes
+					* allows the selection of elements based on information not specified by the html DOM and that cannot be expressed using other simple selectors
+					* always consists of the ":" symbol followed by the name of the pseudo-class and optionally by a value between parentheses
+					* are allowed anywhere in a sequence of simple selectors after the leading type or universal selector, may be dynamic 
+					* dynamic pseudo-classes 
+						* an element may gain or lose a dynamic pseudo-class based user behavior
+						* select a hyperlink that has not been visited using the ":link" symbol
+							`a:link`
+						* select a hyperlink that has been visited using the ":visited" symbol
+							`a:visited`
+						
+ 					 
+							
