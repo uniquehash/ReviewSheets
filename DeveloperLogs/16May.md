@@ -166,7 +166,7 @@ Okay so basically css architecture is like any other architecture and you should
 	* scalable 
 		* css should be easily managable by a single person or large engineering team
 		* the css architecture is easily approachable without requiring a large learning curve
-		* 
+		 
 
 * CSS architecture bad practices 
 	* modifying components based on who their parents are
@@ -189,7 +189,7 @@ Okay so basically css architecture is like any other architecture and you should
 		* it is common to scope components sub-elements inside the components class name
 			* bad idea: 
 				* the parent component is used as a main scope followed by the smaller sub-scopes in the css rules
-			* why its a bad news bear <i should have bear going rahhhhhhh here>
+			* why its a bad news bear < i should have bear going rahhhhhhh here>
 				* so the style of the subscopes wont spill into other rules but other rules could spill into them
 				* generic class names lead to unpredictable css
 	* making a rule do too much
