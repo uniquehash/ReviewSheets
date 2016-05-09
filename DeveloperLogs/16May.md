@@ -135,9 +135,18 @@ To run through a quick overview so far. Basically css rules are made of selector
 							`a:link`
 						* select a hyperlink that has been visited using the ":visited" symbol
 							`a:visited`
+					* user action pseudo-classes
+						* sometimes people interact with elements and things requiring how they are styled to be changed. css has three pseudo-classes for selecting elements being used by the user.
+							* select an element that a user designates with a pointing devices though not necessarily activating it
+								* :hover
+							* select an element that a user is interacting with a pointing device, like between the time a user presses the mouse button and releases it. 
+								* :active
+					 		* select an element that is currently being focused on by the user, like when tabed to or when a input element is accepting type
+								* :focus
+					* target pseudo-class 
+						* 		 
 						
- 					 
-						
+
 
 
 
@@ -189,7 +198,7 @@ Okay so basically css architecture is like any other architecture and you should
 		* it is common to scope components sub-elements inside the components class name
 			* bad idea: 
 				* the parent component is used as a main scope followed by the smaller sub-scopes in the css rules
-			* why its a bad news bear < i should have bear going rahhhhhhh here>
+			* why its a bad news bear ( i should have bear going rahhhhhhh here)
 				* so the style of the subscopes wont spill into other rules but other rules could spill into them
 				* generic class names lead to unpredictable css
 	* making a rule do too much
