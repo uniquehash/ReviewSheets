@@ -770,6 +770,313 @@ What is a key selector?
 		* fade-in() 
 		* fade-out()
 	* color manipulation 
+		* sass can directly manipulate colors 
+			* provides the most control over how to precisely tune specific color properties 
+				* obvious trade off, power means complexity 
+		* change-color()
+			* set any property of a color
+			* $color
+				* [$red]
+				* [$green]
+				* [$blue]
+				* [$hue]
+				* [$saturation]
+				* [$lightness]
+				* [$alpha]
+		* adjust-color()
+			* incrementally manipulate any property of a color
+			* $color
+				* [$red]
+				* [$green]
+				* [$blue]
+				* [$hue]
+				* [$saturation]
+				* [$lightness]
+				* [$alpha]
+		* scale-color()
+			* fluidly scale any percentage based on property of a color 
+			* $color
+				* [$red]
+				* [$green]
+				* [$blue]
+				* [$hue]
+				* [$saturation]
+				* [$lightness]
+				* [$alpha]
+	* extends 
+		* provides a way to easily share and reuse styles without having to explicitly repeat code or use additional classes 
+		* really allows for modular css 
+		* element selectors can be used as an extend
+		* class selectors can be used as an extend 
+		* there are placeholder selectors built to be used as extends
+		* the `@extend` symbols is used to denote an extension 
+		```
+			.alert
+				border-radius: 10px
+				padding: 10px 20px
+			
+			.alert-error
+				@extend .alert	
+				background: #black	
+				color: #red
+		```
+		* compiles to css
+		```
+			.alert, 
+			.alert-error {
+				border-radius: 10px;
+				padding: 10px 20px;
+			}
+
+			.alert-error {
+				background: #black
+				color: #red
+			}		
+		```
+	* placeholder selector extend
+		* prevents the creation of a bunch of unused classes
+		* placeholder selectors meant to be used by extensions 
+		* placesholder selectors are never compiled into css
+		* the `%` symbol initializes a placeholder selector 
+		```
+			%alert
+				border-radius: 10px
+				padding: 10px 20px
+			
+			.alert-error
+				@extend %alert
+				background: #black
+				color: #red
+		```
+		* compiles to css
+		```
+			.alert-error {
+				border-radius: 10px;
+				padding: 10px 20px;
+			}
+			.alert-error {
+				background: #black;
+				color: #red;
+			}
+		```
+	* element selector extend 
+		* standard type selectors can also be extended
+		```
+			h2
+				color: #white
+				span
+					text-decoration: underline
+			
+			.sub-heading
+				@extend h2
+		```
+		* compiles to css 
+		```
+			h2, .sub-heading {
+				color: #white
+			}
+	
+			h2 span, .sub-heading span {
+				text-decoration: underline;
+			}
+		```
+	* mixins 
+		* a way to easily template properties and values and share them amongst different selectors
+		* allow arguments to be passed in 
+		* use the `@mixin` symbol followed by any potential arguments to make stand alone mixins
+		* use the `+` symbol followed by the name of the mixin and argument values to call mixin from within a selector
+		```
+			@mixin btn($color, $color-hover)
+				color: $color
+				&:hover
+					color: $color-hover
+				
+			.btn
+				+btn($color: #black, $color-hover: #white)
+		```
+		* compiles to css
+		```
+			.btn {
+				color: #black;
+			}
+			.btn:hover {
+				color: #white;
+			}
+		```
+		* mixins can also be passed default arguments
+			* these can of course be overwritten when declared
+			```
+				@mixin btn($color: #black, $color-hover: #white)
+					color: $color
+					&: hover
+						color: $color-hover
+				
+				.btn
+					+btn($color-hover: #red)
+			```
+			* compiles to css
+			```
+				.btn {
+					color: #black;
+				}
+				.btn:hover {
+					color: #red	
+				}
+			```
+		* mixins can also be passes multiple values for the same argument to take care of browser differences for example
+			* use the `...` symbol after the argument 
+			``` 
+				@mixin box-shadow($shadow...)
+					-webkit-box-shadow: $shadow
+					-moz-box-shadow: $shadow
+					box-shadow: $shadow
+				
+				.shadows
+					+box-shadow(0 1px 2px #black, inset 0 0 5px #black)
+			```
+			* compiles to css
+			```
+				.shadows {	
+					-moz-box-shadow: 0 1px 2px #black, inset 0 0 5px #black;
+					-webkit-box-shadow: 0 1px 2px #black, inset 0 0 5px #black;
+					box-shadow: 0 1px 2px #black, inset 0 0 5px #black;
+				}
+			```
+	* imports 
+		* sass can import multiple .scss or .sass files an condense them into one single file
+			* reduces the number of http request that have to be made to render the pade
+		* the `@import` symbol is used to import other style sheets
+		* in the example three files are compiled into one sass stylesheet called `styles.sass`
+		```
+			@import "normalize"
+			@import "grid", "typography"	
+		```
+		* compiles to css
+		```
+			<link href="styles.css" rel="stylesheet">
+		```
+	* loops & conditionals 
+		* loops and conditionals are meant for creating detailed mixins and helpers 
+		* operators 
+			* relational operators
+				* look at the relationship between two entities
+				* < 
+					* Less than 
+				* > 
+					* Greater than 
+				* <= 
+					* Less than or equal to 
+				* >= 
+					* Greater than or equal to 
+			* comparison operators 
+				* == 	
+					* Equal to 
+				* != 
+					* Not equal to
+		* if function 
+			* tests an expression and then loads the styles beneath that expression if the expression returns anything other than false or null
+			* use the `@if`, `@else` symbol to denote conditionals 
+			```	
+				$shay: awesome
+				
+				.shay
+					@if $shay == awesome
+						background: #black
+					@else if $shay == cool
+						background: #red
+					@else 
+						background: #white
+			```
+			* compiles to css
+			```
+				.shay {
+					background: #black;
+				}
+			```
+		* for loop 
+			* outputs different sets of styles based off of a counter variable 
+			* two different forms `to` and `through` 
+				* `to` is exclusive
+				* `through` is inclusive
+			* use the `@for`, `from` symbols and either the `to` or `through` symbol to use for loops
+			```
+				@for $col from 1 to 6
+					.col-#{$col}
+						width: 40px * $col
+			```
+			* compiles to css
+			```
+				.col-1 {
+					width: 40px;
+				}
+				.col-2 {
+					width: 80px;
+				}
+				.col-3 {
+					width: 120px;
+				}
+				.col-4 {
+					width: 160px;	
+				}
+				.col-5 {
+					width: 200px;
+				}
+			```
+		* each loop 
+			* each loop that follows a ruby like loop for an iterable 
+			* use the `@each` symbol 
+			```
+				@each $class in uxd, rails, html, css
+					.#{$class}-logo
+						background: url("/img/#{$class}.jpg")
+			```
+			* compiles to css
+			```
+				.uxd-logo { 
+					background: url("/img/uxd.jpg");
+				}			
+				.rails-logo {
+					background: url("/img/rails.jpg");
+				}
+				.html-logo { 
+					background: url("/img/html.jpg");
+				}
+				.css-logo {
+					background: url("/img/css.jpg");
+				}
+			```
+		* while loop 
+			* repeatedly returns styles until boolean expression is false
+			* use the `@while` symbol
+			```
+				$heading: 1
+				@while $heading <= 6
+					h#{$heading}
+						font-size: 2em - ($heading * .25em)
+					$heding: $heading + 1
+			```
+			* compiles to css
+			```
+				h1 {
+					font-size: 1.75em;
+				}
+				h2 {
+					font-size: 1.5m;
+				}
+				h3 {
+					font-size: 1.25em;
+				}
+				h4 {
+					font-size: 1em;
+				}
+				h5 { 
+					font-size: 0.75em;
+				}
+				h6 {
+					font-size: 0.5em;
+				}
+			```
+			
 	
 #May 13 - The react js library 
 
