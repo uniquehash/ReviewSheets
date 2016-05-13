@@ -310,3 +310,467 @@ Okay so basically css architecture is like any other architecture and you should
 			* modifier classes should not be used without their base class
 			* sub-object classes should not be used when no ancestor contains the base class
 			* plain old div or span elements without classes attached should notbe used in the html
+
+#May 12 - preprocessor galor
+
+here we learn to use the beautiful preproccessors that allow us to add additional concepts into css like inheritance and stuff
+
+####Questions 
+
+What is a preprocessor?
+What does interpolation mean?
+What is a key selector?
+
+
+
+####Following the [html & css advanced guide](http://learn.shayhowe.com/advanced-html-css/performance-organization/)
+
+* Style architecture 
+	* separate style based on intent (separation of concerns)
+		* Base
+			* base css for neutral items 
+		* Components
+			* reusible visual elements 
+		* Modules
+			* compenent visual elements
+	* [object oriented css](http://oocss.org/) 
+		* Nicole Sullivan (idol person)
+		* separate layout and feel 
+		* separate content from container
+	* [scalable & modular architecture css](https://smacss.com/)
+		* Jonathan Snook (idol person)
+		* separate style into 5 components 
+			* base
+				* core element styles, general defaults
+			* layout 
+				* identifies the sizing and gris styles 
+			* module 
+				* specific styles targeting indivisual parts of the page
+					* navigation, feature
+			* state
+				* used to augment or overridde other styles for modules with changing states
+			* theme	
+				* styles based around look and feel of different modules
+	
+* performance driven selectors
+	* keep selectors short 
+		* limit the use of combinators, stick to simple selectors
+	* favor classes 
+		* key selector
+			* selectors are rendered from right to left
+			* the selector at the end of a selector furthese to the right, identifies the first element the browser is going to find
+		* use classes instead of long chains 
+		* do not prefix class selectors with an element
+		* avoid using id
+	* reusable code
+		* reuse classes that use the same styling 
+	* minify and compress files
+		* gzip compression 
+			* takes common files, identifies similar strings to compress down, the more matching strings the more it compresses. 
+		* measuring compression 
+			* google chrome web inspector has a tool for performance 
+		* image compression 
+			* image compression can reduce the quality of the image itself 
+				* lossless compression is when there is no quality loss
+			* [imageOptim](https://imageoptim.com/mac)
+				* compresses both jpg and png 	
+			* setting the height and width attributes of the img html tag increases performance
+	* reduce http requests 
+		* combine like files 
+			* combine all of the css files into one file
+			* combine all of the js files into one file 
+			* css file should be loaded at the beginning of the document within the head 
+			* javascript file should be loaded at the end of the document before the closing body tag
+		* image sprites 
+			* [spriting images](http://www.w3schools.com/css/css_image_sprites.asp)  
+				* combining images into one background image 
+				* use css to change where the positioning of the image is to display the correct image
+		* image data uri
+			* [data uri](https://css-tricks.com/data-uris/)
+				* encode image data directly into html and css with a data uri, no http request
+			* useful when the data never changes 
+			* hard to maintain 
+			* not backwards compatible 
+			* generate data uri
+				* [converters](http://websemantics.co.uk/online_tools/image_to_data_uri_convertor/)
+				* [pattern generators](http://www.patternify.com/)
+		* cache common files
+			* set within the .htcaccess file 
+
+* containing floats
+	* allow elements to appear next to, apart from one another 
+	* provide the ability to build a natural flow within a layout and allow elements to interact with one another based on their size and size of their parents
+	* when floated an elements position is dependent on the other elements positioned around it
+	* classic problems with float
+		* parent element that contains many floated elements 
+			* content on the page will respect the size and placement of the floated children element, but these floated elements no longer impact the outer edges of the parent container
+			* the parent essentially loses the context of exactly what it contains and collapses thus giving the parent element a height of 0 and ignoring various other properties 
+			* <b>solution</b> place an empty element with the css rule `clear: both` just before the parent elements closing tag
+			* <b>solution</b> [method for containing floats](http://www.ejeliot.com/blog/59)
+				* overflow technique 
+					* use the css `overflow` property 
+						* set the `overflow` property to `auto` within the parent element will contain the floats, resulting in an actual height for the parent element 
+						* for IE 6 a `height` and `width` must be given to the parent element 
+					* drawbacks 
+						* adding styles or moving nested elements that span outside of the parent will not work as expected
+						* browsers treat the overflow property differently 
+					* code snippet 
+						```
+							.box-set {
+							  overflow: auto;
+							}
+						```		
+				* [clearfix technique](http://nicolasgallagher.com/micro-clearfix-hack/)
+					* more complex but better supported 
+					* based of using the `:before` and `:after` pseudo-elements on the parent element 
+						* create hidden elements above and below the parent element 
+						* `:before` 
+							* used to prevent the top margin of child elements from collapsing by creating an anonymous table-cell element using the css rule `display: table;`
+							* also helps ensure consistency within IE 6 and 7
+						* `:after`
+							* used to prevent the bottom margin of child elements from collapsing, as well to clear the nested floats
+					* adding the `*zoom` property to the parent element triggers the `hasLayout` [mechanism](http://www.satzansatz.de/cssd/onhavinglayout.html)
+						* determines how elements should draw and bound their content, as well as how elements should interact with and relate to other elements 	
+					* code snippet 
+					```
+						.parent-set:before,
+						.parent-set:after {
+						  content: "";
+  						  display: table;
+						}
+						.parent-set:after {
+						  clear: both;
+						}			
+						.parent-set {
+						  *zoom: 1;
+						}	
+					```	
+				* effectively containing floats
+					* assign a class to the parent element of the float elements
+					* group class name 
+						* all parents are assigned the group class name thus solving all the problems 
+						
+* fine-tune control over the [positioning of elements](http://alistapart.com/article/css-positioning-101) 
+	* the `position` property controls how elements are positioned 			
+	* accepts 5 values
+		* position static 
+			* elements default to the static position 
+				* they do not have nor will they accept any specific box offset properties 
+				* will be position as intended with default behavior 
+		* position relative 
+			* accepts the box offset properties 
+				* the offset is based off the default position of the element in normal flow
+				* top
+					* prioritized over bottom
+				* right 
+					* prioritized by the direction in which the language of the page is written in 
+				* bottom 
+				* left
+			* allows the element to be precisely positioned, shifting the element from its default position
+			* specify how an element should be displaced from its default position 
+			* will overlap and underlap on top of other elements without colisions
+		* position absolute 
+			* accepts box offset properties 
+				* the offset is based off the positioning of the relative/absolute parent of the element 
+			* removed from the normal flow of the document 
+				* positioned directly in relation to their containing parent whom is relatively or absolutely positioned 
+			* not specifying a offset will move the element to the top left of its parents position
+				* if no relative or absolute parent found, will be positioned in relation to the body of the page
+			* if an element does not have a specific height or width and is absolutely positioned using a combination of top and bottom offsets the element will inheret the size of its parent 	
+		* position fixed 
+			* essentialy like absolute except the position is relative to the browsers viewport and does not scroll with the page
+				* will always be in the same spot no matter what the user does
+			* does not work with IE 6
+			* accepts box offset properties 
+				* based on viewport
+			* fixed header or footer
+				* often used to create fixed headers and footers
+				* code snippet
+					```
+						body {
+						  background: #eaeaed;
+						}
+						footer {
+						  background: #2db34a;
+						  bottom: 0;
+						  left: 0;
+						  position: fixed;
+						  right: 0;
+						}
+					```
+	* [z-index property](http://www.impressivewebs.com/a-detailed-look-at-the-z-index-css-property/) 
+		* allows control over the order in which elements are layerd on top of each other
+		* default z positioning 
+			* in the order inwhich the elements appear in the DOM 
+		* z positioning is only functional when the `position` property has particular values 
+			* relative 
+			* absolute
+			* fixed
+
+* preprocessor 
+	* a program that takes one type of data and converts it to another type of data
+	
+* haml 
+	* an html preproccessor 
+	* doctype
+		* which doctype to use is explicit `!!! 5` translates to !doctype html otherwise will use default doctype of html 1.0
+	* [declaring elements](http://www.screencasts.org/episodes/introduction-to-haml)
+		* haml elements only have the opening tag 
+		* elements are initialized with the `%` symbol
+		* identation is used to show nesting 	
+			* identation must be consistent like python
+		* text can either be on the same line of a declared element or indented before it. on or the either
+		* attributes 
+			* declared directly after an element within either `{}` or `()` symbol 
+				* `{}` is ruby syntax
+					* do assignment the ruby way
+					```
+						%img{src: "shady.jpg", alt: "this is a shady jpg"}
+					``` 
+				* `()` is html syntax	
+					* do assignment the html way
+					```
+						%img(src="shady.jpg" alt="this is a shady jpg")
+					```
+				* both compile to same html 
+					```
+						<img src="shady.jpg" alt="this is a shady jpg">
+		* classes & ids
+			* class and ids can be declared the same way as all other attributes 	
+			* they can also be assigned using a different syntax 
+				* you can use a `.` notation to assign classes 
+				```
+					%section.feature 
+					%section.feature.special
+				```
+				* you can use a `#` notation to assign ids 
+				```
+					%section#hello
+					%section#hello.feature(role="region")
+				```
+				* assigning classes and ids to divs
+					* you can omit the `%div` tag
+		* boolean attributes 
+			* handled the same way as the syntax chosen
+			```
+				%input{type: "checkbox", checked: true}
+				%input(type="checkbox" checked=true)
+			```
+		* escaping text 
+			* major benefit of haml is the ability to evaluate and run ruby 
+			* not always desired 
+				* text, and lines of code can be escaped by using the `\` symbol
+				```
+					.author
+						= @author
+						\= @author		
+				```
+				* compiles to html
+				```
+					<div class="author">
+					  Oliver Belanger
+					  = @author
+					</div>
+				```
+		* text escaping alternatives 
+			* sometimes you need to do ruby hacks to get the desired output
+			```
+				%p 
+					shay is 
+					= succeed "." do
+						%a{href: "#"} awesome
+			```
+			* compiles to html
+			```
+				<p>Shay is <a href="#">awesome</a>.</p>
+			```
+		* comments 
+			* comments are made using the `/` symbol
+			* multi line comments are just idented under the `/` symbol
+		* conditional comments
+			* to create a conditional comment use the `[]` symbols around the condition
+			```
+				/[if lt IE 9]
+					%script{src: "html5shiv.js"}
+			```
+		* silent comments 
+			* these are comments that are in the haml file but not in the html document 
+			* use the `-#` symbol to initiate 
+		* filters
+			* haml lets you mix languages together in the same document by using filters 	
+			* filters are denoted by the `:` before a established language keyword 
+				* :cdata :coffee :css :erb :escaped :javascript :less :markdown :maruku :plain :preserve :ruby :sass :scss :textile
+			* simply use a filter and nest the code underneath the filter 
+		* ruby interpolation 
+			* sometimes you need to evaluate ruby within plain-text 
+			```
+				%div {class: "student-#{@student.name}"}
+			```
+"
+* sass
+	* a css preprocessor 
+	* stands for syntactically awesome stylesheets
+	* files written in sass need to have a .sass file extension 
+	* to convert run `sass style.sass style.css`	
+		* to have auto recompile use `sass --watch styles.sass:style.css`
+		* to have auto recompile for entire directory `sass --watch assets/sass:public/css`
+	* syntax 
+		* omits curly brackets and semicolons 
+		* identation and clear line breaks to for formating 
+		* strict syntax, if syntax rules broken file wont compile
+		```
+			.new
+				color: #black
+				font-weight: bold
+				span
+					text-transform: uppercase
+		```
+	* nesting 
+		* selectors can be nested inside one another to create compound selectors
+		* do not overdo it 
+	* nesting properties 
+		* you can nest properties 
+		```
+			div 
+				font:
+					family: baskerville, palatino, serif
+					style: italic
+					weight: normal
+		```
+	* nested media queries 
+		* media queries can also be nested inside of a selector to change that property based off a media condition 
+		```
+			.container
+				width: 960px
+				@media screen and (max-width: 960px)
+					width: 100%
+		```
+	* parent selector 
+		* you can add styles to a previous selector using the `&` symbol
+		```
+			a 
+				color: #0087cc
+				&:hover
+					color: #ff7b29
+		```
+	* parent key selector
+		* you can add qualiifying selectors to make compound selectors 
+		```
+			.btn
+				background: linear-gradient(#fff, #9799a7)
+				.no-cssgradients &
+					background: url("gradient.png") 0 0 repeat-x
+		```
+		* compiles to css
+		```
+			.btn {
+				background: linear-gradient(#fff, #9799a7);
+			}
+			
+			.no-cssgradients .btn {
+				background: url("gradient.png") 0 0 repeat-x
+			}
+		```
+	* comments 
+		* the /* ... */ syntax for comments works and compiles to css comments 
+	* silent comments 
+		* the `//` symbol is used to make silent comments that will not be compiled to css
+			* can be made multi-line with identation 
+	* variables
+		* you can define variables in sass and reuse them 
+		* variables are defined using the `$` symbol
+		```
+			$font-base: 1em
+			$serif: "Helvetica Neue", Arial, "Lucida Grande", sans-serif
+			
+			p
+				font: $font-base $serif
+		```
+		compiles to css
+		```
+			p {
+				font: 1em "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
+			}
+		```
+	* variable interpolation 
+		* sometimes they variables need to be interpolated 
+		```
+			$location: chicago
+			$offset: left
+			
+			.#{$location}
+				#{offset}: 20px
+		```
+		* compile to css
+		```
+			.chicago {
+				left: 20px;
+			}
+		```
+	* calculations
+		* you can do calculations in your css like but not limited to 
+			* addition 
+				* use the `+` symbol 
+				* the first unit listed is the unit that the calculation will return 
+			* subtraction
+				* use the `-` symbol
+				* the first unit listed is the unit that the calculation will return
+			* modular
+				* use the `%` symbol
+				* only one number can have a unit 
+			* multiplication 
+				* use the `*` symbol 
+				* only one number can have a unit 
+			* division
+				* use the `/` symbol
+				* when using one unit the calculation will return one unit, when using two units the calculation will return no units
+		* you can use sass to combine mathamatical operations 
+		* [built in calc functions](http://sass-lang.com/documentation/Sass/Script/Functions.html)
+			* percentage()
+				* turns a value into a percentage 
+			* round() 
+				* rounds a value to the closest whole number
+			* ceil() 
+				* rounds a value up to the closest whole number 
+			* floor() 
+				* rounds a value down to the closest whole number
+			* abs()
+				* finds the absolute vaue of a given number
+	* color 
+		* sass has a lot of helper functions for colors 
+		* you can change hexadecimal color or variable and convert it to RGBa value 
+		```
+			color: rgba(#8ec63f, .25)
+			
+			$green: #8ec63f
+			color: rgba($green, .25)
+		```
+		* compile to css
+		```
+			color: rgba(142, 198, 63, .25);
+		```
+	* color operations 
+		* you can do calculations on colors 
+		```
+			color: #8ec63f + #666
+			color: #8ec63f * 2
+			color: rgba(142, 198, 63, .75) / rgba(255, 255, 255, .75)
+		```
+	* color alterations
+		* invert()
+		* complement() 
+		* mix() 
+		* grayscale()
+	* HSLa color alteration 
+		* lighten() 
+		* darken() 
+		* saturate() 
+		* desaturate() 
+		* adjust-hue() 
+		* fade-in() 
+		* fade-out()
+	* color manipulation 
+		
+
+
+
