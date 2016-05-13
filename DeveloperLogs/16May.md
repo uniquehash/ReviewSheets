@@ -770,7 +770,40 @@ What is a key selector?
 		* fade-in() 
 		* fade-out()
 	* color manipulation 
-		
+	
+#May 13 - The react js library 
 
+react is a javascript library that can be used like a framework, it is pretty nifty he says. 
+
+####questions 
+
+What the fuck is isomorphic loading? 
+
+
+
+
+* react js has super cool features
+	* one-way data flow 
+		* properties are passed to components as properties in its html tag
+		* component cannot directly modify any properties passed to it, but can be passed callback functions that do modify values 
+			* properties flow down and actions flow up 
+	* [virtual DOM](http://facebook.github.io/react/docs/working-with-the-browser.html)
+		* an in-memory data structure cache, computes the resulting difference and updates the browsers displayed DOM efficiently 			
+			* the `render()` method returns a description of the DOM 
+				* react can compare this description with the virtual DOM to compute the fastest way to update the browser
+			* inplements a full synthetic event system 
+				* all event objects are guranteed to conform to the W3C spec regardless of browser quirks 
+				* everything bubbles consistently and efficiently across browsers 
+				* allows you to use HTML5 evenets in older browsers that do not ordinarily support them	
+			* provides hooks to manipulate the DOM api directly if neccesary 
+	* [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html) 
+		* react components are written in javascript extension syntax
+			* allows easy quoting of HTML and the use of HTML tag syntax to render subcomponents 
+				* HTML syntax is processed into JS calls of the react library 
+				* can also use pure JS
+	* architecture beyond HTML 
+		* the architecture applies beyond rendering HTML in the browser 
+		* [fb has dynamic charts that render to <canvas> tags](https://facebook.github.io/react/blog/2013/06/05/why-react.html)
+		* [netflix](http://techblog.netflix.com/2015/01/netflix-likes-react.html) and [paypal](https://www.paypal-engineering.com/2015/04/27/isomorphic-react-apps-with-react-engine/) use isomorphic loading to render HTML on both server and client
 
 
