@@ -317,9 +317,9 @@ here we learn to use the beautiful preproccessors that allow us to add additiona
 
 ####Questions 
 
-What is a preprocessor?
-What does interpolation mean?
-What is a key selector?
+* What is a preprocessor?
+* What does interpolation mean?
+* What is a key selector?
 
 
 
@@ -1113,4 +1113,1060 @@ What the fuck is isomorphic loading?
 		* [fb has dynamic charts that render to <canvas> tags](https://facebook.github.io/react/blog/2013/06/05/why-react.html)
 		* [netflix](http://techblog.netflix.com/2015/01/netflix-likes-react.html) and [paypal](https://www.paypal-engineering.com/2015/04/27/isomorphic-react-apps-with-react-engine/) use isomorphic loading to render HTML on both server and client
 
+# May 14 - haml and rails harmony
 
+So apparently the `-` symbol in rails is haml telling rails to silently execute ruby code
+
+####Questions
+	
+* what does the `-` symbol mean in haml under rails?
+	* indicates to rails that the line is ruby code and to silently execute (no output)
+
+
+####Vocab
+
+* `.to_s.downcase` (ruby)
+	* to string and then forced to lower case
+
+* `.to_s.singularize` (ruby)
+	* to string and returns the singular form of a word 
+ 
+# May 15 - rails - deeper into the docs
+
+going to finish the rails tutorial and read deeper into the docs 
+
+some populare authentication add-ons for rails are [Devise](https://github.com/plataformatec/devise) and [Authlogic](https://github.com/binarylogic/authlogic)
+basically rails is a tentacle monster that knows no bounds
+
+
+#### questions
+
+* What does the `@` symbol before a variable mean again?
+	* instance variable in a class are in shared memory for that instance of the class, but cannot be accessed outside the class
+	* essentially a perma reference variable 
+
+* ruby attributes are?
+	* attributes that are set for all instances of the class, can be changed and are accessible by the scope outside of the class
+
+* what is mass assignment?
+
+* what do the `require` and `permit` methods do?
+
+* what is a partial?
+
+* what is the difference between `<%` and `<%=`?
+
+* what is the difference between `@`variable (instance variable) and `:`variable?
+
+* what is a nested resources in the context of rails routing?
+
+
+#### features
+
+* rails [security features](http://guides.rubyonrails.org/security.html) 
+	* [strong parameters](http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters)
+		* [blog about it](http://weblog.rubyonrails.org/2012/3/21/strong-parameters/)
+		* requires rails to know exactly which parameters are allowed into the controllwe actions 
+		* prevents parameter injection from mean people 
+		* built to precent `mass assignment`
+		* thus parameters must be whitelisted 
+		* use `require` and `permit` symbol to white list parameters
+	* basic authentication 
+		* `http_basic_authenticate_with` method
+			* allows access to the requested action if that method allows it 
+		* specified at top of ArticlesController
+		* `app/controllers/articles_controller.rb`
+		```
+			class ArticlesController < ApplicationController
+				http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
+				
+				def index
+					@articles = Article.all
+				end
+			# snipper yo
+		```
+		* basically means that unless authenticated users can only use the articles index and show actions 
+		* authentication to delete comments 
+		* `app/controllers/comments_controller.rb`
+		```
+			class CommentsController < ApplicationController 
+				http_basic_authenticate_with name: "dhh", password: "secret", only: :destroy
+			
+				def create
+					@article = Article.find(params[:article_id])
+					#...
+				end
+				#snipper yo
+		```
+		* popular authentication add-ons
+			* Devise 
+			* Authlogic
+
+
+#### following the [getting started guide](http://guides.rubyonrails.org/getting_started.html#creating-the-article-model)
+
+* creating the article model
+	* active record is pretty cool 
+	* `bin/rails generate model Article title:string text:text`
+		* creates a new model, and links it to the DB and everything 
+		* we have now created an Article model that has two attributes title and text of type string and text 
+		* this model has been added and mapped to the DB automatically 
+		* command creates multiple files the important ones being 
+			* app/models/article.rb
+			* db/migrate/#{dateTimeStamp}_create_articles.rb
+				* responsible for creatign the database structure
+				
+* running a migration - [rabbit hole on active record migrations](http://edgeguides.rubyonrails.org/active_record_migrations.html)
+	* db migrations are ruby classes that are designed to make it simple to create and modify database tables
+	* rails uses rake commands to run migrations 
+		* you can undo migrations even after its been applied to the db
+	* when the db migration script is run it will create an articles table with one string column and a text column 
+	* the migration has a method named `change` which is called to run the migration
+	```
+		class CreateArticles < ActiveRecord::Migration 
+			def change
+				create_table :articles do |t|
+					t.string :title
+					t.text :text
+
+					t.timestamps null: false
+				end
+			end
+		end
+	```
+	* to actually run the db/migration script use a rake command
+		* `bin/rake db:migrate`
+		* important to note that rails will no which to run because of the timestamp title 
+		* important to note that the command will be applied tot he database defined in the development section of the config/database.yml 
+			* this is because the default enviroment is a development environment 
+			* to execute command in a different enviroment you must explicitly pass the appropriate environment 
+				* `bin/rake db:migrate RAILS_ENV=production`
+
+* saving data in the controller 
+	* need to dictate to the ArticlesController to save the data in the DB when the create action is triggered
+	* in `app/controllers/articles_controller.rb`
+	```
+		def create 
+			@article = Article.new(params[:article])
+			
+			@article.save
+			redirect_to @article
+		end
+	```
+	* rails models can be initilized with its respective attributes 
+		* automatically mapped to the respective database columns
+	* the instance variable `@article` has a method `.save` that is responsible for saving the model to the database 
+	* the user is redirected to the show action of the article (not yet defined)
+	* class names in ruby must begin with capital letters 
+		* `Article`
+			* refers to the class defined in `/models/article.rb 
+			* `.new` being a method defined in that class
+	* the `@article.save` call returns a boolean indicating whether the article was saved or not
+	* must whitelist our parameters
+	```
+		def create
+			@article = Article.new(article_params)
+			
+			@article.save
+			redirect_to @article
+		end
+		
+		private 
+			def article_params
+				params.require(:article).permit(:title, :text)
+			end	
+	```
+
+* showing articles
+	* routes currently
+	* `article GET		/articles/:id(.:format)		articles#show`
+		* syntax `:id` 
+			* tells rails that this route expects an :id parameter 
+			* this will be the id of the article
+	* we need to add a show action to the article controller 
+	* `app/controllers/articles_controller.rb`
+	```
+		class ArticlesController < ApplicationController	
+			def show
+				@article = Article.find (params[:id])
+			end
+			
+			def new
+			end
+			#snipper for brevity
+	```
+	* retrieve the id from the Article class using the `Article.find` method and passing it the `param[:id]` argument to get the id from the request
+	* rails passes instance variables from the controller to the views 
+	* we need to create a new view to display the data 
+	* `app/views/articles/show.html.erb
+	```
+		<p>
+			<strong>Title:</strong>
+			<%= @article.title %>
+		</p>
+		
+		<p>
+			<strong>Text:</strong>
+			<%= @article.text %>
+		</p>
+	```
+
+* listing all articles 
+	* we need to add a index action to list articles
+	* convention is to make the index action be first in the controller 	
+	* app/controllers/articles_controller.rb
+	```
+		class ArticlesController < ApplicationController
+			def index
+				@articles = Article.all
+			end
+			
+			def show 
+				@article = Article.find(params[:id])
+			end
+			
+			def new 
+			end 
+			
+			#snippet yo
+	```
+	* add a view to match the action 
+	* app/views/articles/index.html.erb
+	```
+		<h1>Listing articles</h1>
+ 
+		<table>
+  			<tr>
+    				<th>Title</th>
+    				<th>Text</th>
+  			</tr>
+ 
+  			<% @articles.each do |article| %>
+    				<tr>
+      					<td><%= article.title %></td>
+      					<td><%= article.text %></td>
+    				</tr>
+  			<% end %>
+		</table>
+	```
+
+* adding internal links
+	* when linking within the same controller there is no need to specify the controller to use as rails will know which to use by default 
+	* need to navigate through the pages 
+	* app/views/welcome/index.html.erb
+	```
+		<h1>Hello, Rails!</h1>
+		<%= link_to 'My Blog', controller: 'articles' %>
+	```
+	* the `link_to` method is a built-in rails view helper
+		* creates a hyperlink based on text to display and where to go
+	* app/views/articles/index.html.erb
+		* add above the table tag 
+	```
+		<%= link_to 'New article', new_article_path %>
+	```
+	* add a link to go back to the article index
+	* `app/views/articles/new.html.erb
+	```
+		<%= form_for :article, url: articles_path do |f| %>
+		...
+		<% end %>
+		
+		<%= link_to 'Back', articles_path %>
+	```
+	* add a link to the show template to go back to the article index
+	* app/views/articles/show.html.erb
+	```
+		<p>
+  			<strong>Title:</strong>
+  			<%= @article.title %>
+		</p>
+ 
+		<p>
+  			<strong>Text:</strong>
+  			<%= @article.text %>
+		</p>
+ 
+		<%= link_to 'Back', articles_path %>
+	```
+	
+* adding [ActiveRecord validation](http://guides.rubyonrails.org/active_record_validations.html) 
+	* currently the `Article` model inherits from `ActiveRecord::Base`	
+	* `ActiveRecord` sets up pretty much all simple functionality for you including CRUD functionality 
+	* there are also methods to ease validation of the data sent to models 
+	* `app/models/article.rb`
+	```
+		class Article < ActiveRecord::Base
+			validates :title, presence: true, length: {minimum:5}
+		end
+	```
+		* this makes sure that each title is at least 5 characters long 
+		* lots of stuff can be validated by forms
+	* if the article submitted doesnt fufill the requirements it will get rejected, that needs to be in the controller logic
+	* `app/controllers/articles_controller.rb`
+	```
+		def new 
+			@article = Article.new
+		end
+		
+		def create 
+			@article = Article.new(article_params)
+		
+			if @article.save
+				redirect_to @article
+			else
+				render 'new'
+			end
+		end
+		
+		private 
+			def article_params
+				params.require(:article).permit(:title, :text)
+			end
+	```
+		* `render` 
+			* used such that the instance variable @article is passed back to the new template when it is rendered 
+			* the rendering is done within the same request as the form submission 
+		* `redirect_to` 
+			* tells the browser to issue another request 
+	* error messages 
+		* we need to pass error messages to the user so they know that their shit did not go through 
+		* `app/views/articles/new.html.erb
+		```
+			<%= form_for :article, url: articles_path do |f| %>
+			
+				<% if @article.errors.any? %>
+					<div id="error_explanation">
+						<h2>
+							<%= pluralize(@article.errors.count, "error") %>
+								prohibited this article from being saved: 
+						</h2>
+						<ul>
+							<% @article.errors.full_messages.each do |msg| %>
+								<li><%= msg %></li>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>
+				<p>
+					<%= f.label :title %><br>
+					<%= f.text_field :title %>
+				</p>	
+			
+				<p>
+					<%= f.label :text %><bt>
+					<%= f.text_area :text %>
+				</p>
+			
+				<p>
+					<%= f.submit %>
+				</p>
+			<% end %>
+				
+			<%= link_to 'Back', articles_path %>
+		```		
+		* `@article.errors.any?`
+			* checks to see if there are any errors 
+		* `@article.errors.full_messages`
+			* list all the error messages
+		* `pluralize` 
+			* a rails helper 
+			* takes a number and a string as its arguments 
+			* if the number is greater than one the string will be automaticall pluralized 
+		* rails automatically wraps fields that contain an error with a div 
+			* class name of that div is `field_with_errors`
+			* you can use css to make them standout 
+		
+
+* updating articles 
+	* [more on forms in rails](http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-form_for)
+	* we need an edit action in the ArticlesController
+	* `app/controllers/articles_controller.rb`
+	```
+		def new 
+			@article = Article.new 
+		end 
+		
+		def edit 
+			@article = Article.find(params[:id])
+		end
+	
+		def create
+			@article = Article.new(article_params)
+		
+			if @article.save
+				redirect_to @article
+			else 
+				render 'new'
+			end
+		end
+	```
+	* add an edit view
+	* `app/views/articles/edit.html.erb`
+	```
+		<h1>Editing article</h1>
+ 
+		<%= form_for :article, url: article_path(@article), method: :patch do |f| %>
+ 
+  			<% if @article.errors.any? %>
+   				 <div id="error_explanation">
+      					<h2>
+        					<%= pluralize(@article.errors.count, "error") %> prohibited
+        					this article from being saved:
+      					</h2>
+      					<ul>
+        					<% @article.errors.full_messages.each do |msg| %>
+          						<li><%= msg %></li>
+        					<% end %>
+      					</ul>
+    				</div>
+  			<% end %>
+ 
+  			<p>
+    				<%= f.label :title %><br>
+    				<%= f.text_field :title %>
+  			</p>
+ 
+  			<p>
+    				<%= f.label :text %><br>
+    				<%= f.text_area :text %>
+  			</p>
+ 
+  			<p>
+    				<%= f.submit %>
+  			</p>
+ 
+		<% end %>
+ 
+		<%= link_to 'Back', articles_path %>
+	```	
+	* the method `:patch` option tells rails 
+		* the form should be submitted via the PATCH HTTP method 
+		* essential the update part of crud 
+	* passing in parameter `:article` with the same name as the instance variable leads to the same behavior 
+	* now we need an update action in the controller 
+	* `app/controllers/articles_controller.rb`
+	```
+		def create
+  			@article = Article.new(article_params)
+ 
+  			if @article.save
+    				redirect_to @article
+  			else
+    				render 'new'
+ 			end
+		end	
+	
+		def update 
+			@article = Article.find(params[:id])
+			
+			if @article.update(article_params)
+				redirect_to @article
+			else
+				render 'edit'
+			end
+		end
+	
+		private 
+			def article_params
+				params.require(:article).permit(:title, :text)
+			end
+	```
+	* now in the index we need to add  a link to edit 
+	* `app/views/articles/index.html.erb`
+	```
+		<table>
+  			<tr>
+    				<th>Title</th>
+    				<th>Text</th>
+    				<th colspan="2"></th>
+  			</tr>
+ 
+  			<% @articles.each do |article| %>
+    				<tr>
+      					<td><%= article.title %></td>
+      					<td><%= article.text %></td>
+      					<td><%= link_to 'Show', article_path(article) %></td>
+      					<td><%= link_to 'Edit', edit_article_path(article) %></td>
+    				</tr>
+  			<% end %>
+		</table>
+	```
+	* add it on the show page as well
+	* `app/views/articles/show.html.erb`
+	```	
+		...	
+		<% link_to 'Edit', edit_article_path(@article) %> |
+		<% link_to 'Back', articles_path %>
+	```
+
+* using partials to clean up duplication in views 
+	* [the guide on this shit](http://guides.rubyonrails.org/layouts_and_rendering.html)
+	* [resource oriented style forms](http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-form_for-label-Resource-oriented+style)
+	* by convention partials are prefixed with an underscore 
+	* partials are i think just reausable view components 
+	* were gonna make a form partial 
+	* `app/views/articles/_form.html.erb`
+	```
+		<% form_for @article do |f| %>
+			<% if @article.errors.any? %>
+    				<div id="error_explanation">
+      					<h2>
+        					<%= pluralize(@article.errors.count, "error") %> prohibited
+        					this article from being saved:
+      					</h2>
+      					<ul>
+        					<% @article.errors.full_messages.each do |msg| %>
+          						<li><%= msg %></li>
+        					<% end %>
+      					</ul>
+    				</div>
+  			<% end %>
+ 
+ 			<p>
+    				<%= f.label :title %><br>
+    				<%= f.text_field :title %>
+  			</p>
+ 
+  			<p>
+    				<%= f.label :text %><br>
+    				<%= f.text_area :text %>
+  			</p>
+ 
+  			<p>
+    				<%= f.submit %>
+  			</p>
+ 
+		<% end %>	
+	```
+	* the data is exactly the same so we can make a mini-template to switch in and out 
+	* the reason that this works is because the `@article` instance variable is a resource corresponding to a full set of restful routes
+		* rails can infer which URI and method to use based on the context 
+	* updat the view to use the partial 
+	* `app/views/articles/new.html.erb`
+	```
+		<h1>New article</h1>
+		
+		<% render 'form' %>
+		<%= link_to 'Back', articles_path %>
+	```
+ 	* `app/views/articles/edit.html.erb`
+	```
+		<h1>Edit article</h1>
+		
+		<%= render 'form' %>
+		<%= link_to 'Back', articles_path %>
+	```
+
+* deleting articles 
+	* [details on routes](http://guides.rubyonrails.org/routing.html)
+	* use the delete route to delete shit
+	* create a delete method to destroy resources
+	* create a detroy action in the controller 
+	* `app/controllers/articles_controller.rb`
+	```
+		def destroy 
+			@article = Article.find(params[:id])
+			@article.destroy 
+		
+			redirect_to articles_path
+		end
+	```
+	* we can now call destroy on active recorde objects to delete them from the db 
+	* we need to addd the destroy call to the index view 
+	* `app/views/articles/index.html.erb`
+	```
+		<h1>Listing Articles</h1>
+		<%= link_to 'New article', new_article_path %>
+		<table>
+  			<tr>
+    				<th>Title</th>
+    				<th>Text</th>
+    				<th colspan="3"></th>
+  			</tr>
+ 
+  			<% @articles.each do |article| %>
+    				<tr>
+      					<td><%= article.title %></td>
+      					<td><%= article.text %></td>
+      					<td><%= link_to 'Show', article_path(article) %></td>
+      					<td><%= link_to 'Edit', edit_article_path(article) %></td>
+      					<td><%= link_to 'Destroy', article_path(article), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    				</tr>
+  			<% end %>
+		</table>
+	```
+	* used `link_to` differently 
+		* passed options 
+			* `:method :delete`
+				* will submit the link using the delete restful method 
+			* `data: {confirm: 'are you sure?'}`
+				* html5 attribute that will launch a confirm dialog using jquery 
+
+* adding a second model 
+	* how to add comments to the application 	
+		* after all a blogging platform cannot exist wihtout comments 
+	* generate a `Comment` model for comments 
+	* `bin/rails generate model Comment commenter:string body:text article:references`
+	* creates four files 		
+		* `db/migrate/#{dateTimeStamp}_create_comments.rb
+			* db migrtion to create comments table in db	
+		* `app/models/comment.rb`	
+			* the comment model 
+		* `test/models/comment_test.rb`
+			* testing harness for the comments model
+		* `test/fixtures/comments.yml`
+			* sample comments for use in testing 
+	* because we made a reference variable and pointed that to article the model shows the relationship
+		* this is called `Active Record association`
+		* the db migration contains a column for article_ids that act as a foreign key that point to the articles table 
+	
+* associating models
+	* [Active Record associations](http://guides.rubyonrails.org/association_basics.html)
+		* allow you to easily declare the relationship between two models 
+		* the association is not completed until reflected in both models
+	* `app/models/comment.rb`
+	```
+		class Comment < ActiveRecord::Base
+			belongs_to :article
+		end
+	```
+	* `app/models/article.rb`
+	```
+		class Article < ActiveRecord::Base
+			has_many :comments
+			validates :title, presence: true, length: {minimum:5}
+		end
+	```
+
+* addding a route for comments 
+	* we need to add routes so that rails knows where to see comments 
+	* `config/routes.rb`
+	```
+		resources :articles do
+			resources :comments
+		end
+	```
+	* this makes comments a nested resource within articles 
+		* shows the hierarchical relationship between comments and articles within the routing itself
+
+* generating a controller 
+	* command is `bin/rails generate controller Comments`
+	* six files are generated 
+		* `app/controllers/comments_controller.rb`
+			* comments controller
+		* `app/views/comments`
+			views of the controllers are stored here
+		* `test/controllers/comments_controller_test.rb`
+			the test for the controller are here 
+		* `app/helpers/comments_helper.rb`
+			view helper files are here
+		* `app/assests/javascripts/comment.js.coffee`
+			coffeescripts for the controller
+		* `app/assests/stylesheets/comment.css.scss`
+			css stylesheet for the controller
+	* we need to add comments to the Article show template
+	```	
+		<p>
+  			<strong>Title:</strong>
+  			<%= @article.title %>
+		</p>
+ 
+		<p>
+  			<strong>Text:</strong>
+  			<%= @article.text %>
+		</p>
+ 
+		<h2> Add a comment:</h2>
+		<%= form_for([@article, @article.comments.build]) do |f| %>
+			<p>
+				<%= f.label :commenter %><br>
+				<%= f.text_field :commenter %>
+			</p>
+			<p>
+				<%= f.label :body %><br>
+				<%= f.text_area :body %>
+			</p>
+			<p>
+				<%= f.submit>
+			</p>
+		<% end %>
+		
+		<%= link_to 'Edit', edit_article_path(@article) %> | 
+		<%= link_to 'Back', articles_path %>
+	```
+	* adds a form on the Article Show page to create a new comment by calling the CommentsController create action
+	* the form_for call here uses an array to build a nested route 
+	* the comments controller needs to have a create method though 
+	* `app/controllers/comments_controller.rb`
+	```
+		class CommentsController < ApplicationController
+			def create 
+				@article = Article.find(params[:article_id])
+				@comment = @article.comments.create (comment_params)
+				redirect_to article_path(@article)
+			end
+			
+			private 
+				def comment_params
+					params.require(:comment).permit(:commenter, :body)
+				end
+		end
+	```
+	* each comment needs to know the article that referenced it 
+		* this is why the route was nested in the first place
+		* this is why the form was using an array to make a nested call so that the comment would always know which article owned it 
+	* the user gets redirected to the article they commented on so the view should reflect that 
+	* ```app/views/articles/show.html.erb`
+	```
+		<p>
+  			<strong>Title:</strong>
+  			<%= @article.title %>
+		</p>
+ 
+		<p>
+  			<strong>Text:</strong>
+  			<%= @article.text %>
+		</p>
+ 
+		<h2>Comments</h2>
+		<% @article.comments.each do |comment| %>
+  			<p>
+    				<strong>Commenter:</strong>
+    				<%= comment.commenter %>
+  			</p>
+ 
+  			<p>
+    				<strong>Comment:</strong>
+    				<%= comment.body %>
+  			</p>
+		<% end %>
+ 
+		<h2>Add a comment:</h2>
+		<%= form_for([@article, @article.comments.build]) do |f| %>
+  			<p>
+   	 			<%= f.label :commenter %><br>
+    				<%= f.text_field :commenter %>
+  			</p>
+  			<p>
+    				<%= f.label :body %><br>
+    				<%= f.text_area :body %>
+ 	 		</p>
+  			<p>
+    				<%= f.submit %>
+  			</p>
+		<% end %>
+ 
+		<%= link_to 'Edit', edit_article_path(@article) %> |
+		<%= link_to 'Back', articles_path %>
+	```
+	
+* rendering partial collections 
+	* turn showing comments into a partial 
+	* `app/views/comments/_comment.html.erb`
+	```
+		<p>
+			<strong>Commenter:</strong>
+			<%= comment.commenter %>
+		</p>
+		
+		<p>
+			<strong>Comment:</strong>
+			<%= comment.body %>
+		</p>
+	```
+	* change the `app/views/articles/show.html` file to render the partial instead of the html
+	
+	* you can turn the comment form into a partial as well 
+		* becareful you have to render the path to the form, 
+			`<%= render 'comments/form' %>
+
+* deleting comments 
+	* important to remember in the controller while creating the destroy action 
+		* need to find the article 
+		* need to find the comment in the article 
+		* need to tell that comment to kill itslef
+		* redirect to the same page with dead comment 
+	* important with the view 
+		* you are making a hyper link that will send a request to the approriate route (nested) to delete with a confirmation 
+
+* deleting associated objects 
+	* if you delete an article all the comments have to die as well
+	* `app/models/article.rb`
+	```
+		class Article < ActiveRecord::Base
+			has_many :comments, dependent: :destroy
+			validates :title, presence: true, length: {minimum:5}
+		end
+	```
+
+# May 16 - asset pipeline 
+
+The rails asset pipeline is the subject of todays fun time learn time 
+
+this is the [sass-rails docs](https://github.com/rails/sass-rails#features)
+
+
+
+#### questions 
+	
+* what is the `asset_path` helper?
+* what is a `require_tree` directive?
+* what are digest as in `config.assets.digest`?
+* what are far-future headers?
+
+#### [following rails docs on asset pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
+
+* what is the asset pipeline 
+	* provides a framework to concatenate and minify or compress js and css	assets 
+	* add the ability to write these assets in other languages and pre-processors like sass
+	* no longer a core feature of rails
+		* managed by the [sprockets-rails gem](https://github.com/rails/sprockets-rails)
+	* asset pipeline is enabled by default 
+		* to disable `rails new appname --skip-sprockets`
+	* rails automatically adds pre-proccessor gems to your gemfile
+		* sass-rails
+		* uglifier
+		* coffee-rails
+
+* main features 
+	* concatenate assets 
+		* reduces the number of requests that the client has to make 
+		* faster loading time 
+		* sprockets concatenates all js files into one master .js file and all css files into one master .css file 
+			* the order in which they are grouped is customizable 
+			* in production rails inserts MD5 fingerprint into each filename so that the file is cashed by the browser 
+	* asset minification/compression 
+		* css 
+			* removes whitespace and comments 
+		* javascript 
+			* more special stuff 
+		* this compression can be set from a set of built in options or specify a custom compression 
+	* allows coding assets via a higher-level language
+		* precompiles down to actual assets 
+			* sass -> css
+			* coffeescript -> js
+			* ERB -> either or
+
+* what is fingerprinting and why should i care 
+	* fingerprinting is a technique that makes the name of a file dependent on the contents of the file 
+	* makes it easy to tell if contents of file are identical 
+	* makes caching easy 
+		* cache busting 
+			* when the content is updated the fingerprint changes 
+	* sprockets does this by inserting a hash of the content into the name usually at the end 
+	* they used to use a query string stragy 
+		* several disadvantages 
+			* not all caches will reliably cache content where the filename only differs by query parameters 
+			* the file name can change between nodes in multi-server environments 
+			* too much cache invalidation 
+	* fingerprinting can be enabled or disabled in your `config.assets.digest` options
+
+* how to use the asset pipeline 
+	* in previous rails all assets were located in subdirectories of `public`
+	* with the asset pipeline the preferred location for these assets is
+		* `app/assets` directory 
+			* these files are served by the sprockets middleware 
+	* assets can still be placed in the `public` directory 
+		* any assets under `public` will be served as static files by the application or webserver when `config.serve_static_files` is set to true
+		* use `app/assets` for file that must undergo pre-processing before they are served 
+	* in production files in `app/assets` are never served directly in production 
+
+* controller specific assets 
+	* generating a scaffold or a controller aslo generates a js and css file for that controller 
+	* when it comes to scaffold it also generates scaffolds.css 
+	* these files will be ready to use by your application immediately using the `require_tree` directive 
+	* only include controller specific stylesheets and js in their respective controllers 
+		* `<%= javascript_include_tag params[:controller] %>` or `<%= stylesheet_link_tag params[:controller] %>
+		* do not use the `require_tree` directive simultaniously as it will mean your assets are being included more than once 
+	* disable generation of controller specific asset files 
+		* `config/application.rb`
+		```
+			config.generators do |g|
+				g.assets false
+			end
+		```
+
+* asset organization 
+	* pipeline assets can be placed inside one of three locations 	
+		* `app/assets`
+			* for assets that are owned by the application, such as custom images, js files or stylesheets
+		* `lib/assets`
+			* for your own libraries code that does not really fit into the scope of the application or those libraries which are shared across applications 
+		* `vendor/assets`
+			* for assets that are owned by outside entities such as js plugins or css frameworks 
+				* third party code with references to other files also processed by the asset pipeline will need to be reqritten to use helpers like `asset_path`
+	
+* search paths 
+	* when a file is referenced from a manifest or a helper sprockets searches the `app/assets` directory for it 
+	* in each file the relative path to the directory can be ignored 
+	* search paths can be seen by looking at `Rails.application.config.assets.paths` in the rails console
+	* fully qualified paths can be added to the pipeline in 
+	* `config/application.rb`
+	```
+		config.assets.paths << Rails.root.join("lib", "videoplayer", "flash")
+	```
+	* paths are traversed in the order they occur in the search path 
+	* `app/assets` -> `lib` -> `vendor` 
+		* paths in `app/assets` will mask corresponding paths in `lib` and `vendor`
+	* files referenced outside a manifest must be added to the precompile array or they will not be available in the production environment 
+	
+* using index files 
+	* sprockets uses files named index for a special purpose 
+		* uses them as the manifest for all files in the library 
+			* can include a list of all the required files in order 
+			* or a simple `require_tree` directive 
+	* the library as a whole can be accessed in the application manifest 
+	
+* coding links to assets 
+	* sprockets does not add any new methods to access your assets 
+	* to include assets 
+	```
+		<%= stylesheet_link_tag "application", media: "all" %>
+		<%= javascript_include_tag "application" %>
+	```
+	* if using the turbolinks gem (you are) 
+		* add the `data-turbolinks-track` option
+			* makes turbolinks check to see if an asset has been updated and if so loads it into the page 
+		```
+			<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+			<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		```
+	* in regular views you can access images in the `public/assets/images` directory 
+	```
+		<%= image_tag "rails.png" %>
+	```
+	* sprockets will aslo look through the paths specified in `config.assets.paths` 
+		* includes standard application paths 
+		* includes any paths added by the Rails engine 
+	* images can also be organized into subdirectories and accessed with specified path
+		* if precompiling linking to an asset that does not exist will raise an exception in the calling page 
+	
+* css and erb
+	* the asset pipeline automatically evaluates erb
+		* if you add an erb extension to a css asset then helpers like `asset_path` are available in your css rules 
+		```
+			.class { background-image: url (<%= asset_path 'image.png' %>) }
+		```
+	
+* css and sass 
+	* when using the asset pipeline paths to assets 
+	* `-url` and `-path` helpers 
+		* image-url("rails.png") 
+			* grabs the assets/rails.png url
+		* image-path('rails.png')
+			* grabs the /assets/rails.png path 
+	
+* js and coffeescript and erb
+	* adding a erb extension to a js asset 
+	* can use the asset_path helper in js source 
+	
+* manifest files and directives 
+	* sprockets uses manifest files to determine which assets to include and serve 
+	* `directives` 
+		* instructions that tell sprockets which files to require to build a single css or js file 
+			* using the directives sprockets loads the files specified, processes them, and concatenates them into one single file and then compresses them 
+		* directives are processed top to bottom, but the order in which files are included by require_tree is unspecified 
+		* js sprocket directives 
+			* begin with `//=` syntax 
+			* sprockets assumes that you are referencing js files from js files 
+		* `require_self`
+			* puts the file in the current file at the precise location of the require_self call
+		* `require_tree` 
+			* tells sprockets to recursively include all js files in the specified directory into the output 
+			* must be specified relative to the manifest file 
+		* `require_directory` 
+			* includes al js files in the directory specified without recursion 
+		* css sprocket directives 
+			* begin with `/* *= */` syntax 
+			* the same thing as js 
+			* if using multiple sass files use the [sass @import rule](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#import)
+		* each section of an application could theoritically have its own manifest file 
+				
+* preprocessing 
+	* file extensions used on an asset determine what preprocessing is applied 
+	* preprocessors extensions are read from right to left 
+	* `app/assets/stylesheets/projects.css.scss.erb` 
+		* first processed as erb 
+		* then scss
+		* then served as css
+
+* development 
+	* in development mode assets are served as separate files in the order they are specified in the manifest file 
+	* sprockets requires the body param 
+
+* runtime error checking 
+	* the asset pipeline will check for potential errors in development mode during runtime 
+		* to disable `config.assets.raise_runtime_errors = false`
+	* if the option is turned on the asset pipeline will check to see if all assets loaded are included in the `config.assets.precompile` list 
+		* if `config.assets.digest` is also true the asset pipeline will require all requess for assets include digests 
+	
+* turning digests off 
+	* you can turn off digests by updating `config/environments/development.rb`
+		* to include `config.assets.digest = false` 
+
+* turning debugging off
+	* you can turn off debug mode by updating `config/environments/development.rb`
+		* to include `config.assets.debug = false`
+	* when debug mode is off sprockets concatenates and runs the necessary preprocessors on all files
+		* the manifest would look like `<script src="/assets/application.js"></script>
+	* assets are compiled and cached on the first request after the server is started 
+		* sprockets sets a `must-revalidate` cache-control HTTP header to reduce request overhead on subsequent requests 
+		* if any of the files in the manifest have changed between requests the server responds with a new compiled file
+	
+* in production 	
+	* in production sprockets uses the fingerprinting scheme outlined above 
+		* by default Rails assumes assets have been precompiled and will be served as static assets by your web server 
+
+* precompiling assets 
+	* Rails comes bundled with a rake task to compile the asset manifests and other files in the pipeline
+		* compiled assets are written to the location specified in config.assets.prefix 	
+			* by default this is the `/assets` directory 
+		* rake task to create a compiled version of assets directly on the server 
+		* `$ RAILS_ENV=production bin/rake assets:precompile`
+	* capistrano (v2.15.1 and above) include a recipe to handle this in deployment 
+		* add following to `Capfile` 
+		* `load 'deploy/assets'
+		* links the directory specified in `config.assets.prefix` to `shared/assets`
+			* it is important that this directory is shared between deployments so that remotely cached pages referencing the old compiled assets still work for the life of the cached page
+
+* [far-future expires header](http://guides.rubyonrails.org/asset_pipeline.html#far-future-expires-header)
+	* precompiled assets exist on the file system and are served directly by your web server 
+	* they do not have far-future headers by default 		
+	
+* customizing the pipeline 
+	* css compression 
+		* [yui css compression](http://yui.github.io/yuicompressor/css.html)
+			* `config.assets.css_compressor = :yui`
+			* requires the `yui-compressor` gem
+		* sass-rails css compression
+			* `config.assets.css_compressor = :sass`
+			* requires `sass-rails` gem
+	* js compression 
+		* [uglifier js compression](https://github.com/lautis/uglifier)
+			* `config.assets.js_compressor = :uglifier`
+			* requires `uglifier` gem
+		* yui js compression 
+			* `config.assets.js_compressor = :yui`
+			* require `yui-compressor` gem
+		* closure js compression 
+			* `config.assets.js_compressor = :closure`
+			* require `closure-compiler` gem
+	* you can use your own compressor (no)
+	* changing the assets path 
+		* the public path that sprockets uses by default is `/assets`	
+			* can be changed
+			* `config.assets.prefix = "/some_other_path"`
+	* x-sendfile headers 
+		* is a directive to the web server to ignore the response from the application and instead serve a specified file from disk 
+
+
+
+
+
+
+
+
+
+
+ 	
