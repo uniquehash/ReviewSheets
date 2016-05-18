@@ -2160,6 +2160,377 @@ this is the [sass-rails docs](https://github.com/rails/sass-rails#features)
 	* x-sendfile headers 
 		* is a directive to the web server to ignore the response from the application and instead serve a specified file from disk 
 
+# May 17 - rails action view overview 
+
+im tired but today we learn about action view and all its glory 
+
+
+#### questions 
+
+* what do yields do in ruby?
+* what does the `div_for` helper class do?
+* what is an Atom feed?
+* and what is an RSS feed how does it work?
+* what is a select tag?
+
+
+#### following [action view overview](http://guides.rubyonrails.org/index.html)
+
+* in rails web request handled by action pack 
+	* splits the work into 
+		* controller component (action controller) 
+			* concerned with communicating with the database and performing CRUD actions  
+		* view component (action view) 
+			* responsible for compiling the response 
+			* templates written using embedded ruby in tags mingled with html 
+			* to avoid boilerplate code helper classes exist to provide common behavior for forms, dates, and strings 
+
+* using action view with rails 
+	* for each controller there is an associated directory in the `app/views` directory 
+		* it holds the template files that create the views for the controller 
+		
+* templates, partials and layouts 
+	* .builder extensions 
+		* mwans the `Builder::XmlMarkup` library is used 
+	* the extension determines the template system to interpret 
+	* erb 
+		* ruby code can be included usign either 
+			* `<% %>`
+				* executes ruby code that does not return anything 
+					* conditionals	
+					* loops 
+					* blocks 
+			* `<%= %>`
+				* used when output is desired 
+			* `<%- -%>` 
+				* used to suppress leading and trailing whitespaces 
+	* builder 
+		* these are more programmatic than erb 
+		* useful for generating XML content 
+		* automatically passes template an XmlMarkup object named xml
+	* template caching 
+		* rails compiles each template to a method in order to render it 
+	* partials 
+		* a way of breaking the rendering process into more manageable chunks 
+		* extract pieces of code from templates to separate files and reuse them throughout your templates 
+		* to rend partials 
+		```
+			<%= render "menu" %>
+		```
+			* rails will look for a file `_menu.html.erb` and render it in the appropriate spot 
+		* partials are named with a leading underscore 
+		* partials can be used as subroutines to simplify views 
+		* the `as` and `object` options 
+			* `ActionView::Partials::PartialRenderer` has its object in a local variable with the same name as the template 
+				* `<%= render partial: "product" %>
+					* within product the instance variable `@product` will be in the local variable `product` 
+						* no different than being explcit 
+						* `<%= render partial: "product", locals: {product: @product} %>
+			* `as` 
+				* can be used to specify a different name for the local variable 
+				* `<%= render partial: "product", as: "item" %>`
+			* `object`
+				* can be used to directly specify which object is rendered into the partial 
+				* useful when the templates object is elsewhere
+				* instead of	
+					* `<%= render partial: "product", locals: {product: @item} %>
+				* you can do 
+					* `<%= render partial: "product", object: @item %>`
+			* `as` and `object` can be used together 
+				* `<%= render partial: "product", object: @item, as: "item" %>
+		* rendering collections 
+			* to iterate over a collection and render a sub-template for each of the elements
+			* there is a method for that 
+			* you can turn 
+				```
+					<% @products.each do |product| %>
+						<%= render partial: "product", locals:{ product: product} %>
+					<% end %>
+				```
+			* can be rewritten into a single line 
+				* `<%= render partial: "product", collection: @products %>`
+			* when a partial is called with a collection 
+				* the individual instances of the partial have access to the member of the collection being rendered via a variable named after the partial
+					* in this case `_product`
+				 * if @products is a collection of Product instances you can shorten it even more 
+					* `<%= render @products %>`
+					* rails determines the name of the partial to use by looking at the model name in the collection 
+						* in this case `Product` 
+						* you can also render a collection made up of instances of different models with the same shorthand 
+							* rails will choose the proper partial for each memeber of the collection 
+		* spacer templates 
+			* you can have a second partial rendered between instances of a main partial using the `:spacer_templates` option 
+			* `<%= render partial: @products, spacer_template: "product_ruler" %>`
+			* rails will render the _product_ruler partial between each pair of _product partials 
+	* layouts 
+		* used to render a common view template around the results of rails controller actions 
+			* typically a rails app will have a couple of layouts that pages will be rendered within 
+		* different layouts can have completely different organizational structures 
+	* partial layouts 
+		* partials can have their own layouts applied to them 
+		* imagine displaying an article on a page that should be wrappe in a div for display
+			* create article
+				* `Article.create(body: "partial layouts are cool!")`	
+			* in show template render _article partial wrapped in box layout
+			* `articles/show.html.erb`
+				* `<%= render partial: 'article', layout: 'box', locals: {article: @article} %>`
+			* the box layout wraps the article in a div 
+			* `articles/_box.html.erb`
+				* `<div class='box'><%= yield %></div>`
+			* the _article partial wraps the articles body in a div with the id of the article using the div_for helper
+			* `articles/_article.html.erb`
+			```
+				<%= div_for(article) do %>
+					<p><%= article.body %></p>
+				<% end %>
+			```
+			* the output generated 
+			```
+				<div class='box'>
+					<div id='article_1'>	
+						<p>Partial Layouts are cool!</p>
+					</div>
+				</div>
+			```
+			* partial layouts still use the `_` syntax
+			* you can also render a block of code instead of yield within the partial layout
+			* `articles/show.html.erb`
+			```
+				<% render(layout: 'box', locals: {article: @article}) do %>
+					<%= div_for(article) do %>
+						<p><%= article.body %></p>
+					<% end %>
+				<% end %>
+			```
+				* this would produce same output as before						
+	* view paths 
+		* UNKNOWN OMG PANIC
+	* overview of helpers provided by Action view 
+		* full list of [API Docs](http://api.rubyonrails.org/classes/ActionView/Helpers.html)
+		* [RecordTagHelper](http://api.rubyonrails.org/files/actionview/lib/action_view/helpers/record_tag_helper_rb.html)
+			* provides methods for generating container tags such as div for your record 
+			* the recommended way of creating a container to render Active Record objects, as it adds an appropriate class and id attribute to that container 
+			* following conventions means less thinking 
+				* `content_tag_for`
+					* renders a container tag that relates to your Active Record Object 
+					* given @article
+					```
+						<%= content_tag_for(:tr, @article) do %>
+							<td><%= @article.title %></td>
+						<% end %>
+					```		
+					* basically retrieves content tags of the record 
+				* `div_for`
+					* convenience method 
+					* calls `content_tag_for` internally with :div as the tag name 
+					```
+						<%= div_for(@article, class: "frontpage") do %>
+							<td><%= @article.title %></td>
+						<% end %>	
+					```
+		* [AssetTagHelper](http://api.rubyonrails.org/files/actionview/lib/action_view/helpers/asset_tag_helper_rb.html)
+			* provides methods for generating html that links views to assets like images and js files 
+			* by default Rails links to these assets on the current host in the public folder 
+				* you can direct rails to link to assets from a dedicated assets server by altering 					
+					* `config/environments/production.rb`
+						* `config.action_controller.asset_host = "assets.example.com"`
+				* `auto_discovery_link_tag`
+					* returns a link tag that browsers and feed readers can use to auto-detect an RSS or atom feed
+					```
+						auto_discovery_link_tag(:rss, "www.example.com", { title: "RSS Feed" }) 
+							<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://www.example.com"/>
+					```
+				* `image_path`
+					* computes the path to an image asset in the app/assets images directory 
+					* `image_path("edit.png") # => /assets/edit.png`
+				* `image_url`
+					* computes the url to an image asset in app/assets/images directory 
+					* calls image_path internally and will merge with current host 
+					* `image_url("edit.png")`
+				* `image_tag`
+					* returns an html image tag for the source 
+					* `image_tag("icon.png")`
+				* `javascript_include_tag`
+					* returns an html script tag for each source provided 
+					* `javascript_include_tag "common"`
+					* if app not using asset pipeline to include jQuery and js libraries in app 
+						* pass defaults as the source 
+							* when using defaults if an application.js file exists in your app/assets/javascripts directory it will be included 
+							* `javascript_include_tag :defaults`
+						* pass all to pass all	
+							* pass all js in app/assets/javascripts directory 
+							* `javascript_include_tag :all`
+				* `javascript_url`
+					* computes the url to a js asset in app/assets/javascript directory 
+					* `javascript_url "common"`
+				* `stylesheet_link_tag`
+					* returns a stylesheet link tag for the sources specified as arguments 
+					* `stylesheet_link_tag "application"`
+					* you can pass all to include all 
+						* `stylesheet_link_tag :all`
+				* `stylesheet_path`
+					* computes the path to a stylesheet asset in app/assets/stylesheets directory 
+					* `stylesheet_path "application"`
+				* `stylesheet_url`
+					* computes the url to a stylesheet asset in app/assets/stylesheets directory 	
+					* `stylesheet_url "application"`
+		* [AtomFeedHelper](http://api.rubyonrails.org/files/actionview/lib/action_view/helpers/atom_feed_helper_rb.html)		
+			* this makes building an Atom feed easy 
+			* `config/routes.rb`
+				* `resources :articles`
+			* `app/controllers/articles_controller.rb`
+			```
+				def index 
+					@articles = Article.all
+					
+					respond_to do |format|
+						format.html
+						format.atom
+					end
+				end
+			```
+			* `app/views/articles/index.atom.builder`
+			```
+				atom_feed do |feed|
+					feed.title("Article Index")
+					feed.updated((@articles.first.created_at))
+	
+					@articles.each do |article|		
+						feed.entry(article) do |entry|
+							entry.title(article.title)
+							entry.content(article.body, type: 'html')
+					
+							entry.author do |author|
+								author.name(article.author_name)
+							end
+						end
+					end
+				end
+			```
+		* [BenchmarkHelper]()
+			* measures the execution time of a block in a template and records the result to the log 
+			```
+				<% benchmark "Process data files" do %>
+					<%= expensive_files_operation %>
+				<% end %>
+			```
+		* [CacheHelper](http://api.rubyonrails.org/classes/ActionView/Helpers/CacheHelper.html)
+			* `cache`
+				* a method for caching fragments of a view rather than an entire action or page 
+				* useful for caching menus, list of topics, html fragments ect 
+				```
+					<% cache do %>	
+						<%= render "shared/footer" %>
+					<% end %>
+				```
+		* [CaptureHelper](http://api.rubyonrails.org/files/actionview/lib/action_view/helpers/capture_helper_rb.html)
+			* `capture`
+				* method allows you to extract part of a template into a variable 
+				* the variable can then be used anywhere in template or layout 
+				```
+					<% @greeting = capture do %>
+						<p> Welcome! The date and time is <%= Time.now %></p>
+					<% end %>
+				```
+			* `content_for`
+				* stores a block of markup in an identifier for later use
+				* can be grabbed by passing identifier to yield
+				* `app/views/articles/special.html.erb`
+				```
+					<p> this is a special page.</p>
+						
+					<% content_for :special_script do %>
+						<script> alert('hello!')</script>
+					<% end %>
+				```
+				* `app/views/layouts/application.html.erb`
+				```	
+					<html>
+						<head>
+							<title>Welcome!</title>
+							<%= yield :special_script %>
+						</head>
+						<body>
+							<p>Welcome! the date and time is <%= Time.now %></p>
+						</body>
+					</html>	
+				```	
+		* [DateHelper](http://api.rubyonrails.org/files/actionview/lib/action_view/helpers/date_helper_rb.html)
+			* `date_select`
+				* returns a set of select tags (year, month, day) 
+				* `date_select("article", "published_on")
+			* `datetime_select`
+				* returns a set of select tage (year, month, day, hour, minute) 
+				* `datetime_select("article", "published_on")
+			* `distance_of_time_in_words`
+				* reports the approximate distance in time between two time or date objects or integers as seconds 
+				```
+					distance_of_time_in_words(Time.now, Time.now + 15.seconds)
+					distance_of_time_in_words(Time.now, Time.now + 15.seconds, include_seconds: true)
+				```
+			* `select_date`
+				* returns a set of html select tags(year, month, day) with date provided
+					* date select that defaults to the date provided 
+						* `select_date(Time.today + 6.days)
+					* date select that defaults to today
+						* `select_date()`
+			* `select_datetime`	
+				* returns a set of html select-tags (year, month, day, hour, minute) with datetime provided
+					* datetime select that is provided 
+						* `select_datetime(Time.now + 4.days)`
+					* datetime select that defaults to today
+						* `select_datetime()`
+			* `select_day`
+				* returns a select tag with options for each of the days 1-31 with current day selected 
+					* day provided
+						* `select_day(Time.today + 2.days)`
+					* defaults number given
+						* `select_day(5)`
+			* `select_hour`
+				* returns a select tag with options for each of the hours 0 - 23 with current hour selected 
+				* `select_hour(Time.now + 6.hours)`
+			* `select_minute`
+				* returns a select tag with options for each of the minutes 0 - 59 with current minute selected 
+				* `select_minute(Time.now + 6.hours)`
+			* `select_month`
+				* returns a select tag with options for each of the months January through December with current month selected 
+				* `select_month(Date.today)`	
+			* `select_second`
+				* returns a select tag with options for each of the second 0 - 59 with current second selected 
+				* `select_secont(Time.now + 16.minutes)`
+			* `select_time`
+				* returns a set of html select tags (hour and minute)
+				* `select_time(Time.now)`
+			* `select_year`
+				* returns a select tag with options for each of the five years on each side of the current which is selected 
+					* five years before after today 
+						* `select_year(Date.today)`	
+					* between 1900 and 2009
+						* `select_year(Date.today, start_year: 1900, end_year: 2009)`
+			* `time_ago_in_words`
+				* like distanct_of_time_in_words but to_time is fixed to Time.now
+				* `time_ago_in_words(3.minutes.from_now)
+			* `time_select`
+				* returns a select tag (hour, minute, and optional seconds) prepared for multi-parameter assignment to Active Record Object
+				* `time_select("order", "submitted")
+		* [DebugHelper](http://api.rubyonrails.org/files/actionview/lib/action_view/helpers/debug_helper_rb.html)
+			* returns a pre tag that has an object dumped by YAML
+			* a very readable way to inspect an object 
+			```		
+				my_hash = {'first' => 1, 'second' => 'two', 'third' => [1,2,3]}
+				debug(my_hash)
+			```
+			* the ouput is 
+			```
+				<pre class="debug_dump">---
+				first: 1
+				second: two
+				third:
+				- 1
+				- 2
+				- 3 
+				</pre>
+			```
 
 
 
@@ -2169,4 +2540,20 @@ this is the [sass-rails docs](https://github.com/rails/sass-rails#features)
 
 
 
- 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
