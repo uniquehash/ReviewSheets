@@ -2532,28 +2532,316 @@ im tired but today we learn about action view and all its glory
 				</pre>
 			```
 
+# May 19 - work the grind
 
+fun fact improper shut down can cause postgress to freak out and fuck your shit up 
 
+```
+	PG::ConnectionBad at /
 
+	could not connect to server: Connection refused
+		Is the server running on host "localhost" (::1) and accepting
+		TCP/IP connections on port 5432?
+	could not connect to server: Connection refused
+		Is the server running on host "localhost" (127.0.0.1) and accepting
+		TCP/IP connections on port 5432?
+```
 
+this is the error i was getting. this is likely caused by a [stale postgress pid file that is intefering with normal work](http://stackoverflow.com/questions/19828385/pgconnectionbad-could-not-connect-to-server-connection-refused)
 
+* solution 1
+	* To fix it remove/rename the PID file. Find the postgres data directory. On a MAC using homebrew it is /usr/local/var/postgres/, other systems it might be /usr/var/postgres/.
+	* To make sure this is the problem, look at the log file (server.log). On the last lines you will see: FATAL:  lock file "postmaster.pid" already exists HINT:  Is another postmaster (PID 347) running in data directory "/usr/local/var/postgres"?
+	* If so, rm postmaster.pid
+	* Restart your server. On a mac using launchctl (with homebrew) the following commands will restart the server.
+	```	
+		launchctl unload homebrew.mxcl.postgresql.plist  
+		launchctl load -w homebrew.mxcl.postgresql.plist
+	```
+	* did not work for me
 
+* solution 2 
+	* get info on how brew and postgres play
+		*  ` brew info postgres`
+	* start postgresql and restart at login 
+		* ` brew services start postgresql`
+	* woooooooo it worked 
+		* postgres does not like getting interupted and takes rudness really poorly, noted
 
+ we must conquer the evil of margin collapsing 
 
+* margin collapsing 
+	* top and bottom margins of blocks are sometimes combined into a single margin whose size is the largest of the margins combined 
+	* three basic cases 
+		* adjacent siblings 
+			* margins of adjacent siblings are collapsed 
+		* parent and first/last child
+			* the margins collaps if
+				* if there is no 
+					* border 
+					* padding 
+					* inline content 
+					* or clearance 
+				* to separate the margin-top of a block from the margin-top of its first child block 
+				* or no 
+					* border
+					* padding
+					* inline content
+					* height	
+					* min-height	
+					* max-height 	
+				* to separate the margin-bottom of a block from the margin bottom of its last child 
+		* empty blocks 
+			* the margins collaps if 
+				* there is no 
+					* border
+					* padding 
+					* inline comment 
+					* height 
+					* min-height 
+				* to separate a blocks margin-top from its margin-bottom 
+		* margins of floating and absolutely positioned elements never collapse	
+				
+of course bootstrap and sass-rails do not play nice together. overide default variables is a whole thing wooooo
 
+kk so apperently the thing is how sass deals with variables. sass does not allow variables to be used until they are declared. i guess that means that the entire framework has to be in memory before you can overide. 
 
+* _variables.scss ->
+	* bootstrap ->
+		* mixins ->
+			* overwrites -> 
+				* your own style 
 
+oy now we have to have a deep understanding of how rails loads the css assets 
 
+* application.css.scss is the master stylesheet in the pipeline 
+	* require_self
+		* putss the css contained within the file at the top of any other css being imported in the following lines 
+		* if you want to override everything else heres where to do it 
+	*  require_tree 
+		* imports all other files in `app/assets/stylesheets/`
 
-
-
-
-
-
-
-
-
-
-
-
+* maximizing sass power in the rails framework can be troubling 
+	* but there is a way 
+	* `app/assets/stylesheets/application.css.scss`
+	```
+		/* 
+			*= require_self
+			// only require main
+			*= require main
+		*/
+	```
+	* directory structure: 
+		* assets/
+			* stylesheets/
+				* /application.css.scss
+				* /main.scss
+					* base/
+						* /mixins.scss
+						* /globals.scss
+						* /normalize.scss
+					* styles/
+						* /posts.scss
+						* /home.scss
+	* `app/assets/stylesheets/main.css.scss`
+	```
+		@import "base/mixins.scss";
+		@import "base/normalize.scss";
+		@import "base/globals.scss";
+		@import "styles/home.scss";
+		@import "styles/posts.scss";
+	```
 	
+# May 21 - Linux 
+
+* chown
+	* for changing the owner/group of a file 
+
+* chmod 
+	* for changing the mode of a file 
+	
+* mode 
+	* actual read/write/execute bits 	
+
+* import data into postgress
+	* `psql -d [database_name] [filename]`
+		* `-d` 
+			* flag to specify the database name 
+
+# May 22 - Boolean logic 
+
+Im gonna build a fucking compiler god damn it. but first boolean logic.
+
+#### following elements of computer systems
+
+* boolean logic 
+	* boolean algebra 
+		* works with boolean values 
+			* boolean values 
+				* contain only 2 possible states 
+					* true/false is an example
+	* boolean gates 
+		* physical implementations of boolean functions 
+		* boolean functions
+			* a function that operates on binary inputs and returns binary outputs 
+	* boolean operations 
+		* standardized observed causal relationships between input and output 
+		* typical operators 
+			* and
+				* x and y is 1 exactly when both x and y are 1 
+				* symbolic representation `*` 
+			* or 
+				* x or y is 1 exactly when either x or y or both are 1
+				* symbolic representation `+` 
+			* not 
+				* not x is 1 exactly when x is 0
+				* symbolic representation `!`
+	* truth table representation 
+		* the simplest way to specify a boolean function 
+		* enumerate all the possible values of the functions input variables 	
+		* enumerate all the possible values of the functions output variables for each set of inputs 
+	* boolean expressions 
+		* boolean functions can be specified using and stringing together operators 
+		* boolean literals 
+			* boolean variables or their negations 
+	* canonical representation 
+		* a notation to represent a boolean function succinctly 
+		* select all the rows in which the function has value 1 
+			* for each row with a value of 1 
+				* apply the and operator to literals with a 1 point of reference 
+		* all boolean functions regardless of complexity can be expressed using three boolean operators 
+			* and
+			* or
+			* not
+	* two-input boolean functions 
+		* number of boolean functions that can be defined over n binary variables is `2^2^n`
+		* each of those functions for simple two-input boolean functions has a conventional name 
+		* for all examples below `x = 0 0 1 1` and `y = 0 1 0 1`
+			* constant 0
+				* operation: `0`
+				* result: `0 0 0 0`
+			* and 
+				* operation: `x * y`
+				* result: `0 0 0 1`
+			* x and not y 
+				* operation: `x * !y`
+				* result: `0 0 1 0`
+			* x 
+				* operation: `x`
+				* result: `0 0 1 1`
+			* not x and y 
+				* operation: `!x * y`
+				* result: `0 1 0 0`
+			* y 
+				* operation: `y`
+				* result: `0 1 0 1`
+			* xor 
+				* operation: `x * y + !x * !y`
+				* result: `0 1 1 0`
+			* or 
+				* operation: `x + y`
+				* result: `0 1 1 1` 
+			* nor 
+				* operation: `!(x + y)`
+				* result: `1 0 0 0` 
+			* equivalence 
+				* operation: `x * y + !x * !y`
+				* result: `1 0 0 1`	
+			* not y
+				* operation: `!y`
+				* result: `1 0 1 0`
+			* if y then x 
+				* operation: `x + !y`
+				* result: `1 0 1 1`
+			* not x 
+				* operation: `!x`
+				* result: `1 1 0 0`
+			* if x then y 
+				* operation: `!x + y`
+				* result: `1 1 0 1`
+			* nand 
+				* operation: `!x * !y`
+				* result: `1 1 1 0`
+			* constant 1 
+				* operation: `1`
+				* result: `1 1 1 1`
+		* nand function is super special yo 
+			* each operation 
+				* and 
+				* or 
+				* not
+			* can be constructed from nand expressions alone 
+				* every boolean function can be constructed from and, or and not operations
+					* every boolean function can be constructed from nand alone 
+		* gate logic 
+			* gate 
+				* a physical device that implements a boolean function 
+			* if a boolean function f operated on n variables and returns m binary results 
+				* the gate implements f has 
+					* n input pins 
+					* m output pins 
+			* complex gates are composed from elementary gates 
+				* the simplest gate is a transistor 
+				* transistors 
+					* simple piece of circutry that controls current 
+						* two states 
+							* on / 1
+							* off / 0
+				* primitive gates 
+					* black box abstraction that implements an elementary logical operation 
+						* and 
+							* looks like a bullet
+						* or 	
+							* looks like a shield	
+						* not 
+							* looks like a triangle with a boob 
+				* composite gates 
+					* a abstraction that implements more complex logical operations by using a series of primitive gates
+				* since they all boil down to boolean values you can create several layers of abstraction that compile down to primitive gates
+				* gate logic 
+					* also known as logic design 
+					* the art of interconnecting gates in order to implement more complex functionality 
+					* all gates can be viewed from two perspectives 
+						* implementation
+							* the gates internal architecture 
+						* interface
+							* the input and output pins that is exposed to the outside world 
+					* interface is unique but implementation is completely open ended 
+					* the fundemental requirement of logic design 	
+						* the gate implementation will realize its stated interface in one way or another 
+				* hardware description language - hdl
+					* you can plan a chip architecture with a markup language 
+					* hardware simulator takes your markup and checks it 
+				* hdl definition of a chip 
+					* header section 
+						* specifies the chips interface
+							* chip name 
+							* name of input and output 
+					* parts section 	
+						* name of all lower-level parts 
+						* topology of all the lower-level parts 
+						* represented by a statement that specifies the part name and the way it is connected to other parts in the design
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
