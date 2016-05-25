@@ -2824,21 +2824,184 @@ Im gonna build a fucking compiler god damn it. but first boolean logic.
 
 
 
+# May 23 - sass, rails, bootstrap 
 
+how bootstrap and rails integrate into one well adjusted family.
 
+#### following [boostrap ruby gem](https://github.com/twbs/bootstrap-rubygem)
 
+* install the gem 
+	* `sprockets-rails` must be at least v2.3.2
+* use sass
+	* use the sass `@import` system not the native sprockets asset pipeline 
+	* custom bootstrap variables must be set or imported before bootstrap itself 
+	* if you use the `*= require set up` in stylesheets bootsrtap mixins and variables will not be available
+	* they recommend to require `//= require` jquery and bootstrap-sprockets 
+		* not sure if im gonna have to 
+		* `bootstrap-sprockets`
+			* provides individual bootstrap components for ease of debugging 
+	* tooltips and popovers depend on [tether](http://github.hubspot.com/tether/) for positioning 
+		* install gem if using 
+		* its a javascript library for efficiently making an absolutely positioned element stay next to another element on a page 
+			* tooltips
+			* diolog 
+			* 
+		* require tether after jquery
+			* i bet you that tether and jquery have some sort of weird non-monogamous relationship behind sprockets back
+	* [postCSS](https://github.com/postcss/postcss) 
+		* is a tool for transforming styles with JS plugins 
+			* lint css
+			* support variables and mixins 	
+			* transpile future css syntax
+			* inline images 
+			* basically cool shit 
+	* [can i use](http://caniuse.com)
+		* basically a information repository that lets you know which features can be used on which browser for which version 
+		* it basically a gold mine of browser tom foolery and the gotcha css
+	* [autpprefixer](https://github.com/postcss/autoprefixer)
+		* oh boy 
+		* a postCSS plugin to parse css and add vendor prefixes to css rules using values from [can i use](http://caniuse.com)
 
+#### following [launchschool boostrap and rails tutorial](https://launchschool.com/blog/integrating-rails-and-bootstrap-part-1)
 
+* remove the `*=` from the centrall css file 	
+* `@import` relevant css into your central css file 
+	* `app/assets/stylesheets/application.css.sass`
+		* specifically 
+			* `@import "bootstrap-sprockets"`
+			* `@import "bootstrap"`
+	* `app/assets/javascripts/application.js`
+		* use the sprockets method 
+		* `//= require bootstrap-sprockets`
+		 
+#### override bootstrap variables 
 
+* in central css custom bootstrap variables must be declared after `bootstrap-sprockets` but before `bootstrap/variables` and `bootstrap`
+	* `@import 'bootstrap-sprockets'`
+		* allows more access to bootstrap 
+	* `@import 'bootstrap/variables'`
+		* where bootstrap variables are contained 
+	* `@import 'bootstrap'`
+		* just like bootstrap 
 
+# May 24 - More boolean stuff
 
+#### following elements of computer structures
 
+	
 
-
-
-
-
-
+* gates yo 
+	* primitive gates
+		* nand gate
+			* the atom of gates. all gates are pretty much built from this
+			```
+				Name: nand
+				Inputs: a, b
+				Outputs: out
+				Function: if a=b=1 then out=0 else out=1
+				Comment: primitive gate
+			```
+	* basic logic gates 	
+		* not gate
+			* also known as a "converter" 
+			* single input
+			* turns input from 0 to 1
+			```	
+				Name: not
+				Inputs: in
+				Outputs: out 
+				Function: if in=0 then out=1 else out=0
+			```
+		* and gate 
+			* returns 1 when both its inputs are 1 
+			```
+				Name: and 
+				Inputs: a, b 
+				Outputs: out	
+				Function: if a=b=1 then out=1 else out=0
+			```
+		* or gate 
+			* returns 1 when at least one of its inputs is 1 
+			```
+				Name: or 
+				Inputs: a, b
+				Outputs: out
+				Function: if a=b=0 then out=0 else out=1
+			```
+		* xor gate 
+			* also known as "exclusive or" 
+			* returns 1 when its two inputs have opposing values 
+			```
+				Name: xor
+				Inputs: a, b 
+				Outputs: out
+				Function: if a!=b then out=1 else out=0 
+			```
+		* multiplexor 
+			* a three-input gate 	
+				* "selection bit" 
+					* selects and outputs on of the other two inputs 
+				* "data bits"
+					* input that is selected to be outputed 
+			* may be called "selector" 
+			``` 
+				Name: mux
+				Inputs: a, b, sel
+				Outputs: out
+				Function: if sel=0 then out=a else out=b 
+			```
+		* demultiplexor
+			* the opposite of a multiplexor 
+			* takes a single input and channels it to one of two possible outputs according to a selector bit 
+			```
+				Name: dmux
+				Inputs: in, sel
+				Outputs: a, b
+				Function: if sel=0 then {a=in, b=0} else {a=0, b=in}
+			```
+	* multi-bit versions of basic gates 
+		* computer hardware is typically designed to operate on multi-bit arrays called "buses" 
+		* 32-bit computer is able to compute (bit-wise) an And function on two given 32bit buses 
+			* build an array of 32 binary And gates 	
+		* these are called multibit logic gates 
+		* the following ar for 16-bit computers 
+			* the architecture of an n-bit logic gates is bassically the same regardless of the value of n 
+		* it is common to use array syntax to refer to bits in a bus 
+		
+		* multi-bit not
+			* applies the Not operation to every bit in its input bus 
+			```
+				Name: not16	
+				inputs: in[16]
+				Outputs: out[16]
+				Function: for i=0..15 out[i]=not(in[i])
+			```
+		* multi-bit and 
+			* applies the And operation to every bit pair in the two input buses
+			```
+				Name: and16
+				Inputs: a[16], b[16]
+				Outputs: out[16]
+				Function: for i=0..15 out[i]=and(a[i], b[i])
+			```
+		* multi-bit or 
+			* applies the Or operation to every bit pair in the two input buses 
+			```
+				Name: or16
+				Inputs: a[16], b[16]
+				Outputs: out[16]
+				Function: for i=0..15 out[i]=or(a[i],b[i])
+			```
+		* multi-bit multiplexor
+			* a selector bit dictates which bus will be outputed 
+			```
+				Name: mux16
+				Inputs: a[16], b[16], sel
+				Outputs: out[16]
+				Function: if sel=0 then for i=0..15 out[i]=a[i] 
+					  else for i=0..15 out[i]=b[i]
+			```
+		
 
 
 
