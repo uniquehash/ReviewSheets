@@ -2902,12 +2902,12 @@ how bootstrap and rails integrate into one well adjusted family.
 				Comment: primitive gate
 			```
 	* basic logic gates 	
-		* not gate
+		* Not gate
 			* also known as a "converter" 
 			* single input
 			* turns input from 0 to 1
 			```	
-				Name: not
+				Name: Not
 				Inputs: in
 				Outputs: out 
 				Function: if in=0 then out=1 else out=0
@@ -2915,7 +2915,7 @@ how bootstrap and rails integrate into one well adjusted family.
 		* and gate 
 			* returns 1 when both its inputs are 1 
 			```
-				Name: and 
+				Name: And 
 				Inputs: a, b 
 				Outputs: out	
 				Function: if a=b=1 then out=1 else out=0
@@ -2923,7 +2923,7 @@ how bootstrap and rails integrate into one well adjusted family.
 		* or gate 
 			* returns 1 when at least one of its inputs is 1 
 			```
-				Name: or 
+				Name: Or 
 				Inputs: a, b
 				Outputs: out
 				Function: if a=b=0 then out=0 else out=1
@@ -2932,7 +2932,7 @@ how bootstrap and rails integrate into one well adjusted family.
 			* also known as "exclusive or" 
 			* returns 1 when its two inputs have opposing values 
 			```
-				Name: xor
+				Name: Xor
 				Inputs: a, b 
 				Outputs: out
 				Function: if a!=b then out=1 else out=0 
@@ -2945,7 +2945,7 @@ how bootstrap and rails integrate into one well adjusted family.
 					* input that is selected to be outputed 
 			* may be called "selector" 
 			``` 
-				Name: mux
+				Name: Mux
 				Inputs: a, b, sel
 				Outputs: out
 				Function: if sel=0 then out=a else out=b 
@@ -2954,7 +2954,7 @@ how bootstrap and rails integrate into one well adjusted family.
 			* the opposite of a multiplexor 
 			* takes a single input and channels it to one of two possible outputs according to a selector bit 
 			```
-				Name: dmux
+				Name: DMux
 				Inputs: in, sel
 				Outputs: a, b
 				Function: if sel=0 then {a=in, b=0} else {a=0, b=in}
@@ -2971,7 +2971,7 @@ how bootstrap and rails integrate into one well adjusted family.
 		* multi-bit not
 			* applies the Not operation to every bit in its input bus 
 			```
-				Name: not16	
+				Name: Not16	
 				inputs: in[16]
 				Outputs: out[16]
 				Function: for i=0..15 out[i]=not(in[i])
@@ -2979,7 +2979,7 @@ how bootstrap and rails integrate into one well adjusted family.
 		* multi-bit and 
 			* applies the And operation to every bit pair in the two input buses
 			```
-				Name: and16
+				Name: And16
 				Inputs: a[16], b[16]
 				Outputs: out[16]
 				Function: for i=0..15 out[i]=and(a[i], b[i])
@@ -2987,7 +2987,7 @@ how bootstrap and rails integrate into one well adjusted family.
 		* multi-bit or 
 			* applies the Or operation to every bit pair in the two input buses 
 			```
-				Name: or16
+				Name: Or16
 				Inputs: a[16], b[16]
 				Outputs: out[16]
 				Function: for i=0..15 out[i]=or(a[i],b[i])
@@ -2995,13 +2995,199 @@ how bootstrap and rails integrate into one well adjusted family.
 		* multi-bit multiplexor
 			* a selector bit dictates which bus will be outputed 
 			```
-				Name: mux16
+				Name: Mux16
 				Inputs: a[16], b[16], sel
 				Outputs: out[16]
 				Function: if sel=0 then for i=0..15 out[i]=a[i] 
 					  else for i=0..15 out[i]=b[i]
 			```
+	* multi-way versions of basic gates 
+		* accept an arbitrary number of inputs 
 		
+		* multi-way or 
+			* n-way Or gate outputs 1 when at least one of its n bit inputs is 1, outputs 0 otherwise 
+			```
+				Name: Or8Way
+				Inputs: in[8]
+				Outputs: out
+				Function: out=or(in[0], in[1],...,in[7])
+			```
+		* multi-way/multi-bit multiplexor 
+			* an m-way n-bit multiplexore selects one of m n-bit input buses and outputs it to a single n-bit output bus. the selection is specified by a set of k control bits, where k = log2m 
+			``` 
+				Name: Mux4Way16
+				Inputs: a[16], b[16], c[16], d[16], sel[2]
+				Outputs: out[16]
+				Function: if sel=00 then out=a else if sel=01 then out=b 
+					  else if sel=10 then out=c else if sel=11 then out=d
+				Comment: the assignment operations mentioned above are all 16-bit 
+			```
+			```
+				Name: Mux8Way16
+				Inputs: a[16], b[16], c[16], d[16], e[16], f[16], g[16], h[16], sel[3]
+				Outputs: out[16]
+				Function: if sel=000 then out=a else if sel=001 then out=b
+					  else if sel=010 out=c ... else if sel=111 then out=h 
+				Comment: the assignment operations mentioned above are all 16-bit	
+			```
+		* multi-way/multi-bit demultiplexor 
+			* an m-way n-bit demultiplexor channels a single n-bit input into one of m possible n-bit outputs. the selection is specified by a set of k control bits, where k = log2m
+			```
+				Name: DMux4Way
+				Inputs: in, sel[2]
+				Outputs: a, b, c, d
+				Function: if sel=00 then 	{a=in, b=c=d=0}
+					  else if sel=01 then 	{b=in, a=c=d=0}
+					  else if sel=10 then	{c=in, a=b=d=0}
+					  else if sel=11 then 	{d=in, a=b=c=0}
+			```
+			```
+				Name: DMux8Way
+				Inputs: in, sel[2]
+				Outputs: a, b, c, d, e, f, g, h
+				Function: if sel=000 then 	{a=in, b=c=d=e=f=g=h=0}
+					  else if sel=001 then	{b=in, a=c=d=e=f=g=h=0}
+					  else if sel=010 ...
+					  ...
+					  else if sel=111 then	{h=in, a=b=c=d=e=f=g=0}
+			```
+
+# May 25 - elements of computer systems 
+
+#### following elements of computer system 
+		
+* implementation 
+	* primitive gates provide a set of elementary building blocks from which everything else can be built 
+		* off-the-shelf implementation 
+	* in this case only Nand
+	 
+* digital design 
+* logic design 
+
+* Hardware Description language appendix a
+	* file extension
+		* each chip is defined in a separate text file 
+			* chip Xxx defined in file Xxx.hdl
+	* chip structure	
+		* header
+			* specifies the chip interface 
+		* body
+			* specifies the chip implementation 
+	* syntax conventions
+		* hdl is case sensitive 
+			* hdl keywords are written in uppercase letters
+	* identifier naming 
+		* chip names start with a capital letter
+		* pin names start with a lowercase 
+	* white space
+		* space characters, newline charactrs, and comments are ignored 
+	* comments 
+		* the following comment formats are supported 
+			// comment to end of line
+			/* comment until closing */
+			/** api documentation comment */
+
+* loading chips into the hardware simulator 
+	* load file menu/icon 
+		* open a hdl file 
+	* test scripts 
+		* can include a `load Xxx.hdl` command 
+			* open a hdl file
+	* when hdl program is loaded and parsed 
+		* all chip names listed in it as an internal part are loaded 
+
+* chip header 	
+	* the interface 
+	* `CHIP` declaration
+		* the `CHIP` keyword is followed by the chip name. the rest of the hdl code appears between curly brackets 
+	* Input pins	
+		* the `IN` keyword is followed by a comma-separated list of input pin names. the list is terminated with a semicolon 
+	* Output pins
+		* the `OUT` keyword is followed by a comma-separated list of output pin names. the list is terminated with a semicolon 
+	* input and output pins are assumed by default to be single-bit wide
+	```
+		CHIP chip name {
+			IN input pin name, input pin name,...;
+			OUT output pin name, output pin name,...;
+			//Here comes the body.
+		}
+	```
+
+* chip body - implementation 
+	* parts 
+		* a typical chip consists of several lower-level chips 
+		* connected to chip input/output pins in a certain logic (connectivity pattern) 
+		* the logic can be written by the hdl programmer described the chip body in format
+		```
+			PARTS: 
+			internal chip part; 
+			internal chip part; 
+			...
+			internal chip part;
+		```
+			* each internal chip part statemnet describes on internal chip with all its connections 
+			```
+				chip name (connection,...,connection);
+			```
+				* each connection is described
+				```
+					parts pin names = chips pin name
+				```
+	* pins and connections 
+		* each connection describes how one pin of a part is connected to another pin in the chip definition 
+			* simple 
+				* connect a parts pin to an input or output pin of the chip 
+			* complex 
+				* a parts pin is connected to another pin of another part 	
+				* needs internal pins
+		* internal pin 
+			* connects an output pin of a part to the input pins of other parts 
+			```
+				Part1 (..., out=v);	// out of Part1 is piped into v
+				Part2 (in=v, ...);	// v is piped into in of Part2	
+				Part3 (a=v, b=vm ...);	// v is piped into both a and b of Part3
+			```
+			* internal pins can be fed from a single source only 
+			* internal pins can feed multiple sources 
+		* input pins 
+			* each input pin of a part may be fed by one of the following sources 
+				* an input pin of the chip 
+				* an internal pin 
+				* one of the constants true and false, representing 1 and 0, respectively 
+			* each input pin 
+				* fan-in 1 
+					* fed from single source 
+		* output pin 
+			* each output pin of a part may feed one of the following destinations
+				* an output pin of the chip 	
+				* an internal pin 
+	* buses 
+		* each pin used in a connection can be a multi-bit bus 
+			* the widths of input and output pins are defined in the chip header
+			* the widths of internal pins are dedued implicitly from their connections 
+		* in order to connect individual elements of a multi-bit bus 
+			* the pin name is subscripted `x[i]` or `x[i...j]=v` where v is an internal pin 
+			* internal pins cannot be subscripted 
+		```
+			CHIP Foo {
+				IN in[8]	//8-bit input 
+				OUT out[8]	//8-bit output 
+				// Foos body 
+			}
+		```
+					
+		
+
+
+
+
+
+
+
+
+
+
+
 
 
 
