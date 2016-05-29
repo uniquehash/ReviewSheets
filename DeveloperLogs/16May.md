@@ -3397,12 +3397,125 @@ gonna learn a more indepth understanding of how routing works in rails
 			* resource 
 				* `resources :photos`
 			* routes 
-			```
-				| HTTP Verb 	| Path		| Controller#Action	| used for 				|
-				| ------------- | ------------- | --------------------- | ------------------------------------- | 
-				| sjlkjdflk	| jfj		| 	djfpjdp		| dfkjadkjflk				|
-			```	
+				* Path: /photos
+					* HTTP Verb: GET
+					* Controller#Action: photos#index
+					* Used for: display a list of all photos 
+				* Path: /photos/new
+					* HTTP Verb: GET
+					* Controller#Action: photos#new
+					* Used for: return an HTML form for creating a new photo 
+				* Path: /photos 
+					* HTTP Verb: POST
+					* Controller#Action: photos#create
+					* Used for: create a new photo 
+				* Path: /photos/:id
+					* HTTP Verb: GET
+					* Controller#Action: photos#show
+					* Used for: display a specific photo 
+				* Path: /photos/:id/edit 
+					* HTTP Verb: GET
+					* Controller#Action: photos#edit
+					* Used for: return an HTML form for editing a photo 
+				* Path: /photos/:id 
+					* HTTP Verb: PATCH/PUT 
+					* Controller#Action: photos#update
+					* Used for: update a specific photo 
+				* Path: /photos/:id
+					* HTTP Verb: DELETE
+					* Controller#Action: photos#destroy 
+					* Used for: delete a specific photo 
+	* path and url helpers 
+		* resource routes exposes a number of helpers to the controllers in your application  
+		* example 
+			* resource 
+				* `resources :photos`
+			* helpers 
+				* `photo_path` 
+					* returns `/photos`
+				* `new_photo_path` 
+					* returns `/photos/new`
+				* `edit_photo_path(:id)`
+					* returns `/photos/:id/edit`
+				* `photo_path(:id)`
+					* returns `/photos/:id`
+			* these all have url helpers which return the same path prefixed with the current host port and path prefix 
+	* defining multiple resources at the same time 
+		* you can auto gen multiple resources simultaniously 
+		* example 
+			* `resources :photos, :books, :videos`
+			* this will auto gen three controllers for corresponding resources 
+	* singular resources 
+		* some resources should always be found without a reference id 
+			* like finding the profile of the currently logged in user 
+		* example 
+			* `get 'profile', to: 'users#show'`
+		* singular and plural resources route to the same controller 
+		* resource is for singular
+		* resources is for plural
+		* the mentioned above is a really idiotic convention 
+		* there is a long standing bug 
+			* `form_for` does not work right with singular resources 
+				* as a workaround specify the url for the form direcly 
+	* controller namespaces and routing 
+		* you may want to group a number of controllers under a namespace
+			* like an admin namespace 
+		* place them in a single directory in `app/controllers/` 
+		* group them together in router
+		* example 
+			* grouping under `Admin::` namespace 
+				* place in `app/controllers/admin` directory 
+			* group them together in router 
+				```
+					namespace :admin do 
+						resources :articles, :comments
+					end
+				```
+			* this creates a number of routes for the articles and comments controllers 
+				* `Admin::ArticlesController`
+					* Path: /admin/articles	
+						* HTTP Verb: GET 
+						* Controller#Action: admin/articles#index
+						* Named helper: admin_articles_path
+					* Path: /admin/articles/new	
+						* HTTP Verb: GET
+						* Controller#Action: admin/articles#new
+						* Named Helper: new_admin_article_path
+					* Path: /admin/articles 
+						* HTTP Verb: POST 
+						* Controlled#Action: admin/articles#create 
+						* Named Helpers: admin_articles_path 
+					* Path: /admin/article/:id	
+						* HTTP Verb: GET
+						* Controlled#Action: admin/articles#show
+						* Named Helpers: admin_article_path(:id)
+					* Path: /admin/articles/:id/edit	
+						* HTTP Verb: GET
+						* Controlled#Action: admin/articles#edit
+						* Named Helper: edit_admin_article_path(:id)
+					* Path: /admin/articles/:id	
+						* HTTP Verb: PATCH/PUT
+						* Controller#Action: admin/articles#update
+						* Named Helper: admin_article_path(:id)
+					* Path: /admin/articles/:id
+						* HTTP Verb: DELETE
+						* Controller#Action: admin/articles#destroy 
+						* Named Helper: admin_article_path(:id)
+			* if you want to route `/articles` wihtout the prefix /admin 
+				* at creation use 
+				```
+					scope module: 'admin' do 
+						resources :articles, :comments	
+					end 
+				```
+				* or for a single case 
+					* `resources :articles, module: 'admin'`
+	* nested resources 
+	
 
+woah man gonna take a break here and get into it in a bit again gotta push some code first 
+
+	
 
 
 
