@@ -3399,8 +3399,8 @@ gonna learn a more indepth understanding of how routing works in rails
 			* routes 
 				| HTTP Verb 	| Path		| Controller#Action	| used for 				|
 				| ------------- | ------------- | --------------------- | ------------------------------------- | 
-
-
+				| sjlkjdflk	| jfj		| 	djfpjdp		| dfkjadkjflk				|
+				
 
 
 
