@@ -3175,8 +3175,246 @@ how bootstrap and rails integrate into one well adjusted family.
 				// Foos body 
 			}
 		```
-					
-		
+* built-in chips
+	* the identifier following the keyword `BUILTIN` is the name of the program unit that implements the chip logic 
+	* Foundation 
+		* some chips are the atoms from which all other chips are built 
+			* Nand gates and flip-flops are the building blocks of all combinational sequential chips respectively 
+	* certification and efficiency 
+		* to boost performance and minimize errors always use built-in versions of chips whenever they are available 
+	* visualization 
+		* some higher-level chips are easier to understand and debug if their operation can be inspected visually 
+			* built-in chips can be endowed with GUI side effects 
+							
+# May 26 - working on da rail 
+
+* rails helper methods i run into 
+	* [in_groups_of](http://apidock.com/rails/Array/in_groups_of)
+		* `in_groups_of(number, fill_with = nil) public`
+			* splits or iterates over an array in groups of size `number`
+				* padds any remaining slot with `fill_with` unless it is `false` 
+	* [each_with_index](http://ruby-doc.org/core-2.3.1/Enumerable.html#each_with_index-method)
+		* `each_with_index {|item, index|}`
+			* for each item in an enumerator the given arguments are passed through to each()
+	* [each()](http://ruby-doc.org/core-2.2.0/Array.html#method-i-each)
+		* `each {|item| block}`
+			* calls the given block once for each element in `self` passing that element as a parameter 
+			* for each item apply the block of code 
+	* [object.class](http://ruby-doc.org/core-2.3.1/Object.html)
+		* returns the class of the object 
+	
+* adding bootstrap modals in rails
+	* [launchschool](https://launchschool.com/blog/integrating-rails-and-bootstrap-part-3)
+		* rahhhhhh
+
+# May 27 - elements of computer system hardwae simulator tutorial 
+	
+#### following the [hardware simulator tutorial of nand2tetris](http://www.nand2tetris.org/tutorials/PDF/Hardware%20Simulator%20Tutorial.pdf) 
+
+* building a hardware platform called Hack 
+	* a 16-bit computer 
+		* has screen
+		* has keyboard 
+	* first build hardware architecture of Hack
+		* hardware simulation is used to represent this in bits not atoms 
+	* then build software architecture 
+
+* hardware simulation tutorial 
+	* getting started 
+		* chip interface .hdl
+			* name of chip 
+			* name of its input and output pins
+			* documentation of the intended chip operation
+			* supplied by chip architect 
+		* chip definition .hdl 
+			* can be implemented in various ways 
+			* internal parts consist of other chips 
+			* internal pins created and named by the hdl programmerd used to connect internal parts 
+		* loading a chip 
+			* navigate to a directory and select an .hdl file 
+			* input pin window
+				* names and current values of the chips input pins
+				* to change their values enter the new values here 
+			* output pin window 
+				* names and current values of the chips output pins 
+				* calculated by the simulator; readonly 
+			* hdl window 
+				* read only view of the loaded .hdl file
+				* defines the chip logic 
+				* to edit it use an external text editor 
+			* internal pins window 
+				* names and current values of the chips internal pins 
+				* calculated by the simulator; readonly 
+		* exploring the chip logic 
+			* hdl window
+				* click `PARTS` keyword 
+					* table data loads into internal parts window 
+					* displays whether they are 
+						* primitive or composite 
+						* clocked or unclocked 
+				* click one of the chip `PARTS`
+					* table data loads into location of internal parts window 
+						* now called Parts pin window
+							* shows the input/output pins of the selected parts and their current values 
+			* interactive chip testing 
+				* input pin window
+					* change the values of input pins 
+					* simulator responds 
+						* darkens the output and internal pins to indicate that the displayed values are no longer valid
+						* enabling the eval (calculater) button
+							* when clicked
+								* simulator re-calculates the values of the chips intenal and output pins 
+	* test scripts 
+		* used for specifying, automating, and replicating chip testing 
+		* supplied for every chip mentioned in the book
+		* effect, batch-style, any operation that can be done interactively 
+		* written in a simple language described in appendix b of the book	
+		* can create an output fiel that records the results of the chip test 
+		* if the script specifies a compare file the simulator will compate the .out file to the .cmp file line by line 
+		* loading a script 
+			* click the (scroll) button to load a new .tst file 
+			* loading the chip may not be necessary since the test script probably contains a load chip command 
+		* script controls 
+			* forward single arrow
+				* executes the next simulation step
+			* forward double arrow 
+				* multi-step execution until a pause
+			* square 	
+				* pauses the script execution 
+			* backwards double arrow
+				* resets the script 	
+			* slow-fast slider
+				* controls the script execution speed
+			* script 
+				* series of simulation steps each ending with a semicolon 
+		* running a script 
+			* click forward double arrow
+ 				* typical init code 
+					* loads a chip definition .hdl file
+					* initializes an output .out file
+					* specifies a compare .cmp file
+					* declares an output line format 
+				* comparison to the .out lines to the .cmp lines 
+		* viewing output and compare files 
+			* click the view drop-down menu 		
+				* select appropriate view 	
+	* built-in chips 
+		* has a hdl interface and a java implementation 
+			* name of the java class specified following the `BUILTIN` keyword 
+			* buil-in implementations of all the chips that appear in the book are supplied in the `tools/buitIn` directory 
+		* built in chips are used to 
+			* implement primitive fates 
+			* implement chips that have a peripheral side effects 
+			* implement chips that feature a gui 
+			* provide the functionality of chips that the user did not implement for some reason 
+			* improve simulation speeed and save memory 
+			* facilitate behavioral simulation of a chip before actually building it in hdl 
+			* built in chips can be used either explicitly or implicitly 
+	* clocked chips 
+	* GUI-empowered chips 
+	* debugging tools 
+	* the hack platform 
+
+# rails and modals dog 
+
+* basically modal are a jquery/boostrap js library unit 
+	* you call the modal function call 
+		* give it the id of the modal which you are attempting to find 
+		* give it parameters to pass to the modal 
+	* have a modal template for the content 
+		* in the function call that generates the modal 
+		* alter the template to generate the approriate data 
+			* make model retrievals in the javascript 
+	
+# May 29 - rails 
+
+gonna learn a more indepth understanding of how routing works in rails 
+
+
+#### following [rails routing from the outside in](http://guides.rubyonrails.org/routing.html)
+
+* purpose of the rails router 
+	* rails router recognizes urls and dispatches them to a controller action 
+		* can generate paths and URLs avoiding hardcoding strings in views 
+	* connecting urls to code 
+		* rails receives an incoming request 
+			* asks the router to match it to a controller action 
+			* if the route matches 
+				* the request is dispatched to the resources controller 
+					* the appropriate action is selected with the url parameters 
+			* example 
+				* request	
+					* `GET /patients/17`
+				* matches to 
+					* `get '/patients/:id', to: 'patients#show'`
+				* dispatches to 
+					* `patients` controller `show` action with `{ id: '17'}` parameter 
+	* generating paths and urls from code 
+		* can generate paths and urls 
+		* have the controller look for particular instances 
+		* link the in the corresponding view dynammically 
+		* example 
+			* request
+				* `GET /patients/17`
+			* matches to 
+				* `get '/patients/:id', to: 'patients#show', as: 'patient'`
+			* controller intervenes 
+				* `@patient = Patient.find(17)`
+			* view links the appropriate record 
+				* `<%= link_to 'Patient Record', patient_path(@patient) %>`
+					* router will automatically generate the appropriate path dynamically 
+* resource routing: the rails default 
+	* resource routing allows you to quickly declare all of the common routes for a give resource controller 
+		* instead of manually declaring routes for basic actions like 
+			* index 	
+			* show
+			* new
+			* edit 
+			* create 
+			* update 
+			* destroy 
+		* resource route declares them automatically 
+	* resources on the web 
+		* browsers request pages from rails by making request for a url using a specific HTTP method
+			* GET
+			* POST
+			* PATCH		
+			* PUT 		
+			* DELETE
+		* each method is a request to perform an operation on the resource 
+		* resource routing maps these operations in a single controller
+		* example 
+			* request 
+				* `DELETE /photos/17`
+			* match 
+				* `resources :photos`
+			* rails dispatch that request to the destroy method on the photos controller with {id: '17'} in the parameters
+	* CRUD, verbs and actions 
+		* resource routes provides a mapping between HTTP verbs and urls to controller actions 
+			* by convention each action also maps to a particular CRUD operations in a database 
+			* routes are matched in the order they are specified
+		* example 
+			* resource 
+				* `resources :photos`
+			* routes 
+				| HTTP Verb 	| Path		| Controller#Action	| used for 				|
+				| ------------- | ------------- | --------------------- | ------------------------------------- | 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
