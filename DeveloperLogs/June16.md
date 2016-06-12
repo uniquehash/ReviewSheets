@@ -686,15 +686,325 @@ I cant keep myself focused on front end stuff right now. So better to cut my los
 							* the controller `PhotosController` can now recognize the uri path `/photos/1/preview` using GET http verb
 							* the route helprts `preview_photo_url` and `preview_photo_path` are also created 
 
+# June 11 - rails form helpers 
+
+learning all about how forms and rails sleep at night 
+
+* [dealing with basic forms](http://guides.rubyonrails.org/form_helpers.html)
+	* `form_tag` 
+		* the most basic form helper 
+			```
+				<%= form_tag do %>
+					Form contents 
+				<% end %>
+			```
+		* when called without an argument 
+			* creats a `<form>` tag 
+			* when submitted will POST to the current page 
+			* for page `/home/index`
+				```
+					<form accept-charset="UTF-8" action="/" method="post">
+						<input name="utf8" type="hidden" value="&#x2713;"/>
+						<input name="authenticity_token" type="hidden" value="J7CBxfHalt49OSHp27hblqK20c9PgwJ108nDHX/8Cts="/>
+						Form contents
+					</form>
+				```
+					* contains hidden input elements 
+						* form cannot be succesfully submited without these 
+						* forces browser to respect your forms character encoding 
+							* in this case UTF-8
+							* generated for all GET and POST forms 
+						* cross-site request forgery protection
+							* security feature 		
+							* generated for all non-GET forms 
+							* contains name authenticity_token 
+	* generic search form 
+		* contains 
+			* form element with GET method 
+			* a label for the input 
+			* a text input element 	
+			* a submit element 
+		* use multiple form helpers to create this form 
+			* `form_tag`
+				* creates a form element 
+			* `label_tag`
+				* creates a label element 
+			* `text_field_tag`
+				* creates a text field input element 
+			* `submit_tag`
+				* creates a submit input element
+			* example: 
+				```
+					<%= form_tag("/search", method: "get") do %>	
+						<%= label_tag(:q, "search for:") %>
+						<%= text_field_tag(:q) %>
+						<%= submit_tag("search") %>
+					<% end %>
+				```
+			* will generate the following HTML: 
+				```
+					<form accept-charset="UTF-8" action="/search" method="get">
+						<input name="utf8" type="hidden" value="&#x2713;" />
+						<label for="q">search for:</label>
+						<input id="q" name="q" type="text" />
+						<input name="commit" type="submit" value="search" />
+					</form>
+				```
+					* for every form input 
+						* an id attribute is generated from its name
+						* these ids can be useful for CSS styling or manipulation of form controls with JS
+			* always use GET as the method for search forms 
+				* it allows users to bookmark a specific search an get back to it 
+		* multiple hashes in form helper calls 
+			* `form_tag` helper accepts 2 arguments 
+				* the path for the action 
+					* does not have to be a string 
+						* like `link_to` helper it can recognize a hash of url parameters
+							* rails recognizes them in the routing mechanism 
+							* turns them into a valid url 
+				* an options hash 
+					* specifies the method of the form submission and html options such as the form elements classes 
+			* since both options can be hashes be careful deliniating between the two 
+				* can be donw by wraping first hash in curly brakcets or both hashes 
+				* example: 
+					```
+						form_tag({controller: "people", action: "search"}, method: "get", class: "nifty_form")
+					```
+		* helpers for generating form elements 
+			* rails has a lot of helpers for generating form elements 
+				* the first parameter of these is always the name of the input 
+					* when the form is submitted the name is passed along with the form data 
+					* it will make its way to the `params` hash in the controller with the value entered by the user for that field 
+						* example: 
+							* `<%= text_field_tag(:query) %>`
+								* the value of this field is passed to the controller with `params[:query]`
+			* when naming inputs rails uses certain conventions that make it possible to submit parametes with non-scalar vaules such as arrays or hashes 
+				* these will also be accessible in `params` 
+			* checkboxes 
+				* a form control that gives the user a set of options they enable or disable 
+				* example: 
+					```
+						<%= check_box_tag(:pet_dog) %> 
+						<%= label_tag(:pet_dog, "I own a dog") %>
+						<%= check_box_tag(:pet_cat) %> 
+						<%= label_tag(:pet_cat, "I own a cat") %>
+					```
+				 * html: 
+					```
+						<input id="pet_dog" name="pet_dog" type="checkbox" value="1" />
+						<input for="pet_dog">I own a dog</label>
+						<input id="pet_cat" name="pet_cat" type="checkbox" value="1" />
+						<input for="pet_cat">I own a cat</label>
+					```
+				* parameters to `check_box_tag`
+					* name of the input 
+					* the value of the input 
+						* included in the form data 
+							* will be present in the controller in the `params` when the box is checked 
+			* radio buttons 
+				* similar to checkboxes
+				* form controls that specify a set of options in which they are mutually exclusive 
+					* user can only pick one
+				* example: 
+					```
+						<%= radio_button_tag(:age, 'child') %>
+						<%= label_tag(:age_child, "I am younger than 21") %>
+						<%= radio_button_tag(:age, 'adult') %>
+						<%= label_tag(:age_adult, "I am over 21" %>
+					```
+				* html: 
+					```
+						<input id="age_child" name="age" type="radio" value="child" />	
+						<label for="age_child">I am younger than 21</label>
+						<input id="age_adult" name="age" type="radio" value="adult" />
+						<label for="age_adult">I am over 21</label>
+					```
+				* parameters to `radio_button_tag` 
+					* the inputs share the same name making them mutually exclusive 
+					* the value of the input 
+						* included in the form data 
+							* controller will be able to retrieve in `params` however only on of the inputs can pass a value since they have the same name 
+			* other helpers of interest 
+				* form controls 
+					* `text_area_tag`
+					* `password_field_tag`
+					* `hidden_field_tag`
+						* are not shown to the user but hold data 
+					* `search_field`	
+						* html 5 control
+					* `telephone_field`
+						* html 5 control
+					* `date_field`
+						* html 5 control
+					* `datetime_field`
+						* html 5 control
+					* `datetime_local_field`
+						* html 5 control
+					* `month_field`
+						* html 5 control
+					* `week_field`
+						* html 5 control
+					* `url_field`
+						* html 5 control
+					* `email_field`
+						* html 5 control
+					* `color_field`
+						* html 5 control
+					* `time_field`
+						* html 5 control
+					* `number_field`
+						* html 5 control
+					* `range_field`
+						* html 5 control
+				* example: 
+					```
+						<%= text_area_tag(:message, "hi, nice site", size: "24x6") %>
+						<%= password_field_tag(:password) %>
+						<%= hidden_field_tag(:parent_id, "5") %>
+						<%= search_field(:user, :name) %>
+						<%= telephone_field(:user, :phone) %>
+						<%= date_field(:user, :born_on) %>	
+						<%= datetime_field(:user, :meeting_time) %>
+						<%= datetime_local_field(:user, :graduation_day) %>
+						<%= month_field(:user, :birthday_month) %>
+						<%= week_field(:user, :birthday_week) %>
+						<%= url_field(:user, :homepage) %>
+						<%= email_field(:user, :address) %> 
+						<%= color_field(:user, :favorite_color) %> 
+						<%= time_field(:task, :started_at) %>
+						<%= number_field(:product, :price, in: 1.0..20.0, step: 0.5) %>
+						<%= range_field(:product, :discount, in: 1..100) %> 
+					```
+				* html: 
+					```
+						<textarea id="message" name="message" cols="24" rows="6">Hi, nice site</textarea>
+						<input id="password" name="password" type="password" />
+						<input id="parent_id" name="parent_id" type="hidden" value="5" />
+						<input id="user_name" name="user[name]" type="search" />
+						<input id="user_phone" name="user[name]" typer="tel" />
+						<input id="user_born_on" name="user[born_on]" type="date" />
+						<input id="user_meeting_time" name="user[meeting_time]" type="datetime" />
+						<input id="user_graduation_day" name="user[graduation_day]" type="datetime-local" />
+						<input id="user_birthday_month" name="user[birthday_month]" type="month" />
+						<input id="user_birthday_week" name="user[birthday_week]" type="week" />
+						<input id="user_homepage" name="user[homepage]" type="url" />
+						<input id="user_address" name="user[address]" type="email" />
+						<input id="user_favorite_color" name="user[favorite_color]" type="color" value="#00000" />
+				 		<input id="task_started_at" name="task[started_at]" type="time" />
+						<input id="product_price" max="20.0" min="1.0" name="product[price]" step="0.5" type="number" />
+						<input id="product_discount" max="100" min="1" name="product[discount]" type="range" />
+					```
+* dealing with model objects 
+	* model object helpers 
+		* you can use tags without the `tag` suffix 
+		* objects need to be mentioned 
+		* these helpers take two arguments 
+			* name of an instance variable 
+			* name of a method to call on that object 
+		* rails will set the value of the input control to the return value of that method for the object and set an appropriate input name 
+		* example: 
+			* controller has `@person` as a instance variable 
+				* `@person` has an attribute `:name`
+					* `:name` has a value of "Henry"
+			* `<%= text_field(:person, :name) %>`
+			* produces html output 
+				* `<input id="person_name" name="person[name]" type="text" value="Henry" />`
+					* when submitted the value entered by the user will be stored in `params[:person][:name]`
+						* this value can then be used to be passed to methods of the `@person` instance variable 
+	* binding a form to an object 
+		* `form_for`
+			* binds a form to a model object 
+			
+			* example: 
+				* `app/controllers/articles_controller.rb`
+					```
+						def new 
+							@article = Article.new
+						end		
+					```
+				* `app/views/articles/new.html.erb`
+					```
+						<%= form_for @article, url: {action: "create"}, html: {class:"nifty_form"} do |f| %>
+							<%= f.text_field :title %>
+							<%= f.text_area :body, size: "60x12" %>
+							<%= f.submit "Create" %>
+						<% end %>
+					```
+				* things to note
+					* `@article` is being edited 
+					* there is a single hash of options 
+						* routing options are passed in the `:url` hash
+						* html options are passed in the `:html` hash 
+						* namespace can be passed in a `:namespace` option 
+							* attribute will be prefixed with underscore ont he generated html id
+						* `form_for` yields a form builder object 
+							* this is what the `f` variable is 
+							* methods to create form controls are called on the form builder object f 
+				* html output:
+					```
+						<form accept-charset="UTF-8" action="/articles/create" method="post" class="nifty_form">
+							<input id="article_title" name="article[title]" type="text" />
+							<textarea id="article_body" name="article[body]" cols="60" rows="12"></textarea>
+							<input name="commit" type='submit' value="Create" />
+						</form>
+					```
+						* the name passed to `form_for` controls the key used in the `params` to access the forms values 
+		* `fields_for` 
+			* creates a similar binding to `form_for` but does not create a <form> html object 
+				* simply makes the attributes of a model object available 
+			* `form_for` calls `fields_for` internally 
+		* relying on record identification 			
+			* RESTful resources and `form_for` play nicely together if you rely on record identification 
+				* rails basically does all the work for you 
+			* example: 
+				* `app/views/articles/new.html.erb`
+					```
+						## creating a new article 
+						# long-style: 
+						form_for(@article, url: articles_path)
+						# same thing, short-style (record identification gets used): 
+						form_for(@article)
+					
+						## editing an existing article
+						# long-style 	
+						form_for(@article, url: article_path(@article), html: {method: "patch"})
+						# short-style
+						form_for(@article)
+					```
+						* the short form is smart enough to now if it is editing a record or creating a new one
+							* will automatically select the correct path to submit to and name based on class of the object 
+			* STI(single-table inheritance) is not compatible with record identification 
+		* dealing with namespaces 
+			* if the routes are namespaced `form_for` has a shorthand 
+				* example: 
+					* `form_for [:admin, @article]`
+						* creates a form that submits to the `ArticlesController` inside the admin namespace 
+						* works with namespace nesting
+		* how do forms with PATCH, PUT, or, DELETE methods work 	
+			* most browsers do not support methods other than GET and POST when submiting forms 
+				* rails emulates other methods over POST with a hidden input named `"_method"`	
+					* `form_tag(search_path, method: "patch")`
+				* html output
+					```
+						<form accept-charset="UTF-8" action="/search" method="post">	
+							<input name="_method" type="hidden" value="patch" />
+							<input name="utf8" type="hidden" value="&#x2713;" />
+							<input name="authenticity_token" type="hidden" value="long fucking hash xx"/>
+						</form>
+					```
+				* rails will be chill and use the method in the hidden field 
 
 
 
 
 
 
+				
 
 
 
+
+		
 
 
 
