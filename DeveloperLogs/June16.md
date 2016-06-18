@@ -1139,7 +1139,15 @@ learning all about how forms and rails sleep at night
 					* `select_year`, `select_month`, `select_day`, `select_hour`, `select_minute`, `select_second`
 			
 * uploading files 
-	
+	* to upload files the forms encoding must be set to 'multipart/form-data' 
+		* done automatically with `form_for` must be done manually for `form_tag`
+	* rails has usual helper dichotamy 
+		* barebones `file_field_tag`
+			* in the controller access with `params[:picture]`
+		* model helper `file_field`
+			* in the controller access with `params[:person][:picture]`
+	* what gets uploaded 
+		* 
 
 
 # 6/18 rails, rails, rails.
