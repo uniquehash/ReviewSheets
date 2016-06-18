@@ -994,10 +994,161 @@ learning all about how forms and rails sleep at night
 					```
 				* rails will be chill and use the method in the hidden field 
 
+* making a select boxes with ease
+	* the select and option tags 
+		* `select_tag`
+			* helper which generates a select html tag containing an option string 
+				* `<%= select_tag(:city_id, '<option value="1">Lisbon</option>...')%>`
+					* does not dynamically create the option tags 
+		* `options_for_select` 
+			* helper which dynamically generates option html tags 
+				```
+					<%= options_for_select([['Lisbon', 1], ['Madrid', 2], ...], 2) %>
+				```
+				* html output: 
+				```
+					<option value="1">Lisbon</option> 
+					<option value="2" selected="selected">Madrid</option> 
+				```
+			* the first argument is a nested array	
+				* each element has two elements 	
+					* option text	
+						* this case city name 
+					* option value 	
+						* this case city id 
+						* this is submitted to the controller 
+			* allows you to preselect an option by passing the value of the option as the second argument to the helper 
+			* arbitrary attributes can be added to the options using hashes
+				* `<%= options_for_select([['Lisbon', 1, {'data-size' => '2.8 million'}]], 1) %>`
+				* html output: 
+					* `<option value="1" data-size="2.8 million">Lisbon</option>`
+
+		* can be combined to do smart things 
+			* `<%= select_tag(:city_id, options_for_select(...))%>`
+				* will do all of the previous things 
+	* select boxes for dealing with models 
+		* rails has helpers built just for dealing with the fuckery of select and options with models
+		* controller: 
+			* `@person = Person.new(city_id: 2)`
+		* view: 
+			* `<%= select(:person, :city_id, [['Lisbon', 1], ['Madrid', 2], ...]) %>`
+		* comentary from the rails gods 
+			* the first parameter 
+				* an instance variable corresponding with a model graced by the controller 
+			* the second parameter 
+				* the helper checks the instance variable matching property to see if there already is a match in values 
+				* in this case the option 'Madrid' would be preselected since the :city_id match 
+			* the third parameter	
+				* an options array just like the `options_for_select`
+			* if using a form builder scoper to the instance variable 
+				* `<%= f.select(:city_id, ...) %>`	
+					* magic 
+		* red flag: 
+			* beware of using `select`, `collection_select`, `select_tag` to set a `belongs_to` association 
+				* must pass the name of the foreign key not the name of the association itself 
+				* this is a security threat?
+	* options tags from a collection of arbitrary objects 
+		* the `options_for_select` helper requires you to create an array containing the text and value for each option 
+		* you can also generate the select and options tags from a collection of objects 
+			* take for example a `City` model
+				* you could iterate over a nested array 
+					* view: 		
+						```
+							<% cities_array = City.all.map { |city| [city.name], city.id] } %>
+							<%= options_for_select(cities_array) %>
+						```
+				* rails has a helper for that 
+					* `options_from_collection_for_select`
+						* expects 
+							* a collection of arbitraty objects 
+							* the name of the methods to read the option value 
+							* the name of the methods to read the text value 
+						* example 
+							* `<%= options_from_collection_for_select(City.all, :id, :name) %>` 
+								* generates the option tags from 
+									* all the City instances 
+									* their :id
+									* their :name
+					* `<%= collection_select(:person, :city_id, City.all, :id, :name) %>`
+						* you can probably figure out how this works 
+	* time zone and country select 
+		* rails has a helper specifically for timezone selects 
+			* example 
+				* `<%= time_zone_select(:person, :time_zone) %>`
+		* can be done more intricatly using 
+			* `time_zone_options_for_select` 
+
+* using date and time form helpers 
+	* there are alternative date and time helpers available		
+		* these are different 
+			* data and times are not representable by a single input element 
+				* input for each component (year, month, day, etc.)
+				* no single value in `params` hash in controller
+			* other helpers use the `_tag` suffix to indicate whether a helper is a barebones helper or a model helper 
+				* `select_date`, `select_time`, `select_datetime`
+					* barebones helpers 
+				* `date_select`, `time_select`, `datetime_select`
+					* model helpers 
+	* barebones helpers 
+		* the `select_*` family of helpers 
+			* first argument 
+				* instance of `Date`, `Time`, or `DateTime` 
+					* `<%= select_date Date.today, prefix: :start_date %>`
+					* used as the currently selected value 
+			 		* if omitted the current date is used 
+					* `params[:start_date]` in the controller
+						* a hash with keys 
+							* `:year`, `:month`, `:day`
+						* to get an actual `Date`, `Time`, or `DateTime` object you must extract these values and pass them to the appropriate constructor 
+							* `Date.civil(params[:start_date][:year].to_i, params[:start_date][:month].to_i, params[:start_date][:day].to_i)`
+						* the `:prefix` option is the key used to retrieve the hash of date components from the `params` hash
+	* model object helpers 
+		* `select_date` does not work well with forms that create Active Record objects 
+			* Active Record expects each elements in the `params` hash to correspond to one attribute 
+		* the model object helper submits parameters with key word names 
+			* Active Record knows how to react 
+			* it knows how to appropriately combine columns 
+		* example: 
+			* `<%= date_select :person, :birth_date %>`
+			
+		* html output: 
+			```
+				<select id="person_birth_date_1i" name="person[birth_date(1i)">
+				<select id="person_birth_date_2i" name="person[birth_date(2i)">
+				<select id="person_birth_date_3i" name="person[birth_date(3i)">
+			```		
+		* controller receives on submition: 
+			```
+				{ 'person': 	
+					{ 'birth_date(1i)': '2008',
+					  'birth_date(2i)': '11',
+					  'birth_date(3i)': '22'}
+				}
+			```
+			* when this hash is passed to `Person.new` 	
+				* Active Record spots that these parameters should be used to construct the birth_date attribute and uses the suffixes information to determine which order it should pass these parameters to other functions 
+	* common options 
+		* both barebones and model object helpers accept largely the same options 
+		* default: 
+			* rails generate year options 5 years on either side of the current year 
+				* the `:start_year` and `:end_year` options override this behavior 
+		* [exhaustive list of options](http://api.rubyonrails.org/classes/ActionView/Helpers/DateHelper.html)
+		* individual components 
+			* some times you need to display just a single date component such as a year or a month 
+				* each component has its own helper 
+					* `select_year`, `select_month`, `select_day`, `select_hour`, `select_minute`, `select_second`
+			
+* uploading files 
+	
 
 
+# 6/18 rails, rails, rails.
+	
+i still have no idea what im doing. but im starting to get a handle on what questions to ask. 
 
-
+#### questions 
+	
+* what the fuck is a `belongs_to` association?
 
 				
 
