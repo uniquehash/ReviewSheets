@@ -1147,9 +1147,71 @@ learning all about how forms and rails sleep at night
 		* model helper `file_field`
 			* in the controller access with `params[:person][:picture]`
 	* what gets uploaded 
-		* 
+		* controller `params` hash 
+			* an instance of a subclass of `IO` object 
+				* may be a `StringIO` object 
+				* may be a `File` object 
+					* backed by a temporary file 
+				* both cases object will have an
+					* `original_filename` attribute 	
+						* the name the file had on the users computer 
+					* `content_type` attribute 
+						* contains the MIME type of the uploaded file 
+				* example: 
+					```
+						def upload 
+							uploaded_io = params[:person][:picture]
+							File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|		
+								file.write(uploaded_io.read)
+							end
+						end
+					```
+						* basically the controller reads the received file into a local copy
+		* dealing with Ajax 
+			* asynchronous file upload form is not as simple as a plug and play helper 
+			* its fucked?
+
+* customizing form builders 
+	* objects yielded by `form_for` and `fields_for` are instances of `FormBuilder`
+		* `FormBuilder` can be subclassed and extended 
+		
+* understanding parameter naming conventions 
+	* values from forms can be at the top level of `params` or nested in another hash 
+		* a create action for a Person model 
+			* `params[:person]` would contain all the attributes for the person to create 
+		* the `params` hash can also contain arrays, arrays of hashes, and so on
+	* basic structures 
+		* arrays 
+			* duplicate parameter names will be accumullated in an array 
+		* hashes 
+			* mirror syntax used for accessing the value in `params` 
+	* combining them 
+		* only one level of arrayness is permited 
+			* array does not play well with `check_box` helper 
+	* using form helpers 
+		* you can do some interesting play between `form_for`, `fields_for` and `:index` 
+		* example: 
+			```
+				<%= form_for @person do |person_form| %> 
+					<%= person_form.text_field :name %> 
+					<% @person.addresses.each do |address| %> 
+						<%= person_form.fields_for address, index: address.id do |address_form| %>
+							<%= address_form.text_field :city %>
+						<%end%>
+					<%end%>
+				<%end%>
+			```
+	
 
 
+
+
+
+
+
+
+
+ 
 # 6/18 rails, rails, rails.
 	
 i still have no idea what im doing. but im starting to get a handle on what questions to ask. 
