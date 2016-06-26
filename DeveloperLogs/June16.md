@@ -1220,9 +1220,192 @@ i still have no idea what im doing. but im starting to get a handle on what ques
 	
 * what the fuck is a `belongs_to` association?
 
-				
+# 6/22 fuck forms 
 
+forms are very annoying 
 
+* label and check box 
+	* [stack overflow deffff](http://stackoverflow.com/questions/18432376/what-does-for-attribute-do-in-html-label-tag)
+	* label tags can be used to click on associated input elements 
+		* two methods 
+			* nest the checkbox into the label tag 
+			* use the `for` attribute 
+				* will associate the label to the checkbox that contains the same name 	
+
+# 6/23 css dreams 
+
+css you are so silly but ily
+
+* make a circular border thing
+	* the css border radius property 
+		* dictates the roundedness of each components of an element 
+			* accepts 
+				* length in pixels
+				* length in percentage 
+				* initial (default)
+				* inherits from parent element 
+		* basically turn border-radius to 50% to make a circle 
+	
+* [the difference between masking and clipping](https://css-tricks.com/clipping-masking-css/)
+	* this shit is totally not supported
+		* ie dead, firefox poor 
+	* fundemental difference 
+		* masks are images 
+			* simple image 
+		* clips are paths 
+			* inside path opaque outside path transparent 
+	
+	* clip 
+		* `clip: rect(10px, 20px, 40px, 30px);`
+			* similar to margin 
+		* restrictions 	
+			* only works if element is `position: absolute` 
+			* can only do rectangles 
+	* clip-path 
+		* `clip-path: inset(10px 20px 30px 40px);`
+			* single value: all sides the same 
+			* 2 values: vert/horz
+			* 3 values: top/horz/bottom
+		* clip a circle 
+			* `clip-path: circle(60px at center);`
+		* clip an ellipse 
+			* `clip-path: ellipse(60px 40px at 75px 30px);`
+		* clip a polygon 
+			* `clip-path: polygon(5% 5%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);`
+			* [indepth of clip-path polygons](https://css-tricks.com/sketchy-avatars-css-clip-path/)
+	* masking 
+		* there was a webkit-only version of masking 
+		* you can link up an svg file as a mask 
+			
+* the html `data` attribute
+	* a great solution for custom element-associated metadata
+	* [the data-* attribute](http://www.w3schools.com/tags/att_global_data.asp)
+		* used to store custom data private to the page or application 
+		* gives the ability to embed custom data attributes on all html elements 
+		* the stored data can be used by JS to create a more engaging user experience without making any Ajax calls or server-side db queries 
+		* consist of two parts 
+			* the attribute name 
+				* should not contain any uppercase letters 
+				* must contain the prefix `data-`
+				* must be at least on character long following the prefix
+			* the attribute value 
+				* can be any string 
+	* [using data attributes](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_data_attributes)
+		* basically the data-* attribute is an idiomatic way to store information in semantic html elements without hacks 
+		* useful for storing information that does not have any visual reprsentation 
+		* javascript access 
+			* the key-value pairs can be read from elements using 
+				* `getAttribute()` function 
+				* using standard `.` notation on the element itself through the `dataset` property
+					* `-` are converted to camelcase 
+					* `article.dataset.columns`
+		* css access 
+			* the key-value pairs can be read from elemnts using 	
+				* `attr()` function 
+				* this can be very useful in combination with css generated content and the content css property 
+				* can use [attribute selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors) in css to change styles according to the data 
+	* browser support 
+		* IE 11+ supports 
+
+# June 25 - browser and file uploads 
+
+basically diving deep into file uploads and stuff and how they are implemented 
+
+#### questions 
+
+* will dropzone handle the upload process even if the upload interface is the default browser upload interface?
+
+* when i select a file to upload from the OS, or i drag and drop a file into the browser, what generates the POST request and where/how does it get stored (browser memory, browser cache...)?
+
+* if we have both interfaces displayed at all times, can the state of one interface affect the state of the other?
+
+	* i drag and drop, i see a preview; i then select-for-upload, the preview disappears or even better, changes to the image i just selected-for-upload?
+
+	* i select-for-upload, i see a file name; i then drag and drop, the file name disappears or even better, changes to the file name of the new image?
+
+* what really is MIME type?
+	* stands for Multi-purpose Internet Mail Extensions 
+	* a standard way of classifying file types 
+		* two parts seperated by a slash 
+			* top-level type name 
+				* registered names 
+					* application 
+					* audio 
+					* example 
+					* image 
+					* message 
+					* model 
+					* multipart 
+					* text
+					* video 
+			* subtype 
+	* example: 
+		* `application/json`
+
+* what is an ENCTYPE?
+	* a form attribute that specifies how the form-data should be encoded when submitted to the server 
+	* can only be used if metho="post"
+
+#### research 
+
+* [form-based file upload in html: rfc 1867](https://www.ietf.org/rfc/rfc1867.txt)
+	* circa 1995 yall
+	* abstract: 
+		* extend html to 
+			* express file upload request uniformly 
+			* MIME compatible representation for file upload responses 
+	* html forms with file submission 
+		* current html
+			* input: checkbox, hidden, image, password, radio, reset, submit, text 
+		* ENCTYPE attribute using post method have default value 
+			* "application/x-www-form-urlencoded"
+		* changes 
+			* add a file option for input tags 
+			* allow an accept attribute for input tags 
+				* list of media types or type patterns allowed for the input 
+			* defines new MIME media type 
+				* multipart/form-data
+			* specifies behavior of html user agents when interpretung a form with 
+				* ENCTYPE="multipart/form-data" 
+				* <input type="file">
+	* suggested implementation 
+		* display of file widget 
+			* browse button with a file selection gui 
+			* accept attribute constrains the file extensions allowed 
+		* action on submit 
+			* send the form data and content of the selected files 
+				* encoding type `multipart/form-data` is used since the other is insufficient 
+		* use of multipart/form-data 
+			* each field is sent in order in which it appears in the form as part of the stream 
+				* identifies the input name within the form 
+				* labelled with an appropriate content-type if media type is known 
+			* if multiple files are selected they should be transferred together using the `multipart/mixed format`	
+			* http protocol can transport arbitrary binary data 
+				* the default for mail transport is 7Bit encoding 
+				* may need to supply the `content-transfer-encoding` header if the value does not conform to default encoding 
+			* the original local file name may be supplied as well 
+				* filename parameter within 
+					* `content-disposition: form-data` header (single file) 
+					* `content-disposition: file` header of the subpart (multiple files)
+			* the server realizes that it is `multipart/form-data` and does special shit to it 
+		* interpretation of other attributes 
+			* value attribute 
+				* could be used with `<input type=file>` tags for a default file name 
+			* size attribute 
+				* width 
+					* default for filename width 
+				* height 
+					* expected size showing the list of selected files for filename area 
+	* backward compatibility issues 
+		* i just dont care sorry 
+	* other considerations 
+		* compression, encryption 
+			* rfc thinks these topics are out of scope 
+		* deferred file transmission 
+			* lost patience 
+
+					
+						
 
 
 		
