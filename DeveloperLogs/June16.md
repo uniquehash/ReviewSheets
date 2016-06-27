@@ -1346,6 +1346,18 @@ basically diving deep into file uploads and stuff and how they are implemented
 	* a form attribute that specifies how the form-data should be encoded when submitted to the server 
 	* can only be used if metho="post"
 
+* what is a positioning context?
+
+* what is this flow concept in css? fucking annoying that i dont understand it 
+
+* why is em value better for accessibility?
+
+* what are linear gradients? 
+
+* what is a polyfil ?
+
+
+
 #### research 
 
 * [form-based file upload in html: rfc 1867](https://www.ietf.org/rfc/rfc1867.txt)
@@ -1404,11 +1416,489 @@ basically diving deep into file uploads and stuff and how they are implemented
 		* deferred file transmission 
 			* lost patience 
 
+
+
+* [some clarity on file upload](http://stackoverflow.com/questions/12085392/how-html-file-upload-works)
+	* web applications are sandboxed and cannot access local files directly 
+		* file upload picker must somehow reach an OS api to select a file in the local computer 
+			* once a user has selected a file the web application can access it 
+
+* [how does the browser determine the mime type to send](http://stackoverflow.com/questions/1201945/how-is-mime-type-of-an-uploaded-file-determined-by-browser)
+	* mime type sent by the browser is likely to be the one reported by the OS 
 					
+	
+* [the w3c file api](https://www.w3.org/TR/FileAPI/)
+
+* [the mozilla form gambit](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms)
+	* [sending form data](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_and_retrieving_form_data)
+		* web is based on basic client/server architecture
+		* the client side: defining how to send the data 
+			* the `<form>` element itslef defines how the data will be sent 
+				* attributes are designed to let you configure the request to be sent when a user hits a submit button 
+					* action 
+						* defines where the data gets sent 
+						* value must be a valid url 
+						* if not provided data will be sent to the url of the page containing the form 
+					* method  
+						* defines how the data is sent 
+						* form data can be sent via 
+							* get method 
+								* retrieves from server something 
+								* never send sensitive data via get
+							* post method 
+								* form data is part of the body of the http request 
+								* the `content-length` header 			
+									* indicates the size of the body 
+								* the `content-type` header 
+									* indicates the type of resource sent to the server 
+								* large amount of data the post method is preferred 
+		* special case: sending files 
+			* files are binary data 
+			* the enctype attribute 
+				* specifies the value of `content-type` 
+					* must be set to `multipart/form-data` so that the data is split into multiple parts
+						* one for each file 
+						* one for the text of the form body that may be sent with it
+		* security concerns 
+			* concentrated on the server side 
+			* XSS and CSRF 
+				* Cross-site Scripting (XSS)
+					* allows the attackers to inject client-side scripts into web pages viewed by other users 
+					* can be used to bypass access controls like 
+						* [same origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)
+					* exploits the trust a user has for a website 
+				* Cross-Site Request Forgery   
+					* allows the user to inject client-side script into web pages 
+						* target ti attempt to escalate privileges of user to that of a higher-privileged user to perform actions it should not be able to do 
+					* exploits the trust a web site has for its users
+				* sanitize user input always 
+			* sql injection 
+				* attempts to perform actions on a database used by the website 
+				* typically involve sending an sql request in the hope that the server will execute it 
+				* can cause data loss to unprivileged access 
+			* http header injection and email injection 
+				* leave you open to session hijcking and phishing attacks 
+			* be paranoid 
+				* all data should be sanitized 
+				* escape potentially dangerous characters 		
+				* limit the incoming amount of data allowed only to whats necessary 
+				* sandbox upploaded files 
+	* [data form validation](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation)
+		* the browser can validate user data without relying on scripts 
+			* [validation attributes](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation)
+		* when an element is  invalid 
+			* the element will match the `:invalid` css pseudo-class enabling particular styles (same goes for `:valid`)
+			* if the user tries to send the data the browser will block the form and display an error message
+		* validation constraints on `<input>` elements 
+			* can be validated using the [pattern](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-pattern) attribute 
+				* expects a case sensitive regular expression as its value 
+					* if not empty and does not match it will be considered invalid 
+			* the [required](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required) attribute 
+				* the form cannot be submitted if this input field is empty 
+		* other validation constraints 
+			* textarea does not support the pattern attribute 
+			* all input and textarea elements can be constrained with [maxlength](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-maxlength)
+			* number fields have a [min](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min) and [max](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max) that make anything below the min and above the max invalid 
+		* customized error messages 
+			* these front end validation error messages are standard browser behavior left to the whim of the browser local 
+				* to customize the text and appearance of these messages you must use JS 
+			* html5 has a [constraint validation api](https://www.w3.org/TR/html5/forms.html#the-constraint-validation-api)
+				* allows you to check and customize the state of a form element 
+				* allows you to change the text of the error message 
+		* validating forms using JS
+			* [html5 constraint validation api mozilla table](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation#The_HTML5_constraint_validation_API)
+		* validating without api 
+			* insperation and tips 
+				* [smashing magazine](https://www.smashingmagazine.com/2009/07/web-form-validation-best-practices-and-tutorials/)
+				* [smashing magazine](https://www.smashingmagazine.com/2012/06/form-field-validation-errors-only-approach/)
+				* [six revision](http://sixrevisions.com/user-interface/best-practices-for-hints-and-validation-in-web-forms/)
+				* [a list apart](http://alistapart.com/article/inline-validation-in-web-forms)
+			* basically its a fucking nightmare 
+			* [jquery has a plugin](http://bassistance.de/jquery-plugins/jquery-plugin-validation/)
+	* how to build custom form widgets 
+		* sometimes we build our own shit because the default solution is not sufficient 
+		* design structure and semantics 
+			* know what you want and why you want it 
+				* define all the states of your widget 
+				* define behavior of widget
+			* the `<select>` example 
+				* three states 
+					* the normal state 
+						* the page loads 
+						* the widget was active and the user clicks anywhere outside the widget 	
+						* the widget was active and the user moves the focus to another widget using the keyboard 
+					* the active state 
+						* the user clicks on it 
+						* the user hits the tab key and it gains focus 
+						* the widget was in its open state and the user clicks on the widget 			
+					* the open state 
+						* the widget is in any other state than open and the user clicks on it 					
+				* behavior 
+					* widget must be usable with a mouse, and a keyboard 
+					* the value of the widget changes 
+						* the user clicks on an option when the widget is in the open state 
+						* the user hits the up or down arrow keys when the widget is in its active state 
+					* the options of the widget 
+						* when the widget is opened the selection option is highlighted 
+						* when the mouse is over an option, the option is highlighted and the previously highlighted option is returned to its normal state 
+		* [defining the html structure and semantics](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/How_to_build_custom_form_widgets#Defining_the_HTML_structure_and_semantics)
+			```	
+				<!-- the comments are not idomatic html i know -->
+				//this the main container for the widget 	
+				// the tabindex attribute is what allows the user to focus the widget 
+					//better to set through js 
+				<div class="select" tabindex="0">
+					
+					//this container will be used to display the current value of the widget 
+					<span class="value">Cherry</span>
+					
+					//this container will contain all the option available for the widget 
+					<ul class="optList">
+						//each option only contain the value to be displayed 	
+						// real value will be set later 
+						<li class="option">Cherry</li>
+						<li class="option">Lemon</li>		
+						<li class="option">Banana</li>
+						<li class="option">Strawberry</li>
+						<li class="option">Apple</li>	
+					</ul>
+				</div>
+			```
+		* creating the look and feel using css 
+			* split css into two parts 
+				* required style
+					* base level css to have the widget behave like a `<select>` element 
+				* beutification 
+					* the style built ontop of it that make it look fancy 
+			* css 
+				* required style 
+					``` 
+						.select {
+							//this will create a positioning context for the list of options
+							postion: relative; 
+							
+							//this will make our widget become part of the text flow and sizable at the same time 
+							display: inline-block;			
+						}
 						
+						//define the look and feel of the widget when it is in active state 
+						.select.active,
+						.select:focus {
+							outline: none;
+					
+							// box shadow not required but it makes the active state visible with a visual cue
+							box-shadow: 0 0 3px 1px #227755;
+						}	
+						
+						//handling the list of options 
+						.select .optList {
+							//this will make sure the list of options will be displayed below the value and out of the html flow
+							position: absolute;
+							top: 100%;
+							left: 0;
+						}
+						
+						//handle when the list of options is hidden 
+							//manage difference between active state and open state 	
+						.select .optList.hidden {
+							//hide the list in an accessible way 
+							max-height: 0;
+							visibility: hidden; 
+						}
+					``` 
+				* beautification 
+					```
+						.select {
+							// all sizes expressed with em value for accessibility reasons 
+							font-size: 0.625em; 
+							font-family: Verdana, Arial, sans-serif;
+							
+							-moz-box-sizing: border-box;
+							box-sizing: border-box; 
+						
+							//we need extra room for the down arrow we will add
+							padding : .1em 2.5em .2em .5em;
+							width: 10em; 
+							
+							border: .2em solid #000;
+							border-radius: .4em;
+							box-shadow: 0 .1em .2em rgba( 0, 0, 0, .45);
+						
+							// first declaration is for browsers that do not support linear gradients 
+							// second declaration is because webkit based browsers havent unprefixed it yet 
+							background: #F0F0F0;
+							background: -webkit-linear-gradient(90deg, #E3E3E3, #fcfcfc 50%, #f0f0f0);
+							background: linear-gradient(0deg, #E3E3E3, #fcfcfc 50%, #f0f0f0);	
+						}
+				
+						.select .value {
+							// because the value can be wider than our widget we have to make sure it will not change the widgets width 
+							display: inline-block;
+							width: 100%;
+							overflow: hidden;
+						
+							vertical-align: top;
+					
+							//and if the content overflows it bettwe to have a nice ellipsis
+							white-space: nowrap;
+							text-overflow: ellipsis;
+						}
+				
+						// use the :after pseudo element to design the down arrow 
+						.select:after {
+							content: "U+25BC";
+							position: absolute;
+							z-index: 1;
+							top: 0; 
+							right: 0;
+							
+							-moz-box-sizing: border-box;
+							box-sizing: border-box;		
+							
+							height: 100%;
+ 							width: 2em; 
+							padding-top: .1em;
+							
+							border-left: .2em solid #000; 
+							border-radius: 0 .1em .1em 0;
+					
+							background-color: #000; 
+							color: #fff;	
+							text-align: center;
+						}
+					
+						//styling the list options 
+						.select .optList {
+							z-index: 2;
+							
+							//reset teh default style of the ul element 
+							list-style: none;
+							margin: 0;
+							padding: 0;
+						
+							-moz-box-sizing: border-box;
+							box-sizing: border-box; 
+				
+							//this will ensure that the values that are smaller than the widget the options will be as large 
+							min-width: 100%; 
+							
+							max-height: 10em; 
+							overflow-y: auto; 
+							overflow-x: hidden;
+			
+							border: .2em solid #000; 
+							border-top-width: .1em;
+							border-radius: 0 0 .4em .4em;
+						
+							box-shadow: 0 .2em .4em rgba( 0, 0, 0, .4);
+							background: #f0f0f0; 
+						}
+				
+						//add a highlight class to be able to identify the value the user will pick 
+						.select .option {
+							padding: .2em .3em;
+						}
+				
+						.select .highlight {
+							background: #000;
+							color: #FFFFF;
+						}
+					```
+			* bring the widget to life with JS 
+				* we are going to use the standard DOM api 
+				* we are going to use 4 js featuers (ordered from riskiest to safest) 
+					* [classList](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList)
+					* [addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
+					* [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+					* [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector) and [querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelectorAll)
+				* add support for forEach to NodeList objects 
+					```
+						NodeList.prototype.forEach = function (callback) {
+							Array.prototype.forEach.call(this, callback);
+						}
+					```
+				* building event callbacks: the general behavior 
+					```
+						// will be used each time we want to deactivate a custome widget 
+						function deactivateSelect(select) {
+							//the widget is not active there is nothing to do 
+							if (!select.classList.contains('active')) return;
+						
+							//we need to get the list of options for the custom widget 	
+							var optList = select.querySelector('.optList');
+							
+							//we close the list of options 
+							optList.classList.add("hidden");
+				
+							//deactivate the custom widget itself
+							select.classList.remove('active');
+						}
+			
+						//used each time the user wants to activate the widget 
+						// parameters : DOM node with select class 
+						//		list of all the Dom nodes with the select class 
+						function activeSelect (select, selectList) {
+							// the widget is already active there is nothing to do 
+							if (select.classList.contains('active')) return;
+							
+							//turn off active state on all custom widgets 
+							selectList.forEach(deactivateSelect);
+							
+							//turn on the active state for this specific widget 
+							select.classList.add('active');
+						}
+						
+						//function will be used each time the user wants to open/close the list of options 
+						function toggleOptList(select) {
+							//list is kept from the widget 
+							var optList = select.querySelector('.optList');
+							
+							//we change the class of the list to show/hide it 
+							optList.classList.toggle('hidden');
+						}
+					
+						//function will be used each time we need to highlight an option 
+						function highlightOption(select, option) {
+							
+							//get the list of all option available for our custom select element 
+							var optionList = select.querySelectorAll('.option');
+							
+							//we remove the highlight from all options 
+							optionList.forEach(function (other) {
+								other.classList.remove('highlight');
+							});
+						
+							//we highlight the right option 
+							option.classList.add('highlight');
+						}
+					
+						//bind the functions to appropriate events 
+							
+						//handle the event binding when the document is loaded 
+						window.addEventListener('load', function() {
+							var selectList = document.querySelectorAll('.select');
+							
+							//each custom widget needs to be initialized 
+							selectList.forEach(function (select) {
+							
+								//as well as all its 'options' elements 
+								var optionList = select.querySelectorAll('.option');
+								
+								//each time a user hovers their mouse over an option we highlight the given option 
+								optionList.forEach(function (option) {
+									option.addEventListener('mouseover', function() {
+										highlightOption(select, option);
+									});
+								}):
+								
+								//each time the user clicks on a custom select element 
+								select.addEventListener('click', function (event) {
+									toggleOptList(select);
+								});
+						
+								//widget gains focuse 	
+								select.addEventListener ('focus', function(event) {
+									activeSelect(select, selectList);
+								});	
+					
+								//widget looses focus 
+								select.addEventListener('blur', function(event) {
+									deactivateSelect(select);
+								}):
+							}):
+						}):
+					```
+				* handling the widgets value 
+					* use a native widget as a vehicle 
+					```
+						//function updates the displayed value and synchronizes it with the native widget 
+						// parameters
+						//	1. select: DOM node with the class `select` containing the value to update 
+						// 	2. index: the index of the value to be selected 
+						function updateValue(select, index) {
+							//get the native widget 
+							var nativeWidget = select.previousElementSibling;
+							
+							//we also need to get the value placeholder of our custom widget 
+							var value = select.querySelector('.value');
+							
+							//and we need the whole list of options 
+							var optionList = select.querySelectorAll('.option');
+								
+							//we set the selected index to the index of our choice 
+							nativeWidget.selectedIndex = index;
+						
+							//update the value placeholder 
+							value.innerHTML = optionList[index].innerHTML;	
+							
+							//highlight the corresponding option of our own custom widget 
+							highlightOptions(select, optionList[index]);	
+						}; 
+						
+						//function returns the current selected index in the native widget 	
+						//parameter : 
+						// 	1. select: the DOM node with the class `select` related to the native widget 
+						function getIndex(select) {
+							//access the native widget for the give custom widget 
+							var nativeWidget = select.previousElementSibling;
+							return nativeWidget.selectedIndex;
+						};
 
-
+						//bind the native widget to the custom eone 
+						//handle event binding when document is loaded 
+						window.addEventListener('load', function () {
+							var selectList = document.querySelectorAll('.select');
+						
+							//custom widget needs to be initialized 	
+							selectList.forEach(function (select) {
+								var optionList = select.querySelectorAll('.option'),
+									selectedIndex = getIndex(select);
 		
+							//we make our custom widget focusable 
+							select.tabIndex = 0;
+						
+							//we make the native widget no longer focusable 
+							select.previousElementSibling.tabIndex = -1;
+
+							// make sure that the default selected value is correctly displayed 
+							updateValue(select, selectedIndex);
+					
+							//each time a user clicks on an option, we update the value accordingly 
+							optionList.forEach(function (option, index){
+								option.addEventListener('click', function(event) {
+									updateValue(select, index);
+								}):
+							});
+				
+							//each time a user us its keyboard on a focused widget we update the value accordingly 
+							select.addEventListener ('keyup', function (event) { 
+								var length = optionList.length, 
+									index = getIndex(select);
+								
+								// the user hit the down arrow we jump to the next option 
+								if (event.keyCode === 40 && index < length - 1) { index ++;}
+								
+								// the user hit the up arrow we jump to the previous option 
+								if (event.keyCode === 38 && index > 0 {index--;}
+								
+								updateValue(select, index);
+							}):
+						});
+					});
+				```
+			* making it accessible 
+				* assitive tech would have no idea how to deal with this element 
+				* [ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA)
+					* accessible rich internet application 
+					* makes the web more semantic 
+				* [role attribute](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques)
+					* accepts a value that defines what an element is used for 
+				* aria-selected attribute 
+					* used to mark which option is currently selected 
+			* as usual [jQuery has a thing for UI elements](http://jqueryui.com/)
+	* [sending forms through javascript](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_forms_through_JavaScript) 			
+								
+							
 
 
 
@@ -1423,17 +1913,7 @@ basically diving deep into file uploads and stuff and how they are implemented
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+	
 
 
 
