@@ -1916,7 +1916,7 @@ basically diving deep into file uploads and stuff and how they are implemented
 		* sending form data 
 			* three ways to send form data 
 				* [building a DOM in a hidden iframe (legacy)](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_forms_through_JavaScript#Building_a_DOM_in_a_hidden_iframe)
-					* build a form using the DOM Api and then send the data into a hidden [<iframe>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) 
+					* build a form using the DOM Api and then send the data into a hidden [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) 
 						* retrieve the content of the hidden `<iframe>` to access the result of what you sent 
 					* this is a bad idea and you will get hacked 
 				* [building an XMLHttpRequest manually](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_forms_through_JavaScript#Building_an_XMLHttpRequest_manually)
