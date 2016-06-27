@@ -1356,6 +1356,13 @@ basically diving deep into file uploads and stuff and how they are implemented
 
 * what is a polyfil ?
 
+* what is a [blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob)?
+	* a file-like object of immutable, raw data
+	* represents data that is not necessarily JS natove format 
+	* the [File](https://developer.mozilla.org/en-US/docs/Web/API/File) object is based off of it
+
+* what is a [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader);
+	* a object that lets web apps asynchronously read the contents of files (or raw data buffers) stored on the users computer 
 
 
 #### research 
@@ -2142,9 +2149,134 @@ basically diving deep into file uploads and stuff and how they are implemented
 						});
 					});
 				```
+	* [using FormData objects](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects)
+		* creating a FormData object from scratch 
+			* built purely from JS
+				```
+					var formData = new FormData();
+					
+					formData.append('username', "Groucho");
+					formData.append('accountnum', 123456); //number converted to string 
+				
+					//html file inpu chosen by user 
+					formData.append('userfile', fileInputElement.files[0]);
+					
+					//js file-lie object 
+					var content = '<a id="a"><b id="b">hey!</b></a>'; // the body of the new file 
+					var blob = new Blob([content], {type: 'text/xml'});
 
-
-
+					formData.append('webmasterfile', bob);
+					
+					var request = new XMLHttpRequest();
+					request.open('POST', "http://foo.com/submitform.php");
+					request.send(formData);
+				```				
+		* retrieving a FormData object from an HTML form 
+			* js
+				```
+					// form retrieved 
+					var someFormElement = document.querySelector('form');
+					var formData = new FormData(someFormElement);	
+						
+					// form sent 
+					var request = new XMLHttpRequest();
+					request.open('POST', 'submitform.php');
+					request.send(formData);
+				```
+	* [using files from web applications](https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications)
+		* yay files and browsers 
+		* accessing selected files 
+			* the file api makes it possible to access a [FileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList) containing [File](https://developer.mozilla.org/en-US/docs/Web/API/File) selected by the user 
+			* html 
+				* `<input type="file" id="input">`
+				* accessing one selected file 
+					* js 
+						```
+							//vanila js 
+							var selectedFile = document.getElementById('input').files[0];
+						
+							// jQuery 	
+							var selectedFile = $('#input').get(0).files[0];
+							var selectedFile = $('#input')[0].files[0];
+					 	```
+		* accessing selected files on a change event 
+			* html 
+				* `<input type="file" id="input" onchange="handleFiles(this.files)">`
+				* when shit changes the function will be called 
+				* can use the `multiple` attribute to allow multiple files
+		* dynamically adding a change listener 
+			* if input field created dynamically you need to manually add the event listener 
+				* js 
+					```
+						var inputElement = document.getElementById('input');
+						inputElement.addEventListener('change', handleFiles, false);
+						function handleFiles(){
+							var fileList = this.files;
+							//handle the fucking files mate 
+						}
+					```
+		* getting information about selected files 
+			* check the length of `FileList` to see how many files are there 
+				* js 
+					* `var numFiles = list_of_files.length;`
+			* individual file objects are retrieved like an array 	
+				* js 
+					* `var file = list_of_files[0]`
+			* file object have three important attributes 
+				* name 	
+					* the file name as a readonly string 
+				* size 
+					* the size of the file in bytes as a read-only 64-bit integer 
+				* type 
+					* the MIME type of the file as a read-only string or "" if undetermined 
+		* using hidden file input elements using the click() method 
+			* html 
+				```
+					<input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+					<a href="#" id="fileSelect">Select some files</a>
+				```
+			* js 
+				```
+					//handles click event 
+					var fileSelect = document.getElementById('fileSelect'), 
+						fileElem = document.getElementById('fileElem');
+					
+					fileSelect.addEventListener('click', function(e) {
+						if (fileElem) {
+							fileElem.click();
+						}
+						e.preventDefault();
+					}, false);
+				```
+		* showing thumbnails of user-selected images 
+			* js  
+				```
+					function handleFiles(files){
+						for (var i=0; i < files.length; i++) {
+							var file = files[i];
+							var imageType = /^image\//;
+								
+							if (!imageType.test(file.type)){
+								continue;
+							}
+						
+							var img = document.createElement('img');
+							img.classList.add('obj');
+							img.file = file;
+							preview.appendChild(img); //this assumes that preview is the div output for content 
+							
+							var reader = new FileReader();
+							reader.onload = function(aImg) {return function(e) {aImg..src = e.target.result;};})(img);
+							reader.readAsDataURL(file);
+						}
+					}
+			* key point is adding the file attribute to each image 		
+			* the filereader is to let the browser read a provided file 
+		* uploading user selected-file 
+		* handling the upload process for a file asynchronously 
+		* using object urls to display pdf 
+		* using object urls with other file types 
+		
 
 
 
