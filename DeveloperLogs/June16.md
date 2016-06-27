@@ -1897,19 +1897,258 @@ basically diving deep into file uploads and stuff and how they are implemented
 					* used to mark which option is currently selected 
 			* as usual [jQuery has a thing for UI elements](http://jqueryui.com/)
 	* [sending forms through javascript](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_forms_through_JavaScript) 			
+		* gaining control over the global interface 
+			* remain in control of the user interface 
+		* how is [ajax](https://developer.mozilla.org/en-US/docs/AJAX) different		
+			* ajax techniques rely mostly on [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) (XHR) DOM objects
+				* allows you to build http request, send them, and retrieve the results of those requests 
+				* works with both xml and json 
+					* neither fit the structure of form data requests 
+						* form data request are url-encoded lists of key/value pairs 
+						* for binary data the whole http request is changed to deal with it 
+		* sending form data 
+			* three ways to send form data 
+				* [building a DOM in a hidden iframe (legacy)](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_forms_through_JavaScript#Building_a_DOM_in_a_hidden_iframe)
+					* build a form using the DOM Api and then send the data into a hidden [<iframe>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) 
+						* retrieve the content of the hidden `<iframe>` to access the result of what you sent 
+					* this is a bad idea and you will get hacked 
+				* [building an XMLHttpRequest manually](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_forms_through_JavaScript#Building_an_XMLHttpRequest_manually)
+					* to do this you must encode the data properly all data must be url-encoded 
+						* here you manually encode data 
+						* sounds like a bitch 
+				* [using XMLHttpRequest and the FormData object](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Sending_forms_through_JavaScript#Using_XMLHttpRequest_and_the_FormData_object)
+					* the [FormData] (https://developer.mozilla.org/en-US/docs/Web/API/FormData) object is dope
+						* used in two ways 
+							* build a set of data to transmit 
+							* get the data represented by a given form element to manage how it gets sent 
+						* FormData objects are write only objects, you cannot read them 
+					* this is a good idea 
+					* building a set of data to transmit example  
+						* html 
+							`<button type="button" onclick="sendData({test: 'ok'})">Click Me!</button>`
+						* js 
+							```
+								function sendData(data) {
+									var XHR = new XMLHttpRequest();
+									var FD 	= new FormData();
 								
+									// we push our data into our FormData object 
+									for (name in data) {
+										FD.append(name, data[name]);
+									} 
+						
+									//we define what will happeen if the data are successfullly sent 
+									XHR.addEventListener('load', function(event) {
+										alert('Yeah! Data sent and response loaded.');
+									});
+
+									//define what happens if this goes south 
+									XHR.addEventListener('error', function(event) {
+										alert('noooo! your shit broke');
+									});
+								
+									//we setup our request 
+									XHR.open('POST', 'http://ucommbieber.unl.edu/cors/cors.php');
+									
+									//we just send our FormData object, HTTP headers are set automatically 
+									XHR.send(FD);
+								}
+							```
+					* using formdata bound to a form element 
+						* html 
+							```
+								<form id="myForm">
+									<label for="myName">Send me your name:</label>
+									<input id="myName" name="name" value="john">
+									<input type="submit" value="send me!">
+								</form>
+							```
+						* js 
+							```	
+								window.addEventListner ('load', function() {
+									function sendData () {
+										var XHR = new XMLHttpRequest();
+										
+										//bind form data object and the form elemetn 
+										var FD = new FormData(form);
 							
+										// define what will happen if the data are successfully sent 
+										XHR.addEventListener('load', function(event) {	
+											alert(event.target.responseText);
+										});	
+			
+										//define what will happen in case of error 
+										XHR.addEventListener('error', function(event) {
+											alert('nope shit broke');
+										});
+								
+										//we setup our request 
+										XHR.open('POST', 'http://uncommbierber.unl.edu/cors/cors.php');	
+								
+										//the data sent are the one the user provide in the form 
+										XHR.send(FD);
+									}
+
+
+									// we need to access the form element 
+									var form = document.getElementById('myForm');	
+					
+									// to takeover its submit event 
+									form.addEventListener('submit', function(event){
+										event.preventDefault();
+										sendData();
+									});
+								});
+							```
+		* dealing with binary data 
+			* many sources for binary data in modern web 
+				* [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) api
+					* more information on the [filereader api and web](https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications)
+				* [canvas](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) api
+			* sending binary data with browsers that support [FormData](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/FormData)
+		* use the FileReader api by hand to acces the binary data 
+			* html 
+				```
+					<form id="myForm">
+						<p>
+							<label for="i1">text data:</label>
+							<input id="i1" name='myText' value='Some text data'>
+						</p>
+						<p>
+							<label for='i2'>file data:</label>
+							<input id='i2' name='myFile' type='file'>
+						</p>
+						<button>Send Me!</button> 
+					</form>
+				```
+			* js 
+				```	
+					//initialize scrip on pade load 
+					window.addEventListner("load", function() {
+						// this variable will be used to store the form data 
+						var text = document.getElementById("i1");
+						var file = {
+							dom 	: document.getElementById("i2"),
+							binary	: null
+						};
+						
+						//we use the filereader api to access our file content 
+						var reader = newFileReader 			
+						
+						//because the filereader api is asynchronous we need to store its result when it has finished reading the file 
+						reader.addEventListener ('load', function() {
+							file.binary = reader.result;	
+						});
+						
+						// at page load if a file is already selected we read it 
+						if(file.dom.files[0]){
+							reader.readAsBinaryString(file.dom.files[0]);
+						}
+							
+						//however we will read teh file once the user selected it 
+						file.dom.addEventListener('change', function() {
+							if (reader.readyState === FileReader.LOADING) {
+								reader.abort();
+							}
+							
+							reader.readAsBinaryString(file.dom.files[0]);
+						});	
+
+						//the sendData function is our main function 
+						function sendData() {
+							//first if there is a file selected we wait for it to be read 
+							// if not we delatu the execution of the function 
+							if(!file.binary && file.dom.files.length > 0) {
+								setTimeout(sendData, 10);
+								return; 
+							}
+							
+							// to construct our multipart form data request 
+							// need XMLHttpRequest instance 
+							var XHR = new XMLHttpRequest();
+					
+							//need a seperator to define each part of the request 
+							var boundary = "blob";
+				
+							// we will store our body request as a string 	
+							var data = "";
+				
+							//if the user has selected a file 
+							if (file.dom.files[0]) {
+								//we start a new part in our body's request 
+								data += "--" + boundary + "\r\n";
+					
+								//we sait its form data
+								data += "content-disposition: form-data;"
+								// we define the name of the form data 
+									+ "name='" + file.dom.name + "';"
+								// provide the real name of the file 
+									+ 'filename="' + file.dom.files[0].name + '"\r\n';
+								//we provide the mime type of the file 
+								data += 'Content-Type: ' + file.dom.files[0].type + '\r\n';
+			
+								// there is always a blank line between the meta-data and the data 
+								data += '\r\n';
+								
+								//we happen the binary data to our bodys request 
+								data += file.binary + '\r\n';
+							}
+							
+							//for text data its simple 
+							// new part in our bodys request 
+							data += "--" + boundary + "\r\n";
+						
+							//we said its form data and give it a name 
+							data += "content-disposition: form-data; name='" + text.name + "'\r\n";
+							
+							//there is always a blank line between the meta-data and the data 
+							data += '\r\n';
+				
+							// add the text data to our body request 
+							data += text.value + '\r\n';
+		
+							// once we are done we close the body request 
+							data += '--' + boundary + '--';
+							
+							//define what will happen if the data are sent successfully 
+							XHR.addEventListener ('load', function(event) {
+								alert('yeah! data sent and response loaded');
+							});
+						
+							//define what will happen in case of error 
+							XHR.addEventListener('error', function(event) {
+								alert('shit broke');
+							});
+			
+							// setup our request 
+							XHR.open('POST', 'http://ucommbieber.unl.edu/cors/cors.php');
+				
+							//we add the required http header to handle multipart form data post request 
+							XHR.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+							XHR.setRequestHeader('Content-Length', data.length);
+		
+							//we sned the data 
+							// for firefor it s not send()
+							XHR.sendAsBinary(data);
+						}
+					
+						/// need access to form 
+						var form = document.getElementById('myForm');
+			
+						//take over the submit event 
+						form.addEventListener( 'submit', function(event) {
+							event.preventDefault();
+							sendData();
+						});
+					});
+				```
 
 
 
 
 
 
-
-
-
-
-
+		
 
 
 
