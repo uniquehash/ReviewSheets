@@ -2474,9 +2474,9 @@ okay so basically the try random shit until works strategy did not work. So now 
 			* document 
 				* returns the document object for the window 
 			* frameElement 
-				* returns the <iframe> element in which the current window is inserted 
+				* returns the `<iframe>` element in which the current window is inserted 
 			* frames 
-				* returns all <iframe> elements in the current window 
+				* returns all `<iframe>` elements in the current window 
 			* history 
 				* returns the history object for the window 
 			* innerHeight
@@ -2484,7 +2484,7 @@ okay so basically the try random shit until works strategy did not work. So now 
 			* innerWidth 
 				* returns the inner width of a windows content area 
 			* length 
-				* returns the number of <iframe> elements in the current window 
+				* returns the number of `<iframe>` elements in the current window 
 			* localStorage 
 				* returns a reference to the local storage object used to store data. stores data with no expiration date 
 			* location 
