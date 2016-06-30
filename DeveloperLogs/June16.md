@@ -2326,7 +2326,7 @@ okay so basically the try random shit until works strategy did not work. So now 
 	* basically the lifecycle of an event 
 
 * how do window objects work?
-	* represents an open window in a browser, can have multiple in a page using <iframe> 
+	* represents an open window in a browser, can have multiple in a page using `<iframe>`
 
 
 * what is a meta key? 
