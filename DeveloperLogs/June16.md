@@ -2465,7 +2465,7 @@ okay so basically the try random shit until works strategy did not work. So now 
 				* replaces one child node of the current one with the second one given in parameter 
 	* [Window object](http://www.w3schools.com/jsref/obj_window.asp)
 		* represents an open window in a browser 
-		* if a document contains frames (<iframe> tags) the browser creates one window object for the html document and one window object for each frame
+		* if a document contains frames (`<iframe>` tags) the browser creates one window object for the html document and one window object for each frame
 		* properties 
 			* closed 
 				* returns a boolean value indicating whether a window has been closed or not 
