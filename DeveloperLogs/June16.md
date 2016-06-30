@@ -2277,6 +2277,863 @@ basically diving deep into file uploads and stuff and how they are implemented
 		* using object urls to display pdf 
 		* using object urls with other file types 
 		
+# June 28th - CSS, javascript, and file uploads but not research actually making the thing do the thing 
+
+woooo learned enough. lets build 
+
+#### questions 
+	
+* Why wont the thing [center with margin: 0 auto;](http://stackoverflow.com/questions/963636/why-cant-i-center-with-margin-0-auto)?
+	* i cheated. made it a block element so that it would take the whole width of the elemnt and then used text-align: center cause it was text.
+		* this centering shit is the devil 
+
+* What is normal flow?
+
+* How does css overflow work?
+
+
+# June 29th - Enginner bullshit html properties 
+
+okay so basically the try random shit until works strategy did not work. So now i need to slow down, understand how all the components work and actually engineer out a solution. Math not Science. 
+
+#### questions 
+
+* what does a document being unloaded mean?
+
+* what is a web storage area?
+
+* what is a context menu?
+
+* what is the difference between [onmouseover](http://www.w3schools.com/tags/ev_onmouseover.asp) and [onmousemove](http://www.w3schools.com/tags/ev_onmousemove.asp)?
+
+* what is an abort in the web media context?
+
+* what is a `<track>` element?
+
+* what is a seeking attribute?
+	
+* what is a message. is it connected to [this](http://www.w3schools.com/tags/ref_httpmessages.asp)?
+
+* what are [DOM levels](http://stackoverflow.com/questions/6629093/what-are-dom-levels)? 
+
+* what is the life cycle of an event?
+	* three phases 
+		* capture 
+		* target 
+		* bubbling
+
+* what is an "event flow"?
+	* basically the lifecycle of an event 
+
+* how do window objects work?
+	* represents an open window in a browser, can have multiple in a page using <iframe> 
+
+
+* what is a meta key? 
+
+* what is the difference between a [node object and an element object](http://stackoverflow.com/questions/9979172/difference-between-node-object-and-element-object)?
+	* node is an abstract class never really used but inherited from by different html objects including element 
+		* in essense there is relatively no difference, except element has additional characteristics over node 
+
+* what is a [DOMString](https://developer.mozilla.org/en-US/docs/Web/API/DOMString)?
+
+* what is a [NamedNodeMap](https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap)?
+
+* what is a [Number in the javascript context](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)?
+
+* what is a [HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection)?
+
+* what is a [DOMTokenList](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList)?
+
+* what is a [shadow element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Shadow)?
+
+* what is a [boolean in the context of javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?
+
+* what is a [pointerEvent](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent)?
+
+* what is a [shadowDom](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM)?
+
+
+
+
+
+
+
+
+
+
+* html objects 
+	* html DOM nodes 
+		* in the html DOM 
+			* everything is a node 
+			* the document is a document node 
+			* all html elements are element nodes 
+			* all html attributes are attribute nodes 
+			* test inside html elements are text nodes 
+			* comments are comment nodes 
+	* [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget)
+		* an interface implemented by objects that can receive events and may have listeners for them 
+		* methods 
+			* addEventListener()
+				* register an event handler of a specific event type on the EventTarget 
+			* removeEventListener()
+				* removes an event listener from the EventTarget 
+			* dispatchEvent()
+				* dispatch an event to this EventTarget
+	* [Node object](https://developer.mozilla.org/en-US/docs/Web/API/Node)
+		* inherits from [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget)
+		* essentially exists to be inherited from like sass placeholder classes 
+			* DOM elements that inherit from it 
+				* Document 
+				* Element 
+				* CharacterData 
+				* ProcessingInstruction 
+				* DocumentFragment 
+				* DocumentType 
+				* Notation 
+				* Entity 
+				* EntityReference 
+		 * properties 
+			* baseURI 
+				* returns a DOMString representing the base URL 
+			* childNodes
+				* returns a live NodeList containing all the children of this node 
+					* live means that if the children of the Node change the NodeList is automatically updated 
+			* firstChild 
+				* returns a Node representing the first direct child node of the node or null if there are no children 
+			* lastChild 
+				* returns a node representing the last direct child node of the node or null if there are no children 
+			* nextSibling 
+				* returns a Node representing the next node in the treee or null if there is no next node 
+			* nodeName 
+				* returns a DOMString containing the name of the node. 
+			* nodePrincipal 
+				* a [nsIPrincipal](https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIPrincipal) representing the node principal 
+			* nodeType 
+				* returns an unsigned short representing the type of node 
+					* ELEMENT_NODE: 1 
+					* ATTRIBUTE_NODE: 2 - DEPRECATED 
+					* TEXT_NODE: 3 
+					* CDATA_SECTION_NODE: 4 - DEPRECATED 
+					* ENTITY_REFERENCE_NODE: 4 - DEPRECATED 
+					* ENTITY_NODE: 6 - DEPRECATED 
+					* PROCESSING_INSTRUCTION_NODE: 7 
+					* COMMENT_NODE: 8 
+					* DOCUMENT_NODE: 9 
+					* DOCUMENT_TYPE_NODE: 10 
+					* DOCUMENT_FRAGMENT_NODE: 11 
+					* NOTATION_NODE: 12 - DEPRECATED 
+			* nodeValue
+				* a DOMString representing the value of an object, for most Node types this returns null and set operations are ignored 
+					* TEXT_NODE, COMMENT_NODE, PROCESSING_INSTRUCTION_NODE
+						* value corresponds to the text data contained in the object 
+			* ownderDocument
+				* returns the document that this node belongs to, if none returns null 
+			* parentNode 
+				* returns a Node that is the parent of this node, if none returns null
+			* parentElement 
+				* returns an element that is the parent of this node, if none returns null 
+			* previousSibling 
+				* returns a node representing the previous node in the tree or null if none 
+			* rootNode 
+				* returns a node object representing the topmost node in tree, found by walking backwards allong the parentNode until top reached 
+			* textContent
+				* is a DOMString representing the textual content of an element and all its descendants 
+		* methods 
+			* inherits methods deom EventTarget 
+			* appendChild()
+				* insert a node as the last child node of this element 
+			* cloneNode()
+				* clone a node and optionally all of its contents. by default clones the content of the node 
+			* compareDocumentPosition()
+				* crazy shit 
+			* contains()
+				* returns a boolean value indicating whether a node is a descendant of a given node or not 
+			* hasChildNodes()
+				* returns a boolean indicating if the element has any child nodes or not 
+			* insertBefore()
+				* inserts the first node given in a parameter immediately before the second child of this element
+			* isEqualNode()
+				* returns a boolean which indicates whether or not two nodes are of the same type and all their defining data points match 
+			* isSameNode()
+				* returns a boolean value indicating whether or not the two nodes are the same 
+			* normalize()
+				* clean up all the text nodes under this element (merge adjacent, remove empty) 
+			* removeChild()
+				* removes a chile node from the current element which must be a child of the current node 
+			* replaceChild()
+				* replaces one child node of the current one with the second one given in parameter 
+	* [Window object](http://www.w3schools.com/jsref/obj_window.asp)
+		* represents an open window in a browser 
+		* if a document contains frames (<iframe> tags) the browser creates one window object for the html document and one window object for each frame
+		* properties 
+			* closed 
+				* returns a boolean value indicating whether a window has been closed or not 
+			* defaultStatus 
+				* sets or returns the default text in the statusbar of a window 
+			* document 
+				* returns the document object for the window 
+			* frameElement 
+				* returns the <iframe> element in which the current window is inserted 
+			* frames 
+				* returns all <iframe> elements in the current window 
+			* history 
+				* returns the history object for the window 
+			* innerHeight
+				* returns the inner height of a windows content area 
+			* innerWidth 
+				* returns the inner width of a windows content area 
+			* length 
+				* returns the number of <iframe> elements in the current window 
+			* localStorage 
+				* returns a reference to the local storage object used to store data. stores data with no expiration date 
+			* location 
+				* returns the location object for the window 
+			* name 	
+				* sets or returns the name of a window 
+			* navigator 
+				* returns the navigator object for the window 
+			* opener 
+				* returns a reference to the window that created the window 
+			* outerHeight
+				* returns the outer height of a window including toolbars/scrollbars 
+			* outerWidth 
+				* returns the outer width of a window inlcuding toolbars/scrollbars 
+			* pageXOffset 
+				* returns the pixels the current document has been scrolled (horizontally) from the upper left corner of the window 
+			* pageYOffset 
+				* returns the pixels the current document has been scrolled (vertically) from the upper left corner of the window 
+			* parent 
+				* returns the parent window of the current window 
+			* screen 
+				* returns the screen object for the window 
+			* screenLeft 
+				* returns the horizontal coordinate of the window relative to the screen 
+			* screenTop
+				* returns the vertical coordinate of the window relative to the screen 
+			* screenX 
+				* returns the horizontal coordinate of the window relative ot the screen 
+			* screenY 
+				* returns the vertical coordinate of the window relative to the screen 
+			* session storage 
+				* returns a reference to the local storage object used to store data
+				* stores data for one session (lost when the browser tab is closed) 
+			* scrollX
+				* an alias of pageXOffset 
+			* scrollY 
+				* an alias of pageYOffset 
+			* self 
+				* returns the current window 
+			* status 
+				* sets or returns the text in the statusbar of a window 
+			* top 
+				* returns the topmost browser window 
+		* methods 
+			* alert()
+				* displays an alert box with a message and an OK button 
+			* atob()
+				* decodes a base-64 encoded string 
+			* blur()
+				* removes focus from the current window 
+			* btoa()
+				* encodes a string in base-64 
+			* clearInterval()
+				* clears a timer set with setInterval()
+			* clearTimeout()
+				* clears a timer set with setTimeout()
+			* close()
+				* closes the current window 
+			* confirm()
+				* displays a dialog box with a message and an OK and a Cancel button 
+			* focus()
+				* sets focus to the current window 
+			* getComputedStyle()
+				* gets the current computed css styles applied to an element 
+			* getSelection()
+				* returns a selection object representing the range of text selected by the user 
+			* matchMedia()
+				* returns a MediaQueryList object representing the specified CSS media query string 
+			* movesBy()
+				* moves a window relative to its current position 
+			* moveTo()
+				* moves a window to the specified position 
+			* open()
+				* opens a new browser window 
+			* print()
+				* prints the content of the current window 
+			* prompt() 
+				* displays a dialog box that prompts the visitor for input 
+			* resizeBy()
+				* resizes the window by the specified pixels 
+			* resizeTo()
+				* resizes the window to the specified width and height 
+			* scrollBy()
+				* scrolls the document by the specified number of pixels 
+			* scrollTo()
+				* scrolls the document to the specified coordinates 
+			* setInterval()
+				* calls a function or evaluates an expression at specified intervals 
+			* setTimeout()
+				* calls a function or evaluates an expression after a specified number of miliseconds 
+			* stop()
+				* stops the window from loading 
+	* [document object](http://www.w3schools.com/jsref/dom_obj_document.asp)
+		* when an html document is loaded into a web browser it becomes a document object 
+			* the document object is the root node of the html document and owns all the other nodes 
+		* the document is part of the window object and accessed as window.document 
+		* inherits from the Node object 
+		* properties 
+			* activeElement
+				* returns the currently focused element in the document 
+			* anchors 	
+				* returns a collection of all <a> elements in the document that have a name attribute 
+			* applets 
+				* returns a collection of all <applet> elements in the document 
+			* baseURI 
+				* returns the absolute base URI of a document 
+			* body 
+				* sets or returns the documents body 
+			* cookie 
+				* returns all name/value pairs of cookies in the document 
+			* doctype 
+				* returns the document type declaration associated with the document 
+			* documentElement 
+				* returns the document element of the document 
+			* documentMode 
+				* returns the mode used by the browser to render the document 
+			* documentURI 
+				* sets or returns the location of the document 
+			* domain 
+				* returns the domain name of the server that loaded the document 
+			* embeds 
+				* returns a collection of all <embed> elements in the document 
+			* forms 
+				* returns a collection of all <form> elements in the document 
+			* head 
+				* returns the <head> element of the document 
+			* images 
+				* returns a collection of all <img> elements in the document 
+			* implementation 
+				* returns the DOMImplementation object that handles this document 
+			* inputEncoding 
+				* returns the encoding, the character set, used for the document 
+			* lastModified 
+				* returns the date and time the document was last modified 
+			* links 
+				* returns a collection of all <a> and <area> elements in the document that have a href attribute 
+			* readyState 
+				* returns the (loading) status of the document 
+			* referrer 
+				* returns the url of the document that loaded the current document 
+			* scripts 
+				* returns a collection of <script> elements in the document 
+			* strictErrorChecking 
+				* sets or returns whether error-checking is enforced or not 
+			* title 
+				* sets or returns the title of the document 
+			* url 
+				* returns the full url of the HTML document 
+		* methods 
+			* addEventListener()
+				* attaches an event handler to the document 
+			* adoptNode()
+				* adopts a node from another document 
+			* close()
+				* cloes the output stream previously opened with document.open()
+			* createAttribute()
+				* creates an attribute node 
+			* createComment()
+				* creates a comment node with the specified text 
+			* createDocumentFragment()
+				* creates an empty documentFragment node 
+			* createELement()
+				* creates an element node 
+			* createTextNode()
+				* creates a Text node 
+			* getElementById()
+				* returns the element that has the ID attribute with the specified value 
+			* getElementsByClassName()
+				* returns a NodeList containing all elements with the specified class name 
+			* getElementsByName()
+				* returns a NodeList containing all elements with a specified name 
+			* getElementsByTagName()
+				* returns a NodeList containing all elements with the specified tag name 
+			* hasFocus()
+				* returns a boolean value indicating whether the document has focus 
+			* importNode()
+				* imports a node from another document 
+			* normalize()
+				* removes empty Text nodes, and joins adjacent nodes 
+			* normalizeDocument()
+				* removes empty text nodes and joins adjacent nodes 
+			* open() 
+				* opens an html ouput stream to collect output from document.write(), closed by document.close()
+			* querySelector()
+				* returns the first element that matches a specified CSS selector in the document 
+			* querySelectorAll()
+				* returns a static NodeList containing all elements that matches a specified CSS selector in the document 
+			* removeEventListener()
+				* removes an event handler from the document 
+			* renameNode()
+				* renames the specified node 
+			* write()
+				* writes an html expressions or js code to a document 
+			* writeIn()
+				* same as document.write() but adds a newline character after each statement 
+	* [element](https://developer.mozilla.org/en-US/docs/Web/API/Element)
+		* an object node of a document 
+		* properties 
+			* inherits from node 
+			* attributes
+				returns a NamedNodeMap that lists all attributes associated with the element 
+			* childElementCount 
+				* is a number representing the number of child nodes that are elements 
+			* children 
+				* is a live HTMLCollection containing all child elements of the element as a collection 
+			* classList 
+				* returns a DOMTokenList containing the list of class attributes 
+			* className
+				* is a DOMString representing the class of the element 
+			* id 
+				* is a DOMString representing the id of the element 
+			* innerHTML 
+				* is a DOMString representing the markup of the elements content 
+			* lastElementChild 
+				* is a element, the last direct child element of an element or null if the element has no element children 
+			* localName 
+				* a DOMString representing the local part of the qualified name of the element 
+			* nextElementSibling 
+				* is a element immediately following the given one in the tree or null if there is no sibling node 
+			* previousElementSibling 
+				* is a element immediately preceding the given one in the tree or null if there are no sibling element 
+			* tagName 
+				* returns a string with the name of the tag for the given element 
+			* Experimental properties - no bueno production 
+				* clientHeight
+					* returns a Number representing the inner height of the element 
+				* clientLeft 
+					* returns a number representing the width of the left border of the element 
+				* clientTop
+					* returns a number representing the width of the top border of the element 	
+				* clientWidth 
+					* returns a number representing the inner width of the element 	
+				* firstElementChild 
+					* is a element the first direct child element of an element or null if there are no child elements 
+				* outerHTML 
+					* is a DOMString representing the markup of the element including its content when used as a setter replaces the element with nodes parsed from the given string 
+				* scrollHeight 
+					* returns a number representing the scroll view height of an element 
+				* scrollLeft 
+					* is a number representing the left scroll offset of the element 
+				* scrollLeftMax 
+					* returns a number representing the maximum left scroll offset possible for the element 
+					* has yet to be standardized 
+				* scrollTopMax 	
+					* returns a number representing the maximum top scroll offset possible for the element 
+					* has yet to be standardized 
+				* scrollWidth 
+					* returns a number representing the scroll view width of the element 
+				* shadowRoot 
+					* returns the youngest shadow root that is hosted by the element 
+				* tabStop 
+					* is a boolean indicating if the element can receive input focus via the tab key 
+					* is not yet standardized
+ 	* methods 
+		* inherits from Node and EventTarget 
+		* addEventListener()
+			* registers an event handler to a specific event type on the element 
+		* dispatchEvent()
+			* dispatches an event to this node in the DOM and returns a boolean that indicates that at least one handler has not canceled it 
+		* getAttribute()
+			* retrieves the value of the names attribute from the current node and returns it as an object 
+		* getAttributeNS()
+			* retrieves the value of the attribute with the specified name and namespace from the current node and returns it as an object 
+		* getBoundingClientRect()
+			* method returns the size of an element and its position relative to the viewport 
+		* getClientRects()
+			* returns a collection of rectangles that indicate the bounding rectangles for each line of text in client 
+		* getElementByClassName()	
+			* returns a live HTMLCollection containing all descendant elements of a particular tag name from the current element 
+		* getElementsByTagName()
+			* returns a live HTMLCollection containing all descendant elements of a particular tagname from the current element 
+		* getElementsByTagNameNS()
+			* returns a live HTMLCollection containing all descendant elements of a particular tagname and namespace from the current element 
+		* hasAttribute()
+			* returns a boolean indicating if the element has the specified attribute or not 
+		* hasAttributeNS()
+			* returns a boolean indicating if the element has the specified attribute in the specified namespace or not 
+		* hasAtrributes()
+			* returns a boolean indicating if the element has one or more HTML attributes present 
+		* querySelector()
+			* returns the first Node which matches the specified selector string relative to the element 
+		* querySelectorAll()
+			* returns a NodeList of nodes which match the specified selector string relative to the element 
+		* releasePointerCapture()
+			* releases pointer capture that was previously set for a specific pointer event 
+		* remove()
+			* removes the element from the children list of its parent 
+		* removeAttribute()	
+			* removes the names attribute from the current node 
+		* removeAttributeNS()
+			* removes the attribute with the specified name and namespace from the current node 
+		* removeEventListener()	
+			* removes an event listener from the element 
+		* setAttribute()
+			* sets the value of a named attribute of the current node 
+		* setAttributeNS()
+			* sets the value of the attribute witht he specified name and namespace from the current node 
+		* setPointerCapture()
+			* designates a specific element as the capture target of future pointer events 
+		* experimental - no bueno production 
+			* attachShadow()
+				* attaches a shadow DOM tree to the specified element and returns a reference to its shadowRoot 
+			* animate()
+				* a shortcut method to create and run an animation on an element
+				* returns the created animation object instance 
+			* closest()
+				* returns the element descendant of this element that is the closest ancestor of the elements selected by the selectors given in parameter
+ 			* createShadowRoot()
+				* creates a shadow DOM on the element turning it into a shadow host
+				* returns ShadowRoot
+			* insertAdjacentElement()
+				* inserts a given element node at a given position relative to the element it is invoked upon 
+			* insertAdjacentHTML()
+				* parses the text as HTML or XML and inserts the resulting nodes into the tree in the position given 
+			* insertAdjacentText()
+				* inserts a given text node at a given position relative to the element it is invoked upon 
+			* matches()
+				* returns a boolean indicating whether or not the element would be selected by the specified selector string 
+			* requestFullscreen()
+				* asynchronously ask the browser to make the element full-screen 
+			* requestPointerLock()
+				* allows to asynchrounously ask for the pointer to be locked on the given element 
+			* scrollIntoView()
+				* scrolls the page until the element gets into the view 
+			* setCapture()
+				* sets up mouse event capture redirecting all mouse events to this elements 
+				* the api is not standardized 
+			
+		
+
+
+
+
+##### events 
+
+* html events 
+	* can be something that the browser does 
+	* can be something that a user does 
+	* detectable by javascript 
+	* event handlers 
+		* scripts that are bound to events to perfom some sort of actions 
+	* global event attributes 
+		* window event attributes 
+			* onafterprint 
+				* event triggered after the document is printed 
+			* onbeforeprint
+				* event triggered before the document is printed 
+			* onbeforeunload
+				* event triggered when the document is about to be unloaded
+			* onerror
+				* event triggered when an error occurs 
+			* [onhashchange](http://www.w3schools.com/tags/ev_onhashchange.asp)
+				* event triggered there has been changes to the anchor part of a url 
+			* onload
+				* legacy 
+				* event fired after the page is finished loading 
+			* onmessage	
+				* event fired when a message is triggered 
+			* onoffline
+				* event fired when the browser starts to work offline 
+			* ononline 
+				* event fired when the browser starts to work online 
+			* onpagehide 
+				* event fired when a user navigates away from a page 
+			* onpageshow 
+				* event fired when a user navigates to a page 
+			* onpopstate
+				* event fired when the windows history changes 
+			* onresize 
+				* event fired when the browser window is resized 
+			* onstorage 
+				* event fired when a web storage area is updated
+			* onunload 
+				* legacy 
+				* event fired once a page has unloaded 
+		* form events 
+			* events triggered by actions inside html forms (applies to most html elements, designed in the context of forms)
+			* onblur 
+				* legacy 
+				* event fired when an element loses focus 
+			* onchange 
+				* legacy 
+				* event fired when the value of an element is changed 
+			* oncontextmenu
+				* event fired when a context menu is triggered 
+			* onfocus 
+				* legacy 
+				* event fired when the element gets focus 
+			* oninput 
+				* event fired when an element gets user input 
+			* oninvalid 
+				* event fired when an element is invalid 
+			* onreset 
+				* event fired when the reset button in a form is clicked 
+			* onsearch 
+				* legacy 
+				* event fired when the user writes into a `<input type="search">` field 
+			* onselect 
+				* legacy 
+				* event fired after some text has been selected in an element 
+			* onsubmit 
+				* legacy 
+				* event fired when a form is submitted 
+		* keyboard events 
+			* events trigged by the keyboard 
+			* onkeydown 
+				* legacy 
+				* event fired when a user is pressing a key 		
+			* onkeypress 
+				* legacy 
+				* event fired when a user is pressing a key 
+			* onkeyup 
+				* legacy 
+				* event fired when a user releases a key 
+		* mouse events 
+			* events triggered by the mouse. these are important 
+			* onclick
+				* legacy 
+				* event fired when a mouse clicks on an element 
+			* ondblclick
+				* legacy 
+				* event fired when a mouse double clicks on an element 
+			* onmousedown 
+				* legacy 
+				* event fired when a mouse button is pressed down on an element 
+			* onmousemove 
+				* legacy 
+				* event fired when a mouse pointer is moving while it is over an element 
+			* onmouseout 
+				* legacy 
+				* event fired when a mouse pointer moves out of an element 
+			* onmouseover
+				* legacy 	
+				* event fired when a mouse pointer moves over an element 
+			* onmouseup 
+				* legacy 	
+				* event fired when a mouse button is released over an element 	
+			* ondrag 
+				* event fired when an element is dragged 	
+			* ondragend 
+				* event fired when an element is no longer in drag motion 
+			* ondragenter 
+				* event fired when an element has been dragged to a valid drop target 
+			* ondragleave 
+				* event fired when an element has left the area of a valid drop target 
+			* ondragover
+				* event fired when an element is being dragged over a valid drop target 
+			* ondragstart 
+				* event fired when an element begins being dragged initially 
+			* ondrop 
+				* evetn fired when an element is being dragged is dropped 
+			* onscroll 
+				* event fired when an elements scroll bar is being scrolled 
+			* onwheel 
+				* event fired when the mouse wheel rolls up or down over an element 
+		* clipboard events 
+			* events that happen when you fuck with your clipboard 
+			* oncopy 
+				* legacy 
+				* event fired when the user copies the content of an element 
+			* oncut 
+				* legacy 
+				* event fires when the user cuts the content of an element 
+			* onpaste
+				* legacy 
+				* event fires when the user pastes some content in an element 
+		* media events 
+			* events that are triggered by medias (applies to all html elements but is designed for media elements `<audio>`, `<embed>`, `<img>`, `<object>`, `<video>`)
+			* onabort
+				* legacy 
+				* event fires when an abort?
+			* oncanplay
+				* event fired when a file is ready to start playing (buffered enough to begin)
+			* oncanplaythrough
+				* event fired when a file can be played all the way to the end wihtout pausing for buffering 
+			* oncuechange 
+				* event fired when the cue changes in a <track> element
+			* ondurationchange 
+				* event fired when the length of the media changes 
+			* onemptied 	
+				* event fired when something bad happens and the file is suddenly unavailable (designed for unexpected disconnects) 
+			* onended 
+				* event fired when the media has reached the end of its content 
+			* onerror 
+				* event fired when the file is being loaded 
+			* onloadeddata 
+				* event fired when the media data is loaded 
+			* onloadedmetadata 
+				* event fired when meta data (dimensions, duration) are loaded 
+			* onloadstart 
+				* event fired when the file begins to load before anything is actually loaded 
+			* onpause 	
+				* event fired when the media is paused either by the user or programmatically 
+			* onplay 
+				* event fired when the media is ready to start playing 
+			* onplaying 
+				* event fired when the media actually has started playing 
+			* onprogress 
+				* event fired when the browser is in the process of getting the media data 
+			* onratechange 
+				* event fired each time the playback rate changes 
+			* onseeked 
+				* event fired when the seeking attribute is set to false indicating that seeking has ended 
+			* onseeking 
+				* event fired when the seeking attribute is set to true indicating that seeking is active 
+			* onstalled 
+				* event fired when the browser is unable to fetch the media data for whatever reason 
+			* onsuspend 
+				* event fired when fetching the media data is stopped before it is completely loaded for whatever reason 
+			* ontimeupdate 
+				* event fired when the playing position has changed (designed for when a user fast forwards to a different point in the media) 
+			* onvolumechange
+				* event fired each time the volume is changed (including muting)
+			* onwaiting 
+				* event fired when the media has paused but is expected to resume (designed for pausing to buffer more data) 
+		* misc events 
+			* random events 
+			* onerror
+				* event fired when an error occurs while loading an external file 
+			* onshow
+				* event fired when a `<menu>` element is shown as a context menu 
+			* ontoggle 
+				* event fired when the user opens or closes the <details> element 
+	* [event object](http://www.w3schools.com/jsref/dom_obj_event.asp) 
+		* constants 
+			* CAPTURING_PHASE	
+				* DOM lv 1
+				* the current event phase is the capture phase 
+			* AT_TARGET 
+				* DOM lv 2 
+				* the current event is in the target phase 
+					* being evaluated at the event target 
+			* BUBBLING_PHASE
+				* DOM lv3 
+				* the current phase is the bubbling phase 
+		* properties 
+		 	* bubbles 
+				* DOM lv 2 
+				* returns whether or not a specific event is a bubbling event 
+			* cancelable 
+				* DOM lv 2 
+				* returns whether or not an event can have its default action prevented 
+			* currentTarget 
+				* DOM lv 2 
+				* returns the element whose event listeners triggered the event 
+			* defaultPrevented 
+				* DOM lv 3
+				* returns whether or not the preventDefault() method was called for the event	
+			* eventPhase 
+				* DOM lv 2 
+				* returns which phase of the event flow is currently being evaluated 
+			* isTrusted 
+				* DOM lv 3
+				* returns whether or not an event is trusted 
+			* target 
+				* DOM lv 2 
+				* returns the element that triggered the event 
+			* timeStamp 
+				* DOM lv 2 
+				* returns the time at which the event was created 
+			* type 
+				* DOM lv 2 
+				* returns the name of the event 
+			* view 
+				* DOM lv 2 
+				* returns a reference to the window object where the event occured 
+		* methods 
+			* preventDefault()
+				* DOM lv 2 
+				* cancels the event if it is cancelable 
+					* default action of event does not occur 
+			* stopImmediatePropagation()
+				* DOM lv 3 
+				* prevents other listeners of the same event from being called 
+			* stopPropagation()
+				* DOM lv 2
+				* prevents further propagation of an event during event flow 
+	* [MouseEvent object](http://www.w3schools.com/jsref/dom_obj_event.asp)
+		* event objects triggered by mouse events 
+		* altKey 
+			* DOM lv 2 
+			* returns whetehr the alt key was pressed when the mouse event was triggered 
+		* button 	
+			* DOM lv 2 
+			* returns which mouse button was pressed when the mouse even was triggered 
+		* buttons 
+			* DOM lv 3
+			* returns which mouse buttons were pressed when the mouse event was triggered 
+		* clientX
+			* DOM lv 2 
+			* returns the horizontal coordinate of the mouse pointer, relative to the current window, whne the mouse event was triggered 
+		* clientY 
+			* DOM lv 2 
+			* returns the horizontal coordinate of the mouse pointer, relative to the current window, when the mouse event was triggered 
+		* ctrlKey 
+			* DOM lv 2 
+			* returns whether the key was pressed when the mouse event was triggered 
+		* detail 
+			* DOM lv 2 
+			* returns a number that indicates how many times the mouse was clicked 
+		* metaKey 
+			* DOM lv 2
+			* returns whether the meta key was pressed when an event was triggered
+		* pageX 
+			* DOM 0 i guess 
+			* returns the horizontal coordinate of the mouse pointer, relative to the document, when the mouse event was triggered 
+		* pageY 
+			* DOM 0 i guess 
+			* returns the vertical coordinate of the mouse pointer, relative to the document, when the mouse event was triggerd 
+		* relatedTarget 
+			* DOM lv 2 
+			* returns the element related to the element that triggered the mouse event 
+		* screenX
+			* DOM lv 2 
+			* returns the horizontal coordinate of the mouse pointer, relative to the screen, when an event is triggered 
+		* screenY 
+			* DOM lv 2 
+			* returns the vertical coordinate of the mouse pointer, relative to the screen, when an event is triggered 
+		* shiftKey 
+			* DOM lv 2 
+			* returns whether the shift key was pressed when an event was triggered 
+		* which 
+			* DOM lv 2 
+			* returns which mouse button was pressed when the mouse event was triggered 
+	* [DOM event flow](http://www.w3.org/TR/DOM-Level-3-Events/#event-flow)  
+		* part of the [UI event specification](http://www.w3.org/TR/uievents/)
+		* event flow describes how event objects propagate through a data structure 
+			* basically the life cycle of an event 
+		* [three phases](https://www.smashingmagazine.com/2013/11/an-introduction-to-dom-events)
+			* capture phase 
+				* the event starts at the window object and propagates its way down to the target elements parent 
+				* event listeners bound to this phase handle the event before it reaches the target
+				* fires on each node as it propagates down 
+					* builds the propagation path and sets the path that the bubbling phase will take back 
+			* target phase 	
+				* the event reaches the target element 
+				* event listeners bound to this phase handle the event once it has reached its target 
+				* if the event is set to not bubble the event stops once this phase is over
+				* events always target the most deeply nested elements
+			* bubbling phase 
+				* the event propagates through the targets ancestors in reverse order until it reaches the window 
+				* event listeners bound to this phase handle the event before it reaches the window 
+				* the event is fired on every node on its way back to the window from the target 
+				* this behavior allows us to listen for events and catch them as they are bubbling back up 
+					* prevents setting a million event handlers everywhere, since the event will pass by all the nodes on the propagation path 
+
+
+
+
 
 
 
