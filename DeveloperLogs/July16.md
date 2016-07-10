@@ -1156,7 +1156,7 @@ Now that im not feeling pressured I should be able to make this thing a full sub
 	* there are meta-characters 	
 		* they must be escaped using `\\`
 		* list of characters 
-			* `! " # $ % & ' ( ) * + , . / : ; < = > ? @ [ \ ] ^ `` ` { | } ~`
+			* `! " # $ % & ' ( ) * + , . / : ; < = > ? @ [ \ ] ^ ``\` { | } ~`
 
 
 
