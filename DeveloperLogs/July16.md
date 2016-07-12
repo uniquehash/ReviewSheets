@@ -1156,7 +1156,241 @@ Now that im not feeling pressured I should be able to make this thing a full sub
 	* there are meta-characters 	
 		* they must be escaped using `\\`
 		* list of characters 
-			* `! " # $ % & ' ( ) * + , . / : ; < = > ? @ [ \ ] ^ ``\` { | } ~`
+			* `! " # $ % & ' ( ) * + , . / : ; < = > ? @ [ \ ] ^ { | } ~`
+	* [all selector](https://api.jquery.com/all-selector/)
+		* ("*")
+		* selects all elements 
+	* [:animated selector](https://api.jquery.com/animated-selector/)
+		* (":animated")
+		* selects all elements that are in the progress of an animation at the time the selector is run 
+	* [attribute contains prefix selector](https://api.jquery.com/attribute-contains-prefix-selector/)
+		* ("[attribute|='value']")
+			* attribute: an attribute name 
+			* value: an attribute value (can be an identifier or a quoted string
+		* selects elements that have the specified attribute with a value either equal to a given string or starting with that string followed by a hyphen 
+	* [attribute contains selector](https://api.jquery.com/attribute-contains-selector/)
+		* ("[attribute*='value']")
+			* attribute: an attribute name 
+			* value: an attribute value (can be wither an identifier or a quoted string
+		* selects elements that have the specified attribute with a value containing a given substring  		
+	* [attribute contains word selector](https://api.jquery.com/attribute-contains-word-selector/)
+		* ("[attribute~='value']")
+			* attribute: an attribute name 
+			* value: an attribute value (can be either an identifier or a quoted string) 	
+		* selects elements that have the specified attribute with a value containing a given word, delimited by spaces 
+	* [attribute ends with selector](https://api.jquery.com/attribute-ends-with-selector/)
+		* ("[attribute$='value']")
+			* attribute: an attribute name 
+			* value an attribute value (can either be an identifier or a quoted string)
+		* selects elements that have the specified attribute with a value ending exactly with a given string, the comparison is case sensitive 
+	* [attribute equals selector](https://api.jquery.com/attribute-equals-selector/)
+		* ("[attribute='value']")
+			* attribute: an attribute name 
+			* value: an attribute value (can either be an identifier or a quoted string) 
+		* selects elements that have the specified attribute with a value exactly equal to a certain value 
+	* [attribute not equal selector](https://api.jquery.com/attribute-not-equal-selector/)
+		* ("[attribute!='value']")
+		* select elements that either do not have the specified attribute or do have the specified attribute but not with a certain value 
+	* [attribute starts with selector](https://api.jquery.com/attribute-starts-with-selector/)
+		* ("[attribute^='value']")
+		* selects elements that have the specified attribute with a value beginning exactly with a given string 
+	* [:button selector](https://api.jquery.com/button-selector/)
+		* (":button")
+		* selects all button elements and elements of type button 
+	* [:checkbox selector](https://api.jquery.com/checkbox-selector/)
+		* (":checkbox")
+		* selects all elements of type checkbox
+	* [:checked selector](https://api.jquery.com/checked-selector/)
+		* (":checked")
+		* matches all elements that are checked or selected 
+	* [child selector](https://api.jquery.com/child-selector/)
+		* ("parent>child")
+			* parent: any valid selector 
+			* child: a selector to filter the child elements 
+		* selects all direct child elements specified by "child" of elements specified by "parent" 
+	* [class selector](https://api.jquery.com/class-selector/)
+		* (".class")
+			* class: a class to search for. an element can have multiple classes; only one of them must match 
+		* selects all elements with the given class 
+	* [contains selector](https://api.jquery.com/contains-selector/)
+		* (":contains(text)")
+			* text: a string of text to look for. it is case sensitive 
+		* selects all elements that contain the specified text 
+	* [descendant selector](https://api.jquery.com/descendant-selector/)
+		* ("ancestor descendant")
+			* ancestor: any valid selector 
+			* descendant: a selector to filter the descendant elements 
+		* selects all elements that are descendants of a given ancestor 
+	* [:disabled selector](https://api.jquery.com/disabled-selector/)
+		* (":disabled")
+		* selects all elements that are disabled 
+	* [element selector](https://api.jquery.com/element-selector/)
+		* ("element")
+			* element: an element to search for. refers to the tagName of DOM nodes 
+		* selects all elements with the given tag name 
+	* [:empty selector](https://api.jquery.com/empty-selector/)
+		* (":empty")
+		* selects all elements that have no children (including text nodes)
+	* [:enabled selector](https://api.jquery.com/enabled-selector/)
+		* (":enabled")
+		* selects all elements that are enabled 
+	* [:eq()](https://api.jquery.com/eq-selector/)
+		* (":eq(index)")
+			* index: zero-based index of the element to match 
+		* (":eq(-index)")
+			* indexFromEnd: zero-based index of the element to match, counting backwards from the last element 
+		* selects the element at index `n` within the matched set 
+	* [even selector](https://api.jquery.com/even-selector/)
+		* (":even")
+		* selects even elements, zero-indexed 
+	* [file selector](https://api.jquery.com/file-selector/)
+		* (":file")
+		* selects all elements of type file 
+	* [first-child selector](https://api.jquery.com/first-child-selector/)
+		* (":first-child")
+		* selects all elements that are the first child of their parent 
+	* [first-of-type selector](https://api.jquery.com/first-of-type-selector/)
+		* (":first-of-type")
+		* selects all elements that are the first among siblings of the same element name 
+	* [:first selector](https://api.jquery.com/first-selector/)
+		* (":first")
+		* selects the first matched DOM element 
+	* [:focus selector](https://api.jquery.com/focus-selector/)
+		* (":focus")
+		* selects element if it is currently focused 
+	* [:gt() selector](https://api.jquery.com/gt-selector/)
+		* (":gt(index)")
+			* index: zero-based index 
+		* (":gt(-index)")
+			* indexFromEnd: zero-based index, counting backwards from the last element 
+		* selects all elements at an index greater than `index` within the matched set 
+	* [has attribute selector](https://api.jquery.com/has-attribute-selector/)
+		* ("[attribute]")
+		* selects elements that have the specified attribute, with any value 
+	* [:has() selector](https://api.jquery.com/has-selector/)
+		* (":has(selector)")
+		* selects elements which contain at lease one element that matches the specified selector 
+	* [:header selector](https://api.jquery.com/header-selector/)
+		* (":header")
+		* selects all elements that are headers, like h1, h2, h3, and so on 
+	* [:hidden selector](https://api.jquery.com/hidden-selector/)
+		* (":hidden")
+		* selects all elements that are hidden 	
+	* [ID selector](https://api.jquery.com/id-selector/)
+		* ("#id")
+		* selects a single element with the given id attribute 
+	* [:image selector](https://api.jquery.com/image-selector/)
+		* (":image")
+		* selects all elements of type image 
+	* [:input selector](https://api.jquery.com/input-selector/)
+		* (":input")
+		* selects all input, textarea, select and button elements 
+	* [:lang() selector](https://api.jquery.com/lang-selector/)
+		* (":lang(language)")
+			* language: a language code 
+		* selects all elements of the specified language 
+	* [:last-child selector](https://api.jquery.com/last-child-selector/)
+		* (":last-child")
+		* selects all elements that are the last child of their parent 
+	* [:last-of-type selector](https://api.jquery.com/last-of-type-selector/)
+		* (":last-of-type")
+		* selects all elements that are the last among siblings of the same element name 
+	* [:last selector](https://api.jquery.com/last-selector/)
+		* (":last")
+		* selects the last matched element 
+	* [:it() selector](https://api.jquery.com/lt-selector/)
+		* (":It(index)")
+			* index: zero-based index 
+		* (":It(-index)")
+			* indexFromEnd: zero-based index, counting backwards from the last element 
+		* selects all elements at an index less than `index` within the matched set 
+	* [multiple attribute selector](https://api.jquery.com/multiple-attribute-selector/)
+		* ("[attributeFilter1][attributeFilter2][attributeFilterN]")
+			* attributeFilter1: an attribute filter 
+			* attributeFilter2: another attribute filter, reducing the selection even more 
+			* attributeFilterN: as many more attribute filters as desired 
+		* matches elements that match all of the specified attribute filters 
+	* [multiple selector](https://api.jquery.com/multiple-selector/)
+		* ("selector1, selector2, selectorN")
+			* selector1: any valid selector 
+			* selector2: another valid selector 
+			* selectorN: as many more valid selectors as you like 
+		* selects the combined results of all the specified selectors 
+	* [next adjacent selector](https://api.jquery.com/next-adjacent-selector/)
+		* ("prev + next")
+			* prev: any valid selector 
+			* next: a selector to match the element that is next to the first selector 
+			* selects all next-elements matching `next` that immediately preceded by a sibling `prev`
+	* [next siblings selector](https://api.jquery.com/next-siblings-selector/)
+		* ("prev ~ siblings")
+			* prev: any valid selector 
+			* siblings: a selector to filter elements that are the following siblings of the first selector
+		* selects all sibling elements that follow after the `prev` element, have the same parent, and match the filtering `sibling` selector 
+	* [.not() selector](https://api.jquery.com/not-selector/)
+		* (":not(selector)")
+			* selector: a selector with which to filter by 
+		* selects all elements that do not match the given selector 
+	* [:nth-child() selector](https://api.jquery.com/nth-child-selector/)
+		* (":nth-child(index/even/odd/equation)")
+			* index: the index of each child to match, starting with `1`, the string `even` or `odd`, or an equation (eg. `:nth-child(even)`, `:nth-child(4n)`)
+		* selects all elemenths that the nth-child of their parent 
+	* [:nth-last-child() selector](https://api.jquery.com/nth-last-child-selector/)
+		* (":nth-last-child(index/even/odd/equation)")
+			* index: the index of each child to match, starting with the last one (`1`), the string `even` or `odd`, or an equation (eg. `:nth-last-child(even)`, `:nth-last-child(4n)`)
+		* selects all elements that are the nth-child of their parent, counting from the last element to the first 
+	* [nth-last-of-type() selector](https://api.jquery.com/nth-last-of-type-selector/)
+		* (":nth-last-of-type(index/even/odd/equation)")
+			* index: the index of each child to match, starting with the last (`1`), the string `even`, or `odd`, or an equation (eg. `:nth-last-of-type(even)`, `:nth-last-of-type(4n)`)
+		* selects all the elements that are the nth-child of their parent in relation to siblings with the same element name, counting from the last element to the first 
+	* [:nth-of-type() selector](https://api.jquery.com/nth-of-type-selector/)
+		* (":nth-of-type(index/even/odd/equation)")
+			* index the index of each child to match, starting with `1`, the string `even` or `odd`, or an equation (eg. `:nth-of-type(even)`, `:nth-of-type(4n)`)
+		* selects all elements that are the nth child of their parent in relation to siblings with the same element name 
+	* [:odd selector](https://api.jquery.com/odd-selector/)
+		* (":off")
+		* selects odd elements, zero-indexed 
+	* [:only-child selector](https://api.jquery.com/only-child-selector/)
+		* (":only-child")
+		* selects all elements that are the only child of their parent 
+	* [:only-of-type selector](https://api.jquery.com/only-of-type-selector/)
+		* (":only-of-type")
+		* selects all elements that have no siblings with the same element name 
+	* [.parent selector](https://api.jquery.com/parent-selector/)
+		* (":parent")
+		* selects all elements that have at least one child node (either an element or text)
+	* [:password selector](https://api.jquery.com/password-selector/)
+		* (":password")
+		* selects all elements of type password 
+	* [:radio selector](https://api.jquery.com/radio-selector/)
+		* (":radio")
+		* selects all elements of type radio 
+	* [:reset selector](https://api.jquery.com/reset-selector/)
+		* (":reset")
+		* selects all elements of type reset 
+	* [:root selector](https://api.jquery.com/root-selector/)
+		* (":root")
+		* selects the element that is the root of the document 
+	* [:selected selector](https://api.jquery.com/selected-selector/)
+		* (":selected")
+		* selects all elements that are selected 
+	* [:submit selector](https://api.jquery.com/submit-selector/)
+		* (":submit")
+		* selects all elements of type submit 
+	* [:target selector](https://api.jquery.com/target-selector/)
+		* (":target")
+		* selects the target element indicated by the fragment identifier of the documents URI 
+	* [:text selector](https://api.jquery.com/text-selector/)
+		* (":text")
+		* selects all input elements of type text 
+	* [:visible selector](https://api.jquery.com/visible-selector/)
+		* (":visible")
+		* selects all elements that are visible
+	
+	* selectors can be chained using multiple selector 
+		* this is pretty bad ass 
+
+
+
 
 
 
