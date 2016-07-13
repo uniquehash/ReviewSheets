@@ -1389,7 +1389,189 @@ Now that im not feeling pressured I should be able to make this thing a full sub
 	* selectors can be chained using multiple selector 
 		* this is pretty bad ass 
 
+# July 12th - deployment (pray for me) 
 
+today i become a sys admin. many hats. many hats. 
+
+
+
+
+#### questions 
+
+* what is [`yum` in linux context](https://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified)?
+	* stands for yellow dog updater, modified 
+	* an open-source command line package-management utility for computers running the linux operating system using the [RPM package manager](https://en.wikipedia.org/wiki/RPM_Package_Manager)
+	* works with software repositories which can be accessed locally or over a network 
+
+* what is [(apt) advanced package tool](https://en.wikipedia.org/wiki/Advanced_Packaging_Tool)?
+	* a free software interface 
+	* handles the installation and removal of software on Debian based linux
+	* originally designed as a front-end for [dpkg](https://en.wikipedia.org/wiki/Dpkg) to work with Debian `.deb` packages 
+		* modified to work with RPM package manager system 	
+	* [fink](https://en.wikipedia.org/wiki/Fink) has ported the interface to osx
+
+* what is the [`apt-get` command](http://linux.die.net/man/8/apt-get)
+	* `apt` package handling utility command line interface
+	* this the command line tool for handling packages 
+
+
+* what is [dpkg](https://en.wikipedia.org/wiki/Dpkg)?
+	* the base of the package management system in Debian 
+	* used to install, remove, and provide information about `.deb` packages 
+	* a low level tool, usually interfaced by another tool 
+
+* what is [Ubuntu](https://en.wikipedia.org/wiki/Ubuntu_(operating_system))?
+	* a Debian-based linux operating system 
+
+* what is [Debian](https://en.wikipedia.org/wiki/Debian)?
+	* a unix-like operating system that is entirely free software under the GNU general public license 
+	* packaged by the Debian Project 
+		* three baranches 
+			* stable 
+			* testing 
+			* unstable 
+
+* what is [Fedora](https://en.wikipedia.org/wiki/Fedora_(operating_system))?
+	* an operating system based on linux kernel 
+	* built by the [Fedora Project](https://en.wikipedia.org/wiki/Fedora_Project)
+	* an os aiming to be the leading edge of free and open source software 	
+
+* what is [RPM package manager](https://en.wikipedia.org/wiki/RPM_Package_Manager) in linux context?	
+	* a package management system 
+	* uses the `.rpm` file format 
+	* intended for linux distributions 
+	* built originally for red hat linux
+
+* what is [`su`](http://man7.org/linux/man-pages/man1/su.1.html) in the linux context? 
+	* likely a unix thing 
+	* allows to run commands with a substitute user and group ID 
+	* when called without arguments, defaults to running shell as root 
+	* [`su -`](http://unix.stackexchange.com/questions/7013/why-do-we-use-su-and-not-just-su) is prefered use because it resets the shell environment, diminishing the chances of weird shit happening 
+
+* what does the command [`which`](https://en.wikipedia.org/wiki/Which_(Unix)) do?
+	* unix thing 
+	* used to identify the location of executables 
+
+* what does the command [`identify`](http://www.tutorialspoint.com/unix_commands/identify.htm) do?
+	* its an imageMagick thing
+	* describes the format and characteristics of one or more image files 
+	
+* what does the command [`visudo`](http://www.tutorialspoint.com/unix_commands/visudo.htm) do?
+	* its a unix thing 
+	* edits the sudoers file in a safe fashion 
+
+* what is a [`sudoer`](https://www.sudo.ws/man/1.8.13/sudoers.man.html)?
+	* its a unix thing 
+	* the default sudo security policy plugin 
+
+* what does [`adduser`](http://unix.stackexchange.com/questions/121071/what-does-adduser-do-that-useradd-doesnt) do?
+	* its a debian linux thing?
+	* it is a convenient interface for that leverages `useradd` on the backend to add users and related tasks 
+		* `useradd`
+			* a low level utility for adding users
+
+
+* what is a web server?
+
+* what is nginx?
+
+* what is a ssl certificate?
+
+* what is a hosting provider?
+
+* what is a content delivery network (cdn)?
+
+
+
+
+
+
+
+
+
+#### explore 
+
+
+* edit new york stack [(used builtwith to find tech)](http://builtwith.com/editnewyork.com)
+	* web server 
+		* apache 
+		* phusion passenger 
+	* email services 
+		* campaign monitor 
+	* nameserver providers 
+		* zerigo dns 
+	* hosting providers 
+		* rackspace 
+		* rackspace cloud servers 
+		* dedicated hosting 
+	* ssl certificate 
+		* goDaddy ssl
+	* frameworks 
+		* ruby on rails 
+	* analytics and tracking 
+		* google analytics 
+	* javascript libraries 
+		* css browser selector 
+		* jQuery 
+		* google hosted libraries 
+	* widgets 
+		* thefind upfront 
+	* content delivery network 
+		* ajax libraries api 
+	* aggregation functionality 
+		* feedburner 
+		* rss 
+
+
+* nycnak stack [(used builtwith to find out)](http://builtwith.com/nycnak.com)
+	* web server 
+		* nginx
+	* ssl certificate 
+		* essentialssl 
+		* comodo ssl
+	* hosting providers 
+		* serverbeach 
+	* frameworks 
+		* ruby on rails token 
+		* ruby on rails 
+		* j2ee
+	* analytics and tracking  
+		* google analytics 
+	* javascript libraries 
+		* jQuery 
+		* twitter platform 
+	* widgets 
+		* font awesome 
+		* webtype 
+	* content delivery network 
+		* bootstrapcdn 
+		* amazon s3
+	* css media queries 
+		* orientation 
+		* min width 
+		* max width 
+
+* edit new york order of commands 
+	* 1. install ruby 
+	* 2. install passenger 
+	* 3. install git 
+	* 4. install postgress 
+	* 5. install imagemagick 
+	* 6. set up application_user 
+	* 7. install memcached 
+	* 8. set up database 
+	* 9. configure apache 
+
+* nycnak order of commands 
+	* 1. prepare linux system 
+	* 2. install ruby 
+	* 3. install postgress 
+	* 4. install git 
+	* 5. install nginx 
+	* 6. install imagemagick 
+	* 7. configure postgress 
+	* 8. install and configure unicorn 
+	* 9. setup ssl 
 
 
 
