@@ -1470,6 +1470,11 @@ today i become a sys admin. many hats. many hats.
 		* `useradd`
 			* a low level utility for adding users
 
+* what does the command [`history`](https://en.wikipedia.org/wiki/History_(Unix)) do?
+	* its a unix thing 
+	* unix shells maintain a record of the commands issued by the user during the current session. 
+	* history manipulates these records 
+	* without arguments it prints the list 
 
 * what is a web server?
 
@@ -1573,6 +1578,220 @@ today i become a sys admin. many hats. many hats.
 	* 8. install and configure unicorn 
 	* 9. setup ssl 
 
+# July 13th - deployment continues 
+
+last night was fun installing the software unto the system. today we start thinking about application deployent 
+
+
+
+
+
+
+#### questions
+
+* what does the command [`make`](http://linux.die.net/man/1/make) do?
+	* its a unix thing with GNU implementation 
+	* a GNU make utility to maintain groups of programs 
+		* a [make utility](https://en.wikipedia.org/wiki/Make_(software)) is a tool that automatically builds executable program and libraries from source code by reading files called makefiles, which specify how to derive the target program 
+	* determines automatically which pieces of a large program need to be recompiled, and issues the commands to recompile htem 
+
+* what is a [`makefile`](https://en.wikipedia.org/wiki/Makefile)?
+	* its a unix thing 
+	* a file containing a set of directives used by the make build automation tool 
+		* how to compile and link a program 
+
+* what does the command [`tail`](https://en.wikipedia.org/wiki/Tail_(Unix)) do?
+	* its a unix thing 
+	* used to display the last 10 lines of a text file 
+	* if no file provided used to display as standard ouput piped data 
+	
+* what does the command [`chown`](https://en.wikipedia.org/wiki/Chown) do?
+	* its a unix thing
+ 	* used to change the owner of a file system object
+
+* what does the command [`chgrp`](https://en.wikipedia.org/wiki/Chgrp) do?
+	* its a unix thing 
+	* used to change the group associated with a file system object 
+
+* what does the command [`chmod`](https://en.wikipedia.org/wiki/Chmod) do?
+	* its a unix thing 
+	* used to change the access permissions to file system objects 
+
+* what does the command [`kill`](https://en.wikipedia.org/wiki/Kill_(command)) do?
+	* its an operating system thing 
+	* sends a signal to running processes to request the termination of the process 
+	
+* what does the command [`top`](https://en.wikipedia.org/wiki/Top_(software)) do?
+	* its a unix thing 
+	* stands for "table of processes" 
+	* a task manager program that produces an ordered list of running processes selected by user-specified criteria, and updates it periodically.
+	* default is cpu usage 
+
+* what does the command [`fg`](https://en.wikipedia.org/wiki/Job_control_(Unix)#Commands) do?
+	* its a unix thing 	
+	* part of [unix job control](https://en.wikipedia.org/wiki/Job_control_(Unix)) 
+	* resumes suspended jobs in the foreground 
+
+* what does the command [`cat`](https://en.wikipedia.org/wiki/Cat_(Unix)) do?
+	* its a unix thing 
+	* reads files sequentially, writing them to standard output
+
+* what is [`standard output`](https://en.wikipedia.org/wiki/Standard_streams)?
+	* its a general programmign thing 
+	* part of `standard steams` concept 
+		* preconnected input and output communications channels between a program and its environment when it begins execution 
+		* the three i/o connections are called 
+			* standard input (stdin) 
+			* standard output (stdout) 
+			* standard error (stderr)
+	* the default for `standard  output` is usually set to display on the terminal screen 
+
+* what is a [`pid`](https://en.wikipedia.org/wiki/Process_identifier)?
+	* its a unix thing 
+	* stands for process identifier 
+	* a number used by operating systems to identify an active process 
+
+* what are [`sockets`](https://en.wikipedia.org/wiki/Unix_domain_socket) in server context?
+	* its a unix thing 
+	* full name (IPC) inter-process communication socket
+	* a data communications endpoint for exchanging data between processes executing on the same host operating system 
+
+* what is [`pg`](https://bitbucket.org/ged/ruby-pg/wiki/Home) in the deployment context?
+	* its a ruby gem 
+	* pg is the ruby interface to postgres 
+
+* what is [`pg_ctl`](https://www.postgresql.org/docs/9.4/static/app-pg-ctl.html)?
+	* its a postgres thing 
+	* a utility for initializing a postgresSQL database cluster, starting, stopping, or restarting the postgresSQL database server, or displaying the status of a running server
+
+
+
+
+
+#### explore 
+	
+* capistrano - [resource1](http://robmclarty.com/blog/how-to-deploy-a-rails-4-app-with-git-and-capistrano), [capistrano handbook](https://github.com/leehambley/capistrano-handbook/blob/master/index.markdown), [capistrano wiki](https://github.com/capistrano/capistrano), [deploy flow](http://capistranorb.com/documentation/getting-started/flow/), [capistrano overview](http://capistranorb.com/documentation/overview/what-is-capistrano/), 
+	* capistrano is a gem 
+		* once installed you must "capify" project 
+			* to capify 
+				* go to rails root 
+					* `$ capify .`
+			* generates files 
+				* `/config/deploy.rb` 
+					* add or write custom scripts to help automate your development tasks
+				* `/Capfile` 
+				
+* configuring postgress for production 
+	* [first vector from digital ocean](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-12-04)
+		* update server 
+			* `apt-get update`
+		* download postgres and dependencies 
+			* `apt-get install postgresql postgresql-contrib`
+		* configure postgres 
+			* become the postgres user 
+				* `su - postgres` 
+				* create roles 
+					*  `createuser` 
+						* interactive 
+							* enter name 
+							* is role a superuser?
+						* pass argument to attach password when user created 
+							* `createuser --pwprompt`
+				* connecting to the postgres database 
+					* create a database 	
+						* `createdb <db_name>`
+				
+* postgress pattern in deployment 
+	* have a "deploy" system user 
+	* create a db user called "deplpoy"
+	* allow the system user to aunthenticate to the db via trust (config file) 
+		* allows the system user "deploy" to connect to db without a password 
+	
+* [capistrano](https://github.com/leehambley/capistrano-handbook/blob/master/index.markdown)
+	* capistrano involves three of our directories 
+		* public 
+		* config 
+			* it will install `deploy.rb` here 
+				* contains your deployment settings
+				* loaded when you call the `cap` command on the cli 
+					* searches up until it finds a capfile
+		* app
+	* setting up capistrano is known as `capifying` an application 
+		* use the server method as oppose to the role method for pointing to where deployment goes 
+		* these settings are in `deploy.rb` i believe
+	* tasks 
+		* the foundation of a capistrano setup 
+			* collections of tasks are called recipes 
+		* tasks can be defined anywhere inside the `Capfile` or `deploy.rb` or any other file you want to load into `Capfile` at runtime 
+		* example: 
+			```
+				desc "Search Remote Application Server Libraries" 
+				task :search_libs, :roles => :app do
+					run "ls -x1 /usr/lib | grep -i xml"
+				end 
+			```
+		* task methods expect a block 
+		* task can contain instructions to run locally or on the deployment target servers 
+		* namespacing tasks 
+			* use a namespace variable 
+			* example: 
+				```
+					namespace :web_server do 
+						task :backup do 
+							puts "In Example Backup Web-Server" 
+						end 
+					end 
+		
+					namespace :database_server do 
+						task :backup do
+ 							puts "In Example Backup Database-Server" 
+						end 
+					end  
+				```
+		* existing task 
+			* if you define a task that colides with the name of another it will overwrite the old task 
+		* chaining task 
+			* use `after` to chain tasks 
+			* use `before` as well
+		* calling tasks 
+			* you can specify which task to run 
+				* `cap deploy:symlink`
+	* transactions 
+		* allow us to define what should happen to roll-back a failed task 
+	* variables
+		* `set`  
+			* use the `set` command to declare and set variables 
+			* can be used with symbols and then called as actual variables 
+			* these variables can be used anywhere in the Capistrano environment 
+			* can set variables at run time, accepts `&block`
+		* `fetch`
+			* retrieves previously `set` variables 
+		* `exists?`
+			* checks whether a variable exists at all 
+	
+* [capistrano](https://github.com/capistrano/capistrano#from-the-beggining)
+	* use the `cap` command to do all capistrano things 
+	* when you deploy (`$ cap <environment> deploy`) 
+
+# July 14th - deployment working with s3
+
+we are using s3 to store our assets 
+
+
+
+
+
+#### questions 
+
+* what does the word ['delay']() mean in deployment context?
+
+* what does the command [`monit`]() do?
+
+* what is [`rsync`]()?
+
+* what is an ['assets group']()?
+
+* what is [reverse proxying]()?
 
 
 
@@ -1581,13 +1800,610 @@ today i become a sys admin. many hats. many hats.
 
 
 
+##### explore 
+
+* nycnak code base  
+	* `nycnak_com/config/environments/development`
+		```
+			...
+			config.paperclip_defaults = {
+				:storage => :s3,
+				:s3_protocol => 'http', 
+				:bucket => ENV['AWS_BUCKET'],
+				:s3_credentials => {
+					:access_key_id => ENV['AWS_ACCESS_KEY_ID'], 
+					:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+				}
+			}
+		```
+	* `nycnak_com/config/environments/production`
+		```
+			...
+			config.paperclip_defaults = {
+				:storage => :s3, 
+				:s3_protocol => 'http', 
+				:bucket => ENV['AWS_BUCKET'], 
+				:s3_credentials => {
+					:access_key_id => 	ENV['AWS_ACCESS_KEY_ID'], 
+					:secret_access_key => 	ENV['AWS_SECRET_ACCESS_KEY'] 
+				}
+			}
+		```
+	* `nycnak_com/.env`
+		```
+			...
+	 		#S3_ACCESS_KEY_ID = CREDENTIALS
+			#S3_SECRET_ACCESS_KEY = CREDENTIALS 
+			#S3_BUCKET = staging-downloads-nycnak-com
+		```	
+		* these are commented out which makes me thing they are not being used 
+	* `nycnak_com/app/models/artwork.rb`
+		```
+			...
+			has_attached_file 	:file, 
+					  	storage: :s3, 
+					  	s3_credentials: Proc.new { |a| a.instance.s3_credentials }, 
+						path: 	"/artworks/:id/:style/:filename",
+						s3_permissions: :public_read, 
+						bucket: 'artwork-nycnak-com', 
+						styles: {
+							original: '800x800', 
+							large: '450x450>', 
+							medium: '300x300>', 
+							thumb: '100x100>'
+						}
+			...
+			def s3_credentials {
+				bucket: 		ENV['S3_BUCKET'],
+				access_key_id: 		ENV['S3_ACCESS_KEY_ID'],
+				secret_access_key: 	ENV['S3_SECRET_ACCESS_KEY']
+			}
+		```
+	* `nycnak_com/app/models/download.rb`
+		```	
+			...
+			has_attached_file 	:file, 
+						storage: :s3, 
+						s3_credentials: Proc.new { |a| a.instance.s3_credentials },
+						path: 		"/downloads/:id/:style/:filename",
+						s3_permissions: :private
+			
+			after_save :queue_upload_to_s3
+			
+			...
+			def s3_credentials {
+				bucket: ENV['S3_BUCKET'], 
+				access_key_id: ENV['S3_ACCESS_KEY_ID'], 
+				secret_access_key: ENV['S3_SECRET_ACCESS_KEY']
+			}
+			
+			def queue_upload_to_s3
+				if local_file? && previous_changes.keys.include?('local_file_updated_at')
+					puts "LOCAL FILE CHANGED"	
+					Delayed::Job.enqueue(FileDownloadJob.new(id))
+				end 
+			end 
+
+			def upload_to_s3
+				self.file = fixture_file_upload(local_file.path, local_file.content_type)
+				save!
+			end
+		```
+	* `nycnak_com/app/models/file_download_job.rb`
+		```
+			class FileDownloadJob < Struct.new(:download_id)
+				def perform 
+					download = Download.find(download_id)
+					download.upload_to_s3
+				end 
+			end 
+		```
+	
+* nycnak server
+	* `/home/nycnak/applications/nycnak_com/production/shared/.env`
+		```
+			...
+			AWS_BUCKET = downloads-nycnak-com
+			AWS_ACCESS_KEY_ID = CREDENTIAL_KEY
+			AWS_SECRET_ACCESS_KEY = CREDENTIAL_KEY
+		```	
+
+* holy shit stumbled onto a gold mine for deployment 
+	* background worker
+		* Delayedjob.all 	
+			* this is what works with background workers?
+			* passenger can load the application 
+			* worker does not care about all the dependencies rails does 
+			* if background worker dies it loads the app in memory again 
+	* passwordless authentication	
+		* deploy keys 
+			* creates a unique link between a site and its repository cannot have the same deploy keys for separate applications 
+			* best practice is one system user per application 
+		* ssh agent forwarding
+			* add your own key to github 
+			* no need for passwords because of this 
+	* application deployment procedure 
+		* compile assets on the fly with capistrano 
+			* when you get to x step push directory to s3 with credentials 
+		* heroku 
+			* every request to an asset counts as a request 
+			* does a full build every time you deploy 
+		* elastic beanstalk
+			* aws version of heroku 
+		* [git deploy](https://github.com/mislav/git-deploy)
+			* for simple projects
+			* no rolling back 
+		* capistrano 
+			* expects some centralized repository somewhere 
+			* requires a lot of set up 
+				* once all the connections are in place, it is a lot less complicated 
+			* it is a gem 
+			* you need to restart the web server because the server relies on a version of the gem stored in memory 
+			* steps: 	
+				```	
+					$ cap deploy setup 
+					# everything is based on directories with capistrano, much liberty of implementation here 
+					# options include application / the application / environment (production, staging) 
+					# capistrano creates all directories from this point onwards 
+					# shared contains anything that needs to last between deployments 
+						# logs, crednetials, passwords, configurations 
+					# linked files and linked directories are set once, then remain the same through any new deployment 
+						# 'current' just points at the current deployment in 'releases' 
+						# 5 releases maximum 
+						# $ cap rollback, for examples, switches back to the previous release 
+						# $ cat REVISION, shows you which release you have deployed 	
+					# permissions of anything inside an environment directory gets set through the use of the deploy key
+					# config/deploy.rb 
+						# main entry point for capistrano 
+							# sets user who is going to be allowed to deploy  
+					# $ cap setup 
+						# we decided on a standard structure 
+						# feed that structure to the deploy settings files 
+						# when we deploy, capistrano follows those instructions and creates all the necessary directories 
+				```
+			* example: bondno9.com
+				* the bondno9 user is the one who gets to deploy the site and owns the files 
+				* how do i know that i am able to deploy?
+					* `cap -T`
+						* lists all tasks that are available to you via the cap command 
+				* deploying restarts the application server, like passenger but does not restart the web server like apache or nginx 
+				* `bundle exec cap staging deploy`
+	* web and application servers - apache, nginx, passenger 
+		* advantage of an app server 
+			* you are not restarting the web server constantly 
+			* some app servers are very good at certain things 
+			* passenger is an app server that seems to live in the web server 
+		* nginx and ruby 
+			* really goot at reverse proxying 	* web and application servers - apache, nginx, passenger 
+		* advantage of an app server 
+			* you are not restarting the web server constantly 
+			* some app servers are very good at certain things 
+			* passenger is an app server that seems to live in the web server 
+		* nginx and ruby 
+			* really goot at reverse proxying 	* web and application servers - apache, nginx, passenger 
+		* advantage of an app server 
+			* you are not restarting the web server constantly 
+			* some app servers are very good at certain things 
+			* passenger is an app server that seems to live in the web server 
+		* nginx and ruby 
+			* really goot at reverse proxying 	* web and application servers - apache, nginx, passenger 
+		* advantage of an app server 
+			* you are not restarting the web server constantly 
+			* some app servers are very good at certain things 
+			* passenger is an app server that seems to live in the web server 
+		* nginx and ruby 
+			* really goot at reverse proxying 	* web and application servers - apache, nginx, passenger 
+		* advantage of an app server 
+			* you are not restarting the web server constantly 
+			* some app servers are very good at certain things 
+			* passenger is an app server that seems to live in the web server 
+		* nginx and ruby 
+			* really goot at reverse proxying 	* web and application servers - apache, nginx, passenger 
+		* advantage of an app server 
+			* you are not restarting the web server constantly 
+			* some app servers are very good at certain things 
+			* passenger is an app server that seems to live in the web server 
+		* nginx and ruby 
+			* really goot at reverse proxying 	* web and application servers - apache, nginx, passenger 
+		* advantage of an app server 
+			* you are not restarting the web server constantly 
+			* some app servers are very good at certain things 
+			* passenger is an app server that seems to live in the web server 
+		* nginx and ruby 
+			* really goot at reverse proxying 	* web and application servers - apache, nginx, passenger 
+		* advantage of an app server 
+			* you are not restarting the web server constantly 
+			* some app servers are very good at certain things 
+			* passenger is an app server that seems to live in the web server 
+		* nginx and ruby 
+			* really goot at reverse proxying 				
+				* when a request comes to nginx it looks up where it should go 
+					* passes the information to the backend ('upstream') server 
+					* upstream server generates the html, ect...
+					* passes it back to nginx 
+					* nginx passes it back to the browser 
+			* to restart NGINX 
+				* check to make sure user has proper permissions 
+					* `$ nginx -t -c /etc/nginx/nginx.conf`
+				* restart server 
+					* `$ nginx -s reload` or
+					* `$ /usr/local/nginx/sbin/nginx -s reload` or
+					* `$ service nginx restart`
+	
+		* apache and passenger 
+			* no process running in the upstream 
+
+* DNS stuff 
+	* mypeer1.com is a tool what does it do?
+
+# July 15th - ssh and capistrano 
+
+today we set up ssh and capistrano god damn it 
 
 
 
 
+#### questions 
+
+* what does the [`.ssh/config`](http://nerderati.com/2011/03/17/simplify-your-life-with-an-ssh-config-file/#sshconfig) file do?
+	* within `home/.ssh/config` 
+	* basically allows you to create ssh aliases and set up options for them to be read when called 
+	* can set up port forwarding and stuff to make accessing servers behind firewalls simple because the options are saved (kind of understand it but this is a hell of a rabbit hole) 
+
+* what is an [`IdentityFile`](http://nerderati.com/2011/03/17/simplify-your-life-with-an-ssh-config-file/#sshconfig) in the context of ssh?
+	* allows you to specify exactly which private key should be used to authenticate with a given host 
+	* can be specified as a command like option in normal connection process 
+	* config files are meant for this though 
+
+* what is a [`symlink`](https://en.wikipedia.org/wiki/Symbolic_link)
+	* its a unix thing 
+	* a file that contains a reference to another file or directory in the form od an absolute or relative path 
+	* in other words its basically a system pointer 
+ 
+* what is [shared web hosting]() in the context of web hosting?
+	
+* how does capistrano symlink files that already exist?
+	* its actually a gem called `dotenv-rails` that is generating fake environment variables for development use 
+		* add `dotenv-rails` to the development and test group of your gemfile 
+		* `$ bundle install` to install the gem 
+	* then just add your application config to your `.env` file in the root of your project 
+	* note 
+		* dotenv is initialized in your rails app during the `before_configuration` callback 
+			* fired when the `Application` constant is defined in `config/application.rb` 
+
+* what is the [`rack_env`] `.env` property do? Is there a difference between `rails_env` and `rack_env`?
+	* rack based applications use `rack_env` which rails is a part of 
+	* `rails_env` has higher precedence in the rails ecosystem than `rack_env` 
+	* basically they do the same thing 
+
+	
 
 
 
+#### explore 
+
+* setting up ssh keys 
+	* [setup key simple ssh key authentication on remote server](http://linuxproblem.org/art_9.html)
+		* ssh login from host A/user a to host B/user b 
+			* log in to `host A` as `user a` 		
+				* generate a pair of authentication keys 
+				* no passphrase 
+			* log in to `host B` as `user b`
+				* create a directory `~/.ssh` 
+				* append `user a` public key to `user b`
+					* `.ssh/authorized_keys`
+				* might have to deal with a permission issue with `.ssh` and `.ssh/authorized_keys`	
+	* [multiple SSH private keys on one client](http://stackoverflow.com/questions/2419566/best-way-to-use-multiple-ssh-private-keys-on-one-client)
+		* seems like same process as before except that now theres a config file in play 
+		* `.ssh/config` 
+		
+* capistrano set up 
+	* [installation](http://capistranorb.com/documentation/getting-started/installation/)
+		* ssh needs to be set up 
+	* [structure](http://capistranorb.com/documentation/getting-started/structure/)
+		* `set :deploy_to, "/home/theglassfiles-com/applications/#{fetch(:application)}/#{fetch(:rails_env)}"`
+			* this sets the location in which capistrano will put its deployment 
+			* in our case we are telling it to put it in our particular applications rails environment 
+			* the structure serveside looks like this for lets say `theglassfiles` app `staging` environment
+				```
+					|--- current -> /home/theglassfiles-com/applications/theglassfiles_com/staging/releases/20160701584000/
+					|--- releases 
+					|	|--- 20160701253000
+					|	|--- 20160701364000
+					|	|--- 20160701473000
+					|	|--- 20160701583000
+					|	|--- 20160701584000
+					|--- repo
+					|	|___ <VCS related data> 
+					|--- revisions.log	
+					|___ shared
+						|___ <linked_files and linked_dirs>
+				```	
+				* current 
+					* a symlink pointing to the latest release 
+					* if deployment fails at any point the current symlink points to the old release 
+				* releases 
+					* hols all deployments in a timestamped folder 
+					* the latest of which is the target of the current symlink 
+				* repo 	
+					* holds the version control system configured 
+					* is a raw git repo
+				* revisions.log 
+					* used to log every deploy or rollback 
+						* timestamped 
+						* executing user is listed 
+				* shared 
+					* contains the `linked_files` and `linked_dirs` 
+						* symlinked each release 
+					* persist across deployment and releases 
+					* used for 
+						* database configuration files 
+						* static and persistent user storage 
+	* [configuration](http://capistranorb.com/documentation/getting-started/configuration/) 
+		* location 
+			* can be either global or specific to your stage 
+				* global 
+					* `config/deploy.rb`
+				* stage specific 
+					* `config/deploy/<stage_name>.rb` 	
+		* access 
+			* each variable can be set to a specific value 
+			* a value can be retrieved from the configuration at any time 
+			* variables that hold arrays can easily add values to the array using `append` 
+				* useful for `:linked_dirs` and `:linked_files` 
+				* works with `remove` too
+		* settable variables 
+			* `:application` 
+				* the name of the application 
+			* `:deploy_to` 
+				* default -> {"/var/www/#{fetch(:application)}"} 
+				* the path on the remote server where the application should be deployed 
+			* `:scm`
+				* default -> :git 
+				* the source control managment used 
+				* :git, :hg, :svn supported 
+			* `:repo_url` 
+				* URL to the repository 
+				* must be a valid url for the used scm 
+					* access a repo on a machine using a non-standard ssh port	
+						* `:repo_url, 'ssh://git@example.com:30000/~/me/my_repo.git`
+			* `:branch` 
+				* default -> 'master'
+				* the branch name to be deployed from scm 
+			* `:repo_path` 
+				* default -> { "#{fetch(:deploy_to)}/repo"}
+				* the path on the remote server where the repository should be placed 
+				* this does not normally need to be set 
+			* `:repo_tree`
+				* default -> none the whole repo is normally deployed 
+				* the subtreee of the repository to deploy 
+				* currently only implemented for git and hg 
+			* `:linked_files` 
+				* default -> []
+				* listed files will be symlinked to each release directory during deployment 
+				* can be used for persistent configuration files like `database.yml` 
+			* `:linked_dirs` 	
+				* default -> []
+				* listed directories will be symlinked into the release directory during deployment 
+				* can be used for persistent directories like uploads or other data 
+			* `:default_env` 
+				* default -> {}
+				* default shell environment used during command execution 
+				* can be used to set or manipulate specific environment variables 
+			* `:keep_releases` 
+				* default -> 5 
+				* the last n releases are kept for possible rollbacks 
+				* the cleanup task detects outdated release folders and removes them if needed 
+			* `:tmp_dir` 
+				* default -> '/tmp'	
+				* temporary directory used during deployments to store data 
+				* if you have a shared web host this setting may need to be set 
+			* `:local_user`
+				* default -> { Etc.getlogin }
+				* username of the local machine used to update the revision log 
+			* `:pty` 
+				* default -> false 
+				* used in SSHKit 
+			* `:log_level` 
+				* default -> :debug 
+			* `:format` 
+				* default -> :pretty
+				* used in SSHKit 
+	* [user input](http://capistranorb.com/documentation/getting-started/user-input/)
+		* user input can be required in a task or during configuration 	
+			* use the `ask()` method 
+				* you can pass echo: false to prevent input from being displayed
+				* if you pass a symbol to ask 
+					* the text will be printed 
+					* the input will be saved to that variable 
+	* [preparing your application](http://capistranorb.com/documentation/getting-started/preparing-your-application/)
+		* commit your application to external source control hosting i.e github
+			* put your shit on github 
+		* move secrets out of the repository 
+			* change `config/database.yml` to `config/database.yml.example`
+			* leaving the the `database.yml` filename unused at deployment time is important 
+				* capistrano uses theat name to symlink the production database configuration into place at deploy time 
+			* the original `database.yml` should be added to the `.gitingnore` 
+			* SHOULD BE DONE FOR ALL SECRET FILES 	
+		* initialize capistrano in your application 
+			* commands: 
+				```
+					$ cd my-project 
+					$ cap install
+				```
+			* creates a bunch of files 		
+				```
+					|--- Capfile
+					|--- config 
+					|	|--- deploy 
+					|	|	|--- production.rb 
+					|	|	|--- staging.rb
+					|	|___ deploy.rb
+					|___ lib
+						|___ capistrano
+							|___ tasks
+				```
+				* your new Capfile will automatically any tasks from any `*.rake` files in `lib/capistrano/tasks` 
+		* configure your server addresses in the generated files 
+			* capistrano breaks down common tasks into a notion of 'roles' 
+				* typical rails application have three roles 
+					* web 
+					* app	
+					* db 
+			* generated `config/deploy/staging.rb`
+				```
+					set :stage, :staging 
+					
+					# simple role syntax 
+					role :app, %w{example.com}
+					role :web, %w{example.com}
+					role :db,  %w{example.com} 
+					
+					# extended server syntax 
+					server 'example.com', roles: %w{web app}, my_property: :my_value	
+					
+					# set :rails_env, :staging
+				```
+				* servers can be defined in two ways 
+					* both 
+						* can specify optional properties to be associated with a server or role 
+						* include capistrano-required ones like ssh options 
+					* roles syntax 
+					* server syntax 
+				* example: 
+					```
+						server 'ip_address', roles: [:web, :app, :db], user: 'system_deploy_user'
+					```
+		* set the shared information in `deploy.rb` 
+			* configuration common to each environment can be specified 
+				* git repo 
+				* app name 
+				* user to deploy 
+			* example: 
+				```
+					set :application, 'my app name' 
+					set :repo_url, 'git@example.com:me/my_repo.git'
+					set :branch, 'master'
+				```
+		* roundup 
+			* capistrano knows where to find the servers 
+			* capistrano knows where to find the code
+	* [authentication & authorisation](http://capistranorb.com/documentation/getting-started/authentication-and-authorisation/)
+		* create a deploy user in every environment 
+		* authentication 
+			* we need promptless authentication 
+				* from workstation to our server 
+					* do this with ssh keys 
+					* ++ using a key agent 
+				* from our servers to the repository host 
+					* the server must have access to the repo 
+					* usually done using ssh agent forwarding or deploy keys 
+			* ssh keys from workstation to servers 
+				* create an ssh key 
+				* recomend ssh agent 
+				* drop public key in remote server `~/.ssh/authorized_keys` file
+				* github exposes ssh public keys for users 
+					* `https://github.com/theirusername.keys`
+			* from our servers to the repository host 
+				* ssh agent forwarding 
+					* get the url of the git repo 
+					* make sure the keys are loaded into the agent on localhost 
+						* `ssh-add`
+					* check to make sure the agent forwarding is working 
+						* `me@localhost $ ssh -A deploy@remote_server_com 'git ls-remote git@github.com:repo.git'`
+							* the `ls-remote` command 
+								* list the remote objects 	
+								* if you get error host key verfication failed 
+									* log into deploy user and add github to list of known host 
+										* `ssh git@github.com`
+				* http authentication 
+					* uses https if you do this 
+						* cleartext passwords no bueno 
+					* prompted for username and password 
+				* with a regular username/password 
+					* not happening 
+				* with an OAuth perosnal api token 
+					* gives access to every repository you as a github user has access to 
+					* also no bueno 
+				* deploy keys 
+					* generate a second set of SSH keys for the connection between github and the servers themselves 
+					* public key is uploaded to the repository 		
+					* the private key is copied to each server that needs to deploy 
+		* authorisation 
+			* the system user must be authorised to work in the deployment directory on the server 
+			* work without sudo 
+	* [flow](http://capistranorb.com/documentation/getting-started/flow/)
+		* deploy flow 
+			* when you run `cap <environment> deploy` 
+				* the execution flow 
+					* deploy:starting 
+						* start a deployment, make sure everything is ready 
+					* deploy:started 
+						* started hook(for custom tasks)
+					* deploy:updating 	
+						* update servers with a new release 
+					* deploy:updated 
+						* updated hook for custom tasks 
+					* deploy:publishing 
+						* publish the new release 
+					* deploy:published 
+						* published hook for custom tasks 		
+					* deploy:finishing 
+						* finish the deployment, clean everything up 
+					* deploy:finished 
+						* finished hook for custom tasks 
+				* each of the hooks can be used with `after()` and `before()` 	
+		* rollback flow 
+			* `cap <environment> deploy:rollback` 
+				* execution flow 
+					* deploy:starting 
+					* deploy:started 
+					* deploy:reverting
+						* revert servers to previous release 
+					* deploy:reverted 
+						* reverted hook for custom tasks
+					* deploy:publishing
+					* deploy:published 
+					* deploy:finishing_rollback 
+						* finished the rollback clean everythign up 
+					* deploy:finished 
+						* finished hook for custom tasks 
+	* [rollbacks](http://capistranorb.com/documentation/getting-started/rollbacks/)
+	* [cold start](http://capistranorb.com/documentation/getting-started/cold-start/)
+		* checking the directory structure on the remote machine 
+			* make sure that the deploy user has proper authorization 
+				* `ssh deploy@remote 'ls -lR /var/www/my-application'`
+		* writing our first cap task to formalize this into a check 
+			* make a cap task to do the above 
+				```
+					desc "check that we can access everything" 
+					task :check_write_permissions do 
+						on roles(:all) do |host|
+							if test("[ -w #{fetch(:deploy_to)}]")
+								info "#{fetch(:deploy_to)} is writable on #{host}"	
+							else 
+								error "#{fetch(:deploy_to)} is not writable on #{host}"
+							end 
+						end 		
+					end 
+				```
+			* this will generate a one line output for each server 
+			* capistrano api 
+				* `desc()`, `task()`, `on()`, `roles()`, `test()`, `info()`, `error()`
+		* we can check if git is working 
+			* `me@localhost $ cap staging git:check`
+				* this is super badass
+	* trouble shoot 
+		* [linked file config/database.yml does not exist on remote server](http://stackoverflow.com/questions/28981897/capistrano-linked-file-database-yml-does-not-exist-on-my-server-ipadress)
+			* create the file on the server and adjust it after
+		* capistrano is installing shared and release in the wrong place
+			* fairly certain :rails_env is not being set 
+			* had to set :deploy_to again in the particular environment 
+		* capistrano is freaking out about migrations 
+			* probably load the db on our own 
+			* basicaly rails keeps track of if things need to be migrated by comparing the schema version in `config/schema.rb` to the latest entry in the schema_migrations table in the database. 
+				* if the are different, the system is cued to run migrations 
+			* i was right just need to reupload the db manually
 
 
-
+ 
