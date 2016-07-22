@@ -2406,4 +2406,1738 @@ today we set up ssh and capistrano god damn it
 			* i was right just need to reupload the db manually
 
 
+# July 18th - capistrano and passenger together 
+
+basically dev ops is fucking nuts. really cool though. 
+
+okay so im going to actually try to reflect on this work day. basically things are not as hard as you think they are if you actually go through and try to understand whats going on as you go. i feel pretty close to getting a more intuitive understanding of how this whole bit pusher thing works. thats pretty dope. 
+
+
+
+#### questions 
+
+* what is the [`413 request entity too large for`](http://craftcms.stackexchange.com/questions/2328/413-request-entity-too-large-error-with-uploading-a-file)?
+	* its an nginx thing 
+	* this happens whne the request body is larger than the server is configured to allow 
+	* apperently some vpns can cause this issue as well 
+
+
+
+
+
+#### explore 
+	
+* passenger 
+	* release notes 
+		* there are now two ways to restart passenger 
+			* `touch tmp/restart.txt` 
+				* this is the classic method 
+			* `passenger-config restart-app` 
+				* new way 
+				* need to make changes to `config/deploy.rb` 
+					* set :passenger_restart_with_touch, false
+		* if you are running passegenger in standalone mode, good luck
+	* may need to add some [passenger configs to `config/deploy.rb`](https://www.phusionpassenger.com/library/deploy/apache/automating_app_updates/ruby/#editing-instructions-1)
+		* passenger on the server needs to be configured to server the app from the directory symlinked to current 
+	* [now it is time to learn of the passengers](https://www.phusionpassenger.com/library/walkthroughs/basics/ruby/fundamental_concepts.html)
+		* basic understanding of passenger 
+
+# July 19th - active record associations and models
+
+
+
+
+
+
+#### questions 
+
+* what is a [foreign key constraint](https://robots.thoughtbot.com/referential-integrity-with-foreign-keys) in the rails context?
+	* related to referential integrity 	
+	* [doc](https://www.postgresql.org/docs/9.3/static/ddl-constraints.html#DDL-CONSTRAINTS-FK)
+		* specifies that the values in a column must match the values appearing in some row of another table 
+	
+
+* what is [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity)?
+	* a property of data which, when satisfied, requires every value of one column(attribute) of a table(relation) to exist as a value of another column(attribute) in a different table(relation) 
+	* in a relational database 
+		* any field in a table that is declared a foreign key can obtain either a null value, or only values from a parent tables primary key, or a candidate key
+
+* what is a [candidate key](https://en.wikipedia.org/wiki/Candidate_key)?
+	* its a relational db thing 
+	* a minimal superkey for a relation 
+		* the smallest possible set of attributes that makes all rows distinct from each other 
+
+* what is a [prime attribute](https://en.wikipedia.org/wiki/Candidate_key)?
+	* its a relational db thing 
+	* the attributes that are part of a minimal superkey set are called prime attributes 
+	* those that are not in the set are called non-prime attributes 
+
+* what is a [superkey](https://en.wikipedia.org/wiki/Superkey)?
+	* its a relational db thing 
+	* a set of attributes of a relation variable for which in all relations assigned to that variable there are no repeat rows that have the same values for the attributes in this set 
+
+* what does a [unique index](https://robots.thoughtbot.com/the-perils-of-uniqueness-validations) mean in rails context?
+	* make sure that the db will make each row unique on a db level 
+
+* what is a [job runner]()?
+	* i guess its a background task manager kinda like cron-job?
+
+* what is the [request-response cycle]()?
+
+* what is GlobalID in the rails context?
+	* its a rails mixin 
+	* a method to reference models by URI 
+		* GlobalID is an app wide URI that uniquely identifies a model instance 
+		* `gid://yourApp/Some::Mode/id`
+	* useful when you need a single identifier to reference different classes of objects 
+	* can be signed to ensure that the data has not been tampered with 
+
+* what does `#add_index` mean in rails migrations?
+
+* how will [`delayed_job` play with passenger](http://stackoverflow.com/questions/35245425/passenger-kills-background-workers-for-delayed-job)?
+	* need to use the daemons gem 
+	
+* what is a second-order association in the rails context?
+
+* what does eager-loading mean?
+
+* what does lazy-loading mean?
+
+* what is a association extension?
+
+* what is a `GROUP BY` clause in sql?
+
+* what is a `ORDER BY` clause in sql?
+
+* what is a race condition? 
+
+
+
+
+
+
+#### explore 
+
+
+
+* [delayed paperclip](https://github.com/jrgifford/delayed_paperclip/)
+	* connects paperclip and [activejob](https://github.com/rails/rails/tree/master/activejob)	
+	* works in the same model that paperclip is called 
+	* uses macro-style calls
+ 	* feature set 
+		* displays images during processing 
+			* custom image for processing 
+				* can introduce custom logic for when and what to display a custom image
+			* custome messages if accessed during processing 
+		* only process certain styles	
+			* lets you process certain styles in the background  	
+		* split processing 
+			* lets you only process certain styles in the foreground and background 
+		* reprocess without delay 
+			* in case no background job is necessary 
+			* disables normal `reprocess!`
+			* if post-processors dont work 
+		* set queue name 
+			* you can set the name of the queue for background jobs 
+			* can be changed in global default options or in the actual model 
+		* defaults 
+			* global defaults for all delayed paperclip instanced in the app can be defined by changing the `DelayedPaperclip.options` hash 
+				* useful for 
+					* setting a default processing image 
+				* `config/application.rb`
+ 				```
+					module YourApp 
+						class Application < Rails::Application 
+							# other code... 
+							config.delayed_paperclip_defaults = {
+								url_with_processing: true,
+								processing_image_url: 'custom_processing.png'
+							}
+						end 
+					end 
+				```
+
+* [active job](http://guides.rubyonrails.org/active_job_basics.html)
+	* introduction 
+		* active job is a framework for declaring jobs and making them run on a variety of queuing backends 
+		* works for anything that can be chopped up into small units of work and run in parallel 
+	* the purpose of active job 
+		* ensures that all rails apps have job infastructure in place 
+		* basically standerdizes the writing of jobs so that differences in job runners are irrelevant 
+	* creating a job 
+		* step-by-step 
+		* create the job 
+			* active job provides a rails generator to create jobs 
+				* creates a job in `app/jobs` with a test case in `test/jobs` 
+				```
+					$ bin/rails generate job guests_cleanup 
+						# output
+						invoke 	test_unit 
+						create 		test/jobs/guests_cleanup_job_test.rb 
+						create	app/jobs/guests_cleanup_job.rb 
+				```
+				* creates a job that will run on a specific queue 
+				```
+					$ bin/rails generate job guests_cleanup --queue urgent 
+				```
+				* create a job in `app/jobs` without a generator 
+				```
+					class GuestsCleanupJob < ApplicationJob 
+						queue_as :default 
+						
+						def perform(*guests) 	
+							# do something later 
+						end 
+					end 
+				```
+					* `perform` can be defined with as many arguments as desired 
+		* enqueue the job 
+			* enqueue a job to be performed as soon as the queueing system is free 
+				```
+					GuestsCleanupJob.perform_later guest 
+				```
+			* enqueue a job to be performed tomorrow at noon 
+				```
+					GuestsCleanupJob.set(wait_until: Date.tomorrow.noon).perform_later(guest)
+				```
+			* enqueue a job to be performed 1 week from now 
+				```
+					GuestsCleanupJob.set(wait: 1.week).perform_later(guest)
+				```
+			* `perform_now` and `perform_later` will call `perform` under the hood, pass as many arguments as defined in the latter 
+				```
+					GuestsCleanupJob.perform_later(guest1, guest2, filter: 'some_filter')
+				```
+	* job execution 
+		* to enqueue and execute jobs in production you need to set up a queuing backend 
+			* a 3rd-party queuing library that rails should use 
+			* rails only provides an in-process queuing system
+				* only keeps jobs in ram 
+				* any reset for any reason wipes out all jobs 
+		* backends 
+			* [active job has built-in adapters](http://api.rubyonrails.org/classes/ActiveJob/QueueAdapters.html) for multiple queuing backends 
+				* sidekiq
+				* resque 		
+				* delayed job 
+		* setting the backend 
+			* set your queuing backend 
+				* `config/application.rb`
+				```
+					module YourApp 
+						class Application < Rails::Application 
+							# be sure to have the adapters gem in your gemfile 	
+							# follow the adapters specific installation and deployment instructions 
+							config.active_job.queue_adapter = :sidekiq
+						end 
+					end 
+				```
+				* can also be set on a per job basis 
+				```
+					class GuestsCleanupJob < ApplicationJob 
+						self.queue_adapter = :resque
+					end 
+					# this overides the default config 		
+				```
+		* starting the backend 
+			* jobs run in parallel to your rails application 
+				* most queuing libraries require that you start a library-specific queuing service for the job processing to work 
+				* refer to library documentation for instructions on starting your queue backend 
+					* [sidekiq](https://github.com/mperham/sidekiq/wiki/Active-Job)
+					* [resque](https://github.com/resque/resque/wiki/ActiveJob)
+					* [sucker punch](https://github.com/brandonhilkert/sucker_punch#active-job)
+					* [queue classic](https://github.com/QueueClassic/queue_classic#active-job)
+	* queues 
+		* most adapters support multiple queues 
+			* active job allows you to schedule a job to run on a specific queue 
+			```	
+				class GuestsCleanupJob < ApplicationJob
+					queue_as :low_priotity 
+						
+				end 
+			```
+			* in `application.rb` you can set a prefix for the queue name for all jobs 
+				* `config/application.rb` 
+				```
+					module YourApp 
+						class Application < Rails::Application 
+							config.active_job.queue_name_prefix = Rails.env
+						end 
+					end 
+				```
+				* `app/jobs/guests_cleanup_job.rb` 
+				```
+					class GuestsCleanupJob < ApplicationJob 
+						queue_as :low_priority 
+					end 
+				```
+				* jobs will run on queue production_low_priority in the production environment 
+				* jobs will run on queue staging_low_priority in the staging environment 
+			* the default queue name prefix delimiter is '_', this is changes in `application.rb` 
+				* `config/application.rb`
+				```
+					module YourApp 
+						class Application < Rails::Application 
+							config.active_job.queue_name_prefix = Rails.env 	
+							config.active_job.queue_name_delimiter = '.'
+						end 
+					end 
+				```
+				* `app/jobs/guests_cleanup_job.rb` 
+				```
+					class GuestsCleanupJob < ApplicationJob 
+						queue_as :low_priority 
+					end 
+				```
+				* jobs will run on queue production.low_priority in production environment 
+				* jobs will run on queue staging.low_priority in staging environment 
+			* to have even more control on what queue a job will be run you can pass a `:queue` option to `#set`
+				* `MyJob.set(queue: :another_queue).perform_later(record)`
+			* to control the queue from the job level you can pass a block to `#queue_as` 
+				* executed in the job context (`self.arguments` accessible)
+					* must return the queue name 
+					* `app/jobs/process_video_job.rb` 
+					```
+						class ProcessVideoJob < ApplicationJob 
+							queue_as do 
+								video = self.arguments.first 
+								if video.owner.premium?
+									:permium_videojobs
+								else 
+									:videojobs
+								end 
+							end 
+							
+							def perform(video) 
+								# process video 
+							end 
+						end 
+						
+						ProcessVideoJob.perform_later(Video.last)
+					```
+			* make sure your queuing backend listens on your queue name 
+				* some backends need you to specify the queues to listen to 	
+	* callbacks 
+		* active job provides hooks during the life cycle of a job 
+		* callbacks allow you to trigger logic during the lifecycle of a job 
+		* available callbacks 
+			* `before_enqueue`
+			* `around_enqueue` 
+			* `after_enqueue` 
+			* `before_perform` 
+			* `around_perform` 
+			* `after_perform` 
+		* usage 
+			* `app/jobs/guests_cleanup_job.rb`
+			```
+				class GuestsCleanupJob < ApplicationJob 
+					queue_as :default 
+						
+					before_enqueue do |job|
+						#do something with the job instance 
+					end 
+				
+					around_perform do |job, block|
+						# do something before perform 
+						block.call 
+						# do something aafter perform 
+					end 
+					
+					def perform 
+						# do something later 
+					end 
+				end 
+			```
+	* action mailer 
+		* sending emails outside of request-response cycle 			
+		* active job is integrated with mailer to easily send async emails 
+		* example: 
+			```
+				# to send email now use #deliver_now 
+				UserMailer.welcome(@user).deliver_now 
+					
+				# if you want to send the email through active job use #deliver_later 
+				UserMailer.welcome(@user).deliver_later 
+			```
+	* internationalization 
+		* jobs use the `I18n.locale` set when the job was created 
+			```
+				I18n.locale = :eo
+					
+				UserMailer.welcome(@user).deliver_later # email will be localized to esperanto 
+			```
+	* globalID
+		* active job supports globalID for parameters 
+		* makes it possible to pass live active record objects to jobs instead of class/id pairs 
+		* before globalID 
+			```
+				class TrashableCleanupJob < ApplicationJob
+					def perform(trashable_class, trashable_id, depth)
+						trashable = trashable_class.constantize.find(trashable_id) 
+						trashable.cleanup(depth)
+					end 
+				end 
+			```
+		* after globalID 
+			```
+				class TrashableCleanupJob < ApplicationJob 
+					def perform(trashable, depth) 
+						trashable.cleanup(depth) 
+					end 
+				end
+			```
+		* works with any class that mixes in GlobalID::Identification 
+			* default into active record classes 
+	* exceptions 
+		* active job provides a way to catch exceptions raised during the execution of a job 
+		* example: 
+			* `app/jobs/guests_cleanup_job.rb`
+			```
+				class GuestsCleanupJob < ApplicationJob 
+					queue_as :default 
+					
+					rescure_from(ActiveRecord::RecordNotFound) do |exception|
+						# do something with exception 
+					end 
+							
+					def perform 
+						# do something later 
+					end 
+				end 
+			```
+		* deserialization 
+			* globalID allows serializing full active record objects passed to `#perform` 
+			* if a passed record is deleted after the job is enqueued but before the `#perfom` method is called 
+				* active job raises an `ActiveJob::DeserializationError` exception					
+	* job testing 
+		* check here [testing guide](http://guides.rubyonrails.org/testing.html#testing-jobs)
+
+* [delayed job queue backend](https://github.com/collectiveidea/delayed_job)
+	* encapsulates the common pattern of asynchronously executing longer tasks in the background 
+		* used by shopify to 
+			* send massive newsletters, image resizing, http downloads, updating smart collections, updating solr, our search server, after product changes, batch imports, spam checks 
+	* installation 
+		* `gem 'delayed_job_active_record` 
+		* run bundle install 
+		* create active record tables 
+		```
+			rails generate delayed_job:active_record 
+			rake db:migrate 
+		```
+	* queuing jobs 
+		* call `.delay.method(params)` on any object and it will be processed in the background 
+		``` 	
+			# without delayed_job 
+			@user.activate!(@device) 
+			
+			# with delayed_job 
+			@user.delay.activate!(@device)
+		```	
+		* if a method should always be run in the background call `#handle_asynchronously` after the method declaration 
+		```
+			class Device 
+				def deliver 
+					# long running method 
+				end 	
+				handle_asynchronously :deliver 
+			end 
+				
+			device = Device.new 
+			device.deliver 
+		```
+	* parameters 
+		* `#handle_asynchronously` and `#delay` take these parameters 
+			* `:priority` (number): 
+				* lower numbers run first
+				* default is 0 but can be reconfigured 
+			* `:run_at` (time): 
+				* run the job after this time 
+			* `:queue` (string): 
+				* named queue to put this job in 
+			* can be Proc objects allowing call-time evaluation of the value 
+		* example: 
+			```
+				class LongTasks 
+					def send_mailer 
+						#some code 
+					end 
+					handle_asynchronously :send_mailer, :priority => 20
+					
+					def in_the_future 
+						# some code 
+					end 
+					# 5.minutes.from_now will be evaluated when #in_the_future is called 
+					handle_asynchronously :in_the_future, :run_at => Proc.new {5.minutes.from_now}
+				
+					def self.when_to_run 	
+						2.hours.from_now 
+					end 
+				
+					class << self 
+						def call_a_class_method 
+							#some code 
+						end 
+						handle_asynchronously :call_a_class_method, :run_at => Proc.new{when_to_run}
+					end 
+					
+					attr_reader :how_important 
+					
+					def call_an_instance_method 
+						#some code 
+					end 
+					handle_asynchronously :call_an_instance_method, :priority => Proc.new {|i| i.how_important}
+				end 
+			```
+		* while developing if you want to check how jobs are running without waiting 
+			* append the name of the method with `_without_delay` 
+				* for method: `foo` call `foo_without_delay` 
+	* rails 3 mailers 
+		```	
+			# without delayed_job 
+			Notifier.signup(@user).deliver 
+			
+			# with delayed_job 
+			Notifier.delay.signup(@user)
+			
+			# with delayed_job running at a specific time 
+			Notifier.delay(run_at: 5.minutes.from_now).signup(@user) 
+		```
+	* named queues 
+		* jobs can be assigned to a queue by setting the queue option 
+			```	
+				object.delay(:queue => 'tracking').method 
+					
+				Delayed::Job.enqueue job, :queue => 'tracking' 
+				
+				handle_asynchronously :tweet_later, :queue => 'tweets' 
+			```	
+		* configure default priorities for named queues 
+			```
+				Delayed::Worker.queue_attributes = {
+					high_priority: { priority: -10},
+ 					low_priority: { priority: 10}
+				}
+			```
+		* configured quque priorities can be overriden by passing priority to the delay method 
+			```
+				object.delay(:queue => 'high_priority', priority: 0).method 
+			```
+	* running jobs 
+		* `script/delayed_job` can be used to manage a background process which will start working off jobs 
+			* add `gem "daemons"` to your gemfile and make sure you've run `rails generate delayed_job` 
+		* then magic commands follow 
+			```
+				RAILS_ENV=production script/delayed_job start 
+				RAILS_ENV=production script/delayed_job stop 
+				
+				# runs two workers in separate processes 
+				RAILS_ENV=production script/delayed_job -n 2 start 
+				RAILS_ENV=production script/delayed_job stop 
+				
+				# set the --queue or --queues option to work from a particular queue 
+				RAILS_ENV=production script/delayed_job --queue=tracking start 
+				RAILS_ENV=production script/delayed_job --queues=mailers, tasks start 
+				
+				# use the --pool option to specify a worker pool. you can use this option multiple times to start different numbers of workers for different queues.
+				# the following command will start 1 worker for the tracking queue, 
+				# 2 workers for the mailers and tasks queues, and 2 workers for any jobs: 
+				RAILS_ENV=production script/delayed_job --pool=tracking --pool=mailers, tasks:2 --pool=*:2 start 
+				
+				# runs all available jobs and then exits 
+				RAILS_ENV=production script/delayed_job start --exit-on-complete 
+				# or to run in the foreground 
+				RAILS_ENV=production script/delayed_job run --exit-on-complete
+			```
+			* for rails 4 replace `script/delayed_job` with `bin/delayed_job`
+		* each worker will check the database at least every 5 seconds 
+		* the `rake jobs:work` will start working off jobs 
+			* `rake jobs:workoff` will run all available jobs and exit 
+		* work of queues by setting the `QUEUE` or `QUEUES` environment variable 
+			```
+				QUEUE=tracking rake jobs:work 
+				QUEUES=mailers, tasks rake jobs:work
+			```
+	* restarting delayed_job
+		* the following syntax will restart delayed jobs 
+			* `RAILS_ENV=production script/delayed_job restart`
+ 		* to restart multiple delayed_job workers 
+			* `RAILE_ENV=production script/delayed_job -n2 restart` 
+		* rails 4 replace `script/delayed_job` with `bin/delayed_job` 
+	* hooks 
+		* you can define your own hooks on a job 
+		* example: 	
+			```
+				class ParanoidNewsletterJob < NewsletterJob 
+					def enqueue(job)
+						record_stat 'newsletter_job/enqueue' 
+					end 
+			
+					def perform 
+						emails.each { |e| NewsletterMailer.deliver_text_to_email(text, e)}
+					end 
+					
+					def before(job) 
+						record_stat 'newsletter_job/start' 
+					end 
+				
+					def after(job) 	
+						record_stat 'newsletter_job/after'
+					end 
+				
+					def success(job) 
+						record_stat 'newsletter_job/success'
+					end 
+			
+					def error (job, exception) 
+						Airbrake.notify(exception) 	
+					end 
+					
+					def failure(job) 
+						page_sysadmin_in_the_middle_of_the_night
+					end 
+				end 
+			```
+	* gory details 
+		* the library revolves around a delayed_jobs table 
+		* theres a lot of details 	
+	* guide on setting up [delayed job with active job](http://bica.co/2015/03/08/howto-using-activejob-with-delayedjob/)
+	* [tips and tricks](https://www.sitepoint.com/delayed-jobs-best-practices/)
+
+		
+* [referential integrity in rails](https://robots.thoughtbot.com/referential-integrity-with-foreign-keys)
+	* referential integrity ensures that the relationship between rows in two tables will remain synchronized during all updates and deletes 
+	* rails lets you set up the implied relationship but does nothing to enforce it 
+	* use the dependence macros to indicate rails should do stuff in accordance with relations 
+	* basically to make sure this kind of stuff never happens we add foreign key constraints at the database level 
+		* db will reject any operation that would violate the referential integrity 
+	* polymorphic associations are maintained by rails 
+		* the db knows nothing about them 
+
+* [active record associations](http://guides.rubyonrails.org/association_basics.html)
+	* why associations 
+		* an association is a connection between two active record models 
+		* basically allows you to streamline development of models associated with each other 
+	* the types of associations 
+		* 6 types of associations 
+			* `belongs_to`
+				* sets up a one-to-one connection with another model 
+					* each instance of the declaring model belongs to one instance of the other model 
+						* if we had books and authors and each book could belong to exactly one author this would be the relationship 
+						* example:
+							* model  
+							```
+								class Book < ApplicationRecord 
+									belongs_to :author 
+								end 
+							```
+							* migration 
+							```
+								class CreateBooks < ActiveRecord::Migrations[5.0]
+									def change 
+										create_table :authors do |t|	
+											t.string :name 
+											t.timestamps
+										end 
+									
+										create_table :books do |t|	
+											t.belongs_to :author, index: true 
+											t.datetime :published_at 
+											t.timestamps 
+										end 
+									end 
+								end 
+							```
+					* they must use the singular term 
+						* if you use the pluralized form in the above example then rails would attempt to pluralize the plural form and that would obviously break things 
+						
+			* `has_one` 
+				* sets up a one-to-one connection with another model 
+					* each instancs of a model contains or possesses one instance of another model 
+					* basically the same relationship as `belongs_to` but from the other perspective  
+						* example: 
+							* model 
+							```
+								class Supplier < ApplicationRecord 
+									has_one :account
+								end 	
+							```
+							* migrations 
+							```
+								class CreateSuppliers < ActiveRecord::Migrations[5.0]
+									def change 
+										create_table :suppliers do |t|
+											t.string :name 
+											t.timestamps 
+										end 
+										
+										create_table :accounts do |t|
+											t.belongs_to :supplier, index: true, unique: true, foreign_key: true
+											t.string :account_number 
+											t.timestamps
+										end 
+									end 
+								end 
+							```
+								* here we add a unique index and a foreign key constraint to the supplier column for the accounts table 	
+			* `has_many` 
+				* indicates a one-to-many connection with another model
+					* often paired with `belongs_to` 
+				* each instance of the model has zero or more instances of another model 
+					* example: 
+						* model
+						```
+							class Author < ApplicationRecord 
+								has_many :books
+							end 
+						```
+						* migrations 				
+						```
+							class CreateAuthors < ActiveRecord::Migration[5.0]
+								def change 
+									create_table :authors do |t|
+										t.string :name
+										t.timestamps 
+									end 
+									
+									create_table :books do |t|
+										t.belongs_to :author, index: true
+										t.datetime :published_at 		
+										t.timestamps			
+									end 
+								end 
+							end 
+						```
+				* the name of the referenced model should be pluralized when declared 
+			* `has_many :through` 
+				* used to set up a many-to-many connection with another model 
+					* indicates that the declaring model can be matched with zero or more instances of another model by proceeding through a third model 
+				* for the example: medical practice where patients make appointments to see physicians 
+					* example: 
+						* model 
+						```	
+							class Physician < ApplicationRecord 
+								has_many :appointments 	
+								has_many :patients, through: :appointments 
+							end 
+				
+							class Appointment < ApplicationRecord 
+								belongs_to :physician
+								belongs_to :patient 
+							end 
+				
+							class Patient < ApplicationRecord 
+								has_many :appointments 
+								has_many :physicians, through: :appointments		
+							end 
+						```
+						* migration 
+						```
+							class CreateAppointments < ActiveRecord::Migrations[5.0]
+								def change 
+									create_table :physicians do |t|	
+										t.string :name 
+										t.timestamps 
+									end 
+								
+									create_table :patients do |t|
+										t.string :name 
+										t.timestamps 
+									end 
+						
+									create_table :appointments do |t|
+										t.belongs_to :physician, index: true 
+										t.belongs_to :patient, index: true 
+										t.datetime :appointment_date 
+										t.timestamps 	
+									end 
+								end 
+							end 
+						```
+				* automatic deletion of join models is direct 
+					* no destroy callbacks are triggered 
+			* `has_one :through` 
+				* sets up a one-to-one connection with another mode 
+					* indicates that the declaring model can be matched with one instance of another model by proceeding through a third model 
+				* set up for example- each supplier has one account and each account is associated with one account history 
+					* example: 
+						* model 
+						```
+							class Supplier < ApplicationRecord 
+								has_one :account 
+								has_one :account_history, through: :account 	
+							end 	
+			
+							class Account < ApplicationRecord 
+								belongs_to :supplier 	
+								has_one :account_history 
+							end 
+			
+							class AccountHistory < ApplicationRecord 
+								belongs_to :account 
+							end 
+						```
+						* migration 
+						```
+							class CreateAccountHistories < ActiveRecord::Migrations[5.0]
+								def change 
+									create_table :suppliers do |t|
+										t.string :name
+										t.timestamps
+									end 	
+			
+									create_table :accounts do |t|
+										t.belongs_to :supplier, index: true 
+										t.string :account_number 
+										t.timestamps 	
+									end 
+			
+									create_table :account_histories do |t|
+										t.belongs_to :account, index: true 
+										t.integer :credit_rating 
+										t.timestamps 
+									end 
+								end 		
+							end
+						```									
+			* `has_and_belongs_to_many` 
+				* creates a direct many-to-many connection with another model 
+					* no interveening model 
+				* setup example- assemblies and parts, each assembly having many parts and each part appearing in many assemblies 
+					* example: 
+						* model 
+						```
+							class Assembly < ApplicationRecord 
+								has_and_belongs_to_many :parts 
+							end 
+				
+							class Part < ApplicationRecord 
+								has_and_belongs_to_many :assemblies 
+							end 
+						```
+						* migrations 
+						```
+							class CreateAssembliesAndParts < ActiveRecord::Migrations[5.0]
+								def change 
+									create_table :assemblies do |t|
+										t.string :name 
+										t.timestamps 
+									end 
+									
+									create_table :parts do |t|
+										t.string :parts_number 
+										t.timestamps 
+									end 
+				
+									create_table :assemblies_parts, id: false do |t|
+										t.belongs_to :assembly, index: true 
+										t.belongs_to :part, index: true 
+									end 
+								end 
+							end 
+						```								
+			* associations are implemented using macro-style calls 
+		* choosing between `belongs_to` and `has_one` 
+			* setting a one-to-one relationship 
+				* `belongs_to` on one 
+				* `has_one` on the other 
+			* the distinction is where you place the foreign key 
+				* `has_one` relationship 
+					* something points back to you 
+				* `belongs_to` relationship 		
+					* you point at something 
+			* example: 
+				* model 
+				```
+					class Supplier < ApplicationRecord 	
+						has_one :account
+					end 
+				
+					class Account < ApplicationRecord 
+						belongs_to :supplier 
+					end 
+				```
+				* migrations 
+				```
+					class CreateSuppliers < ActiveRecord::Migration[5.0]
+						def change 
+							create_table :suppliers do |t|
+								t.string :name 
+								t.timestamps 
+							end 
+						
+							create_table :accounts do |t|
+								t.integer :supplier_id 
+								t.string :account_number 
+								t.timestamps 
+							end 
+				
+							add_index :accounts, :supplier_id 
+						end 
+					end
+				```
+		* choosing between `has_many :through` and `has_and_belongs_to_many`
+			* set up a `has_many :through` relationship if 
+				* you need to work with the relationship model as an independent entity
+				* you need validations 
+				* you need callbacks 
+				* or extra attributes on the join model 	
+			* otherwise the `has_and_belongs_to_many` relationship is simpler 
+		* polymorphic associations 
+			* a model can belong to more than one other model on a single association 
+			* setup example- a picture model that belongs to either an employee model or a product model 
+			* example: 
+				* `app/model/picture.rb`
+				```
+					class Picture < ApplicationRecord 
+						belongs_to :imageable, polymorphic: true 
+					end 	
+				```
+				* `app/model/employee.rb` 
+				```
+					class Employee < ApplicationRecord 
+						has_many :pictures, as: :imageable 
+					end 
+				```
+				* `app/model/product.rb` 
+				```
+					class Product < ApplicationRecord 
+						has_many :pictures, as: :imageable 	
+					end 
+				```
+			* polymorphic `belongs_to` is like an interface that any other model can use 
+			* to have access to the parent of an instance of the `Picture` model you must declare in the model that is polymorphic 
+				* a foreign key column 
+				* a type column  
+				* `db/migrations/create_pictures_201607010405055.rb`
+				```
+					class CreatePictures < ActiveRecord::Migration[5.0]
+						def change 
+							create_table :pictures do |t|
+								t.string :name 
+								t.integer :imageable_id 
+								t.string :imageable_type 
+								t.timestamps
+							end 
+							
+							add_index :pictures, [:imageable_type, :imageable_id]
+						end 
+					end 
+				```
+				* simplified using the t.references form 
+				* `db/migrations/create_pictures_201607020402402.rb`
+				```
+					class CreatePictures < ActiveRecord::Migration[5.0]
+						def change 
+							create_table :pictures do |t|
+								t.string :name 
+								t.references :imageable, polymorphic: true, index: true 
+								t.timestamps 	
+							end 
+						end 
+					end 
+				```
+		* self joins 
+			* some models need to have relations to themselves 
+			* setup example- store all employees in a single db model, but be able to trace relationships between types of employees 
+			* example: 
+				* `app/model/employee.rb` 
+				```
+					class Employee < ApplicationRecord 
+						has_many :subordinates, class_name: "Employee", foreign_key: "manager_id" 	
+						
+						belongs_to :manager, class_name: "Employee" 
+					end 
+				```
+				* `db/migrations/create_employees_20160702058404.rb` 	
+				```
+					class CreateEmployees < ActiveRecord::Migrations[5.0]
+						def change 
+							create_table :employees do |t|	
+								t.references :manager, index: true 
+								t.timestamps 
+							end
+						end 
+					end 
+				```
+	* tips, tricks, and warnings 
+		* things you should know to make efficient use of active record associations 
+			* controlling caching, avoiding name collisions, updating the schema, controlling association scope, bi-directional associations 
+		* controlling caching 
+			* all of the association methods are built around caching 
+			* keeps the result of the most recent query available for further operation 
+			* the cache is shared across methods 
+			* example: 
+				```		
+					author.books 					# retrieves books from the db 
+					author.books.size 				# uses the cached copy of books 
+					author.books.empty? 				# uses the cached copy of books 
+				```
+				* to reload the cache fresh from the db call `reload` on the association 
+				```
+					author.books 					# retrieves books from the db 
+					author.books.size 				# uses the cached copy of books 
+					author.books.reload.empty?			# discards the cached copy of books and retrieves a new copy from db 
+				```
+		* avoiding name collisions 	
+			* creating associations adds a method with that name to the model 
+			* do not give an association a name that is already used for an instance method of `ActiveRecord::Base` 
+				* this would override the base method and break things 
+				* `attributes` and `connection` are bad names for associations 
+		* updating the schema 
+			* you are responsible for maintaining referential integrity 
+			* `belongs_to` associations need foreign keys 
+				* if the association is created long after the model 
+					* migrate and add a column to provide the necessary foreign key 
+				* example: 
+					* `app/model/book.rb` 
+					```
+						class Book < ApplicationRecord 	
+							belongs_to :author 
+						end 
+					```
+					* `db/migration/create_books_2016-73813427.rb` 
+					```
+						class CreateBooks < ActiveRecord::Migration[5.0]
+							def change 
+								create_table :books do |t|
+									t.datetime :published_at 
+									t.string   :book_number
+									t.integer  :author_id 
+								end 
+							
+								add_index :books, :author_id 
+							end 
+						end 
+					```
+			* `has_and_belongs_to_many` need join tables 
+				* you need to manually create a joining table 
+				* unless the name of the join table is explicitly specified by using the `:join_table` option 
+					* active record creates the name by using the lexical book of the class names 
+						* lexical ordering 
+				* example: 
+					* `app/model` 
+					```
+						class Assembly < ApplicationRecord 
+							has_and_belongs_to_many :parts 
+						end 
+					
+						class Part < ApplicationRecord 
+							has_and_belongs_to_many :assemblies 
+						end 
+					```
+					* `db/migrations/create_assemblies_parts_join_table_20160719482472.rb` 
+					```
+						class CreateAssembliesPartsJoinTable < ActiveRecord::Migrations[5.0]
+							def change 
+								create_table :assemblies_parts, id: false do |t|
+									t.integer :assembly_id 
+									t.integer :part_id 
+								end 
+								
+								add_index :assemblies_parts, :assembly_id 
+								add_index :assemblies_parts, :part_id 
+							end 
+						end 
+					```
+					* `id: false` is passed to `#create_table` because the table does not represent a model 
+						* strange behavior like mangled model ids or execeptions about conflicting ids are about this 
+					* you can also use `#create_join_table` 
+					* `db/migrations/create_assemblies_parts_join_table_2016071422492249.rb` 
+					```
+						class CreateAssembliesPartsJoinTable < ActiveRecord::Migration[5.0]
+							def change 
+								create_join_table :assemblies, :parts do |t|
+									t.index :assembly_id
+									t.index :part_id
+								end
+							end 
+						end 
+					```
+		* controlling association scope 
+			* by default associations look for objects only within the current modules scope 
+				* important when you declare active record models within a module 
+				* example: 
+					* this is okay because both supplier and account class are defined within the same scope 
+					```
+						module MyApplication 
+							module Business 
+								class Supplier < ApplicationRecord 
+									has_one :account
+								end 
+								
+								class Account < ApplicationRecord 
+									belongs_to :supplier 
+								end 
+							end 
+						end 	
+					```
+					* this will not work because they are in different scopes 
+					```
+						module MyApplication 
+							module Business 
+								class Supplier < ApplicationRecord 
+									has_one :account 
+								end 
+							end 
+							
+							module Billing 
+								class Account < ApplicationRecord 
+									belongs_to :supplier 
+								end 
+							end 
+						end 
+					```
+			* to associate a model with a model in a different namespace you must specify the complete class name in delcaration 
+			* example: 	
+				```
+					module MyApplication 
+						module Business 
+							class Supplier < ApplicationRecord 
+								has_one :account,
+									class_name: "MyApplication::Billing::Account" 	
+							end 
+						end 
+						
+						module Billing 
+							class Account < ApplicationRecord 
+								belongs_to :supplier,				
+			  						class_name: "MyApplication::Business::Supplier" 
+							end 
+						end
+					end 
+				```
+		* bi-directional associations 
+			* it is normal for associations to work in two directions requiring delcarations on two differet models 
+			* there is an `inverse_of` option to infrom rails of bi-directional associations 
+			* exmaple: 
+				```
+					class Author < ApplicationRecord 
+						has_many :books, inverse_of: :author 
+					end 
+				
+					class Book < ApplicationRecord 
+						belongs_to :author, inverse_of: :books
+					end 
+				```
+			* `inverse_of` does not work with 
+				* `:through` associations 
+				* `:polymorphic` associations 
+				* `:as` associations 
+				* `belongs_to` associations ignore `has_many` inverse associations 
+	* detailed association reference
+		* `belongs_to` association reference 
+			* creates a one-to-one match with another model 
+				* in db term this class contains the foreign key 
+					* if the other class contains the foreign key use the `has_one` association 
+			* methods added by `belongs_to` 
+				* when declaring a `belongs_to` association the class gains 5 classes 
+					* `association` 
+					* `association=(associate)`
+					* `build_association(attributes = {})`
+					* `create_association(attributes = {})`
+					* `create_association!(attributes = {})`
+				* the word `association` in each of these methods is replaced with the symbol passed as the first argumet to `belongs_to` 
+					```
+						class Order < ActiveRecord::Base
+							belongs_to :customer 
+						end 
+					```
+					* each instance of the `Order` model will have these methods 
+					```
+						customer 
+						customer=
+						build_customer 
+						create_customer 
+						create_customer!
+					```
+				* indepth of the `association(force_reload = false)` method 
+					* returns the associated object 
+						* if none returns `nil` 
+						* example: 
+							* `@customer = @order.customer`
+					* if the associated object has already been retrieved from the database for this object 
+						* cached version will be returned 
+						* to override and force a db read 
+							* pass true as the `force_reload` argument 
+				* indepth look at the `association=(association)` method 
+					* assigns an associated object to this object 
+						* extracts the primary key from the associate object and setting this objects foreign key to the same value 
+						* basically sets an association 
+						* example: 	
+							* `@order.customer = @customer` 
+				* indepth look at the `build_association(attributes = {})` method
+					* returns a new object of the associated type 
+						* this object is instantiated from the passed attributes 
+						* the link through this objects foreign key will be set 
+						* associated object is not saved 
+						* example: 
+							* `@customer = @order.build_customer(customer_number: 123, customer_name: "John Doe")`
+				* indepth look at the `create_association(attributes = {})` method 
+					* returns a new object of the associated type 
+						* the object will be instantiated from the passed attributes 
+						* the link through the objects foreign key will be set 
+						* once it passes all the validations specified on the associated model the associated object will be saved 				
+						* example: 
+							* `@customer = @order.create_customer(customer_number: 123, customer_name: "John Doe")`
+				* indepth look at the `create_association!(attributes = {})` method
+					* does the same thing as `create_association` but raises `ActiveRecord::RecordInvalid` if the record is invalid 
+				
+
+			* options for `belongs_to` 
+				* rails uses intelligent defaults that work in most situations
+					* like most smart things, it breaks 
+				* customization of the behavior of the `belongs_to` association is accomplished by passing options and scope blocks when you create the association 
+				* example: 	
+					```
+						class Order < ActiveRecord::Base 
+							belongs_to :customer, dependent: :destroy, counter_cache: true
+						end 
+					```
+				* `belongs_to` options 
+					* `:autosave`
+						* if set to true 
+							* rails will save any loaded members and destroy members that are marked for destruction whenever you save the parent object  
+					* `:class_name` 
+						* if the name of the other model cannot be derived from the association name 
+							* set `:class_name` to supply the model name 
+							```
+								class Order < ActiveRecord::Base 	
+									belongs_to :customer, class_name: "Patron" 
+								end 
+							```
+					* `:counter_cache` 
+						* used to make finding the number of belonging objects more efficient 
+							* caches the db COUNT(*) query 
+							* exmample: 
+							```
+								class Order < ActiveRecord::Base 
+									belongs_to :customer, counter_cache: true 
+								end 
+								class Customer < ActiveRecord::Base 
+									has_many :orders 
+								end 
+							```
+						* rails will keep the cache value up to date and then return that value in response to the `size` method 
+						* the associated model must contain a column for the cache value 
+							* read only attribute 
+					* `:dependent` 
+						* set to `:destroy` 
+							* when the object is destroyed, `destroy` will be called on its associated objects 
+						* set to `:delete` 
+							* when the object is destroyed, all its associated objects will be deleted directly from the database without calling their destroy method 
+						* do not set this option if the inverse class has a `has_many` association 
+					* `:foreign_key` 
+						* rails assumes that the column used to hold the foreign key on this model is the name of the association with the suffix `_id` added 
+						* this option lets you set the name of the foreign key directly 
+						* rails does not create foreign key columns for you
+							* must be explicitly defined in the migrations 
+						* example: 
+							```		
+								class Order < ActiveRecord::Base 
+									belongs_to :customer, class_name: "Patron", foreign_key: "patron_id" 
+								end 
+							```
+					* `:inverse_of` 
+						* specifies the name of the `has_many` or `has_one` association that is the inverse of this association 
+						* does not work in combination with the `:polymorphic` options 
+						* example: 
+							```
+								class Customer < ActiveRecord::Base 
+									has_many :orders, inverse_of: :customer
+								end 
+									
+								class Order < ActiveRecord::Base 	
+									belongs_to :customer, inverse_of: :orders 
+								end 
+							```
+					* `:polymorphic` 
+						* passing true indicates that this is a polymorphic association 
+					* `:touch` 
+						* if set to true then the `updated_at` or `updated_on` timestamp on the associated object will be set to the current time whenever the object is saved or destroyed 
+							* example: 
+								* saving or destroying an order will update the timestamp on the associated customer 
+								``` 	
+									class Order < ActiveRecord::Base 
+										belongs_to :customer, touch: true 
+									end 
+				
+									class Customer < ActiveRecord::Base 
+										has_many :orders 
+									end 
+								```
+								* specify a particular timestamp attribute to update
+								```
+									class Order < ActiveRecord::Base 
+										belongs_to :customer, touch: :orders_updated_at 
+									end 
+								```
+					* `:validate`	 
+						* if set to true the associated objects will be validated whenever you save this object 
+							* default is false, associated objects will not be validated when this object is saved 
+			* scopes for `belongs_to` 
+				* you may want to customize the query used by `belong_to` 
+					* achieved via scope block 
+					* example: 	
+						```
+							class Order < ActiveRecord::Base 
+								belongs_to :customer, -> { where active:true}, dependent: :destroy
+							end 
+						```
+				* you can use any of the [standard querying methods](http://guides.rubyonrails.org/v4.2/active_record_querying.html) inside the scope block
+					* four of which are 
+						* `where` 
+							* lets you specify the conditions that the associated object must meet 
+							```
+								class Order < ActiveRecord::Base 
+									belongs_to :customer, -> { where activate: true }
+								end 
+							```
+						* `includes`
+							* specifies the second-order associations that should be eager-loaded when this association is used  
+							* example: 
+								* without includes 
+								```
+									class LineItem < ActiveRecord::Base 	
+										belongs_to :order 
+									end 
+										
+									class Order < ActiveRecord::Base 
+										belongs_to :customer 
+										has_many :line_items 
+									end
+			
+									class Customer < ActiveRecord::Base 
+										has_many :orders 
+									end 
+								```
+								* with include allows you to call `@line_item.customer` 
+								```
+									class LineItem < ActiveRecord::Base 
+										belongs_to :order, -> { includes :customer }
+									end 
+			
+									class Order < ActiveRecord::Base 
+										belongs_to :customer 
+										has_many :line_times 
+									end 
+			
+									class Customer < ActiveRecord::Base 
+										has_many :orders 
+									end 
+								```
+						* `readonly`
+							* this makes the associated object read-only when retrieved via the association 
+						* `select` 
+							* lets you override the SQL SELECT clause that is used to retrieve data about the associated object 
+								* by default Rails retrieves all columns 
+							* make sure to set the `:foreign_key` option when overriding select 
+			* do any associated objects exist?
+				* using `association.nil?` method checks to see if there are associated objects in existance 
+			* when are objects saved?
+				* assigning a `belongs_to` association does not automatically save object or the associated object 
+		* `has_one` association reference 
+	
+		* `has_many` association reference 		
+			* creates a one-to-many relationship with another model 
+				* in database terms this means that the other class will have a foreign key that refers to instances od this class 
+			* methods added by `has_many` 
+				* `collection(force_reloads = false)`
+				* `collection<<(object, ...)`
+				* `collection.delete(object, ...)`
+				* `collection.destroy(object, ...)`
+				* `collection=(objects)`
+ 				* `collection_singular_ids` 
+				* `collection_singular_ids=(ids)`
+				* `collection.clear` 
+				* `collection.empty?`	
+				* `collection.size`
+				* `collection.find(...)`
+				* `collection.where(...)`
+				* `collection.exists?(...)` 	
+				* `collection.build(attributes = {}, ...)`
+				* `collection.create(attributes = {})`
+				* `collection.create!(attributes = {})`
+				
+				* `collection` is replaced with the symbol passed as the first argument to `has_many`
+				* `collection_singular` is replaced with the singularized version of that symbol 
+				* example: 
+					```
+						class Customer < ActiveRecord::Base 
+							has_many :orders 
+						end 
+					```
+				* each instance of the `Customer` model will have these methods 
+					```
+						orders(force_reload = false) 
+						orders<<(object, ...)
+						orders.delete(object, ...)
+						orders.destroy(object, ...) 
+						orders=(objects)
+						order_ids
+						order_ids=(ids)
+						orders.clear
+						orders.empty?
+						orders.size 
+						orders.find(...)
+						orders.where(...)
+						orders.exists?(...)
+						orders.build(attributes = {}, ...)	
+						orders.create(attributes = {})
+						orders.create!(attributes = {})
+					```
+			* indepth look at the `collection(force_reload = false)` method 
+				* returns an array of all the associated objects 
+					* if none returns an empty array 
+				* example: 	
+					* `@orders = @customer.orders` 
+			* indepth look at the `colleciton<<(object, ...)` method
+				* adds one or more objects to the collection by setting their foreign keys to the primary key of the calling model 
+				* example: 
+					* `@customer.orders << @order1`
+			* indepth look at the `collection.delete(object, ...)` method
+				* removes one or more objects from the collection by setting their foreign keys to `NULL` 
+				* example: 
+					* `@customer.orders.delete(@order1)`
+				* objects will be destroyed if they are associated with dependent: :destroy, and deleted if they are associated with dependent: :delete_all
+			* indepth look at the `collection.destroy(object, ...)` method 
+				* removes one or more objects from the collection by running `destroy` on each object 
+				* example: 
+					* `@customer.orders.destroy(@order1)`
+				* objects will always be removed from the database ignoring the :dependent option 
+			* indepth look at the `collection=(objects)` method
+				* makes the collection contain only the supplied objects by adding and deleting as appropriate 
+			* indepth look at the `collection_singular_ids` method 
+				* returns an array of the ids of the objects in the collection 
+				* example: 
+					* `@order_ids = @customer.order_ids`
+			* indepth look at the `collection_singular_ids=(ids)` method 
+				* makes the collection contain only the objects identified by the supplied primary key values by adding and deleting as appropriate 
+			* indepth look at the `collection.clear` method 
+				* removes all objects from the collection according to the strategy specified by the `dependent` option 
+					* default for `has_many :through` is `delete_all` 	
+					* default for `has_many` is to set the foreign keys to `NULL`
+				* example: 
+					* `@customer.orders.clear`
+				* objects will be deleted if they are associated with `dependent:` `:destroy`, or `:delete_all`
+			* indepth look at the `collection.empty?` method
+				* returns true if the collection does not contain any associated objects 
+				* example: 
+					```
+						<% if @customer.orders.empty? %> 
+							No Orders Found
+						<% end %>
+					```
+			* indepth look at the `collection.size` method 
+				* returns the number of objects in the collection 
+				* example: 	
+					* `@order_count = @customer.orders.size` 	
+			* indepth look at the `collection.find(...)` method 
+				* finds objects within the collection
+				* uses the same syntax and options as `AcitveRecord::Base.find` 
+				* example: 
+					* `@open_orders = @customer.orders.find(1)` 
+			* indepth look at the `collection.where(...)` method 
+				* finds objects within the collection based on the conditions supplied
+				* the objects are loaded lazily 
+					* databased is queried only when the objects are accessed 
+				* example: 
+					```
+						@open_orders = @customer.oders.where(open: true) # no query yet 
+						@open_orders = @open_orders.first # now the db will be queried 
+					```
+			* indepth look at the `collection.exists?(...)` method 
+				* checks whether an object meeting the supplied conditions exists in the collection 
+				* uses same syntax and options as `ActiveRecord::Base.exists?`
+			* indepth look at the `collection.build(attributes = {}, ...)` method 
+				* returns one or more new objects of the associated type 
+				* objects are instantiated from the passed attributes 
+				* the link through their foreign key is set 
+				* the associated objects will not be saved 
+				* example: 
+					* `@order = @customer.orders.build(order_date: Time.now, order_number: "A12345")`
+			* indepth look at the `collection.create(attributes = {})` method 
+				* returns a new object of the associated type 
+				* instantiated from the passed attributes 
+				* the link through its foreign key will be created 
+				* once it passes all of teh validations specified on the associated model the associated object will be saved 
+				* example: 
+					* `@order = @customer.orders.create(order_date: Time.now, order_number: "A12345")`
+			* indepth look at the `collection.create!(attributes = {})` method 
+				* does the same as `create` but raises `ActiveRecord::RecordInvalid` if the record is invalid 
+			* options for `has_many` 
+				* intelligent defaults are not alway so smart 
+				* overwrite defaults with options 
+				* example: 
+					```
+						class Customer < ActiveRecord::Base 
+							has_many :orders, dependent: :delete_all, validate: :false
+						end 
+					```
+				* supports the following options 
+					* `:as`
+						* indicates that this is a polymorphic association 
+					* `:autosave`	
+						* if set to true rails will save any loaded members and destroy members that are marked for destruction whenever you save the parent object 
+					* `:class_name` 
+						* if the name of the class cannot be derived from the association name you can pass your own 
+					* `:dependent` 
+						* controls what happens to the associated object when their own er is destroyed 
+							* `:destroy` 	
+								* causes all the associated objects to also be destroyed 
+							* `:delete_all` 
+								* causes all the associated object to be deleted directly from the database (no callbacks executed)
+							* `:nullify` 	
+								* causes the foreign keys to be set to `NULL` (no callback executed) 
+							* `:restrict_with_exception` 
+								* causes an exception to be raised if there are any associated records 
+							* `:restrict_with_error` 
+								* causes an error to be added to the owner if they are any associated objects 
+					* `:foreign_key` 
+						* lets you set the name of the foreign key directly 
+					* `:inverse_of` 
+						* specifies the name of the `belongs_to` association that is the invers of this association 
+					* `:primary_key` 
+						* lets you explicitely set the primary key 
+					* `:source`
+						* specifies the source association name for a `has_many :through` association 
+							* only necessary if the name of the source cannot be automatically inferred from the association name 
+					* `:source_type` 
+						* specifies the source association type for a `has_many :through` association that proceeds through a polymorphic association 
+					* `:through` 
+						* specifies a join model which to perform the query
+					* `:validate` 				
+						* if set to false the associated objects will not be validated whenever you save this object 
+			* scopes for `has_many`
+				* you can customize the query made by `has_many` 
+					* achievied via a scope block 
+					* example: 
+						```
+							class Customer < ActiveRecord::Base 
+								has_many :orders, -> { where processed: true }
+							end 
+						```
+				* though all standard querying methods can be used inside the scope block the following 10 are important to understand 
+					* `where` 
+						* lets you specify the conditions that the associated object must meet 
+							* example: 
+								```
+									class Customer < ActiveRecord::Base 
+										has_many :confirmed_orders, -> { where "confirmed = 1" }, class_name: "Order"
+									end 
+								```
+								* you can also set conditions via a hash 
+								```	
+									class Customer < ActiveRecord::Base 	
+										has_many :confirmed_orders, -> { where confirmed: true }, class_name: "Order"
+									end 
+								```
+							* if you use hash-style `where` option then record creation via this association will be automatically scoped using the hash
+					* `extending` 
+						* specifies a named module to extend the association proxy
+					*  `group` 
+						* supplies an attribute name to group the result set by, using a `GROUP BY` clause in the finder SQL 
+						* example: 	
+							```
+								class Customer < ActiveRecord::Base 
+									has_many :line_items, -> { group 'orders.id' }, through: :orders 
+								end 
+							```
+					* `includes` 
+						* specify second-order associations that should be eager-loaded when this association is used 
+						* lets you use `@collection.association.association2` to retrieve connected things 
+					* `limit` 
+						* lets you restrict the total number of objects that will be fetched through an association 
+						* example: 
+							```
+								class Customer < ActiveRecord::Base 
+									has_many :recent_orders, -> { order('order_date desc').limit(100) }, class_name: "Order"
+								end 
+							```
+					* `offset` 
+						* lets you specify the starting offset for fetching objects via an association 
+						* example: 	
+							* skips the first 11 records 
+							* `-> { offset(11) }`
+					* `order` 
+						* dictates the order in which associated objects will be received in the syntax used by an SQL `ORDER BY` clause 
+						* example: 
+							```
+								class Customer < ActiveRecord::Base 
+									has_many :orders, -> { order "date_confirmed DESC" }
+								end 
+							```
+					* `readonly` 
+						* the associated objects will be read-only when retrieved via the association 
+					* `select` 
+						* lets you override the SQL `SELECT` clause that is used to retrieve data about the associated objects 
+							* default is all columns 
+						* be sure to include the primary key and foreign key columns of the associated model 
+							* otherwise rails will be confused 
+					* `distinct` 	
+						* keeps the collection free of duplicates 
+							* used with the `:through` option 
+						* example: 
+							* without distinct 
+							```
+								class Person < ActiveRecord::Base 
+									has_many :readings 
+									has_many :articles, through: :readings 
+								end 
+					
+								person = Person.create(name: 'John')
+								article = Article.create(name: 'a1') 
+								person.articles << article 
+								person.articles << article 
+								person.articles.instpect # => [#<Article id: 5, name: "a1">, #<Article id: 5, name:"a1">]
+								Reading.all.inspect # => [#<Reading id: 12, person_id: 5, article_id: 5>, #<Reading id: 13, person_id: 5, article_id: 5>]
+							```
+							* with distinct 
+							```
+								class Person 
+									has_many :readings 
+									has_many :articles, -> { distinct }, through: :readings 
+								end 
+						
+								person = Person.create(name: 'Honda') 
+								article = Article.create(name: 'a1')
+								person.articles << article 
+								person.articles << article 
+								person.articles.inspect # => [#<Article id: 7, name: 'a1'>]
+								Reading.all.inspect # => [#<Reading id: 16, person_id: 7, article_id: 7>, #<Reading id: 17, person_id: 7, article_id: 7>]
+							```
+					* distinct does not make sure of duplicates upon creation but on load 
+					* to make sure that upon insertion all of the records in the persisted association are distinct add a `unique` index to the table itself 
+						* example: 
+							* `add_index :person_articles, :article, unique: true`
+					* checking uniqueness using something like `include?` is subject to race conditions 
+						* apperently `unique` indexs are not 
+			* when are objects saved 
+				* when you assign an object to a `has_many` association that object is automatically saved in order to update its foreign key 
+					* assigning multiple objects in one statment saves them all
+				* if any of these saves fail due to validation errors then assignment statement returns `false` and the assignment itself is cancelled 
+				* if the parent object (with the `has_many` association) is unsaved then the child objects are not saved when they are added 
+					* all unsaved members of the association will automatically be saved when the parent is saved 
+					* to assign an object to a `has_many` association without saving the object use the `collection.build` method
+		* `has_and_belongs_to_many` association reference 
+			
+		* association callbacks 
+			* callbacks hook into the life cycle of active record objects 
+				* lets you inject functionality into objects at various points 
+			* association callbaks are similar to normal callbacks 
+				* triggered by events in the life cycle of a collection 
+			* there are four available callbacks 
+				* `before_add` 
+				* `after_add` 
+				* `before_remove` 
+				* `after_remove` 
+			* associations callbacks are defined by adding options to the association declaration 
+				* example: 
+					```
+						class Customer < ActiveRecord::Base 
+							has_many :orders, before_add: :check_credit_limit 
+					
+							def check_credit_limit(order)
+								...
+							end 
+						end 
+					```
+			* callbacks can be stacked on a single event by passing them as an array 
+				* example: 
+					```
+						class Customer < ActiveRecord::Base 
+							has_many :orders, before_add: [:check_credit_limit, :calculate_shipping_charges]
+				
+							def check_credit_limit(order)
+								...
+							end 
+			
+							def calculate_shipping_charges(order)	
+								...
+							end 
+						end 
+					```
+			* if a `before_add` callback throws an exception the object does not get added to the collection 
+			* if a `before_remove` callback throws an exception the object does not get removed from the collection 
+		
+		* association extensions 
+			* not limited by the functionality that rails automatically builds into association proxy objects 
+			* these objects can be extended through anonymous modules, adding new finders, creators, or other methods
+				* example: 
+					```
+						class Customer < ActiveRecord::Base 
+							has_many :orders do 
+								def find_by_order_prefix(order_number)
+									find_by(region_id: order_number[0..2])
+								end 
+							end 
+						end 
+					```
+			* if you have an extension that should be share by many associations you can use a named extension module 
+				* example: 
+					```
+						module FindRecentExtension 
+							def find_recent 
+								where("created_at > ?", 5.days.ago)
+							end 
+						end 
+				
+						class Customer < ActiveRecord::Base 
+							has_many :orders, -> { extending FindRecentExtension }
+						end 
+				
+						class Supplier < ActiveRecord::Base 
+							has_many :deliveries, -> { extending FindRecentExtension }
+						end 
+					```
+			* extensions can refer to the internals of the association proxy using these three attributes of `proxy_association` accessor 
+				* `proxy_association.owner` 
+					* returns the object that the association is a part of 
+				* `proxy_association.reflection` 
+					* returns the reflection object that describes the association 
+				* `proxy_association.target` 	
+					* returns the associated object for `belongs_to` or `has_one`
+					* returns the collection of associate objects for `has_many` or `has_and_belongs_to_many` 
+				
+				
+				
+
+
+
+	
+
+
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
