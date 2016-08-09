@@ -15,6 +15,18 @@ the intranet is the most important tool
 
 * why does he refer to both the emacs and vim screens as buffers? what is a buffer in this context?
 
+* what is the difference between `.viminfo` and `.vimrc`?
+	* unix thing 
+	* there is a difference 
+	* `.vimrc` 
+		* a file you edit to change vims behavior 
+	* `.viminfo` 
+		* a cache that stores shit from vim like buffers, marks ect...
+
+* what is `Moulinette`?
+
+* what does span the file system means in the context of unix?
+
 
 
 
@@ -133,7 +145,7 @@ the intranet is the most important tool
 					* execute permissions 
 				* 2 
 					* write permissions 
-				* 1 
+				* 3 
 					* write and execute permissions 
 				* 4 
 					* read permissions 
@@ -144,6 +156,10 @@ the intranet is the most important tool
 				* 7 
 					* read, write, and execute permissions 
 		* symbols
+			* d 
+				* directory 
+			* l 
+				* symlink 
 			* r
 				* read permission
 			* w	
@@ -160,7 +176,45 @@ the intranet is the most important tool
 			* third set 
 				* permissions for world 
 
+* rules of engagement 
+	* must have appropriate permissions on files and directories 
+	* exercises in shell must be executable with `/bin/sh`
+	* cannot have any additional files in the directory other than those specified by the project 
 
+* email spoofing 
+	* the creation of an email message with a forged sender address 
+	* technical detail 
+		* when smtp email is sent the initial connection provides two pieces of address information 
+		* can be referred to as the envelop address
+			* mail from
+				* generally presented as the return-path: header but not normally visible to the end user 
+				* by default no checks are done for authorization 
+			* rcpt to 
+				* specifies which email address the email is delivered to 
+				* not normally visible to the end user but may be present in theheaders as part of the received header 
+		* the sending system send the data command and typically sends several header items
+			* from 
+				* the address visible to the recipient 
+					* no checks are done that the sending system is authorized to send on behalf of address
+			* reply-to 
+				* who to reply to?
+			* sender 
+				* who is sending 
+
+* ln 
+	* makes links 
+	* by default `ln` makes hard links 
+		* hardlinks 
+			* they are the same as the original file
+			* may not refer to directory 
+			* may not span file system 
+		* symlink 
+			* a reference to the path of the original filesystem object 
+			* may refer to directories 
+			* may span the file system
+	* options 
+		* -s 
+			* create a symbolic link 
 
 
 
