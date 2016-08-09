@@ -4097,23 +4097,1119 @@ okay so im going to actually try to reflect on this work day. basically things a
 					* returns the associated object for `belongs_to` or `has_one`
 					* returns the collection of associate objects for `has_many` or `has_and_belongs_to_many` 
 				
-				
-				
+# July 24th - clean up and deployment 
+
+#### questions 
+	
+* what are environment variables?
+	* [link 1](http://www.catb.org/esr/writings/taoup/html/ch10s04.html)
+		* unix thing 
+		* shell variables saved in the shell context accessible by everything running in the shell 
+
+* what does bundle exec do?
+
+	
+# July 25th - models, background workers 
 
 
+so basically im just creating the account model and connecting it to groups and users. should be straight forward. i need to make sure to have the foreign key constraints in place and all that.
 
+I should build the account model first and make sure it is set up properly before moving forward with the connections. 
+
+#### questions 
+
+#### explore 
+
+
+# July 27th - make the things pop up on the screen 
+
+mm so basically tying groups and images, and making the sharing functionality work as expected 
+
+so reflecting. i really need to read ruby and rails documentation on different objects and helper classes on a regular basis. this involves also becoming very familiar with the different types of syntax, especially the more abstract symbolic ones. this is going to dramatically increase my speed, since i will be able to parse things faster. i have probably reached the limit of my understanding without becoming intimitaly comfortable with functional languages. that is a wall i need to pass. breaking that syntex and design barrier will dramatically change things. another note. its really all about this library shit. like fuck man if i had a decent understanding of all the mixins applied to random objects and how to leverage them my workflow would dramatically speed up. and this is true in general. 
+
+to become better at leveraging libraries the key is in literacy and comprehension. literacy to easily parse and understand what is said and comprehension to bridge the multitude of design patterns. 
+
+
+#### questions 
+
+* what is a hash of conditions in the active record context?
+
+* what does strong and weak parameters mean?
+
+* what exactly is an enumerable? in ruby?
+	* in the context of ruby 
+		* a mixin that gives objects a collection of classes with several traversal and seraching methods with the ability to sort 
+		* must provide a method `each` 
+			* yields successive members of the collection 
+		* if #max, #min, #sort is to be used 
+			* the object that is called upon must implement a meaningful `<=>` operator 
+				* because those methods rely on an ordering between members of the collection 
+
+
+#### explore 
+
+
+* [hash ruby](http://ruby-doc.org/core-2.0.0/Hash.html#update-instance_method)
+	* a hash is a dictionary-like collection of unique keys and their values 
+		* also called associative arrays 
+	* public instance methods
+		* `update`(other_hash) -> hsh
+		* `update`(other_hash) { |key, oldval, newval| block } -> hsh
+			* same thing as `merge!`
+			* add the contents of other_hash to hsh
+			* if no block is specified entries with duplicate keys are overwritten with the values from other hash 
+			* other wise the value of each duplicate key is determined by calling the block with the key
+				* its value in hsh and its value in other_hash 
+			* example: 
+				```
+					h1 = { "a" => 100, "b" => 200 } 
+					h2 = { "b" => 254, "c" => 300 } 
+					h1.merge!(h2) 				#=> {"a"=>100, "b"=>254, "c"=>300}
+					
+					h1 = { "a" => 100, "b" => 200 } 
+					h2 = { "b" => 254, "c" => 300 } 
+					h1.merge!(h2) { |key, v1, v2| v1 } 	#=> {"a"=> 100, "b"=>200, "c"=>300}
+				```
 	
 
 
+
+* [enumerable ruby](http://ruby-doc.org/core-2.0.0/Enumerable.html#flat_map-instance_method)
+	* a mixin that provides collection classes with several traversal and searching methods with the ability to sort 
+		* receiving class must have a `each` method 
+			* yields successive memebers of the collection 
+		* #max, #min, #sort 
+			* objects in collection must have a meanigful `<=>` operator 
+				* these methods rely on an ordering between members of the collection 
+	* public instance methods 
+		* `all?`[{|obj| block}] -> true or false 
+			* passes each element of the collection to the given block 
+			* the method returns true if the block never returns false or nil
+			* if block is not given ruby adds an implicit block of { |obj| obj } 
+				* will cause `all?` to return true when none of the collection members are false or nil
+			```
+				%w[ant bear cat].all? { |word| word.length >= 3 }	#=> true
+				%w[ant bear cat].all? { |word| word.length >= 4 }	#=> false
+				[nil, true, 99].all?  					#=> false
+			```
+		* `any?` [{ |obj| block }] -> true or false 
+			* passes each element of the collection to the given block 
+				* returns true if the block ever returns a value other than false or nil 
+			* when no block gives an implicit block of { |obj| obj } 
+				* returns true if at least one of the collection memeber is not false or nil 	
+			```	
+				%w[ant bear cat].any? { |word| word.length >= 3 }	#=> true 
+				%w[ant bear cat].any? { |word| word.length >= 4 }	#=> true
+ 				[nil, true, 99].any?					#=> true 
+			```
+		* `chunk` { |elt| ...} -> an_enumerator 
+		* `chunk(initial_state) { |elt, state| ...} -> an_enumerator 
+			* enumerates over the items, chunking them together based on the return value of the block 
+				* consecutive elements which return the same block value are chunked together 
+				* example setup - chunk consecutive even numbers and odd numbers
+				```
+					[3, 1, 4, 1 , 5, 9, 2, 6, 5, 3, 5].chunk { |n|
+						n.even?
+					}.each { |even, ary|
+						p [even, ary]
+					}
+				
+					#=> [false, [3, 1]], [true, [4]], [false, [1, 5, 9]], [true, [2, 6]], [false, [5, 3, 5]]
+				```	
+			* method is very useful for sorting series of elements 
+				* example setup - counts words for each initial letter
+				```
+					open("/usr/share/dict/words", "r:iso-8859-1") { |f|
+						f.chunk { |line| line.ord }.each { |ch, lines| p [ch.chr, lines.length] }
+					}
+					#=> ["\n", 1], ["A", 1327], ["B", 1372], ["C", 1507], ["D", 791] ......
+				```
+			* the following key values have special meaning 
+				* `nil` and `:_separator` specifies that the elements should be dropped 
+					* can be used to ignore some elements 
+				* `:_alone` specifies that the element should be chunked by itself 
+					* can be used to force items into their own chunk 
+						* example setup - put lines that contain a URL by themselves and chunk the rest of the lines together 
+						```
+							pattern = /http/
+							open(filename) { |f| 
+								f.chunk { |line| line =- pattern ? :_alone : true }.each {|key, lines|
+									pp lines
+								}
+							}
+						```
+				* all other symbols that begin with an `_` wil raise an error 
+			* if the block needs to maintain state over multiple elements an `initial_state` argument can be used 	
+				* if a non-nil value is given, a reference to it is passed as the 2n argument of the block for the `chunk` method 
+					* state-change persist across block calls 
+		* `flat_map`{ |obj| block } -> array 
+		* `flat_map` -> an_enumerator 
+			* returns a new array with the concaatenated results of running block once for every element in enum 
+			* if no block is given an enymerator is returned instead 
+			* example: 
+				```
+					[1, 2, 3, 4].flat_map { |e| [e, -e] } 		#=> [1, -1, 2, -2, 3, -3, 4, -4]
+					[[1, 2], [3, 4]].flat_map { |e| e + [100] } 	#=> [1, 2, 100, 3, 4, 100]
+				```
+		
+											
+
+
+
+
+* [groupify gem](https://github.com/dwbutler/groupify)
+	* member associations on groups 
+		* groups can be configured to create associations for each expected memeber type 
+			* example setup - group has users and assignments as memebers
+			* example: 
+				```
+					class Group < ActiveRecord::Base 
+						groupify :group, members: [:users, :assignments], default_members: :users
+					end 
+				```
+				* the `default_members` option sets the model type when accessing the `memebers` association 
+					* `group.members`	
+						* returns the users who are members of this group
+	* add to named groups 
+		```
+			user.named_groups << :admin 
+			user.in_named_group?(:admin)
+		```
+	* remove from groups 
+		```
+			users.groups.destroy(group) 		# destroys this users group memebership for this group 
+			group.users.delete(user) 		# deletes this groups group membership for this user 
+		```
+	* check if two members share any of the same groups 
+		```
+			user1.shares_any_group?(user2)		# returns true if user1 and user2 are in any of the same groups 
+			user2.shares_any_named_group?(user1)	# also works for named groups
+		```
+	* query for groups & members 
+		```
+			User.in_group(group) 			# find all users in this group 
+			User.in_named_group(:admin)		# find all users in this named group 
+			Group.with_member(user)			# find all groups with this user 
+			
+			User.shares_any_group(user) 		# find all users that share any groups with this user 
+			User.shares_any_named_group(user)	# find all users that share any named groups with this user 
+		```
+	* check if member belongs to any/all groups 
+		```
+			User.in_any_group(group1, group2) 		# find users that belong to any of these groups 
+			User.in_all_groups(group1, group2)		# find users that belong to all of these groups 
+			Widget.in_only_groups(group2, group3)		# find widgets that belong to only these groups
+
+			widget.in_any_named_group?(:foo, :bar)		# check if widget belongs to any of these named groups 
+			user.in_all_named_groups?(:manager, :poster)	# check if user belongs to all of these named groups 
+			user.in_only_named_groups?(:employee, :worker)	# check if user belongs to only these named groups 
+		```
+	* merge one group into another 
+		```
+			# moves the members of source into destination and destroys source 
+			destination_group.merge!(source_group)
+		```
+	* membership types 
+		* allows for differentiation in roles 
+		* allows role based authorization combined with group authorization 
+		* example setup - add users and resources to the same "sub-group" or "project" within a larger group
+		* example: 
+			```
+				# add user to group as a specific membership type 
+				group.add(user, as: 'manager')
+				
+				# works with named groups too 
+				user.named_groups.add user, as: 'manager' 
+				
+				# query for the groups that a user belongs to with a certain role 
+				* user.groups.as(:manager)
+				* user.named_groups.as('manager')
+				* Group.with_member(user).as('manager')	
+					
+				# remove a members membership type from a group 
+				group.users.delete(user, as: 'manager')			# deletes this groups 'manager' group membership for this user 
+				user.groups.destroy(group, as: 'employee')		# destroy this users 'employee' group membership for this group
+				user.groups.destroy(group) 				# destroy any membership type this user had in this group 
+
+				# find all members that have a certain membership type in a group 
+				User.in_group(group).as(:manager)
+ 			
+				# find all members of a certain membership type regardless of group 
+				User.as(:manager) 	# find users that are managers, we dont care what group 
+			
+				# check if a member belongs to any/all groups with a certain membership type 
+				user.in_all_groups?(group1, group2, as: 'manager') 
+				
+				# find all members that share the same group with the same membership type 
+				Widget.shares_any_group(user).as("Moon Launch Project")
+			
+				# check if one member belongs to the same group as another member with a certain membership type 
+				user.shares_any_group?(widget, as: 'employee')
+			```
+			* adding a member to a group with a specific membership type will automatically add them to that group without a specific membership type 
+				* you can still query `groups` and find the member in that group 
+				* if you then remove that specific membership type they will still remain in the group without a specific membership type 
+	* using for authorization 
+		* with cancan 
+			```
+				class Ability 
+					include CanCan::Ability 
+					
+					def initialize(user) 
+						# implemeners group-base authorization 
+						# users can only manage assignment which belong to the same group 
+						can [:manage], Assignment, Assignment.shares_any_group(user) do |assignment|
+							assignment.shares_any_group?(user)
+						end 
+					end 
+				end 
+			```
+		* with authority 
+			```
+				# whatever class represents a logged-in user in your app 
+				class User 
+					groupify :named_group_member 
+					include Authority::UserAbilities 
+				end 
+				
+				class  Widget 
+					groupify :named_group_member 
+					include Authority::Abilities 
+				end 
+			
+				class WidgetAuthorizer < ApplicationAuthorizer 
+					# implements group-based authorization using named groups. 
+					# users can only see widgets which belong to the same named group. 
+					def readable_by?(user) 
+						user.shares_any_named_group?(resource) 
+					end 
+					
+					# implements combined role-based and group-based authorization 
+					# widgets can only be updated by users that are employees of the same named group 
+					def updateable_by?(user) 
+						user.shares_any_named_group?(resource, as: :employee) 
+					end 
+					
+					# widgets can only be deleted by users that are managers of the same named group 
+					def deletable_by?(user)
+						user.shares_any_named_group?(resource, as: :manager) 
+					end 
+				end 
+				
+				##ruby sheell
+				user = User.create!		
+				user.named_groups.add(:team1, as: :employee) 
+				
+				widget = Widget.create!
+				widget.named_groups << :team1 
+					
+				widget.readable_by?(user)	# => true 
+				user.can_update?(widget)	# => true 
+				user.can_delete?(widget)	# => false 
+			```
+		* with pundit 
+			```
+				class PostPolicy < Struct.new(:user, :post) 
+					#user can only update a published post if they are admin of the same group 
+					def update?
+						user.shares_any_group?(post, as: :admin) || !post.published?
+					end 
+				
+					class Scope < Struct.new(:user, :scope) 
+						def resolve 
+							if user.admin?
+								#an admin can see all the posts in the groups they are admin for 
+								scope.shares_any_group(user).as(:admin) 
+							else 
+								# normal users can only see published posts in the same group 
+								scope.shares_any_group(user).where(published: true) 
+							end 
+						end 
+					end 
+				end 
+			```			
+
+* [cancancan](https://github.com/CanCanCommunity/cancancan/)
+	* an authorization library for RoR which restricts what resources a given user is allowed to access 
+	* all permissions are defined in a single location with the `Ability` class 
+		* not duplicated across controllers, views, and db queries 
+	* mission 
+		* continuation of the dead cancan project 
+			* keep cancan alive and moving forward 
+	* getting started 
+		* cancancan expects a `current_user` method to exist in the controller 
+			* setup authentication like `Devise` before moving forward 
+		* when using [`rails-api`](https://github.com/rails-api/rails-api) you have to manually include the controller methods for cancan
+			```
+				class ApplicationController < ActionController::API 
+					include CanCan::ControllerAdditions 
+				end 
+			```
+	* define abilities 
+		* user permissions are defined in an `Ability` class 
+			* generator included in the library 
+				* `rails g cancan:ability`
+		* defining abilities 
+			* the `Ability` class is where all user permissions are defined 
+			* example: 
+				```
+					class Ability 
+						include CanCan::Ability 
 						
+						def initialize(user) 
+							user ||= User.new # guest user (not logged in)
+							if user.admin?
+								can :manager, :all
+							else 
+								can :read, :all
+							end 
+						end 
+					end 
+				```
+			* the current model is passed into the initialize method 
+				* permissions modified based on any user attributes 
+				* cancan makes no assumption about how roles are handled by your application 
+		
+			* the can method
+				* used to define permissions and requires two arguments 
+					* the action you are setting the permission for 
+					* the class of object you are setting it on 
+					* example: 
+						* `can :update, Article` 
+				* you can pass `:manage` to represent any action and `:all` to represent any object 
+					* example: 
+						```
+							can :manage, Article		# user can perform any action on the article 
+							can :read, :all			# user can read any object 
+							can :manage, :all		# user can perform any action on any object 
+						```
+				* common actions are 
+					* `:read` 
+					* `:create` 	
+					* `:update` 
+					* `:destroy` 
+					* they can be anything 
+						* [action aliases](https://github.com/CanCanCommunity/cancancan/wiki/Action-Aliases)
+						* [custom actions](https://github.com/CanCanCommunity/cancancan/wiki/Custom-Actions)
+					* arrays can be passed for either parameter and are match accordingly 
+				* important notice about `:manage` 
+					* :manage is basically chmod 777	
+						* grants the ability to use any action on the object including aliases and custom actions 
+					* to only allow crud create a custom action 
+				* hash of conditions 			
+					* a hash can be passed to further restrict which records this permission applies to 
+						* example setup - the user will only have permission to read active projects which they own 
+						* example: 
+							* `can :read, Project, :active => true, :user_id => user.id` 
+					* only use database columns for these conditions so they can be used for [fetching records](https://github.com/CanCanCommunity/cancancan/wiki/Fetching-Records)
+					* nested hashes can be used to define conditions on associations 
+						* example setup - project can only be read if the category it belongs to is visible 
+						* example: 
+							* `can :read, Project, :category => { :visible => true }`
+							* the above will issue a query that performs an `INNER JOIN` to query conditions on associated records 
+								* if you need the associations be queried with a `LEFT OUTER JOIN` then you can pass in a scope 
+								* example setup - uses a scope that returns all photos that do not belong to a group
+								* example: 
+									```
+										class Photo
+											has_and_belongs_to_many :groups
+											scope :unowned, includes(:groups).where(:groups => {:id => nil})
+										end 
+			
+										class Group 
+											has_and_belongs_to_many :photos 
+										end 
+			
+										class Ability 	
+											def initialize(user) 
+												user ||= User.new # guest user (not logged in) 
+												can :read, Photo, Photo.unowned do |photo| 
+													photo.groups.empty?
+												end 
+											end 
+										end 
+									```	
+					* an array or range can be passed to match multiple values 
+						* the user can only read projects of priority 1 through 3 
+							* `can :read, Project, :priority => 1..3` 
+					* almost anything you can pass to a hash of conditions in active record will work
+						* exception is working with model ids 
+							* cannot pass model objects directly, must pass in the appropriate ids 
+							* example: 
+								* `can :manage, Project, :group => { :id => user.group_ids }` 
+						* for complext abilities that to complex for hash of conditions [defining abilities with block](https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities-with-Blocks)
+				* combining abilities 
+					* it is possible to define multiple abilities for the same resource 
+						* example setup - users can read projects which are released or available for preview 
+						* example: 
+							```
+								can :read, Project, :released => true 
+								can :read, Project, :preview => true 
+							```
+				* the `cannot` method takes the same arguments as the `can` and defines which actions the user is unable to perform 
+					* normally done after a more generic `can` call 
+						* example: 
+							```
+								can :manage, Project 
+								cannot :destroy, Project
+							```
+	* check abilities & authorization 
+		* the current users permissions can be checked using the `can?` and `cannot?` methods in the view and controller 
+			* example: 
+				``` 
+					<% if can? :update, @article %> 
+						<%= link_to "Edit", edit_article_path(@article) %> 
+					<% end %> 
+				```
+			* more details on [checking abilities](https://github.com/CanCanCommunity/cancancan/wiki/checking-abilities)
+		* the `authorize!` method in the controller will raise an exception if the user is not able to perform the given action 
+			* example: 
+				```
+					def show 
+						@article = Article.find(params[:id])
+						authorize! :read, @article 
+					end 
+				```
+			* setting this for every action can be tedious therefore the `load_and_authorize_resource` method is provided to automatically authorize all actions in a RESTful style resource controller 
+				* uses the `before` action to load the resource into an instance variable and authorize it for every action 
+					* example: 
+						```
+							class ArticlesController < ApplicationController 
+								load_and_authorize_resource 
+							
+								def show 
+									# @article is already loaded and authorized 
+								end 	
+							end 
+						```
+			* more details about [authorizing controller actions](https://github.com/CanCanCommunity/cancancan/wiki/authorizing-controller-actions)
+		* strong parameters 
+			* when using `strong_parameters` or rails 4+
+				* must sanitize inputs before saving record in actions like `:create` and `:update` 	
+			* for `:update` action cancan will load and authorize the resource bu not change it automtically 
+				* example: 
+					```
+						def update 
+							if @article.update_attributes(update_params) 	
+								# hurray 
+							else 
+								render :edit 
+							end 
+						end 
+						... 
+					
+						def update_params 
+							params.require(:article).permit(:body) 
+						end 
+					```
+			* for the `:create` action cancan will try to initialize a new instance with sanitized input by seeing if your controller will respond to the following methods 
+				* `create_params` 
+				* `<model_name>_params` such as `article_params` 	
+					* default convention for naming your param method 
+				* `resource_params` 
+					* a generically named method you could specify in each controller 
+			* the `load_and_authorize_resource` can take a `param_method` option to specify a custom method in the controller to run to sanitize input 
+				* you can associate the `param_method` option with a symbol corresponding to the name of a method that will get called
+					* example: 
+						```
+							class ArticlesController < ApplicationController 
+								load_and_authorize_resource param_methods: :my_sanitizer 
+										
+								def create 
+									if @article.save 
+										#hurray 
+									else 
+										render :new
+									end 
+								end 
+						
+								private 
+							
+								def my_sanitizer 
+									params.require(:article).premit(:name) 
+								end 
+							end 
+						```
+				* you can also use a string that will be evaluated in the context of the controller using `instance_eval` 
+					* needs to contain valid ruby code 
+						* comes in handy when using PermittedParams class as suggested in Railscast 371 
+							* example: 
+								* `load_and_authorize_resource param_methods: 'permitted_params.article'` 
+				* it is possible to associate `param_method` with a Proc object which will be called with the controller as the only argument 
+					* example: 	
+						* `load_and_authorize_resource param_method: Proc.new { |c| c.params.require(:article).permit(:name) }`
+	* handle unauthorized access 
+		* if the user authorization fails a `CanCan::AccessDenied` exception will be raised 
+			* you can catch this and modify its behavior in the `ApplicationController` 
+				* example: 
+					```
+						class ApplicationController < ActionController::Base 
+							rescue_from CanCan::AccessDenied do |exception| 
+								redirect_to root_url, :alert => exception.message 
+							end 
+						end 
+					```
+		* see [exception handling](https://github.com/CanCanCommunity/cancancan/wiki/exception-handling) for more details 
+	* lock it down 
+		* to ensure that authorization happens on every action in your application add `check authorization` to your application controller 
+			example: 
+				```
+					class ApplicationController < ActionController::Base 
+						check_authorization 
+					end 
+				```
+	* [fetching records](https://github.com/CanCanCommunity/cancancan/wiki/Fetching-Records)
+		* sometimes you need to restrict which records are returned from the database based on what the `user` is able to access 
+			* im pretty sure `user` is just a `group memeber` concept 
+			* call the `accessible_by` method on any active record model to make this work 
+				* example:
+					```
+						#current_ability is a method made available by CanCan to your controllers extending ActionController::Base
+						@aerticles = Article.accessible_by(current_ability) 
+					```
+				* done automatically by `load_resource` for the index action 
+			* you can change the action by passing it as the second argument 	
+				* example setup - only fetches the user permission for update 
+				* example: 
+					* `@articles = Article.accessible_by(current_ability, :update)`
+			* if you want to use the current controllers action call the `to_sym` method on it 
+				* example: 
+					* `@articles = Article.accessible_by(current_ability, params[:action].to_sym)` 
+			* this is an active record scope so other scopes and pagination can be chained onto it 
+		* to define complex permission logic and have it translate properly to set up in ability model 
+			* example setup - `Ability.rb model` 
+			* example: 	
+				```
+					# in Ability 
+					# assuming user.id == 1 
+					can :manage, User, :manager_id => user.id 
+					cannot :manage, User, :self_managed => true 
+					can :manage, User, :id => user.id 
+					# translates to "(id = 1) OR (not(self_managed = 't') AND (manager_id = 1))"
+					# as if it is read from bottom to top 
+					# "user could manage himself, for others he could not manage self_managed users, otherwise he could manage his employees" 
+				```
+				* you can define sql fragment in addition to block see [defining abilities with block](https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities-with-Blocks)
+		* if not using active record you can fetch the conditions hash directly from the current ability 
+			* example: 
+				* `current_ability.model_adapter(TargetClass, :target_action).conditions`
+
+#### trials and tribulations
+
+* okay so first lets see how this feature is communicating with the database
+	* so it is adding images to the group membership table with the appropriate group ids
+		* its entering the records twice for some reason 
+			* fix that bug later 
+	* to show the checked state on the front end i need to grab which groups a particular image id is associated with in the group membership table 
+ 				
+# July 29th - modal stuff 
+
+so the modal is using bootstrap/jquery to call itself i believe. 
+its using handle-bar to build the modal template.
+this dude did not know what he was doing so theres definetly a handlebar and jquery tutorial out there that he followed. 
+lol does the title [using handlebars to generate bootstrap modals in rails](http://blog.isnorcreative.com/2015/01/27/using-handlebars-to-generate-bootstrap-modals-in-rails.html) sound familiar.
+kk i got a feel for whats next. 
+
+#### questions 
 
 
 
+#### explore 
 
 
+* [handlebars.js](http://handlebarsjs.com/)
+	* provides the power necessary to build semantic templates effectively with no frustration 
+		* compatible with mustach templates 
+	
+	* getting started 
+		* handlebars templates look like regular html with embedded handlebar expressions 
+		* example: 
+			```
+				<div class="entry"> 
+					<h1>{{title}}</h1> 
+					<div class="body">
+						{{body}}
+					</div> 
+				</div> 
+			```
+		* can deliver template to the browser by including it in a script tage 
+		* example: 
+			```
+				<script id="entry-template" type="text/x-handlebars-template">
+					<div class="entry">
+						<h1>{{title}}</h1> 
+						<div class="body"> 	
+							{{body}}
+						</div> 
+					</div> 
+				</script> 
+			```
+		* compile a template in javascript by using `Handlebars.compile`
+		* example: 
+			```
+				var source = $("#entry-template").html();
+				var template = Handlebars.compile(source);
+			```
+		* get the html result of evaluating a handlebars template by executing the template with a context 
+		* example: 
+			* context 
+			```
+				var context = {title: "My New Post", body: "This is my first post!"};
+				var html = template(context);
+			```
+			* html result 
+			```
+				<div class="entry"> 
+					<h1>My New Post</h1> 
+					<div class="body">
+						This is my first post!
+					</div>
+				</div>
+			```
+	* HTML escaping 
+		* handlebars html-escapes values returned by an `{{expression}}` 
+			* to not escape a value use 'triple-stash' `{{{`
+		* example:
+			* template 
+			```
+				<div class="entry"> 
+					<h1>{{title}}</h1>
+					<div class="body">
+						{{{body}}}		
+					</div>
+				</div>
+			```
+			* with context 
+			```
+				{
+					title: "All about <p> Tags", 
+					body: "<p>This is a post about &lt;p&gt; tags</p>"
+				}
+			```
+			* looks like on the browser
+			```	
+				<div class="entry"> 
+					<h1>All About &lt;p&gt; Tags</h1> 
+					<div class="body"> 
+						<p>This is a post about &lt;p&gt; tags</p>
+					</div> 
+				</div> 
+			```
+		* handlebars will not escape a `Handlebars.SafeString` 
+			* you can write a helper that returns a `new Handlebars.SafeString(result)` 
+			* create your own html escaping 
+			*example: 
+				```
+					Handlebars.registerHelper('link', function(text, url) {
+						text = Handlebars.Utils.escapeExpression(text);
+						url = Handlebars.Utils.escapeExpression(url);
+						
+						var result = '<a href="' + url + '">' + text + '</a>';
+						
+						return new Handlebars.SafeString(result);
+					});
+				```
+				* this will esacape the passed in parameters but mark the response as safe 
+					* handlebars will not try to escape it even if the 'triple-stash' is not used 
+	* block expressions 
+		* allows you to define helpers that will invoke a section of your template with a different context than the current
+		* block helpers are identified by a `#` preceeding the helper name and require a matching closing mustache `/` of the same name 
+		* example: 
+			* helper that will generate an html list 	
+			```
+				{{#list people}}{{firstName}} {{lastName}}{{/list}}
+			```
+			* context 
+			```
+				{
+					people: [
+						{firstName: "Yehuda", lastName: "Katz"},
+						{firstName: "Carl", lastName: "Lerche"},	
+						{firstName: "Alan", lastName: "Johnson"}
+						]
+				}
+			```
+			* helper called `list` to generate html list 
+			```
+				Handlebars.registerHelper('list', function(items, options){
+					var out = "<ul>";
+						
+					for(var i=0, l=items.length; i<l; i++){
+						out = out + "<li>" + options.fn(items[i]) + "</li>";
+					}
+				
+					return out + "</ul>";
+				});
+			```
+				* helper receives `people` as its first parameter 	
+				* receives an options hash as its second parameter 
+					* contains a property `fn` which is invoked with a context just as you would invoke a normal handlebare template 
+			* when executed template renders 
+			```
+				<ul> 
+					<li>Yehuda Katz</li>
+					<li>Carl Lerche</li> 
+					<li>Alan Johnson</li>
+				</ul> 
+			```
+		* block helpers can create conditionals in templates 
+		* handlebars does not escape the results of a block helper 
+	* handlebars paths 
+		*  handlebars supports simple paths like mustache 
+			* example: 	
+				* `<p>{{name}}</p>`
+		* also supports nested paths 
+			* makes it possible to look up properties below the current context 
+			* example: 
+				* template
+				```
+					<div class="entry"> 
+						<h1>{{title}}</h1> 
+						<h2>by {{author.name}}</h2> 
+						
+						<div class="body"> 
+							{{body}}
+						</div> 	
+					</div> 
+				```
+				* context 
+				```
+					var context = { 
+						title: "My First Blog Post!", 
+						author: {
+							id: 47, 
+							name: "Yehuda Katz" 
+						},
+						body: "My first post. Wheeeee!" 
+					};
+				```
+				* this allows you to use templates with more raw json objects
+		* nested handlebar paths can also include `../` segments which evaluate their paths against a parent context 
+			* example: 
+				```
+					<h1>Comments</h1> 
+							
+					<div id="comments"> 
+						{{#each comments}}
+						<h2><a href="/posts/{{../permalink}}#{{id}}">{{title}}</a></h2> 
+						<div>{{body}}</div>
+						{{/each}}
+					</div>
+				```
+				* even though the link is printed while in the context of a comment 
+					* can still go back to the main context (post) and retrieve its permalink 
+				* the exact value of `../` resolve bases on the helper that is calling the block 
+					* `../` only necessary when the context changes (like each, but not like if)
+				```
+					{{permalink}}
+					{{#each comments}}
+						{{../permalink}}
+						
+						{{#if title}}
+							{{../permalink}}
+						{{/if}}
+					{{/each}}
+				```
+				* all examples above will reference the same `permalink` value even though they are located within different blocks 
+		* handlebars also allows for name conflict resolution between helpers and data fields via `this` reference 
+			* example: 
+				```
+					<p>{{./name}} or {{this/name}} or {{this.name}}</p>
+				```
+				* all of the above would cause the `name` field of the current context to be used rather than a helper of the same name 
+	* template comments with `{{!-- --}}` or `{{! }}`
+		* you can use comments in your handlebars code 	
+		* example: 
+			```
+				<div class="entry"> 
+					{{!-- only output author name if an author exists --}}
+					{{#if author}}
+						<h1>{{firstName}} {{lastName}}</h1> 
+					{{/if}}
+				</div> 
+			```
+		* the comments do not result in output 
+			* use html comments to see them in the browser 
+	* helpers 
+		* handlebars helpers can be accessed from any context in a template 
+		* register a helper with `Handlebars.registerHelper` method 
+		* example: 
+			* template 
+			```
+				<div class="post">
+					<h1>By {{fullName author}}</h1>
+					<div class="body">{{body}}</div>
+				
+					<h1>Comments</h1> 
+				
+					{{#each comments}}
+					<h2>By {{fullName author}}</h2>
+					<div class="body">{{body}}</div> 
+					{{/each}}
+				</div> 
+			```
+			* context and helpers 
+			```
+				var context = {
+					author: {{firstName: "Alan", lastName: "Johnson"}, 
+					body: "I Love Handlebars", 
+					comments: [{
+						author: {firstName: "Yehuda", lastName: "Katz"},
+ 						body: "Me too!"
+					}]
+				};
 
+				Handlebars.registerHelper("fullName", function(person) {
+					return person.firstName + " " + person.lastName;
+				});	
+			```
+			* browser results 
+			```
+				<div class="post> 
+					<h1>By Alan Johnson</h1> 
+					<div class="body">I Love Handlebar</div> 
+						
+					<h1>Comments</h1> 
+					
+					<h2>By Yehuda Katz</h2> 
+					<div class="body">Me Too!</div> 
+				</div> 
+			```
+		* helpers receive the current context as the `this` context of the function 
+		* example: 
+			* template
+			```
+				<ul> 
+					{{#each items}}
+					<li>{{agree_button}}</li>
+					{{/each}}
+				</ul>
+			```
+			* context and helpers 
+			```
+				var context = {
+					items: [
+						{name: "Handlebars", emotion: "love"}, 
+						{name: "Mustache", emotion: "enjoy"}, 
+						{name: "Ember", emotion: "want to learn"} 
+					]
+				}; 
+				
+				Handlebars.registerHelper('agree_button', function(){ 
+					var emotion = Handlebars.escapeExpression(this.emotion), 
+						name = Handlebars.escapeExpression(this.name);
+					
+					return new Handlebars.SafeString(
+						"<button>I agree. I " + emotion + " " + name + "</button"
+					);
+				});
+			```
+			* browser results 
+			```
+				<ul> 	
+					<li><button>I agree. I love Handlebars</button></li> 
+					<li><button>I agree. I enjoy Mustache</button></li> 
+					<li><button>I agree. I want to learn Ember</button></li> 
+				</ul> 
+			```
+			* if your helper returns html that you do not want escaped make sure to return a `Handlebars.SafeString` 
+	* literals 
+		* helper calls may also have literal values passed to them either as parameter arguments or hash arguments 
+			* support includes
+				* numbers
+				* strings 
+				* true 
+				* false
+				* null 
+				* undefined 
+			* example 
+				```	
+					{{agree_button "My Text" class="my-class" visible=true counter=4}}
+				```
+	* partials 
+		* handlebars partials allow for code to be reused by creating shared templates 
+		* example: 
+			* template 	
+			```
+				<div class="post"> 
+					{{> userMessage tagName="h1" }}
+				
+					<h1>Comments</h1> 	
+				
+					{{#each comments}}
+						{{> userMessage tagName="h2"}}
+					{{/each}}
+				</div> 
+			```
+			* partial and context 
+			```
+				Handlebars.registerPartial('userMessage', 
+					'<{{tagName}}>By {{author.firstName}} {{author.lastName}}</{{tagName}}>'
+					+ '<div class="body">{{body}}</div>');
+	
+				var context = {
+					author: {firstName: "Alan", lastName: "Johnson"}, 
+					body: "I Love Handlebars", 
+					comments: [{
+						author: {firstName: "Yehuda", lastName: "Katz"},
+						body: "Me too!"
+					}]
+				};
+			```
+			* browser results 
+			```
+				<div class="post"> 
+					<h1>By Alan Johnson</h1> 
+					<div class="body">I Love Handlebars</div> 
+					
+					<h1>Comments</h1> 
+					
+					<h2>By Yehuda Katz</h2> 
+					<div class="body">Me Too!</div> 
+				</div> 
+			```
+	* [built in helpers](http://handlebarsjs.com/builtin_helpers.html)
+	* [api reference](http://handlebarsjs.com/reference.html)
 
+* [nested_forms](https://github.com/ryanb/nested_form)
+	* a rails gem for conveniently managing multiple nestd models in a single form
+	* unobtrusive through jquery 
+	* setup 
+		* add gem 'nested_form' 
+		* add require in asset pipeline 
+	* usage 
+		* you must add `accepts_nested_attributes_for :dependent_model` to parent model 
+			* creates a `:dependent_model_attributes=` method 
+			* may need to add it to the `attr_accessible` array 
+				* `attr_accessible :dependent_model_attributes`
+		* in the view use the `nested_form_for` helper method to enable the nesting 
+		* now able to use `link_to_add` and `link_to_remove` helper methods on the form builder in combination with fields_for to dynamically add/remove nested records 
+	* strong parameters 
+		* pass the `:dependent_model_attributes` arribute accessor to the params 
+			* example: 
+			```
+				params.require(:project).permit(:name, dependent_model_attributes: [:id, :name, :_destroy])
+			```
+		* passing the `:id` ensures that you do not end up with a whole lot of tasks 
+		* passing `:_destroy` ensures that we can delete the depenedent model built upon validation
 
+* [accepts nested attributes](http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html#method-i-accepts_nested_attributes_for)
+	* allow you to save attributes on associated records through the parent 
+	* by default nested attribute updating is turned off 
+		* enable it by using the `#accepts_nested_attributes_for` class method 
+			* this defines an attribute writer on the model 
+	* the attribute writer is named after the association 
+		* adds a methods to your model 
+			* `association_attibutes=(attributes)`
+		* `:autosave` option is automatically turned on for every association that `#accepts_nested_attributes_for` 
+	* one-to-one 
+		* example setup - a member model that has one Avatar 
+		* example: 
+			```
+				class Member < ActiveRecord::Base 
+					has_one :avatar 
+					accepts_nested_attributes_for :avatar
+				end 
+			```
+		* enabling nested attributes on a one-to-one association allows you to create the member and avatar in one go 
+		* example: 	
+			```	
+				params = { member: { name: 'Jack', avatar_attributes: { icon: 'smiling' } } }
+				member = Member.create(params[:member])
+				member.avatar.id    # => 2
+				member.avatar.icon  # => 'smiling'
+			```
+		* allows you to update the avatar through the member 
+		* example: 
+			```
+				params = { member: { avatar_attributes: { id: '2', icon: 'sad' } } } 
+				member.update params[:member]
+				member.avatar.icon # => 'sad'
+			```
+		* by default you will only be able to set and update attributes on the associated model 
+			* to destroy the associated model through the attributes hash you have to enable it first using the `:allow_destroy` option 
+			example: 
+				* model 
+				``` 
+					class Member < ActiveRecord::Base 
+						has_one :avatar 
+						accepts_nested_attributes_for :avatar, allow_destroy: true
+				```
+				* controller
+				```
+					member.avatar_attributes = { id: '2', _destroy: '1' } 
+					member.avatar.marked_for_destruction? 	# => true 
+					member.save 
+					member.reload.avatar	# => nil 
+				```
+					* when you add the `_destroy` key to the attributes hash with a value that evaluates to true the associated model will be destroyed 
+						* the associated model will not be destroyed until the parent is saved 
+						* the associated model will not be destroyed unless you specify its id in the updated hash 
+		* one-to-many 
+			* example setup - consider a member that has a number of posts 
+			* example: 
+				* model 
+				```
+					class Member < ActiveRecord::Base 
+						has_many :posts
+						accepts_nested_attributes_for :posts 
+					end 
+				```
+					* alloes the model to set or update its associated posts through an attribute hash 
+						* must include the key `:posts_attributes` with an array of hashes of post attributes as a value 
+				* controller 
+				```
+					params = { member: {
+						name: 'joe', posts_attributes: [
+							{ title: 'Kari, the awesome Ruby documentation browser!' }, 
+							{ title: 'The egalitarian assumption of the modern citizen' }, 
+							{ title: '', _destroy: '1' } # this will be ignored 
+						]
+					}}
+				```
+					* for each hash that does not have an `:id` key a new record will be instantiated, unless the hash also contains a `_destroy` key that evaluares to true 
+				* you can set a `:reject_if` proc to silently ignore any new record hashes if they fail to pass the criteria 
+				```
+					class Member < ActiveRecord::Base 
+						has_many :posts
+						accepts_nested_attributes_for :posts, reject_if: proc { |attributes| attributes['title'].blank? }
+					end 
+					
+					params = { member: {
+						name: 'joe', posts_attributes: [
+							{ title: 'Kari, the awesome Ruby documentation browser!' }, 
+							{ title: 'The egalitarian assumption of the modern citizen' }, 
+							{ title: '' } # this will be ignored because of the `:reject_if` proc 
+						]
+					}}
+				
+					member = Member.create(params[:member])
+					member.posts.length # => 2 
+					member.posts.first.title # => 'Kari, the awesome Ruby documentation browser!'
+					member.posts.second.title # => 'the egalitarian assumption of the modern citizen 
+				```
+				* alternatively `:reject_if` also accepts a symbol for using methods
+				```
+					class Member < ActiveRecord::Base 
+						has_many :posts
+						accepts_nested_attributes_for :posts, reject_if: :new_record?
+					end 
+			
+					class Member < ActiveRecord::Base 
+						has_many :posts
+						accepts_nested_attributes_for :posts, reject_if: :reject_posts
+						
+						def reject_posts(attributes) 
+							attributes['title'].blank?
+						end
+					end
+				```
+			
+
+#### trials and tribulations 
+
+* okay so i should probably start by making the old media items work with the modal first. they have better data, which will make investigating the templating much simpler.
+	* looks like its a permissions issue 
 
 
 
