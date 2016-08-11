@@ -740,6 +740,54 @@ learning about modules today. they seem cool
 					```
 				
 
+# August 9 - refactoring backend 
+
+fuckkkkkkkkkkk me. uncertain how i will balance this. but hey thats the point isnt it :P.
+
+
+
+#### questions 
+
+* what is the difference between class and instance methods?
+	* class methods are class wide and do not function instantiated objects 
+	* instance methods are particular to a method and function only on instantiated objects  
+
+#### explore 
+
+
+* [class vs instance methods](http://culttt.com/2015/06/10/understanding-class-methods-verses-instance-methods-in-ruby/)
+	* class methods 
+		* a method defined on the class 
+			* meant for functionality that belongs to the class but is not tied to any particular single instance 
+		* example: 
+			```
+				class Basket
+					def self.find(id)
+						puts "finding basket with id of #{id}"
+					end 
+				end 
+			```
+				* a find method on the basket class that accepts an id 
+				* would go to db to find the particular basket and return a basket object
+	* instance methods 
+		* methods defined for a instance of a class, an instantiated object 
+			* when a piece of functionality needs to act on a particular instance of a class 
+			* often used when the functionality concerns the identity of the instance 
+		* example: 
+			```
+				class Basket 
+					def self.find(id) 	
+						puts "finding basket with the id of #{id}"
+					end 
+			
+					def products 
+						[]
+					end 
+				end 
+			```
+		
+
+
 
 
 
