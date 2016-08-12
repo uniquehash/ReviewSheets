@@ -27,6 +27,29 @@ the intranet is the most important tool
 
 * what does span the file system means in the context of unix?
 
+* what is a Root DSE in the context of ldap?
+
+* what does the number at the end of functions in man pages mean?
+	* corresponds to what section of the manual that page is from 
+		* manual sections 
+			* 1
+				* user commands 
+			* 2 
+				* system calls
+			* 3
+				* c library functions 
+			* 4 
+				* devices and special files 	
+			* 5 
+				* file formats and conventions 
+			* 6
+				* games et. al. 
+			* 7 
+				* miscellanea 
+			* 8 
+				* system administration tools and daemons 
+	* use `man -k '^command_to_search'` 
+		* substring searches for all similar commands 
 
 
 
@@ -216,7 +239,217 @@ the intranet is the most important tool
 		* -s 
 			* create a symbolic link 
 
+* ldap 
+	* a rudimentary digital phonebook thing 
+	* all users at the school are on it 
+	* basic interactions 
+		* the underlying session is established
+			* session handle is created 
+				* ldap_initialize(3)
+					* initialize the ldap library without opening a connection to a server 
+			* the protocol version is set to 3 
+				* ldap_set_options(3)
+		* the first operation is issued 
+			* can be any of the three 
+				* start TLS
+					* ldap_start_tls_s(3)
+				* Bind operation
+					* ldap_sasl_bind(3)
+						* asynchronously bind to the directory 
+				* Search operation 
+					* ldap_search_ext_s(3)
+						* synchronously search the directory 
+		* additional operations performed by either synchronous or async routines 
+			* like 
+				* ldap_compare_ext_s(3)
+					* synchronously compare to a directory entry 
+				* ldap_compare_ext(3)
+					* asynchronously compare to a directory entry 
+				* ldap_result(3)
+					* wait for the result from an asynchronous operation 
+		* results returned from routines are interpreted 
+			* using ldap parsing routines 
+				* ldap_parse_result(3)
+		* the ldap association and underlying connection is terminated 
+			* ldap_unbind_ext(3)
+				* synchronously unbind from the ldap server and close the connection 
+	* displaying results 
+		* results from search routines can be outputed by hand 
+			* step through the entries returned
+				* ldap_first_entry(3)
+					* return first entry in a chain of search results
+				* ldap_next_entry(3)
+					* return next entry in a chain of search results 
+			* step through an entrys attributes 
+				* ldap_first_attribute(3)
+					* return first attribute name in an entry 
+				* ldap_next_attribute(3)
+					* return next attribute name in an entry 
+			* retrieve a given attributes values 
+				* ldap_get_values(3)
 
+* ldap search filters 
+	* check [rfc 4515](https://tools.ietf.org/search/rfc4515#section-3) for full details 
+	* string search filter definition 
+		* filter 
+			* LPAREN filtercomp RPAREN
+		* filtercomp	
+			* and / or / not / item 
+		* and 
+			* AMPERSAND filterlist 
+		* or 
+			* VERTBAR filterlist 
+		* not 
+			* EXCLAMATION filterlist 
+		* filterlist 
+			* 1 * filterlist 
+		* item 
+			* simple / present / substring / extensible
+		* simple 
+			* attr filtertype assertionvalue 
+		* filtertype
+			* equal / approx / greaterorequal / lessorequal 
+		* equal 
+			* EQUALS 
+		* approx 
+			* TILDE EQUALS
+		* greaterorequal
+			* RANGLE EQUALS
+		* lessorequals
+		 	* LANGLE EQUALS 
+		* extensible 
+			* ( attr [dnattrs] [matchingrule] COLON EQUALS assertionvalue ) ( [dnattrs] matchingrule COLON EQUALS assertionvalue)
+		* present 
+			* attr EQUALS ASTERISK 
+		* substring 
+			* attr EQUALS [initial] any [final]
+		* initial 
+			* assertionvalue 
+		* any 
+			* ASTERISK *(assertionvalue ASTERISK)
+		* final 
+			* assertionvalue 
+		* attr 
+			* attributedescription
+				* rule described in [section 2.5 of rfc4512](https://tools.ietf.org/search/rfc4512#section-2.5)
+		* dnattrs 
+			* COLON "dn"
+		* matchingrule 
+			* COLON oid 
+		* assertionvalue 
+			* valueencoding 
+				* described in [section 4.1.6 of rfc4511](https://tools.ietf.org/search/rfc4511#section-4.1.6)
+		* valueencoding 
+			* 0 * (normal / escaped) 
+		* normal 
+			* UTF1SUBSET / UTFMB
+		* escaped 
+			* ESC HEX HEX 
+		* UTF1SUBSET 
+			* %x01-27 / %x2B-5B / %x5D-7F
+		* EXCLAMATION 
+			* %x21 -> `!`
+		* AMPERSAND 
+			* %x26 -> `&`
+		* ASTERISK 
+			* %x2A -> `*`
+		* COLON 
+			* %x3A -> `:`
+		* VERTBAR
+			* %x7C -> `|`
+		* TILDE
+			* %x7E -> `~`
+	* escaping sequences are down via there ACII characters 
+			
+* patch 
+	* takes a patch file (patchfile) and applies it to one or more original files 
+		* patchfile 
+			* a difference listing produced by the diff program 
+		* default behavior 
+			* patched versions replace the originals 
+	* lifecycle 
+		* on startup patch attempts to determine the type of the diff listing 
+			* can be overruled by 
+				* -e (--ed)
+					* fed to the `ed(1)` editor via a pipe
+				* -c (--context)
+					* applied by patch itself
+				* -n (--normal)
+					* applied by patch itself
+				* -u (--unified)
+					* applied by patch itself
+		* patch tries to skip any leading garbage, apply the diff, and then skip any trailing garbage 
+			* after removing indentation and encapsulation lines beginning with `#` are ignored 	
+				* considered comments 
+		* with context diff and to a lesser extent normal diffs patch can detect when the line numbers mentioned in the patch are incorrect, and attempt to find the correct place to apply each hunk of the patch 
+		* as each hunk is completed you are told if the hunk failed and if so which line in the new file patch thought the hunk should go 
+		* if no original file (origfile) is specified on the command line patch tries to figure out from the leading garbage what the name of the file to edit is 
+			* patch takes an ordered list of candidate file names as follows 
+				* if the header is a context diff 
+					* takes the old and new file names in the header 
+						* name ignored if it does not have enough slashes to satisfy the -pnum, --strip=num option and /dev/null is also ignored 
+				* if there is an index line in the leading garbage and if either the old and new names are both absent or if patch is conforming to posix 
+					* patch takes the name in the index line 
+				* candidate file names are considered in the order (old, new, index) regardless of headers
+			* patch selects a file name from the candidate list as follows 
+				* if some named files exist 
+						* selects first name if conforming to posix 
+						* selects best name otherwise 
+				* if patch is not ignoring RCS, ClearCase, Perforce, and SCCS (something to do with the -g num option) and no named files exist but an RCS, ClearCase. Perforce, or SCCS master is found 
+					* patch selects the best name requiring the creation of the fewest directories 
+				* if no named file exist, no RCS, ClearCase, Perforce, or SCCS master was found, some names are given, patch is not conforming to posix and the patch appears to create a file 
+					* patch selects the best name requiring the creation of the fewest directories 
+				* if no file name results from the above heuristics 
+					* you are asked for the name of the file to patch 
+						* patch selects that file 
+	* options
+		* -pnum 
+			* strip the smallest prefix containing num leading slashes from each file name found in the patch file 
+				* a sequence of one or more adjacent slashes is counted as a single slash 
+				* controls how file names in the patch file are treated 
+
+* diff 
+	* compare files line by line 
+
+* find 
+	* walk a file hierarchy 
+	* description
+		* recursively descends the directory tree for each path listed 
+		* evaluates an expression 
+			* composed of the primaries and operands 
+			* in terms of each file in the tree 
+	* primaries 
+		* all primaries which take a numeric argument allow the number to be preceded by a plus sign or a minus sign 
+			* + 
+				* more than n 
+			* - 
+				* less than n 
+			* neither 
+				* exactly n 
+	* operand 
+		* the primaries may be combined using the following operators 
+			* listed in decreasing precedence 
+	* [tutorial](http://www.oracle.com/technetwork/articles/calish-find-087766.html)
+		* basic structure 
+			* `find start_directory test options criteria_to_match action_to_perform_on_result`
+
+* file 
+	* determine file type 
+	* description 
+		* file test each argument in an attempt to classify it 
+			* three sets of test in order
+				* filesystem tests 
+				* magic tests 	
+					* used to check for files with data in a particular fixed format 
+				* language tests 
+				* first test to succeed causes the file type to be printed 
+	* magic files 
+		* have a magic number stored in a particular place near the beginning of the file that tells the UNIX operating system that the file is a binary executable 
+		* any file with some invariant identifier at a small fixed offset into the file 
+		* the information identifying these files is read from 
+			* compiled magic file: `/usr/share/file/magic.mgc`
+			* directory: `/usr/share/file/magic` 
+				* if compiled file does not exist 
 
 
 
