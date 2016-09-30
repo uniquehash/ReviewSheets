@@ -45,6 +45,12 @@ this project is about developing a custom standard c library to use in future pr
 * string manipulation - 17 total
 	* strlen
 		* function computes the length of the string `s`.	
+	* toupper
+		* function converts a lower-case letter to the corresponding upper-case letter. the argument must be representable as an unsigned char or the value of EOF. 
+	* tolower
+		* function converts an upper-case letter to the corresponding lower-case letter. the argument must be representable as an unsigned char or the value of EOF
+	* ft_strclr
+		* sets every character of the string to the value `\0`
 	* strcpy
 		* function copies the string `src` to `dst` (including the terminating `\0` character.)
 		* the source and destination should not overlap, behavior is undefined
@@ -64,25 +70,20 @@ this project is about developing a custom standard c library to use in future pr
 		* function locates the first occurance of `c` (converted to a char) in the string point to by `s`. the terminating NULL character is considered to be part of the string; therefore if `c` is `\0` the function locates the terminating `\0`. 
 	* strrchr
 		* function locates the last occurance of `c` (converted to a char) in the string point to by `s`. the terminating NULL character is considered to be part of the string; therefore if `c` is `\0` the function locates the terminating `\0`
-	* strstr
-		* function locates the first occurance of the NULL-terminated string `little` in the null-terminated string `big`
-	* strnstr
-		* function locates the first occurance of the NULL-terminated string `little` in the string `big` where not more than `len` characters are searched. characters that appear after a `\0` character are not searched. since this is a FreeBSD specific API it should only be used when portability is not a concern.
 	* strcmp
 		* function lexicographically compares the NULL-terminated strings `s1` and `s2`.
 	* strncmp
-		* function compares not more than `n` characters. because it is designed for comparing strings rather than binary code, characters that appear after a `\0` character are not compared. 
-	* toupper
-		* function converts a lower-case letter to the corresponding upper-case letter. the argument must be representable as an unsigned char or the value of EOF. 
-	* tolower
-		* function converts an upper-case letter to the corresponding lower-case letter. the argument must be representable as an unsigned char or the value of EOF
+		* function compares not more than `n` characters. because it is designed for comparing strings rather than binary code, characters that appear after a `\0` character are not compared. 	
 	* ft_strequ
 		* lexicographical comparison between `s1` and `s2`. if the 2 strings are identical the function returns 1, or 0 otherwise
 	* ft_strnequ
 		* lexicographical comparison between `s1` and `s2` up to `n` characters or until a `\0` is reached. if the 2 strings are identical, the function returns 1, or 0 otherwise. 
-	* ft_strclr
-		* sets every character of the string to the value `\0`
-
+	* strstr
+		* function locates the first occurance of the NULL-terminated string `little` in the null-terminated string `big`
+	* strnstr
+		* function locates the first occurance of the NULL-terminated string `little` in the string `big` where not more than `len` characters are searched. characters that appear after a `\0` character are not searched. since this is a FreeBSD specific API it should only be used when portability is not a concern.
+	
+	
 * type conversion - 2 total
 	* atoi
 		* function converts the initial portion of the string pointed to by `str` to int representation 
@@ -152,7 +153,7 @@ this project is about developing a custom standard c library to use in future pr
 		* applies the function `f` to each character of the string given as argument to create a "fresh" new string malloc(3) resulting from the successive applictions of `f`
 	* ft_strmapi
 		* applies the function `f` to each character of the string passed as argument by giving its index as first argument to create a "fresh" new string with malloc(3) resulting from the successive applications of `f`
-		
+
 
 ##### part 1 
 
