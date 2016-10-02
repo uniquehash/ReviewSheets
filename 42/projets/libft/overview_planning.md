@@ -26,68 +26,70 @@ this project is about developing a custom standard c library to use in future pr
 
 ##### classification
 
+* total: 52	 	test_total: ~~28~~ 23
+
 * raw memory - 7 total
-	* memset
+	* memset - ~~test~~
 		* writes `len` bytes of value `c` (converted to an unsigned char) to the string `b`
-	* bzero
+	* bzero - test
 		* function writes `n` zeroed bytes to the string `s`. if `n` is zero bzero() does nothing.
-	* memcpy
+	* memcpy - test
 		* function copies `n` bytes from memory area `src` to memory area `dst`. if `dst` and `src` overlap, behavior is undefined. applications in which `dst` and `src` might overlap should use memmove instead.
-	* memccpy
+	* memccpy - test
 		* function copies bytes from string `src` to string `dst`. if the character `c` (as converted to an unsigned char) occurs in the string `src`. the copy stops and a pointer to the byte after the copy of `c` in the string `dst` is returned. otherwise, `n` bytes are copied, and a NULL pointer is returned. the source and destination string should not overlap as the behavior is undefined 
-	* memmove
+	* memmove - test
 		* function copies `len` bytes from string src to string `dst`. the two strings may overlap; the copy is always done in a non-destructive manner. 
-	* memchr
+	* memchr - test
 		* function locates the first occurrence of `c` (converted to an unsigned char) in string `s`
-	* memcmp
+	* memcmp - test
 		* function compares byte string `s1` against byte string `s2`. both strings are assumed to be `n` bytes long.
 
 * string manipulation - 17 total
-	* strlen
+	* strlen - test
 		* function computes the length of the string `s`.	
-	* toupper
+	* toupper - test
 		* function converts a lower-case letter to the corresponding upper-case letter. the argument must be representable as an unsigned char or the value of EOF. 
-	* tolower
+	* tolower - test
 		* function converts an upper-case letter to the corresponding lower-case letter. the argument must be representable as an unsigned char or the value of EOF
 	* ft_strclr
 		* sets every character of the string to the value `\0`
-	* strcpy
+	* strcpy - test
 		* function copies the string `src` to `dst` (including the terminating `\0` character.)
 		* the source and destination should not overlap, behavior is undefined
-	* strncpy
+	* strncpy - test
 		* function copies at most `len` characters from `src` into `dst`. ig `src` is less than `len` characters long, the remainder of `dst` is filled with `\0` characters. otherwise, `dst` is not terminated 
-	* strcat
+	* strcat - test
 		* function append a copy of the null-terminated string `s2` to the end of the null-terminated string `s1`, then add a terminating `\0`. the string `s1` must have sufficient space to hold the result.
 		* the source and destination behavior shuold not overlap, as the behavior is undefined
-	* strncat
+	* strncat - test
 		* function appends a copy of the null-terminated string `s2` to the end of the null-terminated string `s1`, then add a terminating `\0`. the string `s1` must have sufficient space to hold the result. 
 		* appends not more than `n` characters from `s2`, and then adds a terminating `\0`.
-	* strlcat
+	* strlcat - test
 		* function concatenates strings. designed to be safer more consistent, and less error prone replacment for `strncat`. unlike those functions `strlcat` takes the full size of the buffer (not just the length) and gurantees to NUL-terminate the result (as long as there is at least one byte free in `dst`). only operates on true `C``strings i.e. both `src` and `dst` must be NULL-terminated. 
 		* function appends the NULL-terminated string `src` to the end of `dst`. it will append at most `size - strlen(dst) - 1 bytes`, NULL-terminating the result.
 		* the source and the destination should not overlap, as the behavior is undefined.
-	* strchr
+	* strchr - test
 		* function locates the first occurance of `c` (converted to a char) in the string point to by `s`. the terminating NULL character is considered to be part of the string; therefore if `c` is `\0` the function locates the terminating `\0`. 
-	* strrchr
+	* strrchr - test
 		* function locates the last occurance of `c` (converted to a char) in the string point to by `s`. the terminating NULL character is considered to be part of the string; therefore if `c` is `\0` the function locates the terminating `\0`
-	* strcmp
+	* strcmp - test
 		* function lexicographically compares the NULL-terminated strings `s1` and `s2`.
-	* strncmp
+	* strncmp - test
 		* function compares not more than `n` characters. because it is designed for comparing strings rather than binary code, characters that appear after a `\0` character are not compared. 	
 	* ft_strequ
 		* lexicographical comparison between `s1` and `s2`. if the 2 strings are identical the function returns 1, or 0 otherwise
 	* ft_strnequ
 		* lexicographical comparison between `s1` and `s2` up to `n` characters or until a `\0` is reached. if the 2 strings are identical, the function returns 1, or 0 otherwise. 
-	* strstr
+	* strstr - test
 		* function locates the first occurance of the NULL-terminated string `little` in the null-terminated string `big`
-	* strnstr
+	* strnstr - test
 		* function locates the first occurance of the NULL-terminated string `little` in the string `big` where not more than `len` characters are searched. characters that appear after a `\0` character are not searched. since this is a FreeBSD specific API it should only be used when portability is not a concern.
 	
 	
 * type conversion - 2 total
-	* atoi
+	* atoi - test
 		* function converts the initial portion of the string pointed to by `str` to int representation 
-	* ft_itoa
+	* ft_itoa - test
 		* allocate with malloc(3) and returns a "fresh" string ending with '\0'representing the integer `n` given as argument.
 		negative numbers must be supported. if allocation fails the function returns NULL.
 
@@ -110,15 +112,15 @@ this project is about developing a custom standard c library to use in future pr
 		* outputs the integer `n` to the file descriptor `fd`
 
 * type checking - 5 total
-	* isalpha
+	* isalpha - ~~test~~
 		* function tests for any character for which isupper, or islower is true. the value of the argumnet must be representable as an unsigned char or the value of EOF
-	* isdigit
+	* isdigit - ~~test~~
 		* function tests for a decimal digit character 
-	* isalnum
+	* isalnum - ~~test~~
 		* function tests for any character for which isalpha or isdigit is true
-	* isascii
+	* isascii - ~~test~~
 		* function tests for an ASCII character, which is any character between 0 and octal 0177 inclusive 
-	* isprint
+	* isprint - ~~test~~
 		* function tests for any printing character, including space(' '). the value of the argument must be representable as an unsigned char or the value of EOF.
 
 * memory allocation - 7 total
@@ -126,7 +128,7 @@ this project is about developing a custom standard c library to use in future pr
 		* allocates (with malloc(3)) and returns a "fresh" memory area. the memory allocated is initialized to 0. if the allocation fails, the function returns NULL.
 	* ft_strnew
 		* allocates with malloc(3) and returns a "fresh" string NULL-terminated with `\0`. each character of the string is initialized at `\0`. if the allocation fails the function returns NULL
-	* strdup
+	* strdup - test
 		* function allocates sufficient memory for a copy of the string `s1`, does the copy, and returns a pointer to it. the pointer may be used as an argument to the function free(3). 
 		* if insufficient memory is available, NULL is returned and `errno` is set to ENOMEM.
 	* ft_strsub
