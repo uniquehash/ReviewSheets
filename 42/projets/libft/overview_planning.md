@@ -26,18 +26,18 @@ this project is about developing a custom standard c library to use in future pr
 
 ##### classification
 
-* total: 52	 	test_total: ~~28~~ 23
+* total: 52	 	test_total: ~~28~~ ~~23~~ 18
 
 * raw memory - 7 total
 	* memset - ~~test~~
 		* writes `len` bytes of value `c` (converted to an unsigned char) to the string `b`
-	* bzero - test
+	* bzero - ~~test~~
 		* function writes `n` zeroed bytes to the string `s`. if `n` is zero bzero() does nothing.
-	* memcpy - test
+	* memcpy - ~~test~~
 		* function copies `n` bytes from memory area `src` to memory area `dst`. if `dst` and `src` overlap, behavior is undefined. applications in which `dst` and `src` might overlap should use memmove instead.
-	* memccpy - test
+	* memccpy - ~~test~~
 		* function copies bytes from string `src` to string `dst`. if the character `c` (as converted to an unsigned char) occurs in the string `src`. the copy stops and a pointer to the byte after the copy of `c` in the string `dst` is returned. otherwise, `n` bytes are copied, and a NULL pointer is returned. the source and destination string should not overlap as the behavior is undefined 
-	* memmove - test
+	* memmove - ~~test~~
 		* function copies `len` bytes from string src to string `dst`. the two strings may overlap; the copy is always done in a non-destructive manner. 
 	* memchr - test
 		* function locates the first occurrence of `c` (converted to an unsigned char) in string `s`

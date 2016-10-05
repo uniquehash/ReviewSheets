@@ -79,3 +79,5 @@
 			* one post a day 
 				* holy fuck that content stream though 
 	* BD in mechanical engineering from MIT
+
+* [Kent Beck](https://en.wikipedia.org/wiki/Kent_Beck)
