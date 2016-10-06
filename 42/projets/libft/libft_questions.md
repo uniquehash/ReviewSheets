@@ -18,3 +18,6 @@
 		* to create function prototype first undeclare the macro
 
 * why is memove returning dst post change rather than the original value?
+
+* testing harness in C?
+	* [unit testing in c](http://stackoverflow.com/questions/65820/unit-testing-c-code)

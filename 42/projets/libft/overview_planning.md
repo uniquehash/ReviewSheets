@@ -39,7 +39,7 @@ this project is about developing a custom standard c library to use in future pr
 		* function copies bytes from string `src` to string `dst`. if the character `c` (as converted to an unsigned char) occurs in the string `src`. the copy stops and a pointer to the byte after the copy of `c` in the string `dst` is returned. otherwise, `n` bytes are copied, and a NULL pointer is returned. the source and destination string should not overlap as the behavior is undefined 
 	* memmove - ~~test~~
 		* function copies `len` bytes from string src to string `dst`. the two strings may overlap; the copy is always done in a non-destructive manner. 
-	* memchr - test
+	* memchr - ~~test~~
 		* function locates the first occurrence of `c` (converted to an unsigned char) in string `s`
 	* memcmp - test
 		* function compares byte string `s1` against byte string `s2`. both strings are assumed to be `n` bytes long.
