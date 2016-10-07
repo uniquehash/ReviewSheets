@@ -26,9 +26,9 @@ this project is about developing a custom standard c library to use in future pr
 
 ##### classification
 
-* total: 52	 	test_total: ~~28~~ ~~23~~ 18
+* total: 52	 	test_total: ~~28~~ ~~23~~ ~~18~~ 16
 
-* raw memory - 7 total
+* raw memory - 7 total 
 	* memset - ~~test~~
 		* writes `len` bytes of value `c` (converted to an unsigned char) to the string `b`
 	* bzero - ~~test~~
@@ -41,7 +41,7 @@ this project is about developing a custom standard c library to use in future pr
 		* function copies `len` bytes from string src to string `dst`. the two strings may overlap; the copy is always done in a non-destructive manner. 
 	* memchr - ~~test~~
 		* function locates the first occurrence of `c` (converted to an unsigned char) in string `s`
-	* memcmp - test
+	* memcmp - ~~test~~
 		* function compares byte string `s1` against byte string `s2`. both strings are assumed to be `n` bytes long.
 
 * string manipulation - 17 total
