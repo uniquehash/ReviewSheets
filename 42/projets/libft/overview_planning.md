@@ -26,55 +26,55 @@ this project is about developing a custom standard c library to use in future pr
 
 ##### session bucket
 
-* total: 52
+* total: ~~52~~ 35
 
 * session_1
 	* type checking - 5 total
-		* isalpha - ~~test~~
+		* isalpha - /* pre moulitest complete */
 			* function tests for any character for which isupper, or islower is true. the value of the argumnet must be representable as an unsigned char or the value of EOF
-		* isdigit - ~~test~~
+		* isdigit - /* pre moulitest complete */
 			* function tests for a decimal digit character 
-		* isalnum - ~~test~~
+		* isalnum - /* pre moulitest complete */
 			* function tests for any character for which isalpha or isdigit is true
-		* isascii - ~~test~~
+		* isascii - /* pre moulitest complete */
 			* function tests for an ASCII character, which is any character between 0 and octal 0177 inclusive 
-		* isprint - ~~test~~
+		* isprint - /* pre moulitest complete */
 			* function tests for any printing character, including space(' '). the value of the argument must be representable as an unsigned char or the value of EOF.
-	* write - 4 total
-		* ft_putchar
-			* outputs the character `c` to the standard output
-		* ft_putstr
-			* outputs the string `s` to the standard output
-		* ft_putendl
-			* outputs the string `s` to the standard output followed by a '\n'
-		* ft_putnbr
-			* outputs the integer `n` to the standard output
+	* raw memory - 7 total 
+		* memset - /* pre moulitest complete */
+			* writes `len` bytes of value `c` (converted to an unsigned char) to the string `b`
+		* bzero - /* pre moulitest complete */
+			* function writes `n` zeroed bytes to the string `s`. if `n` is zero bzero() does nothing.
+		* memcpy - /* pre moulitest complete */
+			* function copies `n` bytes from memory area `src` to memory area `dst`. if `dst` and `src` overlap, behavior is undefined. applications in which `dst` and `src` might overlap should use memmove instead.
+		* memccpy - /* pre moulitest complete */
+			* function copies bytes from string `src` to string `dst`. if the character `c` (as converted to an unsigned char) occurs in the string `src`. the copy stops and a pointer to the byte after the copy of `c` in the string `dst` is returned. otherwise, `n` bytes are copied, and a NULL pointer is returned. the source and destination string should not overlap as the behavior is undefined 
+		* memmove - /* pre moulitest complete */
+			* function copies `len` bytes from string src to string `dst`. the two strings may overlap; the copy is always done in a non-destructive manner. 
+		* memchr - /* pre moulitest complete */
+			* function locates the first occurrence of `c` (converted to an unsigned char) in string `s`
+		* memcmp - /* pre moulitest complete */
+			* function compares byte string `s1` against byte string `s2`. both strings are assumed to be `n` bytes long.
 
 * session_2
-	* write - 4 total
-		* ft_putchar_fd
+	* write - 8 total
+		* ft_putchar - /* pre moulitest complete */
+			* outputs the character `c` to the standard output
+		* ft_putchar_fd - /* pre moulitest complete */
 			* outputs the char `c` to the file descriptor `fd`
-		* ft_putstr_fd
+		* ft_putstr - /* pre moulitest complete */
+			* outputs the string `s` to the standard output
+		* ft_putstr_fd - /* pre moulitest complete */
 			* outputs the string `s` to the file descriptor `fd`
-		* ft_putendl_fd
+		* ft_putendl - /* pre moulitest complete */
+			* outputs the string `s` to the standard output followed by a '\n'
+		* ft_putendl_fd - /* pre moulitest complete */
 			* outputs the string `s` to the file descriptor `fd` followed by a '\n'
-		* ft_putnbr_fd
+		* ft_putnbr - /* pre moulitest complete */
+			* outputs the integer `n` to the standard output
+		* ft_putnbr_fd - /* pre moulitest complete */
 			* outputs the integer `n` to the file descriptor `fd`
-	* raw memory - 7 total 
-		* memset - ~~test~~
-			* writes `len` bytes of value `c` (converted to an unsigned char) to the string `b`
-		* bzero - ~~test~~
-			* function writes `n` zeroed bytes to the string `s`. if `n` is zero bzero() does nothing.
-		* memcpy - ~~test~~
-			* function copies `n` bytes from memory area `src` to memory area `dst`. if `dst` and `src` overlap, behavior is undefined. applications in which `dst` and `src` might overlap should use memmove instead.
-		* memccpy - ~~test~~
-			* function copies bytes from string `src` to string `dst`. if the character `c` (as converted to an unsigned char) occurs in the string `src`. the copy stops and a pointer to the byte after the copy of `c` in the string `dst` is returned. otherwise, `n` bytes are copied, and a NULL pointer is returned. the source and destination string should not overlap as the behavior is undefined 
-		* memmove - ~~test~~
-			* function copies `len` bytes from string src to string `dst`. the two strings may overlap; the copy is always done in a non-destructive manner. 
-		* memchr - ~~test~~
-			* function locates the first occurrence of `c` (converted to an unsigned char) in string `s`
-		* memcmp - ~~test~~
-			* function compares byte string `s1` against byte string `s2`. both strings are assumed to be `n` bytes long.
+	
 
 * session_3
 	* memory allocation - 7 total
@@ -119,45 +119,45 @@ this project is about developing a custom standard c library to use in future pr
 			* applies the function `f` to each character of the string passed as argument by giving its index as first argument to create a "fresh" new string with malloc(3) resulting from the successive applications of `f`
 
 * session_5
-	* string manipulation - 17 total
-		* strlen - test
+	* string manipulation - ~~17~~ 0 total
+		* strlen - /* pre moulitest complete */
 			* function computes the length of the string `s`.	
-		* toupper - test
+		* toupper - /* pre moulitest complete */
 			* function converts a lower-case letter to the corresponding upper-case letter. the argument must be representable as an unsigned char or the value of EOF. 
-		* tolower - test
+		* tolower - /* pre moulitest complete */
 			* function converts an upper-case letter to the corresponding lower-case letter. the argument must be representable as an unsigned char or the value of EOF
-		* ft_strclr
+		* ft_strclr - /* pre moulitest complete */
 			* sets every character of the string to the value `\0`
-		* strcpy - test
+		* strcpy - /* pre moulitest complete */
 			* function copies the string `src` to `dst` (including the terminating `\0` character.)
 			* the source and destination should not overlap, behavior is undefined
-		* strncpy - test
+		* strncpy - /* pre moulitest complete */
 			* function copies at most `len` characters from `src` into `dst`. ig `src` is less than `len` characters long, the remainder of `dst` is filled with `\0` characters. otherwise, `dst` is not terminated 
-		* strcat - test
+		* strcat - /* pre moulitest complete */
 			* function append a copy of the null-terminated string `s2` to the end of the null-terminated string `s1`, then add a terminating `\0`. the string `s1` must have sufficient space to hold the result.
 			* the source and destination behavior shuold not overlap, as the behavior is undefined
-		* strncat - test
+		* strncat - /* pre moulitest complete */
 			* function appends a copy of the null-terminated string `s2` to the end of the null-terminated string `s1`, then add a terminating `\0`. the string `s1` must have sufficient space to hold the result. 
 			* appends not more than `n` characters from `s2`, and then adds a terminating `\0`.
-		* strlcat - test
+		* strlcat - /* pre moulitest complete */
 			* function concatenates strings. designed to be safer more consistent, and less error prone replacment for `strncat`. unlike those functions `strlcat` takes the full size of the buffer (not just the length) and gurantees to NUL-terminate the result (as long as there is at least one byte free in `dst`). only operates on true `C``strings i.e. both `src` and `dst` must be NULL-terminated. 
 			* function appends the NULL-terminated string `src` to the end of `dst`. it will append at most `size - strlen(dst) - 1 bytes`, NULL-terminating the result.
 			* the source and the destination should not overlap, as the behavior is undefined.
-		* strchr - test
+		* strchr - /* pre moulitest complete */
 			* function locates the first occurance of `c` (converted to a char) in the string point to by `s`. the terminating NULL character is considered to be part of the string; therefore if `c` is `\0` the function locates the terminating `\0`. 
-		* strrchr - test
+		* strrchr - /* pre moulitest complete */
 			* function locates the last occurance of `c` (converted to a char) in the string point to by `s`. the terminating NULL character is considered to be part of the string; therefore if `c` is `\0` the function locates the terminating `\0`
-		* strcmp - test
+		* strcmp - /* pre moulitest complete */
 			* function lexicographically compares the NULL-terminated strings `s1` and `s2`.
-		* strncmp - test
+		* strncmp - /* pre moulitest complete */
 			* function compares not more than `n` characters. because it is designed for comparing strings rather than binary code, characters that appear after a `\0` character are not compared. 	
-		* ft_strequ
+		* ft_strequ - /* pre moulitest complete */
 			* lexicographical comparison between `s1` and `s2`. if the 2 strings are identical the function returns 1, or 0 otherwise
-		* ft_strnequ
+		* ft_strnequ - /* pre moulitest complete */
 			* lexicographical comparison between `s1` and `s2` up to `n` characters or until a `\0` is reached. if the 2 strings are identical, the function returns 1, or 0 otherwise. 
-		* strstr - test
+		* strstr - /* pre moulitest complete */
 			* function locates the first occurance of the NULL-terminated string `little` in the null-terminated string `big`
-		* strnstr - test
+		* strnstr - /* pre moulitest complete */
 			* function locates the first occurance of the NULL-terminated string `little` in the string `big` where not more than `len` characters are searched. characters that appear after a `\0` character are not searched. since this is a FreeBSD specific API it should only be used when portability is not a concern.
 
 
