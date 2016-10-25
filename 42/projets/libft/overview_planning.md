@@ -26,7 +26,31 @@ this project is about developing a custom standard c library to use in future pr
 
 ##### session bucket
 
-* total: ~~52~~ 35
+* total: ~~52~~ ~~35~~ 17
+
+* libft_unit
+	* part 1
+	* part 2
+		* strsplit
+			[crash]: your strsplit does not work with full space string
+			[crash]: your strsplit does not work with empty string
+			[crash]: you did not protect your strsplit
+	* bonus
+		ft_lstmap:
+			shit don't work
+* moulitest
+	* part 1
+		ft_strncmp
+		ft_strrchr
+	* part 2	
+		ft_strnequ
+		ft_strsplit	
+		ft_atoi
+	* bonus
+		ft_lstmap
+
+
+
 
 * session_1
 	* type checking - 5 total
@@ -78,9 +102,9 @@ this project is about developing a custom standard c library to use in future pr
 
 * session_3
 	* memory allocation - 7 total
-		* ft_memalloc
+		* ft_memalloc - /* pre moulitest complete */
 			* allocates (with malloc(3)) and returns a "fresh" memory area. the memory allocated is initialized to 0. if the allocation fails, the function returns NULL.
-		* ft_strnew
+		* ft_strnew - /* pre moulitest complete */
 			* allocates with malloc(3) and returns a "fresh" string NULL-terminated with `\0`. each character of the string is initialized at `\0`. if the allocation fails the function returns NULL
 		* strdup - ~~test~~
 			* function allocates sufficient memory for a copy of the string `s1`, does the copy, and returns a pointer to it. the pointer may be used as an argument to the function free(3). 
@@ -96,26 +120,26 @@ this project is about developing a custom standard c library to use in future pr
 
 * session_4
 	* memory freeing - 2 total
-		* ft_memdel
+		* ft_memdel - /* pre moulitest complete */
 			* takes as a parameter the address of a memory area that needs to be freed with free(3), then puts the pointer to NULL
-		* ft_strdel
+		* ft_strdel - /* pre moulitest complete */
 			* takes as a parameter the address of a string that needs to be freed with free(3), then sets its pointer to NULL
 
 	* type conversion - 2 total
-		* atoi - ~~test~~
+		* atoi - /* pre moulitest complete */
 			* function converts the initial portion of the string pointed to by `str` to int representation 
-		* ft_itoa - test
+		* ft_itoa - /* pre moulitest complete */
 			* allocate with malloc(3) and returns a "fresh" string ending with '\0'representing the integer `n` given as argument.
 			negative numbers must be supported. if allocation fails the function returns NULL.
 
 	* function pointer - 4 total
-		* ft_striter
+		* ft_striter  - /* pre moulitest complete */
 			* applies to function `f` to each character of the string passed as an argument. each character is passed by address to `f` to be modified if necessary
-		* ft_striteri
+		* ft_striteri - /* pre moulitest complete */
 			* applies the function `f` to each character of the string passed as argument, and passing its index as first argument. each character is passed by address to `f` to be modified if necessary.
-		* ft_strmap
+		* ft_strmap - /* pre moulitest complete */
 			* applies the function `f` to each character of the string given as argument to create a "fresh" new string malloc(3) resulting from the successive applictions of `f`
-		* ft_strmapi
+		* ft_strmapi - /* pre moulitest complete */
 			* applies the function `f` to each character of the string passed as argument by giving its index as first argument to create a "fresh" new string with malloc(3) resulting from the successive applications of `f`
 
 * session_5
