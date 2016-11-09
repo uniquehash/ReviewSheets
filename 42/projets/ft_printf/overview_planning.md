@@ -102,16 +102,18 @@ the way i'm gonna organize the research is through my tried an true question ans
 				* specifies the size of the argument
 					* converted value must be of this type
 				* for `d`, `i`, `n`, `o`, `u`, `x`, `X`					
-					* | Modifier  	| d, i          | o, u, x, X  			| n 			|
-					* | --------  	| -------------:| --------------------: | ------------: |
-					* | hh       	| signed char 	| unsigned char 		| signed char*	|
-					* | h      		| short      	| unsigned short 		| short* 		|
-					* | l 			| long      	| unsigned long  		| long* 		|
-					* | ll			| long long		| unsigned long long	| long long*	|
-					* | j			| intmax_t		| uintmax_t				| intmax_t*		|
-					* | t			| ptrdiff_t		| (see note)			| ptrdiff_t*	|
-					* | z			| (see note)	| size_t				| (see note)	|
-					* | q			| quad_t		| u_quad_t				| quad_t*		|					
+					```
+						* | Modifier  	| d, i          | o, u, x, X  			| n 			|
+						* | --------  	| -------------:| --------------------: | ------------: |
+						* | hh       	| signed char 	| unsigned char 		| signed char*	|
+						* | h      		| short      	| unsigned short 		| short* 		|
+						* | l 			| long      	| unsigned long  		| long* 		|
+						* | ll			| long long		| unsigned long long	| long long*	|
+						* | j			| intmax_t		| uintmax_t				| intmax_t*		|
+						* | t			| ptrdiff_t		| (see note)			| ptrdiff_t*	|
+						* | z			| (see note)	| size_t				| (see note)	|
+						* | q			| quad_t		| u_quad_t				| quad_t*		|
+					```
 					* the `t` modifier when applied to `o`, `u`, `x`, `X` conversions indicates that the argument is on an unsigned type equivilent in size to a `ptrdiff_t` 
 					* the `z` modifier when applied to `d`, `i` conversions indicates that the argument is of a signed type equivalent in size to a `size_t` 
 						* when applied to `n` 
