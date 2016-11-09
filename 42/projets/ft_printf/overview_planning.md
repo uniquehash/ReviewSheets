@@ -40,12 +40,6 @@ the way i'm gonna organize the research is through my tried an true question ans
 			* the number of characters printed excluding the trailing `\0`
 			* return a negative value if an error occurs
 
-	* go back after conversions
-		* flags
-		* precision
-		* length modifier
-			go back to type conversion `c` and `s` after
-
 	* what is the detailed structure of the `format string`?
 		* in order of sequence
 			* prefix `%`
@@ -56,11 +50,35 @@ the way i'm gonna organize the research is through my tried an true question ans
 				* if unaccessed arguments in the `format string` are interspersed with ones that are accessed the result will be indeterminate
 			* zero or more flags
 				* `#`
+					* convert value to an alternate form
+					* no effect for `c`, `d`, `i`, `n`, `p`, `s`
+					* `o`
+						* the precision of the number is increased to force the first character of the output string to a zero
+					* `x` & `X`
+						* non-zero result has the string `0x` prepended to it
+					* `a`, `A`, `e`, `E`, `f`, `F`, `g`, `G`
+						* the result always contains a decimal point even if no digit follow it
+					* `g`, `G`
+						* trailing zeros are not removed from the result as they would be otherwise
 				* `0`
+					* zero padding
+					* for all conversions except `n`
+						* the converted value is padded on the left with zeros rather than blanks
+						* if a precision is given with a numeric conversion (`d`, `i`, `o`, `u`, `x`, `X`) the 0 flag is ignored
 				* `-`
+					* negative field width flag
+					* converted value should be left adjusted on the field boundary
+					* except for `n`
+						* padded on right with blanks 
+					* overrides a `0` if both are given 
 				* ` `
+					* for `a`, `A`, `d`, `e`, `E`, `f`, `F`, `g`, `G`, `i`
+					* a blank should be left before a positive number produced by a signed conversion
 				* `+`
+					* a sign must always be placed before a number produced by a signed conversion
+					* overrides a ` ` if both are used
 				* `'`
+					* decimal conversion `d`, `u`, `i` or the integral portion of a floating point conversion `f`, `F` should be grouped and separated by thousands using the non-monetary separator returned by localeconv(3)
 			* separator character
 				* optional field
 				* values
@@ -75,9 +93,45 @@ the way i'm gonna organize the research is through my tried an true question ans
 				* optional field
 				* a `.` followed by an optional digit string
 				* if the digit string is omitted, the precision is taken as zero
+					* minimum number of digits for `d`, `i`, `o`, `u`, `x`, `X`
+					* minimum number of digits to appear after the decimal point for `a`, `A`, `e`, `E`, `f`, `F`
+					* the maximum number of significant digits for `g`, `G`
+					* the maximum number of characters to be printed from a string for `s`
 			* length modifier
 				* optional field
 				* specifies the size of the argument
+					* converted value must be of this type
+				* for `d`, `i`, `n`, `o`, `u`, `x`, `X`
+					```
+						| Modifier  | d, i          | o, u, x, X  			| n 			|
+						| --------: | -------------:| --------------------: | ------------: |
+						| hh       	| signed char 	| unsigned char 		| signed char*	|
+						| h      	| short      	| unsigned short 		| short* 		|
+						| l 		| long      	| unsigned long  		| long* 		|
+						| ll		| long long		| unsigned long long	| long long*	|
+						| j			| intmax_t		| uintmax_t				| intmax_t*		|
+						| t			| ptrdiff_t		| (see note)			| ptrdiff_t*	|
+						| z			| (see note)	| size_t				| (see note)	|
+						| q			| quad_t		| u_quad_t				| quad_t*		|
+					```
+					* the `t` modifier when applied to `o`, `u`, `x`, `X` conversions indicates that the argument is on an unsigned type equivilent in size to a `ptrdiff_t` 
+					* the `z` modifier when applied to `d`, `i` conversions indicates that the argument is of a signed type equivalent in size to a `size_t` 
+						* when applied to `n` 
+							* the argument is a pointer to a signed type equivalent in size to a `size_t`
+				* for `a`, `A`, `e`, `E`, `f`, `F`, `g`, `G`
+					```
+						| Modifier  | a, A, e, E, f, F, g, G						|
+						| --------: | --------------------------------------------: |												
+						| l 		| double (ignored, same behavior as without it) |
+						| L			| long double									|
+					```
+				* for `c`, `s`
+					```
+						| Modifier  | c			| s			|
+						| --------: | --------:	| --------: |												
+						| l 		| wint_t 	| wchar_t*	|						
+					```
+
 			* type conversion
 				* represented by a character
 				* a field width or precision, or both, may be indicated by:
@@ -159,7 +213,7 @@ the way i'm gonna organize the research is through my tried an true question ans
 					* `p`
 						* the void* pointer argument is printed in hexadecimal 
 					* `n`
-						* the number of characters written so far is stored into the integr indicated by the int* pointer argument 
+						* the number of characters written so far is stored into the integer indicated by the int* pointer argument 
 						* no argument is converted
 					* `%`
 						* a '%' is written not argument is converted. 
@@ -221,10 +275,33 @@ the way i'm gonna organize the research is through my tried an true question ans
 						* both the value and the variable are pointers and one or the other is of type `void *`
 
 	* how is the stdio printf function prototyped?
-		* 
+		* `int printf(const char* restrict format, ...)`
+			* what does format mean?
+			* what do the three dots represent?
+				* it's something called an ellipsis
+				* also means the function is not a variadic function
 
-	* what is stdarg?
-		*
+	* what is an ellipsis and what is a [variadic function](https://en.wikipedia.org/wiki/Variadic_function#Variadic_functions_in_C.2C_Objective-C.2C_C.2B.2B.2C_and_D)?
+		* seems that ellipsis are only used in variadic functions
+		* you use `<stdarg>` to access these arbritary parameters
+
+	* what is `<stdarg>`(man)?
+		* declares a type `va_list`
+		* provides 3 macros for stepping through a list of arguments whose number and types are not known to called functions
+		* the calling function must declare an object of type `va_list` to be used by `va_start()`, `va_arg()`, `va_end()`
+			* `va_start()`
+				* must be called first 
+				* initializes `va_list` called `ap`
+			* `va_arg()`
+				* accepts `ap` as an argument
+				* each call to `va_arg()` modifies `ap` so that the next call returns the next argument
+			* `va_end()`
+				* signals that there are no further arguments and causes `ap` to be invalidated
+		* each call to `va_start()` must be matched to `va_end()`
+		* every parameter in the variadic function is actually included in the `va_list`
+			* i think
+
+
 
 	* what is fixed-point notation?
 
