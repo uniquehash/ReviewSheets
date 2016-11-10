@@ -85,34 +85,47 @@
 			* specifies the size of the argument
 				* converted value must be of this type
 			* for `d`, `i`, `n`, `o`, `u`, `x`, `X`					
-				| Modifier  | d, i          | o, u, x, X  			| n 			|
-				| --------  | -------------:| --------------------: | ------------: |
-				| hh       	| signed char 	| unsigned char 		| signed char*	|
-				| h      	| short      	| unsigned short 		| short* 		|
-				| l 		| long      	| unsigned long  		| long* 		|
-				| ll		| long long		| unsigned long long	| long long*	|
-				| j			| intmax_t		| uintmax_t				| intmax_t*		|
-				| t			| ptrdiff_t		| (see note)			| ptrdiff_t*	|
-				| z			| (see note)	| size_t				| (see note)	|
-				| q			| quad_t		| u_quad_t				| quad_t*		|					
-				* the `t` modifier when applied to `o`, `u`, `x`, `X` conversions indicates that the argument is on an unsigned type equivilent in size to a `ptrdiff_t` 
-				* the `z` modifier when applied to `d`, `i` conversions indicates that the argument is of a signed type equivalent in size to a `size_t` 
-					* when applied to `n` 
-						* the argument is a pointer to a signed type equivalent in size to a `size_t`
+				* `hh`
+					* `d`, `i` 				--> `signed char`
+					* `o`, `u`, `x`, `X`	--> `unsigned char`
+					* `n`					--> `signed char*`
+				* `h`
+					* `d`, `i` 				--> `short`
+					* `o`, `u`, `x`, `X`	--> `unsigned short`
+					* `n`					--> `short*`
+				* `l`
+					* `d`, `i` 				--> `long`
+					* `o`, `u`, `x`, `X`	--> `unsigned long`
+					* `n`					--> `long*`
+				* `ll`
+					* `d`, `i` 				--> `long long`
+					* `o`, `u`, `x`, `X`	--> `unsigned long long`
+					* `n`					--> `long long*`
+				* `j`
+					* `d`, `i` 				--> `intmax_t`
+					* `o`, `u`, `x`, `X`	--> `uintmax_t`
+					* `n`					--> `intmax_t*`
+				* `t`
+					* `d`, `i` 				--> `ptrdiff_t`
+					* `o`, `u`, `x`, `X`	--> conversions indicates that the argument is on an unsigned type equivilent in size to a `ptrdiff_t` 
+					* `n`					--> `ptrdiff_t*`
+				* z
+					* `d`, `i` 				--> argument is of a signed type equivalent to `size_t`
+					* `o`, `u`, `x`, `X`	--> `size_t`
+					* `n`					--> argument is a pointer to a signed type equivalent to `size_t`
+				* q
+					* `d`, `i` 				--> `quad_t`
+					* `o`, `u`, `x`, `X`	--> `u_quad_t`
+					* `n`					--> `quad_t*`
 			* for `a`, `A`, `e`, `E`, `f`, `F`, `g`, `G`
-				```
-					| Modifier  | a, A, e, E, f, F, g, G						|
-					| --------: | --------------------------------------------: |												
-					| l 		| double (ignored, same behavior as without it) |
-					| L			| long double									|
-				```
+				* `l`
+					* `a`, `A`, `e`, `E`, `f`, `F`, `g`, `G` --> `double`
+				* `L`
+					* `a`, `A`, `e`, `E`, `f`, `F`, `g`, `G` --> `long double`
 			* for `c`, `s`
-				```
-					| Modifier  | c			| s			|
-					| --------: | --------:	| --------: |												
-					| l 		| wint_t 	| wchar_t*	|						
-				```
-
+				* `l`
+					* `c` --> `wint_t`
+					* `s` --> `wchar_t*`
 		* type conversion
 			* represented by a character
 			* a field width or precision, or both, may be indicated by:
@@ -189,6 +202,8 @@
 						* if a precision is specified no more than the number specified are written 
 							* if a precision is given no null character need be present
 							* if the precision is not specified or is greater than the size of the array the array must contain a terminating `NULL` character
+						* if the `l` modifier is used the `wchar_t*` argument is expected to be a pointer to an array of wide characters
+
 				* `S`
 					* treated as `s` with the `l` length modifier applied
 				* `p`
@@ -292,7 +307,7 @@
 
 * what is a shift sequence in the context of printf?
 
-
+* what is a wide character?
 
 
 
