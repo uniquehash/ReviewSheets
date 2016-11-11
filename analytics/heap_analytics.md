@@ -66,6 +66,49 @@ heap analytics can be thought of as ad-hoc analysis across a userbase's entire a
 		* on-demand instances for everything
 			* more investment makes project not worth it
 
+* events
+	* dom event can be created using a visual tool overlay
+	* page events can be created by selecting links on heap
+
+* funnels
+	* funnels are a way to see how many users make it through a multi-step process
+		* use events in series to design the funnel
+	* group by 
+		* demographic
+			* allows you to segment data based on demographics
+		* count of
+			* segment data by user counts of events
+
+* list
+	* see what users are doing in deep detail
+		* literally full deph of each user
+			* fuckkkkkkk
+		* clicking on undefined events gives you information about that event
+			* can then name it
+	* filter list same way that funnels do
+
+* graphs
+	* allow you to trends over time segment analysis 
+	* any event or segment that is defined can be graphed
+	* view by path
+		* see all things after domain
+
+* retention analysis
+	* track different cohorts
+	* create
+		* select a start event
+			* single initial event
+		* select a return event
+			* repeated activity
+
+* segments
+	* any subset of users
+	* allow you to do more granular analysis 
+
+* deep dive on defining events
+	* 
+
+
 #### questions
 
 * what is a partial index?
@@ -79,7 +122,7 @@ heap analytics can be thought of as ad-hoc analysis across a userbase's entire a
 * what does [CPU bound](https://en.wikipedia.org/wiki/CPU-bound) mean?
 	* time to complete a task is determined principally by the speed of the central processor. 
 
-* what does I/O bound mean?
+* what does [I/O bound](https://en.wikipedia.org/wiki/I/O_bound) mean?
 	* time to complete a task is determined principally by the period spent waiting for input/output operations to complete
 
 
