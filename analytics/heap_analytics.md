@@ -7,6 +7,21 @@ heap analytics is a analytics tool for websites. basically the link is added and
 
 heap analytics can be thought of as ad-hoc analysis across a userbase's entire activity stream.
 
+#### questions
+
+* what is a partial index?
+	* an index over a subset of rows in a table
+
+* what does database sharding really mean?
+
+* what is a 'data ingestion pipeline'?
+	* i assume it is their system for managing received data, kinda like a preprocessor
+
+* what does [CPU bound](https://en.wikipedia.org/wiki/CPU-bound) mean?
+	* time to complete a task is determined principally by the speed of the central processor. 
+
+* what does [I/O bound](https://en.wikipedia.org/wiki/I/O_bound) mean?
+	* time to complete a task is determined principally by the period spent waiting for input/output operations to complete
 
 #### technical specs
 	* web
@@ -125,28 +140,6 @@ heap analytics can be thought of as ad-hoc analysis across a userbase's entire a
 * segments
 	* any subset of users
 	* allow you to do more granular analysis 
-
-* deep dive on defining events
-	* 
-
-
-#### questions
-
-* what is a partial index?
-	* an index over a subset of rows in a table
-
-* what does database sharding really mean?
-
-* what is a 'data ingestion pipeline'?
-	* i assume it is their system for managing received data, kinda like a preprocessor
-
-* what does [CPU bound](https://en.wikipedia.org/wiki/CPU-bound) mean?
-	* time to complete a task is determined principally by the speed of the central processor. 
-
-* what does [I/O bound](https://en.wikipedia.org/wiki/I/O_bound) mean?
-	* time to complete a task is determined principally by the period spent waiting for input/output operations to complete
-
-
 
 #### defining an event
 
@@ -415,6 +408,23 @@ heap analytics can be thought of as ad-hoc analysis across a userbase's entire a
 		* compare segments by using the compare clause 
 	* multi-event graphs
 		* view multiple events at once
+
+#### custom apis
+
+* identify 
+	* allows you to create user identities
+		* regardless of device
+
+* addUserProperties
+	* attach custom properties to user profiles
+
+* track
+	* add custom programic events
+
+#### plan 
+
+* implement identify first
+* implement server side stuff 
 
 
 
