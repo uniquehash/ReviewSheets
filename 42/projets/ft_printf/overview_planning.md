@@ -16,6 +16,34 @@ remember to make putchar work with utf-8 characters
 	* minimum field-width
 	* precision
 
+* order of modifiers
+	* flag
+	* minimum field width
+	* precision
+	* length
+	* conversion
+
+* globals
+	* g_sequence_symbols 
+	* g_flag_symbols 
+	* g_mfieldwidth_symbols 
+	* g_precision_symbols
+	* g_length_symbols[7] 
+	* g_conversion_symbols 
+
+* conversion struct 
+	* t_mod
+		* `char	*flag`
+		* `char *length`
+		* `char *conversion`
+		* `char *substring`
+		* `char *mfieldwidth`
+		* `char *precision`
+		* `int 	mfw`
+		* `int	prec`
+		* `size_t sequence_start_index`
+		* `size_t sequence_end_index`
+
 the way i'm gonna organize the research is through my tried an true question answer format. after words i'l probably organize it into a guide and plan of attack.
 
 * format string conversions feature set, expanded view
@@ -121,3 +149,9 @@ the way i'm gonna organize the research is through my tried an true question ans
 				* the int argument is converted to an unsigned char and the resulting character is written
 			* `C`
 				* treated as `c` with the `l` modifier applied
+
+
+
+
+
+
