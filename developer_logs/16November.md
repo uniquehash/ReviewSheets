@@ -170,6 +170,10 @@ ugh. i'm going to run into this typing problem quite a bit. i'll just write a fu
 
 new option, write 2 `itoa_base` functions each for the largest data type possible, which will encompass all integer datatypes since downcasting is no biggie. one of the `itoa_base` will handle signed, and one will handle unsigned.
 
+### November 30th 2016 - printf
+
+my shiftstr is causing the length global to spill over into the conversion global. i need to fix it to prevent it from doing that. of the top of my head doing something with the strlen is probably the call, a little math goes a long way.
+
 
 
 

@@ -114,7 +114,7 @@ the way i'm gonna organize the research is through my tried an true question ans
 				* `n`					--> argument is a pointer to a signed type equivalent to `size_t`
 		* for `c`, `s`
 			* `l`
-				* `c` --> `wint_t`
+				* `c` --> `wchar_t`
 				* `s` --> `wchar_t*`
 	* type conversion
 		* `s` & `S`
@@ -150,7 +150,7 @@ the way i'm gonna organize the research is through my tried an true question ans
 			* `C`
 				* treated as `c` with the `l` modifier applied
 
-
+this is sick, i love good architecture. cause of the set up implementing these conversions is taking no time at all. legit just did 6 in 30 minutes. those were the gimmes though. now i'm approaching the complicated ones. these are the hexadecimal, pointer, and char/string ones. these are not simple math conversions. 
 
 
 
