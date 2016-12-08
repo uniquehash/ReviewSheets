@@ -170,15 +170,66 @@ ugh. i'm going to run into this typing problem quite a bit. i'll just write a fu
 
 new option, write 2 `itoa_base` functions each for the largest data type possible, which will encompass all integer datatypes since downcasting is no biggie. one of the `itoa_base` will handle signed, and one will handle unsigned.
 
+### November 28th 2016 - tgf
 
+doing some bug fixes as well as a few feature reconfigurations.
 
+* total tasks
+	* self-avatar
+		* can definetly be done today 
+		* manage families
+			* see your own avatar and info in view members
+				* remove all button actions
+		* manage accounts
+			* change "personal" to your name 
+				* same format as viewing members
+	* add middle initial to front end
+		* talk to designers (phillip)
+	* create page changes
+		* can definetly be done today 
+		* change the order of the create page items
+			* basically going to have to have a "mobile page" that's almost the same thing ready to go
+				* anything different would be needlessly complicated
+	* integrate heap analytics onto serverside
+		* may be done today 
+	* how to shuffle videos
+		* may be done today
+	* design and implement organizations
+		* this is gonna take a bunch of thinking, don't even bother till a few days from now.
+	* create pdf bug
+		* explore 
 
+* tasks reasonable for today
+	* ~~create pdf bug~~
+		* ~~explore~~
+	* ~~self-avatar~~
+	* ~~create page changes~~
 
+the self-avatar thing should be pretty straight forward. the lack of seeing your-self was a "handled case" to begin with. oh i can just shift the case from not seeing yourself at all to seing yourself but no buttons that shouldn't be too bad.
 
+definetly an improvement to have your name be there instead of personal. like super improvement. had to dig up a bunch of code but the actual change was minimal, which always feels good.
 
+next up fixing the create writing bug. 
 
+### November 29th 2016 - heap analytics
 
+it's finally time to add the code portion of heap analytics to the app.
 
-
-
+* two components
+	* the identify api
+		* use to attach an identiy to the user on the heap side, making it easier to group and understand who is doing what
+			* this should be as simple as adding a little javascript
+				* nope since the piece of information (email) i want to tie is part of the current user object which is rails i need to first pass the info to the info to the front end
+					* :(
+		* wooo this is done	
+			* wasn't too hard, thank the tech gods
+	* the server side api 
+		* used to trigger heap events from the server
+			* more things to track with finer control
+			* unfortunately there is no way for this to be retro active, for obvious reasons	
+		* theres suppose to be a gem to use to do this easily
+			* we shall see
+			* turns out it was pretty straight forward
+				* good thing i did the identity thing first other wise it wouldn't have worked right
+				
 
