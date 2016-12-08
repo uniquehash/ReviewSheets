@@ -232,4 +232,19 @@ it's finally time to add the code portion of heap analytics to the app.
 			* turns out it was pretty straight forward
 				* good thing i did the identity thing first other wise it wouldn't have worked right
 				
+### November 30th 2016 - printf
+
+my shiftstr is causing the length global to spill over into the conversion global. i need to fix it to prevent it from doing that. of the top of my head doing something with the strlen is probably the call, a little math goes a long way.
+
+
+
+
+
+
+
+
+
+
+
+
 

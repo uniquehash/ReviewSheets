@@ -297,7 +297,121 @@
 	* every parameter in the variadic function is actually included in the `va_list`
 		* i think
 
+* how does [`UTF-8`](https://en.wikipedia.org/wiki/UTF-8) work?
+	* a character encoding capable of encoding all possible characters or code points defined by unicode
+	* the encoding is variable-length and uses 8-bit code units 
+	* backwars compatible with `ASCII` 
+	* dominant character encoding for the web
+	* a group of 8bits is known as an octet
+	* history
+		* hold on to your hats y'all this is a big one
+		* in 1992 the were trying to figure out a good byte strem encoding of multi-byte character set
+		* tried a few things like `utf-1`, `fss-utf`, and eventually evolved to `utf-8`
+		* `utf-8` is awesome 			
+			* backwards compatible
+				* one-byte codes are used only for `ASCII` value 0 through 127
+			* clear distinction between multi-byte and single-byte characters
+				* code points larger than 127 are represented by multi-byte sequences composed of a _leading_ _byte_ and one or more _continuation_ _bytes_
+				* leading byte 
+					* has two or more high-order 1s followed by a 0
+				* continuation byte
+					* all have `10` in the high-order position
+			* clear indication of byte sequence length
+				* the leading byte indicates the number of bytes in the sequence
+			* prefix property
+				* the sequence length indication in the first byte tells you when the sequence ends
+				* no valid sequence is a prefix of any other 
+				* the reader receiving the stream can instantaneously decode each individual fully received sequence without waiting for the first byte of the next sequence or an end-of-stream indication
+			* self-synchronizing
+				* the high-order bits of every byte determine the type of bytes
+					* single bytes `0xxxxxxx`
+					* leading bytes `11...xxx`
+					* continuation bytes `10xxxxxx`
+						* do not share values
+				* start of a character can be found by backing up at most 3bytes
+			* code structure
+				* the remaining bits od the encoding are used for the bits of the code point being encoded with padded 0s if necessary 
+				* the higher-order bits go in the leading byte, lower order bits in subsequent continuation bytes
+				* the number of bytes in the encoding must be the minimum required to hold all the significant bits of the code point
+	* the structure
+		* multi-byte 
+			* the leading byte takes as many spots as it needs for `1`'s and then one more for a following `0`
+			* the continuation bytes all start with `10` leaving 6 bits for the actual data
+			* it's common to use octal to represent mathamatically what's going on since it uses 3 bit groups
+			* boundaries
+				* octal `0200` - `3777` --> hex `80` - `7FF`
+					* two bytes
+				* octal `4000` - `177777` --> hex `800` - `FFFF`
+					* three bytes
+				* octal `200000` - `4177777` --> hex `10000` - `10FFFF`
+					* four bytes
 
+
+* what are [code points](https://en.wikipedia.org/wiki/Code_point)?
+	* any numerical values that make up a codespace
+	* also known as a code position
+	* many codepoints can represent a single character but they can also have other meanings such as formatting
+	* used for abstraction to distinguish both
+		* the number from an encoding as a sequence of bits
+		* the abstract character from a particular graphical representation 
+			* known as a glyph
+		* the distinction exists because one may
+			* encode a particular code space in different ways
+			* display a character via different glyphs
+	* part of character encoding terminology
+	* history
+		* when unicode came out they were prepared for many different types of glyphs. since latin script users (alphabet) used only few characters many of those bits were always set to 0
+		* unacceptable waste of resources at the time 
+		* in unicode a particular sequence of bits is called a codeunit
+			* `UCS-4` encoding 
+				* 4-byte (octet) binary numbers
+			* `UTF-8` encoding
+				* code points are encoded as sequences from one to four bytes long
+
+* what is a [codespace](http://unicode.org/glossary/#codespace)?
+	* a range of numerical values available for encoding characters
+
+* what is a [code page](https://en.wikipedia.org/wiki/Code_page)?
+	* a table of values that describes the character set used for encoding a particular set of glyphs, usually combined with a number of control characters 
+
+* what is [character encoding](https://en.wikipedia.org/wiki/Character_encoding)?
+	* used to represent a repertoire of characters by some kind of an encoding system
+	* depending on the abstraction level and context corresponding code points and the resulting code space may be regarded as bit patters, octets, natural numbers, electrical pulses, ect....
+	* used in computation, data storage and transmission of textutal data
+
+* what are [bitwise operators](https://en.wikipedia.org/wiki/Bitwise_operation)?
+	* tools that operate on one or more binary numeral at the level of their individual bits
+
+* how do bitwise operators work?
+	* they perform operations on the bit level
+	* operators
+		* `&`
+			* binary AND operator 
+			* copies a bit to the result if it exists in both operands
+		* `|`
+			* binary OR operator 
+			* copies a bit if it exists in either operand
+		* `^`
+			* binary XOR operator
+			* copies a bit if it is set in one operand but not both
+		* `~`
+			* binary one's complement operator 
+			* is unary and has the effect of `flipping` bits
+		* `<<`
+			* binary left shift operator
+			* the left operands value is moved left by the number of bits specified by the right operand
+		* `>>` 
+			* binary right shift operator
+			* the left operands value is moved right by the number of bits specified by the right operand
+
+* how to [grab a particular amount of bits from a datatype](http://stackoverflow.com/questions/10090326/how-to-extract-specific-bits-from-a-number-in-c)?
+	* create a bitmask
+	* shift original value `M` bits to the right
+	* perform a bit-wise `AND` with the shifted value and the bitmask
+
+* [what is a bitmask](https://www.quora.com/What-is-bitmasking-What-kind-of-problems-can-be-solved-using-it)?
+	* a binary number where the desired bits are one and the remaining 0
+	* performing a bitwise `AND` operation of a value with a bitmask can test to see if it is one
 
 * what is fixed-point notation?
 
