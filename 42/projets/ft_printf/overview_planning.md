@@ -6,15 +6,20 @@ remember to make putchar work with utf-8 characters
 
 * requirements at a glance
 	* prototype printf in the same way
-	* conversions to implement: 14
+	* conversions to implement: 14		
 		* `s, S, p, d, D, i, o, O, u, U, x, X, c, C`
+		* pre-test completed
 	* basic flags to implement: 4
 		* `#, 0, -, +` and `space`
-	* advanced flags to implement: 5
+	* advanced flags to implement: 5		
 		* `hh, h, l, ll, j, z`
+		* pre-test completed
 	* escape the percent sign with a double percent
+		* pre-test completed
 	* minimum field-width
+		* pre-test completed
 	* precision
+		* pre-test completed
 
 * order of modifiers
 	* flag
