@@ -600,8 +600,62 @@ woooooooooo. minimum field width behaves exactly as i would expect it too for nu
 	```
 
 shweeeeeet. minimum field width is good to go. all that's left is flags? then the og testing.
-
 alright time to transition to tgf. fuck man life is hard hahahah (but not really).
+
+* tasks
+	* edit
+		* full description:
+			* change character limit to 10,000 characters
+			* reflect line breaks in display
+	
+		* in sharing settings, change the word 'shared' to the word 'PICKED' in the case where the sharing has *not* been saved yet
+		
+	* research
+		* we could do it by having a unique link on a facebook ad, clicking it automatically starts the profile creation process, and gives you the free account
+		
+	* feature 
+		* inviting family members through facebook
+			* find people who you know on facebook because you may not have their email address		
+
+it looks like i've got edits, edge case additions, a feature, and research to do. 
+
+sequence wise it will be better to do the research earlier and fresher. fresher because it will be more boring and will require more conscious attention, earlier because it will take time for my brain to convert the information gained from the research into something that resembles a solution. 
+
+the feature i can't asses until i talk to philip. 
+
+edge case and edit can both be done tired since they are defined task that require little wide creativity. though even in this edge case requires more thought than edit.
+
+* feature - invite family members 
+	* [facebook basically killed the feature](https://developers.facebook.com/docs/facebook-login/review/faqs#invite_to_app)
+	* we can use a [send dialog](https://developers.facebook.com/docs/sharing/reference/send-dialog) where the user will be able to send a facebook message to someone they type in facebook with a link to the app. 
+
+* research the super fast fb onboard
+	* fairly certain we can use a "form" to basically get all the data we want to create there free account
+	* [facebook lead ads](https://www.facebook.com/business/help/1462876307360828?__mref=message_bubble) can do exactly what we want. 
+		* work on both desktop and mobile
+		* need to use [zapier](https://zapier.com/developer/documentation/v2/#what-is-zapier) for integration
+			* can be hooked up to [mailchimp](http://kb.mailchimp.com/integrations/facebook/add-subscribers-with-facebook-lead-ads)
+			* can create a custom app to do shit
+		* or hack together a scraper to download the list every like 5 mintues 
+			* i'm sure facebook doesn't want this and would suck
+	* this would basically allow us to create a user almost instantaniously from facebook
+
+the create account from facebook thing is pretty sick. 
+
+### December 11th 2016
+
+* tasks
+	* edit
+		* full description:
+			* ~change character limit to 10,000 characters~
+			* ~reflect line breaks in display~
+	
+		* ~in sharing settings, change the word 'shared' to the word 'PICKED' in the case where the sharing has *not* been saved yet~
+
+now it's time to take care of the edits. 
+
+alright finished everything. 
+
 
 
 
