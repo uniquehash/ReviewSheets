@@ -152,6 +152,24 @@ this is going to be a lot clearer if i have a function to display my thing in bi
 
 woooo finished it. now on to `s`.
 
+### December 7th 2016 - jeremiah project
+
+The project will be an application of Python and SQL that we learned in this class, with an emphasis on using Python to get the data, and then using SQL to analyze your data.
+
+* You are expected to do the following:
+	* Find a source of data that you find interesting. You can find various examples below.
+	* Based on the data you collect, create a database that can be used to store your data. You are encouraged to create an ER diagram first and then translate the ER diagram into a set of tables in MySQL.
+ 	* Load the data in the database and run at least 5 "interesting" SQL queries (including queries with joins and group by). Analyze the results of these queries, and explain (potentially with some visualizations) the interesting insights that you learned from this data analysis.
+
+questions
+
+growth rate by race of computer and mathematical occupations?
+
+what was the average number of hours worked by race?
+
+which occupation is likely to be working the most hours by race?
+
+which salaried occupation by race is working the most hours?
 
 
 
