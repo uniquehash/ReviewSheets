@@ -81,3 +81,7 @@
 	* BD in mechanical engineering from MIT
 
 * [Kent Beck](https://en.wikipedia.org/wiki/Kent_Beck)
+
+* [Thomas Paine](https://en.wikipedia.org/wiki/Thomas_Paine)
+	* political theorist
+	* usa founding father
