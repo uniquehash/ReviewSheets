@@ -85,3 +85,8 @@
 * [Thomas Paine](https://en.wikipedia.org/wiki/Thomas_Paine)
 	* political theorist
 	* usa founding father
+
+* [Henry David Thoreau](https://en.wikipedia.org/wiki/Henry_David_Thoreau)
+	* American essayist, poet, philosopher, abolitionist, naturalist, tax resister, development critic, surveyor, and historian
+	* interesting reading
+		* civil disobedience / resistance to civil government

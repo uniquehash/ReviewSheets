@@ -654,7 +654,173 @@ the create account from facebook thing is pretty sick.
 
 now it's time to take care of the edits. 
 
-alright finished everything. 
+alright finished everything. moving back to printf.
+
+first thing first is to investigate flags more closely. 
+
+* flags		
+	* `#`
+		* convert value to an alternate form
+		* no effect for `c`, `d`, `i`, `p`, `s`
+		* `o`
+			* the precision of the number is increased to force the first character of the output string to a zero
+		* `x` & `X`
+			* non-zero result has the string `0x` prepended to it			
+	
+	* `0`
+		* zero padding
+		* the converted value is padded on the left with zeros instead of blanks
+		* if the precision is given with a numeric conversion the `0` flag is ignored
+	* `-`
+		* negative field width flag			
+		* padded on right with blanks
+		* overrides a `0` if both are given
+	
+	* ` `
+		* `d`, `i`
+			* a blank should be left before a positive number produced by a signed conversion
+	* `+`
+		* `d`, `i`
+			* overrides a ` ` if both are used
+			* a sign must always be placed before a number produced by a signed conversion
+			
+these flags are needlessly confusing. they are already in order of priority so i don't need to worry about that. thank god i split my shit into detection, processing, and application. 
+
+
+
+* test for flags
+	```
+		printf("numerals mfw\n");
+		   printf("   printf: %%d->%d\n", 99);		
+		   printf("   printf: %%#d->%#d\n", 99);
+		   printf("   printf: %% d->% d\n", 99);	
+		   printf("   printf: %% d->% d\n", -99);	
+		   printf("   printf: %%+d->%+d\n", 99);	
+		   printf("   printf: %%+d->%+d\n", -99);
+		   printf("   printf: %% +d->% +d\n", 99);	
+		   printf("   printf: %% +d->% +d\n", -99);						
+		   printf("   printf: %%0d->%0d\n", 99);	
+		   printf("   printf: %%-0d->%-0d<-\n", 99);	
+		   printf("   printf: %%05d->%05d\n", 99);	
+		   printf("   printf: %%-05d->%-05d<-\n", 99);	
+		   printf("   printf: %%02.7d->%02.7d\n", 99);		
+		   printf("   printf: %%-02.7d->%-02.7d<-\n", 99);	
+		   printf("   printf: %%#02.7d->%#02.7d\n", 99);		
+		   printf("   printf: %%#-02.7d->%#-02.7d<-\n", 99);	
+		   printf("   printf: %% #-02.7d->% #-02.7d<-\n", 99);	
+		   printf("   printf: %%+ #-02.7d->%+ #-02.7d<-\n", 99);	
+		   printf("   printf: %% +#-02.7d->% +#-02.7d<-\n", 99);	
+		   printf("   printf: %%+#-02.7d->%+#-02.7d<-\n", 99);	
+		   printf("   printf: %%+-02.7d->%+-02.7d<-\n", 99);	
+
+		   printf("   printf: %%o->%o\n", 99);
+		   printf("   printf: %%#o->%#o\n", 99);
+		   printf("   printf: %% o->% o\n", 99);
+		   printf("   printf: %% o->% o\n", -99);
+		   printf("   printf: %%+o->%+o\n", 99);
+		   printf("   printf: %%+o->%+o\n", -99);
+		   printf("   printf: %% +o->% +o\n", 99);
+		   printf("   printf: %% +o->% +o\n", -99);
+		   printf("   printf: %%#.3o->%#.3o\n", 99);
+		   printf("   printf: %%#3.3o->%#3.3o\n", 99);
+		   printf("   printf: %%0o->%0o\n", 99);
+		   printf("   printf: %%-0o->%-0o<-\n", 99);
+		   printf("   printf: %%05o->%05o\n", 99);
+		   printf("   printf: %%-05o->%-05o<-\n", 99);
+		   printf("   printf: %%02.7o->%02.7o\n", 99);
+		   printf("   printf: %%-02.7o->%-02.7o<-\n", 99);
+		   printf("   printf: %%#02.7o->%#02.7o\n", 99);
+		   printf("   printf: %%#-02.7o->%#-02.7o<-\n", 99);
+
+		   printf("   printf: %%x->%x\n", -44);				   
+		   printf("   printf: %%#x->%#x\n", -44);				   
+		   printf("   printf: %%#x->%#x\n", 0);				   
+		   printf("   printf: %% x->% x\n", 44);				   
+		   printf("   printf: %% x->% x\n", -44);	
+		   printf("   printf: %%+x->%+x\n", 44);	
+		   printf("   printf: %%+x->%+x\n", -44);	
+		   printf("   printf: %%+ x->%+ x\n", 44);	
+		   printf("   printf: %%+ x->%+ x\n", -44);			   
+		   printf("   printf: %%#.3x->%#.3x\n", 99);
+		   printf("   printf: %%#3.3x->%#3.3x\n", 99);
+		   printf("   printf: %%0x->%0x\n", -44);	
+		   printf("   printf: %%-0x->%-0x<-\n", -44);	
+		   printf("   printf: %%05x->%05x\n", 15);
+		   printf("   printf: %%-05x->%-05x<-\n", 15);
+		   printf("   printf: %%02.7x->%02.7x\n", 15);				   
+		   printf("   printf: %%-02.7x->%-02.7x<-\n", 15);	
+		   printf("   printf: %%#02.7x->%#02.7x\n", 15);				   
+		   printf("   printf: %%#-02.7x->%#-02.7x<-\n", 15);		
+		   
+
+		printf("pointer mfw\n");
+		   printf("   printf: %%p->%p\n", s0); 	   
+		   printf("   printf: %%#p->%#p\n", s0);
+		   printf("   printf: %% p->% p\n", s0); 
+		   printf("   printf: %%+p->%+p\n", s0); 
+		   printf("   printf: %%0p->%0p\n", s0);			
+		   printf("   printf: %%-0p->%-0p<-\n", s0);	
+		   printf("   printf: %%05p->%05p\n", s0);	
+		   printf("   printf: %%-05p->%-05p<-\n", s0);	
+		   printf("   printf: %%02.7p->%02.7p\n", s0);			
+		   printf("   printf: %%-02.7p->%-02.7p<-\n", s0);	
+		   
+		printf("char mfw\n");
+		   printf("   printf: %%c->%c\n", 'f');
+		   printf("   printf: %%#c->%#c\n", 'f');
+		   printf("   printf: %% c->% c\n", 'f');
+		   printf("   printf: %%+c->%+c\n", 'f');
+		   printf("   printf: %%0c->%0c\n", 'f');	 
+		   printf("   printf: %%-0c->%-0c<-\n", 'f');	
+		   printf("   printf: %%07c->%07c\n", 'f');	
+		   printf("   printf: %%-07c->%-07c<-\n", 'f');	
+		   printf("   printf: %%06.10c->%06.10c\n", 'f');	 
+		   printf("   printf: %%-06.10c->%-06.10c<-\n", 'f');	
+
+		printf("char* mfw\n");
+		   printf("   printf: %%s->%s\n", "ssss");
+		   printf("   printf: %%#s->%#s\n", "ssss");
+		   printf("   printf: %% s->% s\n", "ssss");
+		   printf("   printf: %%+s->%+s\n", "ssss");
+		   printf("   printf: %%0s->%0s\n", "ssss");		
+		   printf("   printf: %%-0s->%-0s<-\n", "ssss");
+		   printf("   printf: %%07s->%07s\n", "ssss");	
+		   printf("   printf: %%-07s->%-07s<-\n", "ssss");	
+		   printf("   printf: %%06.10s->%06.10s\n", "ssss");		
+		   printf("   printf: %%-06.10s->%-06.10s<-\n", "ssss");		
+	```
+
+### December 12th 2016 - printf 
+
+the struggle is so real. hahaha. built a function that would remove duplicates last night which is good and nessesary but damn. 
+
+okay. so the way i'm gonna approach this i think is that first i'm going to get all the processing done for flags, making sure that only the nessasry ones are there and then i'll work on each individual apply function. 
+
+allright the processing is all finished up, now i have all the proper sequencing of the flags.
+
+first to integrate the flag processing is the #.
+
+* `#`
+		* convert value to an alternate form
+		* no effect for `c`, `d`, `i`, `p`, `s`
+		* `o`
+			* the precision of the number is increased to force the first character of the output string to a zero
+		* `x` & `X`
+			* non-zero result has the string `0x` prepended to it	
+
+basically i need to make sure the conversion is appropriate and set a prepend string.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
