@@ -810,14 +810,86 @@ first to integrate the flag processing is the #.
 
 basically i need to make sure the conversion is appropriate and set a prepend string.
 
+### December 13th 2016 - tgf
+
+woo finally up to the testing portion of printf. should be able to submit tomorrow. now time to do some tgf.
+
+* tasks
+	* edit
+		* show and media viewer page, line breaks		
+	* feature 	
+		* facebook lead ads signup
+			* research and design the facebook lead ads signup feature
+
+the db does save the line breaks as carriage returns. this means that it's a matter of how the front end is reading the characters.
+
+* notes on facebook lead ads integration 
+	* add a new webhook to your fb registered webhooks (webhook on dev ui)
+		* can be done programmatically
+
+### December 19th 2016 - tgf
+
+got a bunch of bugs to fix wooooo. time to organize. 
 
 
 
+* feature
+	* make a `.jpg` for mobile for writing assets
+	* 900 x 900
 
+* bugs	
+	* reprocess `writing` for mobile image	
+	* ~`image` media assets 1 to 109 have no `mobile` asset~
+	* ~items that are not shared are showing up as shared by you with blank~
+	* ~apostrophe in tags gets displayed as a backslash~
+		* not seeing it, need more data
+		* https://www.theglassfiles.com/browse?group_id=170#browse
+		* children's books became children\s books
+		* --> figure it out
+	* ~in app notification not handling abritary capitalization of emails~
+		* need more information about what is desired
+		* we logged in to Dan Sullivan’s account from the Galaxy Tab E
+		* sent an invitation to join the Sullivan to Martha’s gmail address
+		* the tablet automatically capitalized the first letter of her email
+		* she got the email, but no notification in the app
+		* when i corrected the email to all lower case letters and sent Martha a new invite, she did get a notification in the app
+			* we shouldn't enforce case-sensitivity on queries that involve an email address; strings are case-sensitive; the email address in the model is a string, so...
+			* devise stops us from using case-sensitive email addresses
+				* this particular issue is probably due to not using devise validation on 'invite members'
+		* --> fix the bug so that it works
+	* ~new line breaks avatars hover description~
+		* need communication
+		* --> port over the sharing settings description
 
+* notes
+	* modal not working on production sometimes?
+	* if you attempt to re-register with same email site crashes
+	* talk to david about breaking create image
+	* i'm getting hit with double emails from tgf, for people that join the GE family
 
+### December 23rd - tgf
 
+* task			
 
+	* document 
+		* preprocessor tasks
+		* mobile assets
+
+	* ~finalize mobile asset~
+		* border around 350 x 350 image
+
+	* ~finish the tags apostrophy thing~
+
+	* ~special avatar for `create family`~
+		* when you have family avatars appear
+			* location
+				* browse
+				* manage items
+				* manage families
+
+			* blue circle that leads to create family
+				* create: name of family
+				* group: Family
 
 
 
