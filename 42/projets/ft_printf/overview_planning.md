@@ -113,7 +113,7 @@ the way i'm gonna organize the research is through my tried an true question ans
 				* `d`, `i` 				--> `intmax_t`
 				* `o`, `u`, `x`, `X`	--> `uintmax_t`
 				* `n`					--> `intmax_t*`
-			* z
+			* `z`
 				* `d`, `i` 				--> argument is of a signed type equivalent to `size_t`
 				* `o`, `u`, `x`, `X`	--> `size_t`
 				* `n`					--> argument is a pointer to a signed type equivalent to `size_t`

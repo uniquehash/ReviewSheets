@@ -891,9 +891,65 @@ got a bunch of bugs to fix wooooo. time to organize.
 				* create: name of family
 				* group: Family
 
+### December 25th - push_swap
 
+first i need to read the subject and thoroughly understand what the fuck i need to do. 
 
+### December 28th - push_swap
 
+i have a rough understanding of what i need to do. these two programs, `checker` and `push_swap` have individual functionality, but they also have overlap functionality. 
+
+* the over lap functionality
+	* receive a list of space deliminated integers as arguments
+		* either with argc `2` or argc `n`
+	* turn this list of text integers into proper integers in a linked list of structs
+		* check the input for any possible errors
+			* arguments not integers
+			* arguments bigger than an integer
+			* duplicates
+	* perform each transformation move on two linked list
+		* make it a struct array (memory is irrelevant)
+		* the core functionality should work with function pointers to allow maximum flexibility
+
+* checker functionality
+	* receive a list of space deliminated integers as arguments
+		* either with argc `2` or argc `n`
+	* turn this list of text integers into proper integers in a linked list of structs
+		* check the input for any possible errors
+			* arguments not integers
+			* arguments bigger than an integer
+			* duplicates
+	* read instructions from the stdin
+		* check for instruction errors
+			* instruction don't exist
+			* instruction incorrectly formatted
+	* perform all instructions
+	* check to make sure it's sorted
+	* print success or failure
+
+* push_swap
+	* receive a list of space deliminated integers as arguments
+		* either with argc `2` or argc `n`
+	* turn this list of text integers into proper integers in a linked list of structs
+		* check the input for any possible errors
+			* arguments not integers
+			* arguments bigger than an integer
+			* duplicates
+	* perform a sorting algorithm
+		* initial, just a simple bubble sort to get a base line
+			* this needs to be really flexible as it will be fucked with a lot
+				* rotating set of algorithms?
+		* record every transformation move into a `char*`
+	* print to stdout? the instruction set
+
+* other shit i'm going to need
+	* some sort of high level language testing framework
+	* some sort of algorithm versioning to test multiple out comes on the same data set
+
+* what i want to have
+	* an instruction optimizer that will simplify the instruction into a smaller set
+
+so until i have the infastructure built and a test algorithm in there it is pointless to optimize. it is almost certain that my first algorithm will not be efficient enough for the bar, but until i have a baseline it is senseless to attempt to optimize.
 
 
 
