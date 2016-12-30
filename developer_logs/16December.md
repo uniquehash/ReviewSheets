@@ -959,6 +959,52 @@ the receiving arguments thing and putting them into an array thing is likely to 
 
 since the definition of an error is likely to vary significantly from project to project, it doesn't make sense include the error functionality into the function.
 
+### December 30th
+
+today is a heavy work day. first i have to figure out the totality of everything i need to do.
+
+* look into tgf bugs
+	* determine the urgency vs time cost
+		* solve the ones that make sense
+
+* edit the video of latest pitches
+	* make workshop dope
+	* push to tomorrow, sounds like a fun thing to do while drinking
+
+* write to jamie about thoughts and plans
+	* this is going to take at least an hour
+		* best to do after lunch
+
+* get all the infastructure done for push_swap
+	* for both
+		* checker
+		* push_swap
+
+* come clean to paul about camera mishap 
+	* :(
+	* now dude 
+
+step one is looking and analyzing the tgf bugs. 
+
+* tgf bugs
+	* image 365/366 
+		* on update wheel spins forever
+		* data				
+		* preliminary testing
+			* look through airbrake
+			* figure out if it's user related or page related
+		* urgency / cost
+			* medium urgent low cost 
+			* do now
+
+	* image 243 mobile asset
+		* all images should have had their mobile assets regenerated
+		* urgency / cost
+			* low urgent, low cost
+			* do now
+
+
+
 
 
 
