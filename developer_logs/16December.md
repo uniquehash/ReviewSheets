@@ -951,6 +951,17 @@ i have a rough understanding of what i need to do. these two programs, `checker`
 
 so until i have the infastructure built and a test algorithm in there it is pointless to optimize. it is almost certain that my first algorithm will not be efficient enough for the bar, but until i have a baseline it is senseless to attempt to optimize.
 
+### December 29th 2016 - push_swap
+
+i should work on the overlap functionality first. 
+
+the receiving arguments thing and putting them into an array thing is likely to come up again. So i should generalize it. the question becomes do i generalize with the error checking or without it?
+
+since the definition of an error is likely to vary significantly from project to project, it doesn't make sense include the error functionality into the function.
+
+
+
+
 
 
 

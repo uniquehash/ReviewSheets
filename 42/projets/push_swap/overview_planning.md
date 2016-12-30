@@ -1,5 +1,12 @@
 # overview - push_swap - 12/25/2016
 
+YOU REFACTORED THE STRSPLIT, DON'T FORGET TO ADD IT TO LIB WHEN DONE
+* functions to add to libft when done 
+	* ft_strsplit
+	* ft_strsearch_ov
+	* ft_strtrim_c (in strsplit)
+	* ft_charstr_del
+
 * write 2 programs
 		* `checker`		
 		* `push_swap`			
