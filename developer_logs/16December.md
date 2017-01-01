@@ -963,7 +963,7 @@ since the definition of an error is likely to vary significantly from project to
 
 today is a heavy work day. first i have to figure out the totality of everything i need to do.
 
-* look into tgf bugs
+* ~look into tgf bugs~
 	* determine the urgency vs time cost
 		* solve the ones that make sense
 
@@ -971,7 +971,7 @@ today is a heavy work day. first i have to figure out the totality of everything
 	* make workshop dope
 	* push to tomorrow, sounds like a fun thing to do while drinking
 
-* write to jamie about thoughts and plans
+* ~write to jamie about thoughts and plans~
 	* this is going to take at least an hour
 		* best to do after lunch
 
@@ -980,13 +980,13 @@ today is a heavy work day. first i have to figure out the totality of everything
 		* checker
 		* push_swap
 
-* come clean to paul about camera mishap 
+* ~come clean to paul about camera mishap~
 	* :(
 	* now dude 
 
 step one is looking and analyzing the tgf bugs. 
 
-* tgf bugs
+* ~tgf bugs~
 	* image 365/366 
 		* on update wheel spins forever
 		* data				
@@ -1002,6 +1002,27 @@ step one is looking and analyzing the tgf bugs.
 		* urgency / cost
 			* low urgent, low cost
 			* do now
+
+all right the only thing left to do for today is 
+
+* get all the infastructure done for push_swap
+	* for both
+		* checker
+		* push_swap
+
+though the concert i'm going to is definitely going to mean i don't manage to finish. so I need to just honker down and do the best i can. no rimworld for you today sir, booze and music instead.
+
+since i did the correction earlier i have a good grasp on push_swap testing.
+
+* error checking
+	* none numeric input
+	* numeric duplicate input
+	* improperly formated instruction input
+	* empty input
+		* don't print error
+
+
+
 
 
 
