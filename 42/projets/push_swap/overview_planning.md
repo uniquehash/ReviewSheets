@@ -62,6 +62,19 @@ YOU REFACTORED THE STRSPLIT, DON'T FORGET TO ADD IT TO LIB WHEN DONE
 			* arguments that are bigger than integers
 			* duplicates 
 
+* the over lap functionality
+	* receive a list of space deliminated integers as arguments
+		* either with argc `2` or argc `n`
+	* turn this list of text integers into proper integers in a linked list of structs
+		* check the input for any possible errors
+			* arguments not integers
+			* arguments bigger than an integer
+			* duplicates
+	* perform each transformation move on two linked list
+		* make it a struct array (memory is irrelevant)
+		* the core functionality should work with function pointers to allow maximum flexibility
+
+
 * initial plan 
 	* implement everything
 	* build a bubble sort to get a base line 
