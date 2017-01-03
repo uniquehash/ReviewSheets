@@ -189,10 +189,11 @@ my priorities for today (thank you past oliver)
 
 * monday, january, 2ns 2017
 	* high acuity
-		* design the research track
+		* ~design the research track~
 	* medium acuity
 		* continue with push_swap architecture
 		* research ls
+		* stack sorting paper
 		* plan next day
 	* low acuity
 		* clean up the room a little cause charlie is coming with Mia and it will make him happy
@@ -201,7 +202,53 @@ So i need to design the research track first.
 
 first i need to expose my current unknowns. 
 
+* the allowed functions i don't know
+	* opendir
+	* readdir
+	* closeddir
+	* stat
+	* lstat
+	* getpwuid
+	* getgrgrid
+	* listxattr
+	* time
+	* ctime
+	* readlink
+	* perror
+	* strerror
 
+these need to all be researched. i also need to look into what the whole devices thing means.
+research track seed is done. now on to continuing push_swap.
+
+how do i want my algorithm infastructure to work? how about i have an array of algorithms to run, and then i can select or increment which one i want to run depending on a condition, this also gives me the flexibility of running both. I should also use of having a presorted version of the list to compare against. then i should have a structure that holds the pre sorted version of the list as well as the current best algorithm index, instruction count, and matching instruction list. to save on line count i should also have a structure that contains both my stacks and their respective sizes. my condition should be in an array as well and it should be a function, this will allow me to change the kind of conditions i change my array on very easily. i should return a number that will represents the index in the algorithm array to run the proper algorithm from my condition function.
+
+* ~s_result struct~
+	* `int*` true_sort
+	* `char*` op_list
+	* `size_t` op_count
+	* `int` algo_index
+
+* ~s_stack struct~
+	* `int*` arr;
+	* `int*` brr;
+	* `size_t` asize;
+	* `size_t` bsize;
+
+* algorithm infastructure
+	* ~presort the list with a sorting algorithm and save it to result structure~
+		* find an algorithm to use
+			* merge sort
+		* implement the algorithm
+	* array of algorithms to run
+		* each algorithm function returns a `str*` representing the sorted instruction list			
+	* select or increment desired algorithm based on a condition function
+		* condition come from a function array of condition functions
+			* each condition function returns the index to decide which algorithm to run
+	* set the `s_result` solution to the return value of the algorithm if the number of `\n` is smaller than the currently stored verion
+
+alright made good head way on the push_swap component. i'm burnt out on it though, so i should move on to the checker component. actually no. i can do that after dinner. lets do some research instead first.
+
+[holy shit streams are awesome](http://www.gnu.org/software/libc/manual/html_node/I_002fO-on-Streams.html#I_002fO-on-Streams)! thank you GNU.
 
 
 

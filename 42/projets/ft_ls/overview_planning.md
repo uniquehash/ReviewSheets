@@ -6,11 +6,11 @@
 	* write
 	* opendir
 	* readdir
-	* closeddir
+	* closedir
 	* stat
 	* lstat
 	* getpwuid
-	* getgrgrid
+	* getgrgid
 	* listxattr
 	* time
 	* ctime

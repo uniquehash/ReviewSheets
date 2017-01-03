@@ -218,6 +218,8 @@
 * any good graphic visualization of time complexities for sorting algorithms?
 	* [sorting algorithms animations by toptal](https://www.toptal.com/developers/sorting-algorithms)
 
+* any background information on [stack sorting algorithms](http://liacs.leidenuniv.nl/~rijnjnvan/ds2013/assets/opdrachten/opdracht1-stacksorting.pdf)?
+
 
 
 

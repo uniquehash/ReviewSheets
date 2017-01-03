@@ -74,6 +74,18 @@ YOU REFACTORED THE STRSPLIT, DON'T FORGET TO ADD IT TO LIB WHEN DONE
 		* make it a struct array (memory is irrelevant)
 		* the core functionality should work with function pointers to allow maximum flexibility
 
+* structs
+	* s_result struct
+		* `int*` true_sort
+		* `char*` op_list
+		* `size_t` op_count
+		* `int` algo_index
+	* s_stack struct
+		* `int*` arr;
+		* `int*` brr;
+		* `size_t` asize;
+		* `size_t` bsize;
+
 
 * initial plan 
 	* implement everything
