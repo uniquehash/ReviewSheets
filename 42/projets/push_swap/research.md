@@ -218,6 +218,39 @@
 * any good graphic visualization of time complexities for sorting algorithms?
 	* [sorting algorithms animations by toptal](https://www.toptal.com/developers/sorting-algorithms)
 
+* what is and how does a [merge sorts work](https://en.wikipedia.org/wiki/Merge_sort)?
+	* characteristics
+		* efficient
+		* general-purpose
+		* comparison-based sorting
+		* usually stable
+		* algorithmic strategy
+			* divide and conquer
+	* conceptual steps
+		* divide the unsorted list into `n` sublists
+			* each contain 1 element
+				* a list of one is sorted
+		* repeatedly merge sublists to produce new sorted sublists until there is only 1 sublist remaining
+	* implementation variations
+		* top-down
+			* recursively splits list into sublists until sublist size == 1
+			* copy back step avoided with alternating direction of the merge at each level of recursion
+		* bottom-up
+			* treats the list as an array of n sublists of size 1
+			* iteratively merges sublists back and forth between two buffers
+		* top-down using lists
+			* recursively divides the input list into smaller sublists until the sublists are trivially sorted
+			* merges the sublists as the recusion naturally runs it's course
+		* natural merge sort
+			* similar to bottom up sort except that any naturally occuring sorted sequence in the input is exploited
+
+
+
+
+
+
+
+
 * any background information on [stack sorting algorithms](http://liacs.leidenuniv.nl/~rijnjnvan/ds2013/assets/opdrachten/opdracht1-stacksorting.pdf)?
 
 

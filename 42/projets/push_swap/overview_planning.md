@@ -87,9 +87,21 @@ YOU REFACTORED THE STRSPLIT, DON'T FORGET TO ADD IT TO LIB WHEN DONE
 		* `size_t` bsize;
 
 
-* initial plan 
-	* implement everything
-	* build a bubble sort to get a base line 
+* checker architecture
+	* turn args into `int` array
+	* validate `int` array
+	* receive operations from stdin
+	* validate and perform operations
+		* substring by new line and send each into a validation function
+		* check against an array of tokens
+		* the index of the token in the array corresponds to an function to be performed
+		* if the arg matches one of thex tokens 
+			* execute function with corresponding index
+	* check to see if the list is sorted
+		* if yes
+			* print ok
+		* else
+			* print ko
 
 
 

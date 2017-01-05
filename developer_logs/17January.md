@@ -248,7 +248,144 @@ how do i want my algorithm infastructure to work? how about i have an array of a
 
 alright made good head way on the push_swap component. i'm burnt out on it though, so i should move on to the checker component. actually no. i can do that after dinner. lets do some research instead first.
 
-[holy shit streams are awesome](http://www.gnu.org/software/libc/manual/html_node/I_002fO-on-Streams.html#I_002fO-on-Streams)! thank you GNU.
+[holy shit streams are awesome](http://www.gnu.org/software/libc/manual/html_node/I_002fO-on-Streams.html#I_002fO-on-Streams)! thank you GNU
+
+tomorrow i should focus almost exclusively on push_swap. i need to have a fully functioning program by the end of tomorrow. having the proper operation count is not necessarily super important but it def needs to be fully functioning. 
+
+* tuesday, january 3rd, 2017
+	* high acuity
+		* algorithm understanding and development
+	* medium acuity
+		* push_swap infastructure
+		* research ls
+		* plan next day
+	* low acuity 
+		* clean stuff
+
+i need to get a functioning algorithm today so that i can truly be thinking about the algorithmic component tomorrow. fuck me.
+
+kinda got it. welp i can't function anymore so thats that.
+
+### January, 3rd, 2017 - hustle hard
+
+my prior commitments. 
+
+* wednesday, january 4th
+	* meet john
+		* early afternoon
+		* at least 2 hours
+	* moonlight
+		* secure equipment at 5:00pm
+		* start at 8:30pm
+		* at least 2 hours
+
+
+work bucket for today.
+
+* tuesday, january 3rd, 2017
+	* high acuity
+		* algorithm understanding and development
+	* medium acuity
+		* push_swap infastructure
+		* research ls
+		* plan next day
+	* low acuity 
+		* clean stuff
+		* laundry
+
+fuckkkkkk i totally forgot to register for the exam. that's 5 points gone. gotta keep chugging along though. it ain't over till it's over. honestly 5 points are kinda inconsequential.
+
+matt said that there aren't good sorting algoes for stacks so i should just go with merge sort like everyone else. not worth the time exploring other possibilies. 
+
+* merge sort
+	* understand it conceptually
+	* replace the stolen one with my own implementation
+	* think about how to adapt it
+
+time to think about what i'm going to work on tomorrow. i should have all the infastructure for push_swap done today.
+
+* wednesday, january 4th, 2017
+	* high acuity
+		* work on algorithm for push_swap
+	* medium acuity
+		* finish current research set
+		* practice exersizes for ls
+		* think of / work on bonuses for printf
+		* plan next day
+	* low acuity
+		* moonlight and stuff
+
+* checker architecture
+	* turn args into `int` array
+	* validate `int` array
+	* receive operations from stdin
+	* validate and perform operations
+		* substring by new line and send each into a validation function
+		* check against an array of tokens
+		* the index of the token in the array corresponds to an function to be performed
+		* if the arg matches one of thex tokens 
+			* execute function with corresponding index
+	* check to see if the list is sorted
+		* if yes
+			* print ok
+		* else
+			* print ko
+
+### January, 4th, 2017
+
+commitments for the week
+
+
+* wednesday, january 4th
+	* meet john
+		* early afternoon
+		* at least 2 hours
+	* moonlight
+		* secure equipment at 5:00pm
+		* start at 8:30pm
+		* at least 2 hours
+
+plan of action
+
+* wednesday, january 4th, 2017
+	* high acuity
+		* work on algorithm for push_swap
+	* medium acuity
+		* finish current research set
+		* practice exersizes for ls
+		* think of / work on bonuses for push_swap
+		* plan next day
+	* low acuity
+		* moonlight and stuff
+
+shut up and execute.
+
+finished the infastructure for push_swap, on to ls.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

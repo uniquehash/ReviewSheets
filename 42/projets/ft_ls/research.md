@@ -462,14 +462,71 @@
 				* sets `errno`
 
 * what does strerror do and how does it work?
+	* `#include <string.h>`
+	* `char *strerror(int errnum)`
+		* looks up the error message string corresponding to an error number
+		* accepts an error number `errnum` and returns a pointer to the corresponding message string
 
 * what does perror do and how does it work?
+	* `#include <stdio.h>`
+	* `void perror(const char *s)`
+		* finds the error message corresponding to the current value of hte global variable `eerno` and writes it to the stderr 
+		* if the argument `s` is non-NULL and does not point to the null character this string is prepended to the message string and separated from it by a colon and space 
+		* else only the error message string is printed
 
 * what's does FIFO mean in the context of ls?
+	* [in linux](http://man7.org/linux/man-pages/man7/fifo.7.html)
+		* stands for a first-in first-out special file, named pipe
+			* similar to a pipe
+			* accessed as part of the filesystem
+			* it can be opened by multiple processes for reading or writing
+				* when processes are exchanging data via the FIFO
+				* kernel passes all data internally without writing to the filesystem
+				* FIFO special file has no contents on the filesystem
+					* serves as a reference point
+						* allowing processes to access the pipe using a name in the filesystem
 
-* what's an inode number?
-
-* how do you change the color of text in the terminal?
+* what's an [inode number](http://www.grymoire.com/Unix/Inodes.html)?
+	* unix files are stored in three different parts of the disk
+		* data blocks
+			* contains the contents of the file
+		* inodes
+			* contains the meta-data of the file 
+		* directories
+			* table-like structure that contain the filenames in the directory and the matching inode
+				* overhead
+					* "."
+						* points to the inode of the current directory
+					* ".."
+						* points to the inode of the parent directorypoins
+			* always have at least two hard links
+	* `ls -i` 
+		* lists the inode number before the filename
+	* unix systems can support many different types of file systems
+		* classic filesystem
+			* inode #2 is always root file system
+			* inode #3 is the dev directory
+	* inodes are unique per partition
+		* to identify a file you need 
+			* the device
+			* the inode
+	* inode contents
+		* mode/permission
+		* ownder id
+		* group id
+		* size of file
+		* number of hard links to the file
+		* time last accessed
+		* time last modified
+		* time inode last modified
+	* once created the number of inodes and disk blocks are fixed for a particular partition
+	* inodes are what allow the creation of hard links
+		* no different than having multiple names for the same file
+	* when files are "moved"
+		* data isn't recopied
+		* the relevant directory tables are updated
+			* the (name, inode) pair is removed from the current directory
+			* the (name, inode) pair is added to the selected directory
 
 * what is all this talk about devices and stuff?
 
@@ -478,7 +535,7 @@
 
 * what is a [stream in the context of unix](http://www.gnu.org/software/libc/manual/html_node/I_002fO-on-Streams.html#I_002fO-on-Streams)?
 	* a abstract high-level concept representing a communications channel to a file, device, or process
-	* there are many streams used in unix
+	* there are many streams used in unix 
 
 * how are [streams implemented in C](http://www.gnu.org/software/libc/manual/html_node/Streams.html#Streams)?
 	* it's called a `FILE` because history
@@ -499,9 +556,79 @@
 * what is [coordinated universal time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)?
 	* the time standard which regulates clocks and time
 
+* recommended by Levin
+	* http://www.ibm.com/support/knowledgecenter/en/ssw_aix_61/com.ibm.aix.security/passwords_etc_passwd_file.htm
+		* the `/etc/passwd` file is used to keep track of every registered user that has access to a system
+			* `/etc/passwd`
+				* a colon-separated file that contains the following information
+					* user name
+					* encrypted password
+					* (UID) user ID number
+					* (GID) user's group ID number
+					* (GECOS) full name of the user 
+					* user home directory
+					* login shell
+				* owned by root user and readable by all the users
+					* if password for user
+						* field has a '!' character
+					* else 
+						* field has a '*' character
 
 
 
+	* http://pubs.opengroup.org/onlinepubs/009695399/basedefs/pwd.h.html
+		* pwd.h is the password structure
+		* `#include <pwd.h>`
+			* provides a definition for the struct passwd
+			```
+				char	*pw_name	//User's login name
+				uid_t	pw_uid		//numerical user id
+				gid_t	pw_gid		//numerical group id
+				char	*pw_dir		//initial working directory
+				char	*pw_shell	//program to use as shell
+			```
+			* the `uid_t` and `gid_t` types are defined in `<sys/types.h>`
+
+* how do you change the [color of text in the terminal](http://ascii-table.com/ansi-escape-sequences.php)?
+	* use ascii character escape sequences
+		* they let you do cool shit, purely through ascii
+	* for color
+		* `Esc[Value;...;Valuem]`
+			* text attributes
+				| code | attribute 										 |
+				| :--: | :------------- 								 |
+				| 0	   | all attributes off 							 |
+				| 1    | bold on 										 |
+				| 4    | underscore (on monochrome display adapter only) |
+				| 5    | blink on 										 |
+				| 7    | reverse video on								 | 
+				| 8    | concealed on 									 |
+			
+			* foreground colors
+				| code | colors  | 
+				| :--: | :------ |
+				| 30   | black   |
+				| 31   | red     |
+				| 32   | green   |
+				| 33   | yellow  |
+				| 34   | blue    | 
+				| 35   | magenta |
+				| 36   | cyan    | 
+				| 37   | white   |
+
+			* background color
+				| code | colors |
+				| :--: | :------ |
+				| 40   | black   |
+				| 41   | red     |
+				| 42   | green   |
+				| 43   | yellow  |
+				| 44   | blue    | 
+				| 45   | magenta |
+				| 46   | cyan    | 
+				| 47   | white   |
+		* so for red text you would pass
+			* `"\27[31m"`
 
 
 

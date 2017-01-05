@@ -47,7 +47,10 @@
 	* `-t`
 		* sort by time modified before sorting the operands by lexicalgraphic order
 
-
+* planned practice
+	* list a directory
+	* obtain information for a file
+	* different colored text in terminal 
 
 
 
