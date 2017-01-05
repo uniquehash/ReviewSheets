@@ -644,7 +644,21 @@
 		* this defines many different types
 	* its an unsigned long basicaly
 
+* what are [devices in the unix context](http://www.physics.udel.edu/~bnikolic/teaching/phys660/RUTE/rute/node21.html)?
+	
 
+
+
+
+	
+
+* what is the [difference between character devices and block devices](http://haifux.org/lectures/86-sil/kernel-modules-drivers/node10.html)?
+	* character devices 
+		* represented by 'c'
+			* driver communicates by sending and receiving single characters (bytes or octets)
+	* block devices
+		* represented by 'b'
+			* driver communicates by sending entire blocks of data
 
 
 

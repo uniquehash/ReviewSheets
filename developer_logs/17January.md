@@ -362,8 +362,68 @@ shut up and execute.
 
 finished the infastructure for push_swap, on to ls.
 
+* thursday, january 5th
+	* high acuity
+		* design architecture of ls
+	* medium acuity
+		* start implementing ls
+		* think of / work on bonuses for push_swap
+	* low acuity
+		* fix memory leaks in printf
+		* norm and document current push_swap
 
+### January, 5th, 2017
 
+plan of action
+
+* thursday, january 5th
+	* high acuity
+		* design architecture of ls
+	* medium acuity
+		* start implementing ls
+		* think of / work on bonuses for push_swap
+	* low acuity
+		* fix memory leaks in printf
+		* norm and document current push_swap
+
+time to design the architecture of ls.
+
+first i need to think about the characteristics of the problem.
+
+okay architecture.
+
+we have to principle thing here, nodes and sequences of nodes. i'm going to make a big ass tree connecting everything as they are. the whole thing works with flows that takes in three parameters. a tree, a sequencer, and a node operation. the tree is the root of the tree. the sequencer is a function that returns individual nodes, based on some algorithm within the sequencer. the node operation is a function that performs some operation on a node. flows will be broken up depending on whether the node operation requires other nodes to do it's thing or not. then each flag passed to ls will be checked against one of my tokenizer like things to dispatch these flows. in other words i'm going to have a functon array of flows that will be called depending on the flag, or maybe i'll have a funcition array of sequencers that will be called depending on the flag. the downside of doing it around sequencers is that they might require different parameters. though i guess i could give it an array of void parametters or an ellipsis. really don't want to deal with an ellispsis though. well except that would make it really flexible. i could also add conditions to the sequencer's parameter allowing to then do something based on a condition that it is passed giving even more flexibility to the algorithm within
+
+* ls
+	* process cli arguments
+		* make a tree
+			* based on arguments
+				* flow that creates nodes
+		* based on arguments
+			* perform action on tree
+				* flow that does stuff tree
+
+* flows
+	* parameters
+		* root
+		* sequencer
+		* node operation
+	* applies the node operation to the node returned by the sequencer
+	* may have different flows depending on the class of sequencer / node operation and the parameters they will require
+
+* sequencer
+	* parameters
+		* node 
+		* ????
+		* pass it a condition?
+	* contains an algorithm that will return a node based on some condition
+
+* node operation
+	* parameters
+		* node
+		* ???
+	* performs some operation on a node
+		* maybe pass other nodes for different classes of operations?
 
 
 
