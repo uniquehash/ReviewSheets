@@ -590,6 +590,7 @@
 			* the `uid_t` and `gid_t` types are defined in `<sys/types.h>`
 
 * how do you change the [color of text in the terminal](http://ascii-table.com/ansi-escape-sequences.php)?
+	* [wiki baby](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors)
 	* use ascii character escape sequences
 		* they let you do cool shit, purely through ascii
 	* for color
@@ -629,6 +630,23 @@
 				| 47   | white   |
 		* so for red text you would pass
 			* `"\27[31m"`
+
+* what is a [dirent struct](http://pubs.opengroup.org/onlinepubs/7908799/xsh/dirent.h.html)?
+	* `#include <dirent.h>`
+	* returned from `readdir`
+	```
+		ino_t	d_ino		file serial number
+		char	d_name[]	name of entry
+	```
+
+* what is an [ino_t type]?
+	* `#include <sys/types.h>`
+		* this defines many different types
+	* its an unsigned long basicaly
+
+
+
+
 
 
 
