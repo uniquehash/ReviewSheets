@@ -1,5 +1,9 @@
 # overview - push_swap - 12/25/2016
 
+* functions to add to libft when done 
+	* ft_fstrdup
+	* ft_fstrappend
+	* ft_strrchr
 
 
 * allowed functions

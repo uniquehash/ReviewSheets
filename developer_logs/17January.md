@@ -425,10 +425,49 @@ we have to principle thing here, nodes and sequences of nodes. i'm going to make
 	* performs some operation on a node
 		* maybe pass other nodes for different classes of operations?
 
+now management plan.
 
+* build a basic node tree with the appropriate links and the names
+	* name
+	* link to self
+	* link to parent
+	* link to sibling
+	* link to first_child
+* build a basic sequencer
+	* returns every node in the current directory
+* build a basic node_operator
+	* print the name of the node 
+* build a basic flow 
+	* does the flow thing
 
+### January, 6th, 2017
 
+well turns out that my early optimizations to protect from stack overflows were exactly just that early optimizations. shit won't work. specifically getting a stack overflow isn't possible in this context. the system can handle over 100k recursive calls. the max size of a path is usually set to 4065.
 
+* plan of action
+	* high acuity
+		* finish ls -R
+	* medium acuity
+		* think of work on bonuses for push_swap
+		* fix memory leaks in printf
+	* low acuity 
+		* norm push_swap
+
+okay so the way it's going to work is that i'm going to recursively go through, passing a sorting algorithm as i go and a node_function.
+
+the sequencer is going to sort the contents of the "." directory.
+
+blahhhhhhhhhhhh.
+
+okay so i have the depth first thing good to go. which means the next thing i should set up is long format, i won't get it done tonight but i'll start until i'm like fuck this. in the process i will get a good feel for the problems and my drunk subconscious can work on them.
+
+### January, 7th, 2017
+
+* plan of action
+	* glassfiles
+	* rip someones push_swap algorithm	
+	* add bonuses to push_swap
+	* i should get push_swap corrected tonight
 
 
 
