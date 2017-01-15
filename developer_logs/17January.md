@@ -469,8 +469,17 @@ okay so i have the depth first thing good to go. which means the next thing i sh
 	* add bonuses to push_swap
 	* i should get push_swap corrected tonight
 
-
-
+* tgf
+	* clicking edit or share button from `/manage` breaks the app
+		* how do you even get to `/manage`
+		* but if you click button from `/manage/items` all good
+			* lol it's a pathing issue 	
+	* tags are not displaying apostrophees 
+		* talk to philip
+	* ~change graphic for create family to `avatar_family_create.png`~
+	* ~save details button in edit share does not always submit the form, but save sharings does~
+	* ~save details creates 500 error for image 485~
+	* ~editing any item you don't own causes app to crash~
 
 
 
