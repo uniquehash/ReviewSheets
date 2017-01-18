@@ -481,7 +481,7 @@ okay so i have the depth first thing good to go. which means the next thing i sh
 	* ~save details creates 500 error for image 485~
 	* ~editing any item you don't own causes app to crash~
 
-
+### January, 15th, 2017
 
 
 
