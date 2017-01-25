@@ -481,11 +481,66 @@ okay so i have the depth first thing good to go. which means the next thing i sh
 	* ~save details creates 500 error for image 485~
 	* ~editing any item you don't own causes app to crash~
 
-### January, 15th, 2017
+### January, 17th, 2017
 
+algorithm. 
 
+alright well the thing i implemented is literally less efficient than the naive approach. time for a new strategy. this shit is hard. like for me really hard. hard things don't exist, the things we call hard are simply things we have yet to understand. this means that i simply don't have enough understanding of algorithmic thinking to be able to accomplish this task. realistically it will take me longer than a couple days to develop that intuition. i need to make myself a curriculum on algorithms and then follow it, as well as work on my general math skills. to begin i will continue with the khan academy world of math, it will probably take a couple weeks for me to get anywhere useful but the security i get from going bottom up is worth it. I also noticed my basic arithmatic skills getting better from it. but the algorithm thing. if we follow the observe, imitate, dominate as a general case success strategy, then i should first look over the curriculum of 5-10 top tier schools and establishments, then determine if i need more top level data. if the data is satisfactory, i should create a tree of knowledge, then sequence the nodes. then i need to learn and recreate all their methods for the imitate phase. then i integrate them into myself and synthesis them with my skills.
 
+### January, 18th, 2017
 
+okay back to ls. i gotta get something done for christ sakes. 
+
+the way i see it i'm going to have a context being passed around which is basically just an bunch data thrown in a struct.
+
+basically i use the info in the struct to determine which files to keep and which ones to toss. 
+
+### January, 20th, 2017
+
+for ls. 
+
+my function to go through the data needs to take a sorting function pointer to sort the dir's to allow me to handle different flags. for each level of the recursion i need to ensure that only valide files are put into the file list. i should also have the action performed on each file be a function pointer, this will make it easier to use different kinds of printing functions depending on the flag.
+
+the interface to ft_ls is basically that i will have each flag type associated with an index which will correspond to the index of a function in an array, these functions will then add some amount of data to my context structure that information in the context structure will then be used and applied during the process of ls.
+
+flag reading if there is a dash infront of it save it as options in one `char*` other wise save it into it's own `char*` as an argument in a `char**`.
+
+have a function that selects and applies functions from a function pointer array based on which flags are present
+
+the apply functions on context to move engine forward.
+
+### January, 21st, 2017
+
+I might as well make this interface thing general case.
+
+so the way it works is that the incoming cli arguments is parsed. the single_chr multi_symbol short flag options prepended by a '-' character such as `-l` or `-R` are appended to a single string variable that will contain them all excluding the leading `-`. the multi_chr single_symbol long flag options prepended by a `--` are appended to a `char**` excluding the leading `--`. the multi_chr single_symbol arguments that follow the options will be appended to a `char**` as an argument list. each of these pieces of input should be checked for validity as they are appended, any error should result in an error.
+
+* structure - clip
+	* `char		short_signal`
+	* `char		*long_signal`
+	* `char		*short_flags`
+	* `char		*valid_sflags`
+	* `char		**long_flags`
+	* `char		**valid_lflags`
+	* `char		**args`
+	* `char		**valid_args`
+	* `function array apply_short_flags`
+	* `function array apply_long_flags`
+	* `function pointer error function`
+
+* architecture steps
+	* parse the cli
+		* break up and store relevant information
+		* check for validity
+	* apply the appropriate flags
+
+alright now i need library shits for manipulating lists of strings. this got to ridiculous hahaha. its looking good though. 
+
+So far i'm in the process of building the parsing functionality. the majority of the infastructure is finished. probably should be done with this component in 2 or 3 sessions. then after i finish ls i'l probably take about 1 or 2 sessions to package it all up into a library.
+
+### January, 23rd, 2017
+
+man i'm really glad i write everything down. otherwise i'd really wouldn't remember what i'm up to. so now i'm adding `char**` manipulation functions.
 
 
 
