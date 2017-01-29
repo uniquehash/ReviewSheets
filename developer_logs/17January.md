@@ -542,6 +542,36 @@ So far i'm in the process of building the parsing functionality. the majority of
 
 man i'm really glad i write everything down. otherwise i'd really wouldn't remember what i'm up to. so now i'm adding `char**` manipulation functions.
 
+### January, 24th, 2017
+
+finished creating my `char**` helper functions. now what was i gonna use them for.
+
+last time i was working on the parser functionality. which means i need to add the appropriate string to the appropriate place.
+
+### January, 27th, 2017
+
+A standard engineering session is about 4 hours of uniterrupted flow. Unfortunately I don't have 4 hours of uniterrupted time. The downside of combining engineering with leaderee things and having some semblance of non "work" activities is that I end up not having these uniterrupted 4 hours of time. It just doesn't happen. you know what i'm just going to write an medium article about this. 
+
+If i want to shorten the amount of time per engineering session than i have to increase my level of abstraction. that means generalize _everythang_. basically i'm going to be rebuilding high-level languages. which is pretty funny. "ugh c blows", what if i just make a higher level abstraction to do stuff faster.
+
+breakkkkkkkkthrough. 
+
+by using the index of the flags only i end up having no need whatsoever for a `char**` or anything other than a `char*` with a 0 or 1 (wish i had bools)
+
+### January, 28th, 2017
+
+i have my flag parsing figured out. Now how do i deal with arguments?
+
+the right way to do it is to pass a validator function that will then validate arguments. However that is outside of scope of this version. so i'm just going to have it check through for valid characters.
+
+now i have my parsing all finished. the next step is processing and application. for ls i can skip processing because it's not really important though i may need to implement it later for it to work properly, it is rather unclear. i need a function to wrap around the parsing, processing, and application. 
+
+i'm going to call this thing an engine. actually let me look up what an engine means in this context. 
+
+i got it all done! the infastructure for the cli interpreter is finished. 
+
+next thing i need to work on is getting a simple directory printed.
+
 
 
 

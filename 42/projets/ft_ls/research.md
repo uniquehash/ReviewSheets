@@ -645,12 +645,6 @@
 	* its an unsigned long basicaly
 
 * what are [devices in the unix context](http://www.physics.udel.edu/~bnikolic/teaching/phys660/RUTE/rute/node21.html)?
-	
-
-
-
-
-	
 
 * what is the [difference between character devices and block devices](http://haifux.org/lectures/86-sil/kernel-modules-drivers/node10.html)?
 	* character devices 
@@ -660,8 +654,15 @@
 		* represented by 'b'
 			* driver communicates by sending entire blocks of data
 
+* how do i create [variables of arbritary bit amounts](https://www.tutorialspoint.com/cprogramming/c_bit_fields.htm)?
+	* bitfields are literaly this
+	* they allow you to declare how many bits to allocate to the variable within a structure
+		* uncertain whether you can do this outside a structure
 
-
-
-
+* what is an [enumerator actually](http://www.cs.utah.edu/~germain/PPS/Topics/C_Language/enumerated_types.html)?
+	* enumerated types provide a symbolic name to represent one state out of a list of states
+	
+* what is an [engine in the context of a program](https://en.wikipedia.org/wiki/Software_engine)?
+	* refers to a central part of a program
+	
 
