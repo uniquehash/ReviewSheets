@@ -664,5 +664,38 @@
 	
 * what is an [engine in the context of a program](https://en.wikipedia.org/wiki/Software_engine)?
 	* refers to a central part of a program
+
+* what are [major and minor numbers in the unix context](http://www.makelinux.net/ldd3/chp-3-sect-2)?
+	* the major number identifies the driver associated with the device
+		* some major numbers are statically assigned to the most common devices
+			* for character devices
+				* `1`: mem
+				* `2`: pty
+				* `3`: ttyp
+				* `4`: ttys
+				* `6`: lp
+				* `7`: vcs
+				* `10`: misc
+				* `13`: input
+				* `14`: sound
+				* `21`: sg
+				* `180`: usb
+			* for block devices
+				* `2`: fd
+				* `8`: sd
+				* `11`: sr
+				* `65`: sd
+				* `66`: sd
+	* the minor number is used by the kernel to determine exactly which device is being referred to
+		
+* what are [drivers in a linux context](http://www.tldp.org/LDP/tlk/dd/drivers.html)?
+	* the software that handles or manages a hardware controller 
+		* basically a shared library of privileged, memory resident, low level hardware handling routines
+	* linux's device drivers handle the peculiarities of the devices they are managing
 	
+
+
+
+
+
 

@@ -572,6 +572,40 @@ i got it all done! the infastructure for the cli interpreter is finished.
 
 next thing i need to work on is getting a simple directory printed.
 
+### January, 30th, 2017
+
+* people i need to hit up about tomorrow
+	* ~etienne~
+	* ~franklin~
+	* ~stephen~
+	* ~jose~
+	* mason
+	* ~kane~
+	* ~akia~
+	* mhurd
+
+how do i set up my over so i have good flexbility. i can pass a action function, a sorting function, a bonus action, and of course the context.
+
+i have an engine that basically runs the whole thing. it extracts the files then it runs the sorting function, then the action function, then the bonus action.
+
+i can make this a lot more sane by throwing the action, sorting, and bonus action into the structure.
+
+but first let's just build a simple as initital engine without pointers.
+
+### January, 31st, 2017
+
+i got everything in the struct and stuff. However i'm having some freeing issues, where i'm freeing memory and then trying to access it. fsan freaks out basically. 
+
+### February, 2nd, 2017
+
+must find segfault. hahaha always assume null!!!
+
+welp now i need to figure out the long print of ls. oh i did that already haha. 
+
+build long format gooooooo.
+
+
+
 
 
 
