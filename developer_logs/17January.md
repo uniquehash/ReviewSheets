@@ -596,25 +596,3 @@ but first let's just build a simple as initital engine without pointers.
 
 i got everything in the struct and stuff. However i'm having some freeing issues, where i'm freeing memory and then trying to access it. fsan freaks out basically. 
 
-### February, 2nd, 2017
-
-must find segfault. hahaha always assume null!!!
-
-welp now i need to figure out the long print of ls. oh i did that already haha. 
-
-build long format gooooooo.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
