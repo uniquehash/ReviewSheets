@@ -4,7 +4,8 @@
 	* ft_fstrdup
 	* ft_fstrappend
 	* ft_strrchr	
-	
+	* ft_strmcatf
+
 	* ft_strlist_build
 	* ft_strlist_len	
 	* ft_strlist_add

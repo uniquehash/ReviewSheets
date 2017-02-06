@@ -203,13 +203,15 @@
 			* display
 				* file mode
 				* number of links
-				* owner name
+				* owner name				
 				* group name
 				* number of bytes in the file
+
 				* abbreviated month
 				* day-of-month was last modified
 				* hour file last modified
 				* minute file last modified
+				
 				* pathname
 			* for each directory
 				* total number of 512-byte blocks used by files in the directory 
@@ -692,9 +694,9 @@
 	* the software that handles or manages a hardware controller 
 		* basically a shared library of privileged, memory resident, low level hardware handling routines
 	* linux's device drivers handle the peculiarities of the devices they are managing
-	
 
-
+* what is a [foward declaration in c](http://stackoverflow.com/questions/18658438/what-is-forward-declaration-and-the-difference-between-typedef-struct-x-and)?
+	* basically you declare a typedef after you use it
 
 
 

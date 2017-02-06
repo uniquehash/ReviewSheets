@@ -595,4 +595,3 @@ but first let's just build a simple as initital engine without pointers.
 ### January, 31st, 2017
 
 i got everything in the struct and stuff. However i'm having some freeing issues, where i'm freeing memory and then trying to access it. fsan freaks out basically. 
-
