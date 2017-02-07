@@ -5,10 +5,12 @@
 	* ft_fstrappend
 	* ft_strrchr	
 	* ft_strmcatf
+	* ft_fstrmcatf
 
 	* ft_strlist_build
 	* ft_strlist_len	
 	* ft_strlist_add
+	* ft_fstrlist_add
 	* ft_strlist_find
 	* ft_strlist_remove
 	* ft_strlist_minus

@@ -31,11 +31,49 @@ keep long printing wooooooo.
 
 so i can make a generalizable function that takes a bit shifting incrementer to do the work for all three pieces of information. the reason this is valuable is that i'm gonna have to norm this bitch, and i don't want to add an extra file.
 
+### February, 5th, 2017
 
+alright now i'm up to figuring out time strings. 
 
+### February, 6th, 2017
 
+* organizational
+	* bitch to kwame about av
+		* organize team
+	* ad hoc for the doc for permissions rights
+	* figure out some video editing process and approval process	
+	* set up a meeting with jamie about the event 
+	* work with kane on his pitch structure
+	* meeting with smart locus on tuesday
+		* read material tuesday
+	* get pictures of space from hs hacks
+		* send to brezh
+	* try to move the session for d&d
+	* how to have other people add collaberators to a project
 
+figuring out time parsing
 
+i figured out time parsing! woooooooo.
+
+now i'm working on the column spacing. depending on the size of different properties of the contents of the directory, the spacing between columns will change. all of the spacing for each item will always match.
+
+finished long printing :)
+
+all that is theoritically left is handling arguments and handling reverse sort and time sort.
+
+### February, 7th, 2017
+
+* meeting with jamie
+	* talk about showcase
+	* get a feel for speakers coming up
+	* pass on josh's information
+	* pass on tino hacks email
+	* talk about silicon harlem
+	* get a feel for program development
+
+* meeting with smart locus
+	* what does pneumatically equipped mean
+	
 
 
 
