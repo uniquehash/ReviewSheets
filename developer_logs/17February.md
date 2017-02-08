@@ -65,11 +65,21 @@ all that is theoritically left is handling arguments and handling reverse sort a
 
 * meeting with jamie
 	* talk about showcase
+	
 	* get a feel for speakers coming up
+		* beezwax stephan this friday 11:30am 
+		* tomer 22nd 8pm 
 	* pass on josh's information
+		* taken care of
 	* pass on tino hacks email
-	* talk about silicon harlem
+		* population
+		* power sittuation
+		* outside devices
+		* can 42 kids be mentors
+	* talk about silicon valley 
+		* now in 42's court 
 	* get a feel for program development
+		* no point in infastructure
 
 * meeting with smart locus
 	* what does pneumatically equipped mean
