@@ -83,7 +83,36 @@ all that is theoritically left is handling arguments and handling reverse sort a
 
 * meeting with smart locus
 	* what does pneumatically equipped mean
-	
+
+### February, 8th, 2017
+
+time to do the time sort, fix the block size thing, and implement the reverse sort.
+
+your clip isn't working right look into the flag overiding.
+
+it's working just not tied.
+
+wooo check time sort, and reverse to be sure but should be done. also do block size.
+
+### February, 9th, 2017
+
+okay my sort is broken. there's some shady shit going with the fifo file i have no idea what.
+
+i need to implement the clip short flag handling.
+this shit is handled
+
+i need to implement the block size thing. 
+so they round up and down depending on the modulus. that is a huge pain in the ass to implement only gonna do it if it matters. 
+
+i need to implement a real print function for default.
+wooo done :)
+
+there are like 36 memory leaks when i sort with time, gottttta look at that haha. 
+
+took care of the ordering issues. however the time sort is still fucked so that needs to be reviewed.
+
+all that's left is fixing the time sort, implementing arguments, and then hella clean up.
+
 
 
 
