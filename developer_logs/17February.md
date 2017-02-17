@@ -113,6 +113,132 @@ took care of the ordering issues. however the time sort is still fucked so that 
 
 all that's left is fixing the time sort, implementing arguments, and then hella clean up.
 
+### February, 13th, 2017
+
+hackathon went fucking awesome, got to keep working on that 
+
+* showcase
+	* get the fucking info from everyone
+	* finish make a splash page
+
+* ls
+	* fix time sort
+		* not accurate
+		* memory leaks
+	* implementing arguments
+		* like all of it
+	* norming and clean up
+
+* maintenance
+	* reimplement strlist with a linked list
+
+i have the args list now being disected into dir list and non dir list. the next step is looping through the lists and running ls on each one. fuckkkkkkkkkk this blows. now i have to copy over all this shit for the algorithm stack. this is very annoying. 
+
+### February, 14th, 2017
+
+found the thing. clear all the print statements.
+
+file printing is not working for paths
+
+
+* ls
+	* fix time sort
+		<!-- * not accurate -->
+		<!-- * memory leaks -->
+	* implementing arguments
+		* pretty much done? clean up i guess
+			<!-- * yea done till final check -->
+	* refactor -R
+		* change the printing and stuff	
+	* norming and clean up
+
+i need to figure out how to compare time stamps.
+
+barf i need to fix the estimation error in block size
+
+barf i need to change the print style for arguments
+
+
+### February, 15th, 2017
+
+time to finish the time sort thing.
+
+wooo done. 
+
+0: 1
+0: format parsing
+1: format parsing
+2: format parsing
+3: format parsing
+malloc(3) = 0x7faf68c033e0
+4: format parsing
+5: format parsing
+6: format parsing
+0: flow
+malloc(3) = 0x7faf68c00020
+malloc(3) = 0x7faf68c033f0
+free(0x7faf68c033d0)
+1: flow
+malloc(2) = 0x7faf68c033d0
+free(0x7faf68c00020)
+malloc(1) = 0x7faf68c00020
+
+
+malloc(1) = 0x7faf68c03410
+
+free(0x7faf68c00020)
+free(0x7faf68c033d0)
+2: flow
+malloc(4) = 0x7faf68c033d0
+3: flow
+7: format parsing
+free(0x7faf68c033e0)
+8: format parsing
+1: 1
+malloc(5) = 0x7faf68c033e0
+2: 1
+malloc(17) = 0x7faf68c03420
+free(0x7faf68c03400)
+3: 1
+malloc(19) = 0x7faf68c03440
+free(0x7faf68c03420)
+4: 1
+5: 1
+free(0x7faf68c033e0)
+6: 1
+reset start
+reset post flag
+reset post prepend
+reset post length
+free(0x7faf68c033f0)
+lol
+malloc(1) = 0x7faf68c033f0
+reset post conversion
+free(0x7faf68c033d0)
+reset post substring
+reset post mfieldwidth
+reset post precision
+7: 1
+
+* ls
+	* change the output to match ls 
+		* boooo
+	* norm and clean up
+	* remove memory leaks from printf
+
+### February, 16th, 2017
+
+check other print f things for leaks.
+fuck it.
+
+now for ls i just need to change the output to match ls. clean and norm. also need to put in the errors. 
+
+* ls
+	* change the output to match ls 
+		* boooo
+		* just not going to do this
+	* norm and clean up
+	* make sure the error handling is right
 
 
 

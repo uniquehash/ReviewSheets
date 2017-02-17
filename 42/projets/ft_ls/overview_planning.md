@@ -7,15 +7,16 @@
 	* ft_strmcatf
 	* ft_fstrmcatf
 
-	* ft_strlist_build
-	* ft_strlist_len	
-	* ft_strlist_add
-	* ft_fstrlist_add
-	* ft_strlist_find
-	* ft_strlist_remove
-	* ft_strlist_minus
-	* ft_strlist_del
-	* ft_strlist_print
+	* reimplement strlist with a linked list
+		* ft_strlist_build
+		* ft_strlist_len	
+		* ft_strlist_add
+		* ft_fstrlist_add
+		* ft_strlist_find
+		* ft_strlist_remove
+		* ft_strlist_minus
+		* ft_strlist_del
+		* ft_strlist_print
 
 
 
@@ -68,6 +69,8 @@
 	* list a directory
 	* obtain information for a file
 	* different colored text in terminal 
+
+
 
 
 

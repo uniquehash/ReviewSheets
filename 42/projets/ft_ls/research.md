@@ -1,4 +1,4 @@
-# research - push_swap - 12/25/2016
+# research - ls - 12/25/2016
 
 * what are the basic requirments of the `ft_ls` project?
 	* executable
