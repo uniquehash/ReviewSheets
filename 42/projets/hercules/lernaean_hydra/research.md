@@ -92,9 +92,11 @@
 
 
 
-
-
 * how does fork work?
+
+
+
+
 
 * what exactly is a protocol in the context of sockets?
 	* `man 5 protocols`
@@ -131,6 +133,61 @@
 
 
 * how does send work in the context of sockets?
+	* `man 2 send`
+		* `#include <sys/socket.h>`
+			* all three of these functions are used to transmit a message to another socket			
+		* `ssize_t send(int socket, const void *buffer, size_t lengthm int flags)`
+			* can only be used when sockey is in a connected state
+			* no indication of failure to deliver is implicit in a send()
+			* locally detected errors are indicated by a return value of `-1`
+			* if no message space is available at the socket to hold the message to be transmitted
+				* send() normally blocks
+					* unless the socket has been placed in non-blocking I/O mode
+				* the `select(2)` call may be used to determine when it is possible to send more data
+		* `ssize_t sendmsg(int socket, const struct msghdr *message, int flags)`
+			* can be used at any time
+			* uses a *msghdr* structure to minimuze the number of directly supplied arguments
+				* `msghdr`
+					* `msg_iovlen`
+						* the dimensions of this array of iovec structures
+					* `msg_iov`
+						* points to an array of iovec structures
+						* `struct iovec`
+							* `iov_base`
+								* specifies a storage area
+							* `iov_len`
+								* gives its size in bytes
+								* can be zero
+						* each pieces of data indicated by `msg_iov` is sent in turn
+		* `ssize_t sendto(int socket, const void *buffer, size_t length, int flags, const struct sockaddr * dest_addr, socklen_t dest_len)`
+			* can be used at any time
+			* the address of the target is given by *dest_addr* with *dest_len* specifying its size
+				* the length of the message is given by *length*
+					* if the message is too long to pass atomically through the underlying protocol
+						* the error `EMSGSIZE` is returned
+						* message not transmitted
+		* for all three
+			* the *flags* parameter may include one or more of the following
+				```
+					#define MSG_OOB 		0x1		/* process out-of-band */
+					#define MSG_DONTROUTE	0x4		/* bypass routing, use direct interface */
+				```
+				* `MSG_OOB`
+					* used to send out-of-band data on sockets that support this notion
+						* `SOCK_STREAM`
+					* the underlying protocol must also support out-of-band data
+				* `MSG_DONTROUTE`
+					* is usually only used by diagnostic or routing programs
+		* returns the number of bytes which were sent
+		* returns -1 on errir and errno is set to indicate error
+
+
+
+
+
+
+* what does the select call do in the context of networking?
+
 
 * how does recv work in the context of sockets?
 
@@ -146,7 +203,7 @@
 
 
 
-
+* what is out-of-band data?
 
 
 
