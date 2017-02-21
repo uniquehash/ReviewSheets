@@ -240,7 +240,159 @@ now for ls i just need to change the output to match ls. clean and norm. also ne
 	* norm and clean up
 	* make sure the error handling is right
 
+### February, 20th, 2017
 
+this week is gonna have very little coding unfortunately, but that's okay these events are gonna be sick.
+
+* immediate i need to work on
+	* go over the structure with jamie
+		* tomorrow early
+		* think through the AV component
+			* 5:15pm
+	* work on my showcase intro
+		* tomorrow early
+	* work on my intro for tomer
+		* wednesday early
+		* think through AV set up
+		* think through moonlight transition
+			* fuckkkkkkk
+	* work on my moonlight pitch
+		* wednesday early
+	* work with kane on his pitch
+		* 6pm
+	* talk to tomer
+		* post charlies class 
+	* wake up at 6AM 
+		* erryday this week, ain't no two ways about it
+
+
+* long term shit i need to do
+	* figure out a classification method for determining what kind of company i want to work for
+		* high level, this manual classification system
+			* use template and draw generalizations
+				* twilio
+				* valve
+				* other
+	* learn more about virtualization
+		* fairly important cause of interlink with cris
+		* starting points as told by cris
+			* dockerize a web-app
+				* flask
+					* basic flask app
+					* rely on db
+						* postgress
+				* write a docker file 
+				* write a docker compose file
+			* container orchestration
+				* kubernetes
+			* get an AWS setup running with a kubernetes cluster
+				* get it to deploying with kubernetes
+			* make jenkins happen
+				* what is jenkins
+	* work on the frame work
+		* i should do this above go
+	* learn go
+	* finish ls
+		* change the output to match ls 
+		* norm and clean up
+		* make sure the error handling is right
+
+### February, 21st, 2017
+
+
+* immediate i need to work on
+	* go over the structure with jamie
+		* tuesday early
+			* not happening do it live
+		* think through the AV component
+			* 5:15pm
+	* work on my showcase intro
+		* today
+	* work on my intro for tomer
+		* wednesday early
+		* think through AV set up
+		* think through moonlight transition
+			* fuckkkkkkk
+	* work on my moonlight pitch
+		* wednesday early
+	* wake up at 6AM 
+		* lol fuck me
+
+
+* long term shit i need to do
+	* figure out a classification method for determining what kind of company i want to work for
+		* high level, this manual classification system
+			* use template and draw generalizations
+				* twilio
+				* valve
+				* other
+	* learn more about virtualization
+		* fairly important cause of interlink with cris
+		* starting points as told by cris
+			* dockerize a web-app
+				* flask
+					* basic flask app
+					* rely on db
+						* postgress
+				* write a docker file 
+				* write a docker compose file
+			* container orchestration
+				* kubernetes
+			* get an AWS setup running with a kubernetes cluster
+				* get it to deploying with kubernetes
+			* make jenkins happen
+				* what is jenkins
+	* work on the frame work
+		* i should do this above go
+	* learn go
+	* finish ls
+		* norm and clean up
+		* make sure the error handling is right
+			* done
+		* substitute with your printf
+		* check for leaks
+			* done
+
+almost done with ls. just need to norm it, put my printf in there, do the error handling for nonexistant files and no permission files, and fix this weird -a segfault.
+
+norm is a low energy task, i can do it tonight after everything.
+
+just need to handle errors right.
+
+woooooo. just need to norm and substitute printf. so i'm done. that took longer than expected. 65ish hours, after norming it's gonna be like 70 - 75. 
+
+alright well then i should stop procrastinating my set up for the event. time to start pitch writing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 
 
