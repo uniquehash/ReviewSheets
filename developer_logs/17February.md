@@ -498,11 +498,49 @@ woooo now i just need to get corrected.
 
 moving on to learning more about virtualization.
 
+### February, 25th, 2017
 
+* long term shit i need to do
+	* figure out a classification method for determining what kind of company i want to work for
+		* high level, this manual classification system
+			* use template and draw generalizations
+				* twilio
+				* valve
+				* other
+	* learn more about virtualization
+		* fairly important cause of interlink with cris
+		* starting points as told by cris
+			* dockerize a web-app -> now reinforced by smart locus needs
+				* flask
+					* basic flask app
+					* rely on db
+						* postgress
+				* write a docker file 
+				* write a docker compose file
+			* container orchestration
+				* kubernetes
+			* get an AWS setup running with a kubernetes cluster
+				* get it to deploying with kubernetes
+			* make jenkins happen
+				* what is jenkins
+	* work on the frame work
+		* i should do this above go
+	* learn go
+	* rebrand as a data acquisition specialist
 
+* immediate shit to do
+	* burn ls and restart :(
+	* write the description of the moonlight vids
+		* pitches
+		* showcase
+	* edit the tomer video
+	* call christi
+		* message on monday
+	* call trish
+		* message on monday
 
-
-
+* fun stuff to do
+	* work on DnD system
 
 
 
