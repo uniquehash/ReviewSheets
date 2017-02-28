@@ -542,7 +542,7 @@ moving on to learning more about virtualization.
 * fun stuff to do
 	* work on DnD system
 
-### February, 27th, 2017
+
 
 ### February, 25th, 2017
 
@@ -607,9 +607,68 @@ moving on to learning more about virtualization.
 		* natalie
 			* evening
 			
+### February, 27th-28th, 2017
+
+* long term shit i need to do
+	* figure out a classification method for determining what kind of company i want to work for
+		* high level, this manual classification system
+			* use template and draw generalizations
+				* twilio
+				* valve
+				* other
+	* learn more about virtualization
+		* fairly important cause of interlink with cris
+		* starting points as told by cris
+			* dockerize a web-app -> now reinforced by smart locus needs
+				* flask
+					* basic flask app
+					* rely on db
+						* postgress
+				* write a docker file 
+				* write a docker compose file
+			* container orchestration
+				* kubernetes
+			* get an AWS setup running with a kubernetes cluster
+				* get it to deploying with kubernetes
+			* make jenkins happen
+				* what is jenkins
+	* work on the frame work
+		* i should do this above go
+	* learn go
+	* rebrand as a data acquisition specialist
+
+* immediate shit to do
+	* burn ls and restart :(
+	* write the description of the moonlight vids
+		* pitches
+		* showcase
+	* edit the tomer video
+	* call christi
+		* call at 9am
+	* call trish
+		* call sometime this week
+	* call natalie
+		* tuesday night
+
+* fun stuff to do
+	* work on DnD system
 
 
-
+* shit to do as i get loopier cause #noSleep
+	<!-- * write the description of the moonlight vids -->
+		<!-- * pitches -->
+		<!-- * showcase -->
+	* do a bunch of more research on virtualization
+	* work on DnD
+	* meetings
+		* christi
+			* 9am
+		* ambassadors
+			* 2pm (probs an hour)
+		* trish
+			* unknown
+		* natalie
+			* evening
 
 
 
