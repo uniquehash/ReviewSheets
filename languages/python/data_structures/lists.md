@@ -10,7 +10,7 @@
 		* incur O(n) memory movement costs for pop(0) and insert(0, v) operations which change both the size and position of the underlying data
 
 * what are the [methods of the list object](https://docs.python.org/2/tutorial/datastructures.html)?
-	* list. *append*(x)
+	* list.**append**(x)
 
 
 
