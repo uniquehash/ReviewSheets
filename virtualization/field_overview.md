@@ -1,7 +1,5 @@
 # notes on virtualization as a high level topic
 
-
-
 * what is [virtualization](https://en.wikipedia.org/wiki/Virtualization)?
 	* the act of creating a virtual or simulated instance of something
 		* can include

@@ -1,0 +1,102 @@
+# March, 2017
+
+### March, 2nd, 2017
+
+* long term shit i need to do
+	* figure out a classification method for determining what kind of company i want to work for
+		* high level, this manual classification system
+			* use template and draw generalizations
+				* twilio
+				* valve
+				* other
+	* learn more about virtualization
+		* fairly important cause of interlink with cris
+		* starting points as told by cris
+			* dockerize a web-app -> now reinforced by smart locus needs
+				* flask
+					* basic flask app
+					* rely on db
+						* postgress
+				* write a docker file 
+				* write a docker compose file
+			* container orchestration
+				* kubernetes
+			* get an AWS setup running with a kubernetes cluster
+				* get it to deploying with kubernetes
+			* make jenkins happen
+				* what is jenkins
+	* work on the frame work
+		* i should do this above go
+	* learn go
+	* rebrand as a data acquisition specialist
+
+* immediate shit to do
+	* burn ls and restart :(	
+	* chop up the video and 
+
+* fun stuff to do
+	* work on DnD system
+
+i've been doing a lot of reasearch oriented stuff. this does not exactly add exciting sagas to the dev logs. this is something i should change. hmmmm. i guess i could write a little on my thoughts of the implications of something i researched during the day. that should add a little meat to these bones.
+
+docker basically creates a nice interface over existing tools to simplify operating-system level virtualization. One thing i can see being super useful is the ability to have all the dependencies static within the container without interferring with one another. This means you wont have the problem where you try to upgrade a part of the system, and break the rest of it.
+
+### March, 3rd, 2017
+
+* long term shit i need to do
+	* figure out a classification method for determining what kind of company i want to work for
+		* high level, this manual classification system
+			* use template and draw generalizations
+				* twilio
+				* valve
+				* other
+	* learn more about virtualization
+		* fairly important cause of interlink with cris
+		* starting points as told by cris
+			* dockerize a web-app -> now reinforced by smart locus needs
+				* flask
+					* basic flask app
+					* rely on db
+						* postgress
+				* write a docker file 
+				* write a docker compose file
+			* container orchestration
+				* kubernetes
+			* get an AWS setup running with a kubernetes cluster
+				* get it to deploying with kubernetes
+			* make jenkins happen
+				* what is jenkins
+	* work on the frame work
+		* i should do this above go
+	* learn go
+	* rebrand as a data acquisition specialist
+
+* immediate shit to do
+	* 42 stuff
+		* burn ls and restart :(
+		* algorithm for push_swap
+	* chop up the video and 
+
+* fun stuff to do
+	* work on DnD system
+
+working on docker stuffs mostly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

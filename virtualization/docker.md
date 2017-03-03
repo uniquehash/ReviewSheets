@@ -117,13 +117,115 @@
 			* uppon creation the mounts from the current mount namespace are copied to the new namespace
 				* mount points created afterwards do not propagate between namespaces
 		* (pid) process ID
-			*
+			* provides processes with an independent set of process IDs from other namespaces
+				* PID namespaces are nested
+					* when a new process is created it will have a PID for each namespace from its current namespace up to initial PID namespace
+					* initial PID namespace is able to see all processes
+						* with different PIDs than other namespaces will see the same process as
+			* first process created in a PID namespace is assigned process id 1
+				* receives most of the same speial treatment as the normal init process
+					* orphaned processes within the namespace are attached to it
+				* terminating PID 1 process will immediately terminate all processes in its PID namespace and any descendants
+		* (net) network
+			* network namespaces virtualize the network stack
+				* on creation a network namespace contains only a loopback interface
+			* each network interface (physical or virtual) is present in exactly 1 namespace and can be moved between namespaces
+			* each namespace will have a private set of
+				* ip addresses
+				* routing table
+				* socket listing
+				* connection tracking table
+				* firewall
+				* other network-related resources
+			* on its destruction
+				* network namespace will destroy any virtual interfaces within it and move any physical interfaces back to the initial network namespace
+		* (ipc) interprocess communication
+			* ipc namespaces isolate processes from SysV style inter-process communication
+				* prevents processes in different ipc namespaces from intefering with each others inter-process communication
+		* uts
+			* allow a single system to appear to have different host and domain names to different processes
+		* (user) user ID
+			* provides both privilege isolation and user identification segregation across mutliple sets of processes
+				* with administrative assistance it is possible to build a container with seeming administrative rights without actually giving elevated privileges to user processes
+			* contains a mapping table converting user IDs from the container's point of view to the system's point of view
+				* allows the root user to have user id 0 in the container but is actually treated as user id 1,400,000 by the system for ownership checks
+				* a similar table is used for group id mappings and ownership checks
+			* each namespace type is owned by a user namespace based on the active user namespace at the moment of creation
+				* user with admin privileges in the appropriate user namespace will be allowed to perform admin action within that other namespace type
+					* example
+						* if a process has admin permission to change the IP address of a network interface, it may do so as long as the applicable network namespace is owned by a user namespace that either matches or is a child of the process' user namespace
+							* initial user namespace has admin control over all namespace types in the system
+		* cgroup suggested namespace 
+			* to prevent leaking the control group to which a process belongs 
+				* new namespace type is suggested
+			* would hide the actual control group a process is a memeber of
+				* a process in this namespace would see a path that is actually relative to the control group set at creation time hiding its true control group position and identity
 
+* what is a [virtual loopback interface in the context of linux namespaces](https://en.wikipedia.org/wiki/Loopback#Virtual_loopback_interface)?
+	* any traffic a process sends to a virtual loopback interface is immediately passed back up the network software stack as if it had been received from another device
 
-
-
+* what is [SysV style inter-process communication](http://www.tldp.org/LDP/lpg/node22.html#SECTION00741000000000000000)?
+	* three forms of IPC facilities
+		* [message queues](http://www.tldp.org/LDP/lpg/node28.html#SECTION00742100000000000000)
+			* an internal linked list wihtin the kernel's addressing space
+			* messages can be sent to the queue in order and retrieved from the queue in several different ways
+			* each message queue is uniquely identified by an IPC identifier
+		* [semaphores](http://www.tldp.org/LDP/lpg/node47.html#SECTION00743100000000000000)
+			* counters used to control access to shared resources by multiple processes
+				* often used a locking mechanisms to prevent proceses from accessing a particular resource while another process is performing operations on it
+		* [shared memory](http://www.tldp.org/LDP/lpg/node66.html#SECTION00744100000000000000)
+			* the mapping of an area of memory that will be mapped and shared by more than one process
+				* fastest form of ipc
+					* no intermediation
+			* information is mapped directly from a memory segment and into the addressing space of the calling process
+				* a segment can be created by one process and subsequently written to and read from by any number of processes
 
 * what is the [cgroups feature in linux](https://en.wikipedia.org/wiki/Cgroups)?
+	* name is abbreviated from control groups
+	* linux kernel feature targeted at collections of processes
+		* resource limiting
+			* groups can be set to not exceed a configured memory limit
+				* also includes the file system cache
+		* resource prioritization
+			* some groups may get a larger share of CPU utilization or disk I/O throughput
+		* resource accounting
+			* measures a group's resource usage				
+		* resource control
+			* freezing groups of processes their checkpointing and restarting
+	* provides a unified interface to many different use cases
+		* controlling single processes
+		* operating system-level virtualization
+	* control group
+		* a collection of processes that are bound by the same criteria and associated with a set of parameters or limits
+			* groups can be hierarchical
+				each group inherits limits from its parent group
+		* kernel provides access to multiple controllers through the cgroup interface
+			* also known as subsystems
+		* vectors of using control groups
+			* accessing the cgroup virtual file system manually
+			* creating and managing groups on the fly using tools
+				* `cgcreate`
+				* `cgexec`
+				* `cgclassify` (from `libcgroup`)
+			* rules engine daemon
+				* can automatically move processes of certain users, groups, or commands to cgroups as specified in its configuration
+			* indirectly through other software that uses cgroups
+				* docker
+				* linux containters (LXC) virtualization
+				* libvirt
+				* systemd
+				* open grid scheduler/grid engine
+				* lmctfy
+
+* what does [checkpointing mean in the linux environment](https://en.wikipedia.org/wiki/Application_checkpointing)?
+	* a technique to add fault tolerance into computing systems
+	* consists of saving a snapshot of the application's state
+		* can restart from that point in case of failure
+	* important for long running applications that are executed in failure-prone systems
+
+* what is the [rules engine daemon in the linux environment]()?
+	* i'm basically not going to really understand what this is without using it.
+		* at least it didn't point me to an rfc
 
 * what is [Docker, Inc the company](https://en.wikipedia.org/wiki/Docker,_Inc.)?
 	* the company behind the development of the docker software open source project
@@ -173,13 +275,149 @@
 
 * what does [systemd-nspawn do towards virtualization](https://en.wikipedia.org/wiki/Docker_(software))?
 
+* what is [docker ce](https://www.docker.com/community-edition)?
+	* the open source version of docker
+	* features
+		* the latest docker version with integrated tooling to build, test, and run container apps
+		* available for free with software maintenance for the latest shipping version
+		* integrated and optimized for developer desktops, linux servers and clouds
+		* montly edge and quarterly stable release channels available
+		* native desktop or cloud provider experience for easy onboarding
+		* unlimited public and one free private repo storage as a service
+		* automated builds as a service
+		* image scanning and continuous vulnerability monitoring as a service
+	* use cases
+		* containerizing traditional applications
+			* security
+				* increase app security with containers to isolate apps and guarantee safe transport with image signing and verification of the app as it travels through the lifecycle
+					* though security gained through containerization is not super huge, this can be considered a feature (it's more like a consequence)
+			* portability
+				* package everything the app needs into a container and migrate from one vm to another, to server, or cloud without having to refactor the app
+			* cost savings
+				* increase workload density on servers and VMs to save on infastructure costs
+				* gain IT operational efficiency in deployment, maintenance, scale out, and roll back
+			* pretty sure this use case about containerizing old apps, allowing you to not have to deal with upgrade hell
+				* upgrading one thing breaks everything else
+		* continuous integration and deployment [CI / CD]
+			* accelerate app pipeline automation and app deployment and ship 13X more with Docker
+				* accelerate
+					* docker streamlines CI testing time and scales CI testing infastructure
+				* integrate
+					* APIs, open interfaces and webhooks allow for easy integration into existing tools and processes to futher automate the app pipeline
+				* automate
+					* save time and improve software quality by instantly spawning docker hosts and containers to run more tests in parallel
+			* this is the process cris was talking to you about
+				* do more research on this when you get to that
+		* microservices
+			* accelerate the path to modern app architectures
+				* empower
+					* developers are free to use the right tools and stacks for the app without worry of creating app conflicts
+				* innovate
+					* accelerate the rate of innocation of new softwate features
+				* standardize
+					* gain consistency in the app environment to gain efficiency without slowing down software development
+		* IT infrastructure optimization
+			* get more out of your infrastructure and save money
+				* consolidate
+					* containerize apps and consolidate the VMs and servers to reduce the infrastructure footprint
+					* consolidate datacenters from M&A or migrate to cloud
+				* efficiency
+					* reduce operational overhead of patching and maintaining additional operating systems, virtual and physical servers
+				* optimize
+					* improve resource utilization, app scalability, disaster recovery and availability
+
+* how do i [get started using docker](https://docs.docker.com/engine/getstarted/)?
+	* download and install docker
+	* verify your installation
+		* `docker version`
+			* check version
+		* `docker ps`
+			* shows running containers
+		* `docker run hello-world`
+			* will create a docker container hello world to test installation
+		* `docker run  -it ubuntu bash`
+			* super cool creates a container running ubuntu
+		* `docker ps -a`
+			* shows all containers, running or not running
+	* [learn about images and containters](https://docs.docker.com/engine/getstarted/step_two/)
+		* docker engine provides the core docket technology that enables images and containers
+			* `docker run hello-world`
+				* command break down
+					* run
+						* a subcommand that creates and runs a docker container
+					* hello-world
+						* tells docker which image to load into the container
+				* docker engine steps for command
+					* checks to see if `hello-world` image exists
+					* downloads the image from docker hub if it didn't exist
+					* loads the image into the container and runs it
+	* [find and run the whalesay image](https://docs.docker.com/engine/getstarted/step_three/)
+		* docker hub is a repository of images
+			* github for images
+		* tutorial
+			* locate the whalesay image
+			* run the whalesay image
+				* `docker run docker/whalesay cowsay boo`
+	* [building your own image](https://docs.docker.com/engine/getstarted/step_four/)
+		* write a dockerfile
+			* from
+				import a existing image
+			* run
+				* run something in environment setup
+			* cmd
+				* what it should do after the environment is set up
+		* build an image from your Dockerfile
+			* `docker build -t docker-whale .`
+				* build an image from a docker file
+				* -t
+					* gives yout image a tag
+				* .
+					* tells the docker build command to look in the current directory for a file called `Dockerfile`
+		* learn about the build process
+			* the output of the build command broken down
+				* `sending build context to Docker daemon 2.048 kb`
+					* docker checks to make sure it has everything it needs to build
+				* `Step 1: FROM docker/whalesay:latest ---> 6b362a9f73eb`
+					* looks at the `FROM` statement 
+					* docker checks to see if it already has the `whalesay` image locally and pulls it from docker hub if not
+					* `6b362a9f73eb`
+						* at the end of each step an ID is printed
+						* this is the ID of the layer that was created by this step
+					* each line in a Dockerfile corresponds to a layer in the image
+					* this layer shit definitely has to do with the union-capable file system concept
+						* the ID probably corresponds to a layer of in the union file system
+				* `Step 2: RUN apt-get -y update && apt-get install -y fortunes ---> Running in 05d4eda04526`
+					* this is the output of the environment setup
+					* when the `RUN` command finishes a new layer is created and the old one is removed
+				* `Step 3: CMD /usr/games/fortune -a | cowsay`
+					* a new intermediate container is created
+					* docker adds a laer for the `CMD` line in the dockerfile and removes the intermediate container
+				* the `docker-whale` is created
+		* run your new docker-whale
+			* `docker images`
+				* verifies that your new image exist				
+			* `docker run docker-whale`
+				* runs the image docker-whale
+	* [tag, push, and pull your image](https://docs.docker.com/engine/getstarted/step_six/)
+		
 
 
 
 
 
 
+* what is a [docker daemon](https://docs.docker.com/engine/reference/commandline/dockerd/#related-commands)?
+	* `dockerd` 
+		* a self-sufficient runtime for containers
+			* a persistent process that manages containers
+		* to run the daemon
+			* `dockerd`
+		* to run daemon with debug output
+			* `dockerd -D`
 
+
+* what does a [runtime really mean]()?
+	* magic-wand word that basically means an environment that provides everything necessary to properly run the intended program
 
 
 
