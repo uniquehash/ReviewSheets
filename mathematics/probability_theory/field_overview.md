@@ -41,6 +41,9 @@ https://en.wikipedia.org/wiki/Markov_chain
 
 * what are [events in the field of probability theory](https://en.wikipedia.org/wiki/Event_(probability_theory))?
 	* a set of outcomes of an experiment to which a probability is assigned
+		* unlike a sample space which is simply a set of outcomes
+	* a single outcome may be an element of many different events
+	* different evetns in an experiment are usually not equally likely since they may include very different groups of outcomes
 
 * what is a [sample space in the field of probability theory](https://en.wikipedia.org/wiki/Sample_space)?
 	* the set of all possible outcomes or results of an experiment
@@ -52,14 +55,22 @@ https://en.wikipedia.org/wiki/Markov_chain
 		* to find the most complete description of outcomes
 			* find the cartesian product of all the sample spaces
 	* equally likely outcomes
-
-
-
-
-
-
-
-
+		* when all the outcomes of an experiment can be considered to be approximately equal
+			* then the probability of an event is simple to describe mathematically
+				* P(event) = number of outcomes in event / number of outcomes in sample space
+	* simple random sample
+		* a sample in which every individual in the population is equally likely to be included
+			* mathematically
+				* the sample space of simple random samples of a given size from a given population is composed of equally likely outcomes
+	* infinitely large sample spaces
+		* in an elementary approach to probability
+			* any subset of the sample space is usually called an event
+			* problamatic when the sample space is infinite
+		* infinite sample space
+			* σ-algebra
+				* only measurable subsets of the sample space 
+			* events in cases with an infinite sample size
+				* only measurable subsets of the sample size (σ-algebra) / the sample size itself
 
 * what is an [experiment in the field of probability theory](https://en.wikipedia.org/wiki/Experiment_(probability_theory))?
 	* any procedure that can be infinitely repeated and has a well defined set of possible outcomes, known as the sample space
@@ -102,17 +113,34 @@ https://en.wikipedia.org/wiki/Markov_chain
 		* ![{\displaystyle P} P](https://wikimedia.org/api/rest_v1/media/math/render/svg/b4dc73bf40314945ff376bd363916a738548d40a "assignment of probabilities to the event"): the assignment of probabilities to the event
 			* a function from events to probabilities
 
-
-
 * what are [outcomes in the field of probability theory](https://en.wikipedia.org/wiki/Outcome_(probability))?
 	* a possible result of an experiment
 		* each possible outcome of a particular experiment is unique and different outcomes are mutually exclusive
 	* all of the possible outcomes of an experiment form the elements of a sample space
 
+* what is a [stochastic process in the field of probability theory](https://en.wikipedia.org/wiki/Stochastic_process)?
+	* a stochastic process is also known as a random process
+	* mathematical object usually defined as a collection of random variables
+		* widely used as mathematical models of systems and phenomena that appear to vary in a random manner
+	* can be divided into various categories
+		* random walks
+		* martingales
+		* markov processes
+			* wiener process
+				* important stochastic process
+			* poisson process
+				* important stochastic process
+		* Lévy processes
+		* gaussian processes
+		* random fields
+		* renewal processes
+		* branching processes
 
-
-
-
+* what is a [markov process in the field of probability theory](https://en.wikipedia.org/wiki/Markov_chain)?
+	* a stochastic (random) process that satisfies the markov property
+		* markov property
+			* a process satisfies the markov property if one can make predictions for the future of the process based solely on its present state just as well as one could knowing the process's full history
+				* conditional on the present state of the system, its future and past states are independent
 
 
 
