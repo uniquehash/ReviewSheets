@@ -2,6 +2,11 @@
 
 there is a need to differentiate between operating systems as a field and particular operating system implementations which are currently available. this is the first time i run into this problem for my notes!!!! w000000000000. pretty simple plan is outlined below.
 
+
+* resource on OS
+	* https://littleosbook.github.io/
+
+
 * operating_systems <=========[if your reading this you're here]
 	* theory
 		* contains notes on the theory of operating systems
