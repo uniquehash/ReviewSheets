@@ -43,7 +43,23 @@ https://en.wikipedia.org/wiki/Markov_chain
 	* a set of outcomes of an experiment to which a probability is assigned
 
 * what is a [sample space in the field of probability theory](https://en.wikipedia.org/wiki/Sample_space)?
-	* 
+	* the set of all possible outcomes or results of an experiment
+	* usually denoted using set notation
+		* possible outcomes are listed as elements in the set
+	* multiple sample
+		* for many experiments there may be more than one plausible sample space available
+			* depending on what result is of interest to the experimenter
+		* to find the most complete description of outcomes
+			* find the cartesian product of all the sample spaces
+	* equally likely outcomes
+
+
+
+
+
+
+
+
 
 * what is an [experiment in the field of probability theory](https://en.wikipedia.org/wiki/Experiment_(probability_theory))?
 	* any procedure that can be infinitely repeated and has a well defined set of possible outcomes, known as the sample space
@@ -66,10 +82,6 @@ https://en.wikipedia.org/wiki/Markov_chain
 
 
 
-
-
-
-
 * what are [empirical probabilities in the field of probability theory](https://en.wikipedia.org/wiki/Empirical_probability)?
 	* the empirical probability of an event is the ratio of the number of outcomes in which a specified event occurs to the total number of trials
 		* not in a theoritical sample space but in an actual experiment
@@ -87,7 +99,8 @@ https://en.wikipedia.org/wiki/Markov_chain
 			* the set of all possible outcomes
 		* ![{\displaystyle {\mathcal {F}}} {\mathcal {F}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/205d4b91000d9dcf1a5bbabdfa6a8395fa60b676 "set of events"): set of events
 			* each event is a set containing zero or more outcomes
-		* 
+		* ![{\displaystyle P} P](https://wikimedia.org/api/rest_v1/media/math/render/svg/b4dc73bf40314945ff376bd363916a738548d40a "assignment of probabilities to the event"): the assignment of probabilities to the event
+			* a function from events to probabilities
 
 
 
