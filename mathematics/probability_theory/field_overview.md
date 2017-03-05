@@ -1,6 +1,19 @@
 # general notes on the field of probability theory, this one hurt google. it really hurt. im gonna need to learn a shit ton to get this done.
 
 
+
+https://en.wikipedia.org/wiki/Probability_theory
+https://en.wikipedia.org/wiki/Random_variable
+https://en.wikipedia.org/wiki/Event_(probability_theory)
+https://en.wikipedia.org/wiki/Sample_space
+https://en.wikipedia.org/wiki/Experiment_(probability_theory)
+https://en.wikipedia.org/wiki/Stochastic_process
+https://en.wikipedia.org/wiki/Markov_chain
+
+
+
+
+
 * what is [probability theory in the first place](https://en.wikipedia.org/wiki/Probability_theory)?
 	* a branch of mathematics concerned with probability
 		* the analysis of random phenomena
