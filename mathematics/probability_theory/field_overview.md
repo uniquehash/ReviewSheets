@@ -1,6 +1,8 @@
 # general notes on the field of probability theory, this one hurt google. it really hurt. im gonna need to learn a shit ton to get this done.
 
-
+markov
+	https://www.youtube.com/watch?v=63HHmjlh794&t=675s
+	http://linkis.com/setosa.io/ev/markov-/aQv2l
 
 https://en.wikipedia.org/wiki/Probability_theory
 https://en.wikipedia.org/wiki/Random_variable
@@ -51,7 +53,40 @@ https://en.wikipedia.org/wiki/Markov_chain
 				* a random experiment that has exactly two (mutually exclusive) possible outcomes
 		* deterministic
 			* an experiment is deterministic if it has only one outcome
-		
+	* after conducting many trials of the same experiment and pooling the results an experimenter can beging to assess the empirical probabilities of the various outcomes and events that can occur		
+	* experiments and trials
+		* random experiments are often conducted repeatedly
+			* the collective results can be subjected to statistical analysis
+		* composed experiment
+			* fixed number of repetitions of the same experiment
+		* trials
+			* individual repetitions within an experiment
+	* mathematical description
+		* random experiments are modelled by a mathematical construct known as a probility space
+
+
+
+
+
+
+
+* what are [empirical probabilities in the field of probability theory](https://en.wikipedia.org/wiki/Empirical_probability)?
+	* the empirical probability of an event is the ratio of the number of outcomes in which a specified event occurs to the total number of trials
+		* not in a theoritical sample space but in an actual experiment
+	* estimates probabilities from experience and observation
+
+
+* what is [probability space in the context of probability theory](https://en.wikipedia.org/wiki/Probability_space)?
+	* a mathematical constructs that model a real-world experiment or process consisting of states that occur randomly
+		* constructed with a specific kind of sittuation or experiment in mind
+	* one proposes that each time a situation of that kind arises
+		* the set of possible outcomes is the same
+		* the probabilities are also the same
+	* probability space consist of three parts
+		* {\displaystyle \Omega } \Omega : sample space
+			* the set of all possible outcomes
+		* {\displaystyle {\mathcal {F}}} {\mathcal {F}} : 
+
 
 
 
