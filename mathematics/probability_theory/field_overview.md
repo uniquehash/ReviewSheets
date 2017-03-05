@@ -83,9 +83,19 @@ https://en.wikipedia.org/wiki/Markov_chain
 		* the set of possible outcomes is the same
 		* the probabilities are also the same
 	* probability space consist of three parts
-		* {\displaystyle \Omega } \Omega : sample space
+		* Ω: sample space
 			* the set of all possible outcomes
-		* {\displaystyle {\mathcal {F}}} {\mathcal {F}} : 
+		* ![{\displaystyle {\mathcal {F}}} {\mathcal {F}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/205d4b91000d9dcf1a5bbabdfa6a8395fa60b676 "set of events"): set of events
+			* each event is a set containing zero or more outcomes
+		* 
+
+
+
+* what are [outcomes in the field of probability theory](https://en.wikipedia.org/wiki/Outcome_(probability))?
+	* a possible result of an experiment
+		* each possible outcome of a particular experiment is unique and different outcomes are mutually exclusive
+	* all of the possible outcomes of an experiment form the elements of a sample space
+
 
 
 

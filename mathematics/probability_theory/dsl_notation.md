@@ -2,7 +2,7 @@
 
 
 
-{\displaystyle \Omega } \Omega : sample space
+Ω: sample space
 
 
 
