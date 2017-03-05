@@ -13,6 +13,8 @@ https://en.wikipedia.org/wiki/Stochastic_process
 https://en.wikipedia.org/wiki/Markov_chain
 
 
+https://www.youtube.com/user/knowitvideos
+http://setosa.io/ev/
 
 
 
