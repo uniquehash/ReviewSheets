@@ -33,7 +33,23 @@
 		* studying cruise control systems in motor vehicles
 		* queues or lines of customers arriving at an airport
 		* exchange rates of currencies
-		
+
+* what are [absorbing markov chains in the field of probability theory](https://en.wikipedia.org/wiki/Absorbing_Markov_chain)?
+	* an absorbing markov chain is a markov chain that contain at least one absorbant states and that all states have a path to an absorbant state
+		* absorbant state is a state where once reached it does not leave
+			* i.e. once reached it becomes stable
+	* [steps to finding the absorbtion probabilities of a markov chain](https://math.dartmouth.edu/archive/m20x06/public_html/Lecture14.pdf)
+		* create transition matrix
+			* a matrix filled with the probabilities of each state changing
+		* turn it into a canonical form
+			* reorganize the matrix such that the absorbing states follow the transient states
+			* the canonical form can be broken into sections
+				* ![canonical form](https://wikimedia.org/api/rest_v1/media/math/render/svg/97645f614d72a3fdcd42763e4fd74b1817f2e5bc "canonical form")
+		* find the fundamental matrix
+			* fundamental matrix
+				* inverse matrix of (identity matrix of (Q) - Q)
+		* compute the absorption probabilities
+			* absorption probabilities = fundamental matrix * (R found within the canonical form)
 
 
 
