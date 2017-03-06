@@ -399,7 +399,43 @@
 			* `docker run docker-whale`
 				* runs the image docker-whale
 	* [tag, push, and pull your image](https://docs.docker.com/engine/getstarted/step_six/)
-		
+		* tag and push the image
+			* `docker images`
+				* list the images stored locally
+			* find the image id for docker-whale
+				* for a repo to be recongized by docker hub when published it needs to have a namespace that corresponds with your docker hub account name
+			* `docker tag [image id] [new image name]`
+				* this will change the name of the container to the new name provided
+				* now shows two containers with the same id but two different names
+			* `docker login`
+				* logs you in to docker hub
+			* `docker push [container name]`
+				* will push the container to your docker hub account
+		* pull your new image
+			* `docker image rm -f [image id]`
+				* removes the local docker image that corresponds to that image id
+			* `docker pull [container name]`
+				* will pull from your docker hub account the container with the corresponding name
+			
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
