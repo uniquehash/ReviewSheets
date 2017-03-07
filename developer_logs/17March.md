@@ -82,12 +82,65 @@ docker basically creates a nice interface over existing tools to simplify operat
 
 working on docker stuffs mostly.
 
+### March, 6th, 2017
 
+* long term shit i need to do	
+	* figure out a classification method for determining what kind of company i want to work for
+		* high level, this manual classification system
+			* use template and draw generalizations
+				* twilio
+				* valve
+				* other
+	* learn more about virtualization
+		* fairly important cause of interlink with cris
+		* starting points as told by cris
+			* dockerize a web-app -> now reinforced by smart locus needs
+				* flask
+					* basic flask app
+					* rely on db
+						* postgress
+				* write a docker file 
+				* write a docker compose file
+			* container orchestration
+				* kubernetes
+			* get an AWS setup running with a kubernetes cluster
+				* get it to deploying with kubernetes
+			* make jenkins happen
+				* what is jenkins
+	* work on the frame work
+		* i should do this above go
+	* learn go
+	
 
+* immediate shit to do	
+	* finish the google foobar
+	* chop up the video and 
+	* rebrand as a data acquisition specialist
+	* 42 stuff
+		* burn ls and restart :(
+		* algorithm for push_swap
 
+* fun stuff to do
+	* work on DnD system
 
+so this google foobar thing kind of changes everythin. now i'm going to end up interview ready, which means i might as well apply to a bunch of internships, which means that im changing my whole plan basically. so lets focus on today.
 
-
+* today
+	* talk to jamie
+		* designathon
+	* talk to john
+		* the video
+	* work on the markov chain problem
+		* build a matrix library
+			* exist
+			* create identity matrix of arbritary size
+			* re-arrange rows and columns
+			* subset
+			* matrix subtraction
+			* matrix multiplication
+			* inverse of matrix
+	* build a docker container for the process on the server
+		* not sure just start doing
 
 
 
