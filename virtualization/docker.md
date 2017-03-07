@@ -417,31 +417,6 @@
 			* `docker pull [container name]`
 				* will pull from your docker hub account the container with the corresponding name
 			
-			
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 * what is a [docker daemon](https://docs.docker.com/engine/reference/commandline/dockerd/#related-commands)?
 	* `dockerd` 
 		* a self-sufficient runtime for containers
@@ -454,6 +429,242 @@
 
 * what does a [runtime really mean]()?
 	* magic-wand word that basically means an environment that provides everything necessary to properly run the intended program
+
+* what is an [entrypoint in a dockerfile](https://docs.docker.com/engine/reference/builder/#entrypoint)?
+	* allows you to configure a container that will run as an executable
+		* exec form (preferred)
+			* `ENTRYPOINT ["executable", "param1", "param2"]`
+		* shell form
+			* `ENTRYPOINT command param1 param2
+	* only the last `ENTRYPOINT` instruction in the `Dockerfile` will have an effect	
+	* exec form
+		* can be used to set fairly stable default commands and arguments 
+			* then use either form of `CMD` to set additional defaults that are more likely to be changed
+		* command line args to `docker run <image>` will be appended after all elements in an exec form `ENTRYPOINT`
+			* will override all elements specified using `CMD`
+		* allows arguments to be passed to the entry point
+			* `docker run <image> -d`
+				* will pass the `-d` argument to the entry point (detaching it and making it run in the background?)
+		* `docker run --entrypoint`
+			* can override the `ENTRYPOINT` instruction using the 
+		* example
+			```
+				FROM ubuntu
+				ENTRYPOINT ["top", "-b"]
+				CMD ["-c"]
+			```
+			* when you run container top will be the only process
+			* `docker exec -it test ps aux`
+				* you can then pass it a command to run
+				* this will have top with PID 1 and ps aux with some other PID
+			* `docker stop test`
+				* will be able to gracefully request `top` to shut down because it is PID 1 and thus can receive signals
+			```
+				FROM debian:stable
+				RUN apt-get update && apt-get install -y --force-yes apache2
+				EXPOSE 80 443
+				VOLUME ["/var/www", "/var/log/apache2", "/etc/apache2"]
+				ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+			```	
+			* use `ENTRYPOINT` to run Apache in the forgeround as `PID 1`
+	* shell form
+		* you can specify a plain string for the `ENTRYPOINT` and it will execute in `/bin/sh -c`
+			* uses shell processing to substitute shell environment variables
+			* will ignore any `CMD` or `docker run` command line arguments
+			* to ensure that `docker stop` will signal any long running `ENNTRYPOINT` executable correctly 
+				* start with `exec`
+		* prevents any `CMD` or `run` command line arguments from being used
+			* disadvantage that the `ENTRYPOINT` will be started as a subcommand of `/bin/sh -c`
+				* does not pass signals
+					* executable will not be the containers `PID 1`
+						* will not receive Unix signals
+						* executable will not receive a `SIGTERM` from `docker stop <container>`
+		* example
+			```
+				FROM ubuntu
+				ENTRYPOINT exec top -b
+			```
+			* top is assigned `PID 	1` process
+			* will exit cleanly on `docker stop`
+			```
+				FROM ubuntu
+				ENTRYPOINT top -b
+				CMD --ignored-param1
+			```
+			* top is not assigned `PID 1`
+			* on `docker stop`
+				* container will not exit cleanly
+				* `stop` command will be forced to send a `SIGKILL` after the timeout
+	* understanding how `CMD` and `ENTRYPOINT` interact
+		* both `CMD` and `ENTRYPOINT` instructions define what command gets executed when running a container
+			* rules that describe their co-operation
+				* Dockerfile should specify at least one of `CMD` or `ENTRYPOINT` commands
+				* `ENTRYPOINT` should be defined when usng the container as an executable
+				* `CMD` should be used as a way of defining default arguments for an `ENTRYPOINT` command
+					* or executing an ad-hoc command in a container
+				* `CMD` will be overridden when running the container with alternative arguments
+				* table exist at source for how these two things interact in different combinations
+			
+* what is does the [volume instruction do in a dockerfile](https://docs.docker.com/engine/reference/builder/#volume)?
+	* creates a mount point with the specified name and marks it as holding externally mounted volumes from native host or other containers
+		* value can be
+			* JSON array
+				* `VOLUME ["/var/log/"]`
+			* a plain string with multiple arguments
+				* `VOLUME /var/log /var/db`
+	* `docker run` initializes the newly created volume with any data that exists at the specified location within the base image
+	* example
+	```
+		FROM ubuntu
+		RUN mkdir /myvol
+		RUN echo "hello world" > /myvol/greeting
+		VOLUME /myvol
+	```
+	* results in an image that causes `docker run` to create a new mount point at `/myval` and copy the `greeting` file into the newly created volume		
+
+* what are [volumes in the docker ecosystem](https://docs.docker.com/engine/tutorials/dockervolumes/)?
+	* short for data volumes
+		* a specially-designated directory within one or more containers that bypasses the union file system
+			* volumes are initialized when a container is created
+				* if the containers base image contains data at the specified mount point
+					* that existing data is copied into the new volume upon volume initialization
+						* does not apply when mounting a host directory
+			* data volumes can be shared and reused among containers
+			* changes to a data volume are made directly
+			* changes to a data volume will not be included when you update an image
+			* data volumes persist even if the container itself is deleted
+		* designed to persist data independent of the containers life cycle
+			* docker never automatically deletes volumes when you remove a container
+			* never "garbage collect" volumes that are no longer referenced by a container
+	* adding a data volume
+		* `-v`
+			* will add a data volume to a container when using the `docker create` and `docker run` command
+			* can be used multiple times to mount multiple data volumes
+			* example
+				* `docker run -d -P --name web -v /webapp training/webapp python app.py
+					* will create a new volume inside a container at `/webapp`
+				* can also use the `VOLUME` instruction in a Dockerfile to add one or more new volumes to any container created from that image
+	* locating a volume
+		* `docker inspect`
+			* command will give information on the container
+			* example
+				* `docker inspect web`
+				```
+					"Mounts": [
+						{
+							"Name": "fac424...2424",
+							"Source": "/var/lib/docker/volumes/fac424...2424/_data",
+							"Destination: "/webapp",
+							"Driver": "local",
+							"Mode": "",
+							"RW": true,
+							"Propagation": ""
+						}
+					]
+				```
+				* `Source` 
+					* specifies the location of the volume on the host
+				* `Destination`
+					* specifies the volume location inside the container
+				* `RW`
+					* shows if the volume is read/write
+	* more info to mine but leaving it for now	
+						
+* what does [mounting a host directory mean in the context of docker](https://docs.docker.com/engine/tutorials/dockervolumes/#mount-a-host-directory-as-a-data-volume)
+	* you can mount a directory from your Docker engines host into a container
+	* `docker run -d -P --name web -v /src/webapp:/webapp training/webapp python app.py`
+		* mounts the host directory `/src/webapp` into container `/webapp`
+			* if the path `/webapp` already exists inside the containers image
+				* `/src/webapp` mount overlays but does not remove the pre-existing content
+				* once the mount is removed the content becomes accessible again
+			* the `container-dir` must always be an absolute path
+			* the `host-dir` can either be an absolute path or a `name` value
+				* supply absolute path 
+					* docker bindmounts to the path you specify
+				* supply a `name`
+					* docker creates a named volume by that name
+			* `name` value must start with an alphanumeric character followed by `a-z0-9`, `_`, `.`, `-`
+			* absolute path starts with `/`
+	
+* what is [docker compose](https://docs.docker.com/compose/overview/)?
+	* a tool for defining and running multi-container docker applications
+		* use a compose file to configure your applications services
+		* use single commands create and start all the services from your configuration
+	* features
+		* multiple isolated environments on a single host
+			* uses a project name to isolate environments from each other
+				* several use cases
+					* dev host machine
+						* create multiple copies of a single environment
+							* run a stable copy for each feature branch of a project
+					* CI server
+						* keep builds from intefering with each other
+							* set project name to a unique build number
+					* shared host or dev host machine
+						* prevent different projects which may use the same service names from inteferring with each other	
+			* default project name is the basename of the project directory
+				* set a custom project name 
+					* `-p` command line option
+					* `COMPOSE_PROJECT_NAME` environment variable
+		* preserve volume data when containers are created
+			* compose preserves all volumes used by your services
+			* `docker-compose up`
+				* at execution time will look for any containers from previous runs
+				* copies the volumes from the old container to the new container
+				* ensures that data created in volumes is not lost
+			* if using `docker-compose` on a windows machine see environmentvariables and adjust the necessary environment variables for your specific needs
+		* only recreate containers that have changed
+			* compose caches the configuration used to create a container
+				* when restarting a service that has not changed
+					* compose re-uses the existing containers
+					* re-using containers means that you can make changes to your environment very quickly
+		* variables and moving a composition between environments
+			* supports variables in the compose file
+				* these can be used to customize your composition for different environments or different users
+			* you can extend a compose file using the `extends` field or by creating multiple compose files
+
+
+
+
+
+* what is [variable substitution in docker compose](https://docs.docker.com/compose/compose-file/#variable-substitution)?
+	* configuration options can contain environment variables 
+		* compose uses the variable values from the shell environment in which docker-compose is run
+
+
+* what does [extend do in docker compose](https://docs.docker.com/compose/extends/)?
+	* supports two methods of sharing common configuration
+		* extending an entire compose file by using multiple compose files
+			* using multiple compose files enables you to customize a compose application for different environments or different workflows
+		* extending individual services with the extends field
+			* the `extends` keyword enables sharing of common configuration among different files or even different projects entirely
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
