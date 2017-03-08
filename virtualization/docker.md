@@ -638,7 +638,45 @@
 			* using multiple compose files enables you to customize a compose application for different environments or different workflows
 		* extending individual services with the extends field
 			* the `extends` keyword enables sharing of common configuration among different files or even different projects entirely
-		
+
+* what is [dockerUI](https://github.com/kevana/ui-for-docker)?
+	* ui for docker, deprecated
+
+* what is [portainer](https://github.com/portainer/portainer)?
+	* lightweight management ui which allow you to easily manage docker host or swarm cluster
+	* simple to deploy and use
+		* single container that can run on any docker engine
+	* compatible with standalone docker and with docker swarm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 
 
