@@ -522,6 +522,66 @@
 	```
 	* results in an image that causes `docker run` to create a new mount point at `/myval` and copy the `greeting` file into the newly created volume		
 
+* what does the [ADD command do in a Dockerfile](https://docs.docker.com/engine/reference/builder/#add)?
+	* `ADD <src> ... <dest>`
+	* `ADD ["<src>", ... "<dest>"]
+		* required for paths containing whitespace
+	* copies files directories or remote file URLs from `<src>` and adds them to the filesystem of the image at the path `<dest>`
+	* multiple `<src>` resources may be specified
+		* if they are files or directories then they must be relative to the source directory that is being built
+	* each `<src>` may contain wildcards and matching will be done using Gos filepath.Match rules
+		* [Gos filepath.Match rules](http://golang.org/pkg/path/filepath#Match)
+	* the `<dest>` is an absolute path, or a path relative to `WORKDIR` macro
+		* here the source will be copied inside the destination container
+	* `ADD` obeys the following rules
+		* the `<src>` path must be inside the context of the build
+		* if `<src>` is a URL and `<dest>` does not end with a trailing slash then a file is downloaded from the URL and copied to `<dest>`
+		* if `<src>` is a URL and `<dest>` does end 
+	* i need to continue this some other time, im to tired
+
+* what is the difference between [ADD and VOLUME in docker](http://stackoverflow.com/questions/27735706/docker-add-vs-volume)?
+	* `ADD`
+		* makes whatever is being added actually part of the image
+		* can never `ADD` at run-time
+	* `VOLUME`
+		* lets a container run from the image have access to some path on whatever local machine the container is being run on
+		* cannot use files from the `VOLUME` directory in the Dockerfile
+			* not accessible at build time, but is accessible at run-time
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * what are [volumes in the docker ecosystem](https://docs.docker.com/engine/tutorials/dockervolumes/)?
 	* short for data volumes
 		* a specially-designated directory within one or more containers that bypasses the union file system
@@ -648,6 +708,66 @@
 		* single container that can run on any docker engine
 	* compatible with standalone docker and with docker swarm
 
+* how do i get [started using docker compose](https://docs.docker.com/compose/install/)?
+	* install docker engine, compose, and machine
+	* setup
+		* create directory for the project
+		* create app.py and paste in the flask test app
+		* create a requirements.txt to make things easily pipable for the apps dependencies
+	* create a Dockerfile
+		* in the project directory create a `Dockerfile` and paste the things
+	* degine services in a compose file
+		* create a file `docker-compose.yml` in the project directory and paste the following
+		```
+			version: '2'
+			services:
+				web:
+					build: .
+					ports:
+					 - "5000:5000"
+					volumes:
+					 - .:/code
+				redis:
+					image: "redis:alpine"
+		```
+		* defines two services
+			* web
+				* uses an image that is built from the `Dockerfile` in the current directory
+				* forwards the exposed port 5000 on the container to port 5000 on the host machine
+				* mounts the project directory on the host to `/code` inside the container
+					* allows you to modify the code without having to rebuild the image
+			* redis
+				* uses a public redis image pulled from the docker hub registry
+	* build and run your app with compose
+		* docker-compose up 
+			* will start the application
+			* in the above example 
+				* compose will pull a redis image from dockerhub 
+				* build it for the code provided 
+				* start the services
+			* to see the app running enter `http://0.0.0.0:5000` in a browser
+				* on mac
+					* `docker-machine ip MACHINE_VM`
+						* get ip address of docker host
+						* use that ip in the browser
+							* `http://MACHINE_VM_IP:5000`
+	
+* how to make [docker play nice on osx](https://www.viget.com/articles/how-to-use-docker-on-os-x-the-missing-guide)?
+	* basically osx and docker do not mix well
+	* install virtualbox
+	* install boot2docker 
+	* initialize and start boot2docker
+		* `boot2docker init`
+		* `boot2docker up`
+	* set the DOCKER_HOST environment variable
+		* `eval "$(boot2docker shellinit)"`
+	* fuck this im just spinning up a droplet and doing it there
+
+* how to [install docker on ubuntu](https://docs.docker.com/engine/installation/linux/ubuntu/#docker-ce)?
+	* install from repository
+	* install docker
+
+* how to [pass environment variables to docker container using compose](https://docs.docker.com/compose/environment-variables/#setting-environment-variables-in-containers)?
 
 
 
