@@ -233,6 +233,40 @@ so for the docker volume thing to go host to container you need to either use th
 
 now i need to figure out how to pass information to the container as environment variables.
 
+### March, 12th, 2017
+
+fuck it. i'm just gonna go through this shit by hand. onword to sorting 100 integers by hand using the merge sort method.
+
+okay learned a lot from that, like the fundementals of the things. at their root algorithm are just ways of doing things. you can think of a good algorithm like a fractal, they are natural phenomenons discovered that just work at every layer of iteration. but even after the over all stragy of the algorithm, it can be further optmized at various steps. this can be pre-processing, better methodology for particular components, ect...
+
+now i'm going to build a python algorithm thing to do a bunch of testing. shorter development cycles here are key.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
