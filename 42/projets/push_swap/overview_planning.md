@@ -103,8 +103,14 @@ YOU REFACTORED THE STRSPLIT, DON'T FORGET TO ADD IT TO LIB WHEN DONE
 		* else
 			* print ko
 
-
-
+* 3 arg
+	* 2-3
+* 5 arg
+	* 12
+* 100 arg
+	* 700
+* 500 arg
+	* 5300
 
 
 

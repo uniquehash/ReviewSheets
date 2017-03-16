@@ -71,7 +71,25 @@
 	* different colored text in terminal 
 
 
-
+* new plan
+	* ls
+		* parse arguments
+			* detection
+			* processing
+			* application
+		* store context
+			* rules
+				* don't touch filenames
+				* restrict by case
+					* invalid chr
+					* invalid files
+			* presentation path
+			* access path
+			* filename
+		* deal with arguments
+			* seperate dir from files
+		* grab dir from context
+		
 
 
 

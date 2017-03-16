@@ -136,9 +136,9 @@ so this google foobar thing kind of changes everythin. now i'm going to end up i
 			* create identity matrix of arbritary size
 			* re-arrange rows and columns
 			* subset
-
-			* matrix subtraction
+			* matrix subtraction			
 			* matrix multiplication
+			
 			* inverse of matrix
 
 	* build a docker container for the process on the server
