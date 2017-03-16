@@ -145,6 +145,125 @@ so this google foobar thing kind of changes everythin. now i'm going to end up i
 		* not sure just start doing
 
 
+### March, 8th, 2017
+
+* long term shit i need to do		
+	* learn more about virtualization
+		* fairly important cause of interlink with cris
+		* starting points as told by cris
+			* dockerize a web-app -> now reinforced by smart locus needs
+				* flask
+					* basic flask app
+					* rely on db
+						* postgress
+				* write a docker file 
+				* write a docker compose file
+			* container orchestration
+				* kubernetes
+			* get an AWS setup running with a kubernetes cluster
+				* get it to deploying with kubernetes
+			* make jenkins happen
+				* what is jenkins
+	* work on the frame work
+		* i should do this above go
+	* learn go
+	* figure out a classification method for determining what kind of company i want to work for
+		* high level, this manual classification system
+			* use template and draw generalizations
+				* twilio
+				* valve
+				* other
+
+* immediate shit to do	
+	* finish the google foobar
+	* chop up the video and 
+	* rebrand as a data acquisition specialist
+	* 42 stuff
+		* burn ls and restart :(
+		* algorithm for push_swap
+
+* fun stuff to do
+	* work on DnD system
+
+okay i got the google foobar stuff under control. back to virtualization. so were going to use docker compose to manage the containers, dockerui to visualize the docker host. To pass a directory to a container i need to mount it to the container. passing arbritary arguments should be no big deal. really my next step should be to go throught the getting started compose thing, and just set up a docker image using compose. very likely that my questions will be answered in the process of doing that.
+
+### March, 9th, 2017
+
+* long term shit i need to do		
+	* learn more about virtualization
+		* fairly important cause of interlink with cris
+		* starting points as told by cris
+			* dockerize a web-app -> now reinforced by smart locus needs
+				* flask
+					* basic flask app
+					* rely on db
+						* postgress
+				* write a docker file 
+				* write a docker compose file
+			* container orchestration
+				* kubernetes
+			* get an AWS setup running with a kubernetes cluster
+				* get it to deploying with kubernetes
+			* make jenkins happen
+				* what is jenkins
+	* work on the frame work
+		* i should do this above go
+	* learn go
+	* figure out a classification method for determining what kind of company i want to work for
+		* high level, this manual classification system
+			* use template and draw generalizations
+				* twilio
+				* valve
+				* other
+
+* immediate shit to do	
+	* finish the google foobar
+	* chop up the video and 
+	* rebrand as a data acquisition specialist
+	* 42 stuff
+		* burn ls and restart :(
+		* algorithm for push_swap
+
+* fun stuff to do
+	* work on DnD system
+
+okay so now i have a basic container getting spun up with compose. the compose file is going to contain a single service for the building. it's going to mount a folder associated to an arbritary path to the container. pass credentials to the container's as environment variables.
+
+so for the docker volume thing to go host to container you need to either use the command line options or use `docker-compose`. this is for flexbility in development but honestly fuck.
+
+now i need to figure out how to pass information to the container as environment variables.
+
+### March, 12th, 2017
+
+fuck it. i'm just gonna go through this shit by hand. onword to sorting 100 integers by hand using the merge sort method.
+
+okay learned a lot from that, like the fundementals of the things. at their root algorithm are just ways of doing things. you can think of a good algorithm like a fractal, they are natural phenomenons discovered that just work at every layer of iteration. but even after the over all stragy of the algorithm, it can be further optmized at various steps. this can be pre-processing, better methodology for particular components, ect...
+
+now i'm going to build a python algorithm thing to do a bunch of testing. shorter development cycles here are key.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
