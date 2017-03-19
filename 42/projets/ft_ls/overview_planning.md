@@ -88,8 +88,56 @@
 			* filename
 		* deal with arguments
 			* seperate dir from files
-		* grab dir from context
-		
+				* for each dir
+					* open access path
+				* for each file
+					* extract access path
+					* store filename
+					* open access path
+		* open access path
+			* check if file name is null
+			* apply file function
+	
+	* salvage files
+		* algo
+			* algo_filesort
+			* algo_strsort
+		* file
+			* file_helper
+		* filelist
+			* filelist_infa
+			* ft_fstrlist_add
+		* strlist
+			* ft_strlist_add
+			* ft_strlist_build
+			* ft_strlist_del
+			* ft_strlist_findindex
+			* ft_strlist_len
+			* ft_strlist_minus
+			* ft_strlist_print
+			* ft_strlist_remove
+		* library
+			* ft_fstrmcatf
+			* ft_strmcatf
+			* ft_strsearch_ov
+		* ls
+			* ls_engine
+		* t_clip
+			* t_clip_apply_lflags
+			* t_clip_apply_sflags
+			* t_clip_engine
+			* t_clip_infa
+			* t_clip_infa_helper
+			* t_clip_parse_helper
+		* t_context
+			* t_context_helper
+			* t_context_infa
+
+
+	* refactoring
+		* refactor argument parsing
+		* time sort
+		* t_clip
 
 
 

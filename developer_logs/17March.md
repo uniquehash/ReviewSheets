@@ -241,6 +241,131 @@ okay learned a lot from that, like the fundementals of the things. at their root
 
 now i'm going to build a python algorithm thing to do a bunch of testing. shorter development cycles here are key.
 
+### March, 17th, 2017
+
+* long term shit i need to do	
+	* work with smart locus on their virtualization set up
+		* setting up the ingestion scripts with docker compose
+	* learn more about virtualization
+		* fairly important cause of interlink with cris
+		* starting points as told by cris
+			* dockerize a web-app -> now reinforced by smart locus needs
+				* flask
+					* basic flask app
+					* rely on db
+						* postgress
+				* write a docker file 
+				* write a docker compose file
+			* container orchestration
+				* kubernetes
+			* get an AWS setup running with a kubernetes cluster
+				* get it to deploying with kubernetes
+			* make jenkins happen
+				* what is jenkins
+	* learn go
+	* figure out a classification method for determining what kind of company i want to work for
+		* high level, this manual classification system
+			* use template and draw generalizations
+				* twilio
+				* valve
+				* other
+
+* immediate shit to do			
+	* 42 stuff
+		* restarting ls
+		* algorithm for push_swap
+	* finish chopping up the video
+	* write in the description for the livestream
+	* finish the google foobar
+
+* fun stuff to do
+	* work on DnD system
+
+Since i'm going to be away from the lab computers for a few days i'm going to focus today and tomorrow on stuff i can do on the lab computers. that means putting push_swap down for a second and working on ls. the upside of this is that it is a more effecient use of resources. the downside of this is that it means i will not submit anything anytime soon. 
+
+a lot more of ls was salvagable then i thought. this is good. first i'm going to refactor t_clip, my mini library for cli argument handling. after that's good i'll get to handling the arguments within the program. next will be handling basic ls functionality without arguments or flags. after i'll introduce arguments. then i'll start handling flags. i'll handle the recursion first, then the long print, then the time sort, then the reverse sort, then the hidden files. i need to handle errors properly as i come across them from the getgo, as oppose to lumping them all together at the end
+
+* refactoring plan
+	* refactor t_clip
+	* handle arguments within the program
+	* handle basic ls functionality without arguments or flags
+	* introduce arguments
+	* introduce flags
+		* recursion
+		* long print 
+		* timesort
+		* reverse sort
+		* hidden files
+
+handling arguments within the program is going to be a lot more straight forward this time around. basically the char** get received from clip, and then shoved into a handle_arguments function. the first step of the handle_arguments function is to convert the char** into a filelist. it will extract the access_path of each char** and then attempt to open that access_path. it will then find the desired file in that directory. if found it will return the file to the convert function which will organize them into a filelist and send them back to the handle_arguments function. if there the file cannot be found or there is an error of any kind the error will be displayed using perror, and that entry in the char** will not be added to the filelist. the directories will then be extracted from the filelist, by checking their filetype bit. both list are sorted. then they should be passed through the same process that ls would go through if it were normally called. which will be the next piece i figure out.
+
+* handle arguments within the program
+	* clip contains args char**
+	* handle_args receives char**
+		* convert to filelist
+			* extract access path
+				* if contains a '/'
+					* returns path from index 1 to pen ultimate '/'
+				* if doesn't contain a '/'
+					* returns '.'
+			* open access path
+				* if access path doesn't open
+					* prints perror
+					* returns NULL
+				* find file in directory
+					* if not found
+						* prints perror
+						* returns NULL
+					* if found
+						* returns file
+			* returns filelist
+		* extract the dir from the filelist
+			* check filetype bit
+		* sort the filelist
+		* same behavior as if it were a normal ls call
+
+if filename is null it means were looking for '.' in the access path
+
+### March, 18th, 2017
+
+working on extract_filename. the issue your working on is the problem when you add a slash to the end of a filename, which marks it as a directory but also fucks your extraction system.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
