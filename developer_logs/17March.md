@@ -330,8 +330,23 @@ if filename is null it means were looking for '.' in the access path
 
 working on extract_filename. the issue your working on is the problem when you add a slash to the end of a filename, which marks it as a directory but also fucks your extraction system.
 
+### Match, 21st, 2017
 
+working on the docker container stuff. need to mount a local folder, take in parameter to add to the containers ENV variables and persist. Keeping the container alive might actually be the most difficult component of this task.
 
+okay so more or less i'm going to have a Dockerfile that will add a bunch of shit to the ENV of the container then shove it all in a file, run the crontab that will source that file and then finally run a script that will properly run the python scripts that charlie wrote. 
+
+* Dockerfile
+	* installs all dependencies
+	* loads a bunch of data into containers ENV 
+	* runs a shell command to shove all that data into a file prepended by namespaced exports
+	* adds the proper files into the container including charlies scripts and the crontab
+	* mounts the json files into the container from the host file
+	* runs the crontab command in the foreground
+
+### March, 24th, 2017
+
+got the docker stuff working except that now i need to figure out how to connect to the db on the host machine. there has to be a normal way to do that that isn't stupid. 
 
 
 

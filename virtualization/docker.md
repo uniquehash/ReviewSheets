@@ -370,7 +370,7 @@
 			* `docker build -t docker-whale .`
 				* build an image from a docker file
 				* -t
-					* gives yout image a tag
+					* gives your image a tag
 				* .
 					* tells the docker build command to look in the current directory for a file called `Dockerfile`
 		* learn about the build process
@@ -768,11 +768,44 @@
 	* install docker
 
 * how to [pass environment variables to docker container using compose](https://docs.docker.com/compose/environment-variables/#setting-environment-variables-in-containers)?
+	* follow the tutorial
 
 
 
 
 
+* how to keep docker containers alive, so that they can do periodic tasks?
+	* there are a few different strategies to achieve the desired end goal
+		* [How to Keep Docker Container Running After Starting Services?](http://stackoverflow.com/questions/25775266/how-to-keep-docker-container-running-after-starting-services)
+			* here we basically hack the image to stay persistent and not exit
+				* we put the weight of controlling the execution on of the ingester on the container itself
+			* basically at the end of your scrip add a tail and it will keep running because the program will not exit
+		* [The right way to keep docker container started when it used for periodic tasks](http://serverfault.com/questions/661909/the-right-way-to-keep-docker-container-started-when-it-used-for-periodic-tasks)
+			* here we are going to create our image once and then start it every time the host desires to run a task, communicating via the STDIN
+				* here we put the weight of controlling the execution of the ingester and ect... on the host, not the container
+			* `docker run`
+				* actually creates and starts the container
+			* you can run the container in interactive mode and with a new tty
+				* `docker run -it [image]`
+		* [How to run a cron job inside a docker container?](http://stackoverflow.com/questions/37458287/how-to-run-a-cron-job-inside-a-docker-container)
+			* [resource from Julien Boulay](https://www.ekito.fr/people/run-a-cron-job-with-docker/)
+			* you can build a crontab file and run it in the container
+			* however cron will not have access to your environment variables
+		* [Access environment variables from crontab into a docker container](https://ypereirareis.github.io/blog/2016/02/29/docker-crontab-environment-variables/)
+			* this is actually what we are trying to do
+			* source the ENV variables
+				* put them in a file 
+				* source the file in the crontab prior to the real work
+				* shell command to create file of ENV
+					* grab all ENV variables and shove them in a file with the command export infront
+						* `printenv | sed 's/^\(.*\)$/export \1/g' > /root/project_env.sh`
+					* will filter by [NAMESPACE] capturing only the desired ENV variables
+						* `printenv | sed 's/^\(.*\)$/export \1/g' | grep -E "^export [NAMESPACE]" > /root/project_env.sh`
+				* crontab
+					* `* * * * * root . /root/project_env.sh; [command to be run periodically] >> /var/log/cron.log 2>&1`
+
+* How to get [bash or ssh into a running container in background mode?](http://askubuntu.com/questions/505506/how-to-get-bash-or-ssh-into-a-running-container-in-background-mode)
+	* `docker exec -ti [container_tag_or_id] /bin/bash`
 
 
 
