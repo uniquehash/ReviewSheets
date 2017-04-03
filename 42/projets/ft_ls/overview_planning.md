@@ -6,6 +6,7 @@
 	* ft_strrchr	
 	* ft_strmcatf
 	* ft_fstrmcatf
+	* ft_strtrim_c
 
 	* reimplement strlist with a linked list
 		* ft_strlist_build
@@ -136,6 +137,7 @@
 
 	* refactoring
 		* refactor argument parsing
+			* right now you are working on extracting the directories
 		* time sort
 		* t_clip
 

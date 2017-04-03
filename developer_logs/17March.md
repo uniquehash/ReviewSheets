@@ -348,7 +348,51 @@ okay so more or less i'm going to have a Dockerfile that will add a bunch of shi
 
 got the docker stuff working except that now i need to figure out how to connect to the db on the host machine. there has to be a normal way to do that that isn't stupid. 
 
+### March, 29th, 2017
 
+figured out what my issue was. i was double deleting a string cause i'm dumb.
+
+now i have argument seperation mostly down. time to move on to simple ls behavior. probably tomorrow. remember filenames are blobs of information.
+
+### March, 30th, 2017
+
+* refactoring plan
+	* refactor t_clip
+	* handle arguments within the program
+	* handle basic ls functionality without arguments or flags
+	* introduce arguments
+	* introduce flags
+		* recursion
+		* long print 
+		* timesort
+		* reverse sort
+		* hidden files
+
+time to build some of ls functionality. first refactor things a bit to have them in the appropriate files.
+need to work on how my filelist injest files but besides that should be good.
+
+### March, 31st, 2017
+
+* refactoring plan
+	* refactor t_clip
+	* handle arguments within the program
+	* handle basic ls functionality without arguments or flags
+	* introduce arguments
+	* introduce flags
+		* recursion
+		* long print 
+		* timesort
+			* for arguments sorting, write a wrapper and sort the files
+		* reverse sort
+		* hidden files
+
+so now i'm working on implementing basic ls functionality. i need to fix my filelist set up.
+
+time to introduce argument handling. to handle time sorting for arguments i'll make a small wrapper and sort the actual files.
+
+woooo got it done. that's really dope though. arguments are handled both relative and absolute.
+
+tomorrow i'm gonna start implementing flags.
 
 
 
