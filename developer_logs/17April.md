@@ -65,7 +65,37 @@ woooooo i figured out the fucking thing with the block size.
 all that's left is sorts and the sticky bit and then i'm ready for extensive testing. 
 
 fuccccccck. i need to redo how my program executes on files. you know what. fuck it. hopefully no one will notice.
- 
+
+### April, 5th, 2017
+
+* refactoring plan
+	* refactor t_clip
+	* handle arguments within the program
+		* - alone should be passed as argument
+	* handle basic ls functionality without arguments or flags
+	* introduce arguments
+	* introduce flags
+		* recursion 
+		* long print  
+		* timesort <-
+			* for arguments sorting, write a wrapper and sort the files
+		* reverse sort
+		* hidden files 
+
+the dreaded time sort is here. fuckkkkkk. okay so the order is seconds, then nano-seconds, then lexical. i honestly need to redo the whole thing cause it's bad.
+
+got it pretty much done just need to apply it to the strlist.
+
+found a solution that is better for all of this. it will also allow me to fix the column issue that was bound to come up during corrections.
+
+i will treat files and directories seperately. do the same thing i'm doing now to seperate them. on files i check to see if it ends with a slash, if so it's not a valid file or directory. i attempt to extract it's access path and find the file. if the file is not found then it's not a valid file. i add the file to a file list as i go. then i sort the filelist by the appropriate sorting method, and execute the ls like function on them. basically completely different pipeline than for directories.
+
+for directories. i sort them approriately lexically, and then if it's a time sort i'm not sure what i do. this basically should be my focus tomorrow. if i figure this out i'm pretty much done. 
+
+
+
+
+
 
 
 
