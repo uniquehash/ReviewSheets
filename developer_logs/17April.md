@@ -90,7 +90,17 @@ found a solution that is better for all of this. it will also allow me to fix th
 
 i will treat files and directories seperately. do the same thing i'm doing now to seperate them. on files i check to see if it ends with a slash, if so it's not a valid file or directory. i attempt to extract it's access path and find the file. if the file is not found then it's not a valid file. i add the file to a file list as i go. then i sort the filelist by the appropriate sorting method, and execute the ls like function on them. basically completely different pipeline than for directories.
 
-for directories. i sort them approriately lexically, and then if it's a time sort i'm not sure what i do. this basically should be my focus tomorrow. if i figure this out i'm pretty much done. 
+for directories. i sort them approriately lexically, and then if it's a time sort i'm not sure what i do. this basically should be my focus tomorrow. if i figure this out i'm pretty much done.
+
+wow the rush for this weekend looks pretty complex.
+
+### April, 6th, 2017
+
+so to handle the arguments basically files will be left alone and then a custom ls function will be used for them. 
+
+for directories. first i'm going to lexically sort it. then i'm just gonna open them all the fuck up throw their "." in a filelist and sort the fucker. i'm gonna have to build yet another sorting algorithm that handles both these things but you know what. its. time. to. stop. being. smart.
+
+
 
 
 
