@@ -95,8 +95,6 @@
 				* after the operating system has configured itself, it will instruct the other processors to jump to a piece of trampoline code that will initialize the processors and wait for the operating system to start scheduling threads on them
 
 
-/nfs/2016/o/obelange/Desktop/offence/projects/hercules/mares_diomedes
-
 
 
 

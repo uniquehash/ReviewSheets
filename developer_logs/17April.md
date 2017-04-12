@@ -100,12 +100,35 @@ so to handle the arguments basically files will be left alone and then a custom 
 
 for directories. first i'm going to lexically sort it. then i'm just gonna open them all the fuck up throw their "." in a filelist and sort the fucker. i'm gonna have to build yet another sorting algorithm that handles both these things but you know what. its. time. to. stop. being. smart.
 
+### April, 10th, 2017
 
+i can keep the flag inside the function i just need to set it equal to i within the parent and then set it after. this is pretty disgusting but fuck it.
 
+* plan for tonight
+	* finish this argument handling thing
+	* research minishell
 
+next is handling files.
 
+i'm going to just open up all the files and add them to a filelist and then just run basically ls on this filelist. that way they will be validated in "order" and the weight of sorting will be handled by the ls functionality.
 
+okay. so. now i have two problems. first off the path names are different for files and directories. second the columns are kinda of off for files. i think this is where i give it a shot more or less and see what happens. might be able to push it through.
 
+next is norming and testing. 
+
+taking a break from ls for a second to read the minishell subject and start research.
+
+for minishell i'm not overengineering. i'm going to implement each project as i go in the set, and then refactor / scrap as necessary. the goal for this set of projects is to practice scorched earth development.
+
+my first research step is to go deeeeeeep into the arcane, and learn the ins and outs of the GNU shell. this is likely going to take a while, if i do 2-3 hours a day it should probably take me roughly a week and change to complete read it through. 
+
+so for some reason i'm crashing on long printing ft_printf/src. and the program just generally freaks out on that one. apparently it's because of the number of files in the directory. 82 is my limit? 
+
+### April, 12th, 2017
+
+okay well fuck it. i'm just gonna not allow those filelist to have more than 80 files and hope it passes.
+
+this is gross. I just disallowed the directories that were segfaulting me. super fucking gross. but should get it through. god it's gross. pretty close to submiting now i guess. i should focus on more research in the afternoon. god it's gross. 
 
 
 
