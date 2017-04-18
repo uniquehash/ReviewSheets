@@ -130,6 +130,75 @@ okay well fuck it. i'm just gonna not allow those filelist to have more than 80 
 
 this is gross. I just disallowed the directories that were segfaulting me. super fucking gross. but should get it through. god it's gross. pretty close to submiting now i guess. i should focus on more research in the afternoon. god it's gross. 
 
+it's still gross. i'm ready to norm though pretty sure.
+
+okay, tomorrow there is a correction point sale. so the goal of today is getting both ls and push_swap ready to be corrected. this is gonna be rough, cause time. ls just needs to be normed at this point, and most of it is simple norming stuff. push_swap is entirely done except for the algorithm, and mostly normed as well.
+
+* plan to be ready for tomorrow
+	* implement common algo in python
+	* implement common algo in C
+	* norm ls
+		* norm in the spot for tomorrow
+		* preferably the spot where you already did all the gross stuff
+	* norm push_swap
+
+for push swap the algorithm is basically a shortest path algo, for each element in the list.
+
+### April, 13th, 2017
+
+I JUST HAD A BREAKTHROUGH ON PUSH SWAP!!!!! 
+
+this algo might actually work. it's a really nice optimization on the shortest path algo people have been using. basically we can think of stack b as a belt. the only thing that matters is that the min value is to the left of the max value at all times. so if something is found to be the max or min value it must be immediately moved to that point. so long as this principle holds we should be able to insert anywhere in the list in a sorted fashion and never have a worry. simple insight that holds little worth until we combine it with the shortest path algorithm, which determines the next spot to place a element based on the additive rotation distance on the two stacks. this makes sure we are always making the cheapest move. the capital value is that it allows us to take advantage of natural runs, as well as make it likely that we are kept towards the center of the sorted stack, thus decreasing the max possible distance and the cost of turtles and rabbits. the key problem here is that movement is so expensive that minimizing it is the only way to go, which means that high overhead solution are completely unfeasible.
+
+to formalize.
+
+* formal concept
+	* min must always be to the left of max
+		* if the value to push to the stack is a new min then it must be placed to the immediate left of max
+	* max must always be to the right of min
+		* if the value to push to the stack is a new max then it must be placed to the immediate right of max
+	* minimize movement by moving the element that will have the least cost
+	* no need to place anything in stack b
+
+### April, 18th, 2017
+
+Worked on jgravity yesterday. physics is super fucking cool. trying to simulate the universe. like that shit is crazy.
+
+woooooo! finished implementing my algorithm in push_swap. makes me really happy. however i now need to find some simple algorithms for size 3 and 5. just a stone throw away from being able to submit this project.
+
+reflecting on it this was a great project. i really did develop the beginnings of an algorithmic intuition, as well as the start of a mathematical intuition. i found a huge amount of resources on how to find and understand algorithms. this school fucking rocks.
+
+for my algorithm for 3 i should be able to do it with just a rotation and a swap. there are a few possible states.
+
+* sort for 3 elements
+	* a[0] > a[1] > a[2]
+		* 10 > 9 > 8
+			* sa: 9, 10, 8
+			* rra: 8, 9, 19
+		* sa(); rra();
+	* a[0] > a[1] < a[2]
+		* 10 > 8 < 9
+			* ra: 8, 9, 10
+		* ra();
+	* a[0] < a[1] > a[2]
+		* 8 < 10 > 9
+			* rra: 9, 8, 10
+			* sa: 8, 9, 10
+		* rra; sa;
+	* a[0] < a[1] < a[2]
+		* nothing
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
