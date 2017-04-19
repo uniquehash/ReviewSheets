@@ -188,7 +188,9 @@ for my algorithm for 3 i should be able to do it with just a rotation and a swap
 	* a[0] < a[1] < a[2]
 		* nothing
 
+for my algorithm for 5 i'm gonna turn it into an algorithm of 3 with a simple merge at the end.
 
+basically immediately pb twice and then run the size three algorithm, and then merge the remaining two. i can further optimize that in a bunch of ways. i just really don't want to.
 
 
 
