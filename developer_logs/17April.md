@@ -226,17 +226,32 @@ okay z3 is shut down for a while, so i'm going to just make my ls work on my cur
 
 i got ls corrected today! now i'm finally focused on lem-in. it also seems that for jgravity we will have a large team. i'm worried that it will be unmanagable but we will have to see.
 
-okay lem-in. 
+okay lem-in.
 
 when i'm done reading input i'm gonna have a validator function that will go through and make sure that we are dealing with a valid map.
 
 how do i deal with `##start` and `##end`. what if i just got the next line? cool that works. so then i will just grab the next line and pass it to a store room function, which will accept an char* input, the farm struct, and a flag detailing whether it be the start, end, or simple room.
 
-but before i can build these i must build my map structs contained in farm. i have a few structs here. actually i can just have one, with special pointers. oh god the amount of functions i'm going to be building is obnoxious. infastructure ftw. oh god. i thought i was going to be able to just point to all of the nodes and be done with it. but no. the lists would intefere with each other if there is any over lap. a hash table is starting to seem more and more useful. plus i'll have it for other problems down the road. wait. fuck that. i can make a linked list, where the contents are a char* for name, char** for connections. i have a libray to handle all the complex aspects of that, and as god awful as it may be to reallocate that many times it gets the fucking job done. 
+but before i can build these i must build my map structs contained in farm. i have a few structs here. actually i can just have one, with special pointers. oh god the amount of functions i'm going to be building is obnoxious. infastructure ftw. oh god. i thought i was going to be able to just point to all of the nodes and be done with it. but no. the lists would intefere with each other if there is any over lap. a hash table is starting to seem more and more useful. plus i'll have it for other problems down the road.
+
+wait. fuck that.
+
+i can make a linked list, where the contents are a char* for name, char** for connections. i have a libray to handle all the complex aspects of that, and as god awful as it may be to reallocate that many times it gets the fucking job done. 
 
 so in this implementation i'll need a check function that will make sure that both names in a link are valid names. then for adding connections i'll also have a function. as far as traversing, i'll basically breath first check and then start recursing down from the end of the list. as i go i'll update a char** representing a path. god. this is how awful software is made. 
 
 okay my infastructure is made more or less. next thing to do is to shove all the data in there.
+
+# April, 30th, 2017
+
+back to lem-in.
+
+i already implemented some of the infastructure.
+
+lol i tried to implement store links without implementing store rooms.
+
+now the room storing is implemented.
+
 
 
 
