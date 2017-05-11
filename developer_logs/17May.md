@@ -25,6 +25,72 @@ the way i'm going to do that is find the node starting from the start and then b
 
 after that i just need to build the output functionality and i should be done?
 
+### May, 3rd, 2017
+
+taking naps before dinner is a good idea. i feel much better.
+
+so first step is implementing the path finding algorithm.
+
+* recursive traversal through the tree
+	* scan connections of current node
+		* if end found return 1
+		* if terminal node return 0
+	* add n - ith connection to the path `char**`
+	* recurse into the n - ith connection
+	* if recurs returned 0
+		* remove the n - ith connection from path `char**`
+
+### May, 5th, 2017
+
+okay figured out how to spot cycles. basically any node i've passed through in the passed is ignored in subsequent checks. and if a path ends up with no more places to go it dies. 
+
+* recursive traversal through the tree
+	* scan connections of current node
+		* if end found return 1
+		* if terminal node return 0
+	* add n - ith connection to the path `char**`
+	* recurse into the n - ith connection
+	* if recurs returned 0
+		* remove the n - ith connection from path `char**`
+
+
+holy shit.
+
+it worked.
+
+fuckkkkkkkk yea.
+
+now i just need to do the output and i'm good.
+
+okay the ouput is actually going to take a little thinking. an a white board. not today. i'm gonna set up to maximize trip to the city.
+
+### May, 7th, 2017
+
+okay for the hercules i need to understand socket programming.
+
+wooooo.
+
+eh, i'm not sure what they mean by proxy so i'll ask Mason about it.
+
+okay so for the output for lem-in.
+
+there are 3 states. waxing, constant, waning.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
