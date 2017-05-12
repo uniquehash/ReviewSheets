@@ -1,5 +1,5 @@
-# bash rtfm my initial exploration into the arcane and wizadry of GNU - 4/10/2017
-
+# bash rtfm my initial exploration into the arcane and wizadry of GNU
+4/10/2017, 5/10/2017
 
 * [what is bash](https://www.gnu.org/software/bash/manual/bash.html#What-is-Bash_003f)?
 	* the shell or command language interpreter for the GNU operating system

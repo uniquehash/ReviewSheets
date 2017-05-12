@@ -76,10 +76,35 @@ okay so for the output for lem-in.
 
 there are 3 states. waxing, constant, waning.
 
+### May, 10th, 2017
 
+woo finished lem-in.
 
+### May, 11th, 2017
 
+cleaned up my leaks on ft_printf. I should probably go through and like clean up all my libraries. Hell i could build my hash table mini library. yea let's do that. let's make today a library day.
 
+okay i'm gonna make a hash table.
+
+actually before that let's take care of important things. first i need to make sure my lem-in is good to go. then i need to do that write up for smart locus.
+
+oh god my char** library is definetly leaking like crazy. ughhhhh. oh well this is what i get for being lazy at inception. 
+
+will focuse on smart locus first because that is more immediately important. 
+
+kk the smart locus thing is done. 
+
+okay now designing a hash table. hash tables have a few components.
+
+* hash table
+	* storage
+		* we need to keep these values somewhere
+	* hashing
+		* they need to create a unique number that can be tied to a index
+	* collisions
+		* what happens when a value generates the key
+
+i actually just need the hash table interface. i don't need the O(1) aspect. so i can just do a linked list.
 
 
 
