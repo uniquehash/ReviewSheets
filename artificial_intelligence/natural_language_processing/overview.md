@@ -135,6 +135,9 @@
 		* techniques
 			* expectation maximization
 			* naive bayes classifier
+				* a simple probabilistic classifier
+					* based on applying bayes theorem 
+					* strong independence assumptions between the features
 			* tf-idf
 			* instantaneously trained neural networks
 			* latent semantic indexing
@@ -161,6 +164,24 @@
 			* article triage
 				* selecting articles that are relevant for manual literature curation
 
+* what is a [naive bayes classifier](https://en.wikipedia.org/wiki/Naive_Bayes_classifier)?
+	* a simple probabilistic classifier
+		* based on applying bayes theorem 
+		* strong independence assumptions between the features
+	* used often for text categorization
+		* the problem of classifying text
+		* for text categorization it is competitive with advanced methods such as support vector machines
+	* introduction
+		* simple technique for constructing classifiers
+			* models that assign class labels to problem instances represented as vectors of feature values where the class labels are drawn from some finite set
+		* a family of algorithms based on a common principle
+			* the value of a particular feature is independent of the value of any other feature given the class variables
+		* works very well with little data sets but out performed by other approaches such as boosted trees or random forests
+
+* what does [independence mean in probabilistic models](https://en.wikipedia.org/wiki/Independence_(probability_theory))?
+	* two events are independent if the occurrence of one does not affect the probability of occurrence of the other
+
+* how does [spam filtering work in the context of nlp](https://en.wikipedia.org/wiki/Naive_Bayes_spam_filtering)?
 
 
 
