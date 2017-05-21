@@ -106,6 +106,104 @@ okay now designing a hash table. hash tables have a few components.
 
 i actually just need the hash table interface. i don't need the O(1) aspect. so i can just do a linked list.
 
+### May, 12th, 2017
+
+well fixed my mini char ** lib. no more memory leaks. this is the testing main:
+```
+// test for char** lib
+// char			** ft_fstrlist_add(char **strlist, char *str);
+// char			** ft_strlist_add(char **strlist, char *str);		--
+// char			** ft_strlist_build(size_t size);					--
+// void			   ft_strlist_del(char	***strlist);				--
+// int			   ft_strlist_findindex(char **strlist, char *str);	--
+// size_t		   ft_strlist_len(char	**strlist);					--
+// char			** ft_strlist_minus(char **strlist);				--
+// void			   ft_strlist_print(char **strlist);				--
+// char			** ft_strlist_remove(char **strlist, char *str);	--
+// int	main(void)
+// {
+
+// 	char **list;
+
+// 	list = NULL;
+// 	while (1){
+
+	// build
+	// list = ft_strlist_build(3);
+	// list[0] = ft_strdup("one");
+	// list[1] = ft_strdup("two");
+	// list[2] = ft_strdup("three");
+
+	// add
+	// list = ft_strlist_add(list, "one");
+	// list = ft_strlist_add(list, "two");
+	// list = ft_strlist_add(list, "three");
+
+	// find index
+	// printf("index of %s is %d\n", "two", ft_strlist_findindex(list, "two"));
+
+	// len
+	// printf("size of list: %zd\n", ft_strlist_len(list));
+
+	// minus
+	// list = ft_strlist_minus(list);
+
+	// remove
+	// list = ft_strlist_remove(list, "two");
+
+	// ft_strlist_print(list);
+	// ft_strlist_del(&list);
+
+	// sleep(100);}
+// }
+```
+
+eventually i will want to incorporate it into my libft.
+
+i probably still have memory leaks. so it's time to look into that.
+
+oh god my get next line has leaks. whelp. that is going to take a while. this will not be ready by the correction point sale :(
+
+### May, 13th, 2017
+
+I BUILT A FUCKING HASH MAP IN C WOOOOOOOOOOOOOOO!!!!!!!!! FUCK YEA.
+
+### May, 20th, 2017
+
+ugh. i can't believe i forgot the author file. so stupid. so very stupid.
+
+okay the contact email thing is out of hand. i talked to Mikhail about some breaking into ML stuff to deal with it. it's all text classification, which as it turns out is well explored problem.
+
+* text classification
+	* subset
+		* spam classification
+	* possible frameworks
+		* fast text facebook
+	* possible libraries
+		* keras
+	* simple models
+		* bag of words
+		* random forrest
+	* advanced models
+		* lstm
+		* rnn
+	* education resources
+		* stanford course on nlp
+			* cs224: nlp with deep learning
+	* vocab
+		* word embeddings
+			* word2vec
+			* GloVe
+	* implementation details
+		* tf-idf
+		* stop words
+		* mgram
+
+
+
+
+
+
 
 
 
