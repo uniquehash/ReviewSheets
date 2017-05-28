@@ -261,6 +261,8 @@ alright i am now reading a line woooooo. lol. next is tokenizing the input.
 
 working on the interpreter. okay i was thinking way to complicated for the scope of the problem. though i will have to scrap everything when i move forward, this will give me a far better idea of how this shit works.
 
+i've now finished all of the built ins except for echo and cd. these two will be slightly more difficult, but still relatively easy. the next step should be working on actually running these exectuables. doing the whole fork thing. this will require some research. in case i'm drunk tomorrow when i get back i should work on the remaining builtins and perhaps shell expansion.
+
 
 
 
