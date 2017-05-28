@@ -197,7 +197,72 @@ okay the contact email thing is out of hand. i talked to Mikhail about some brea
 	* implementation details
 		* tf-idf
 		* stop words
-		* mgram
+		* n-gram
+
+### May, 24th, 2017
+
+Man what an exhausting trip to nyc. well back to code. so lets architect this minishell a little.
+
+so minishell is basically reading data via the command line, handling environment variables, handling path, handle errors without errno, building the buil-ins.
+
+so the built-ins should go last. since they use everything else. errors should be done as i go, since their pretty integral. PATH should go before environment variables, since it will influence the design. taking in information should probably go first? it kinda doesn't matter cause it's a siloed component. that's the interpreter. 
+
+* minishell
+	* research errno and uderstand how it works
+		* design a shitty
+		* build a shitty errno
+	* refresh on bash interpreter
+		* design a shitty interpreter for this set of requirements
+		* build a shitty interpreter
+	* research the intricacies of how the PATH variable works
+		* design a proper PATH setup
+		* build a proper PATH setup
+	* design a decent environment variables set up
+		* build it
+	* start working on the built-ins
+		* build setenv
+		* build unsetenv
+		* build env
+		* build exit
+		* research echo
+		* research cd
+	* bonus
+		* research how to hook up man pages in my shell
+			* this probably works out of the box with the PATH
+
+cool that's a decent plan. i'll leave it be until i start.
+
+gonna work on that article.
+
+### May, 26th, 2017
+
+working on minishell. first going to do some research on errno.
+
+what does minishell require as intepreter functionality. let us see.
+
+* interpreter
+	* display prompt
+		* simple can be anything
+	* receive input
+		* something like get next line should work
+	* interpret input
+		* this is where it gets dicy
+			* tokenize the input
+				* classify as either word or operator
+			* parse tokens as simple commands
+			* shell expansion
+	* act on interpretation
+
+okay! wonderful news! my new gnl doesn't work right on fd 0, 1, 2. which of course is what minishell is all about. so imaaaaa have to rewrite it before i finish! gonna leave it alone for now and use an old crappy one but yea no bueno.
+
+alright i am now reading a line woooooo. lol. next is tokenizing the input. 
+
+### May, 27th, 2017
+
+working on the interpreter. okay i was thinking way to complicated for the scope of the problem. though i will have to scrap everything when i move forward, this will give me a far better idea of how this shit works.
+
+
+
 
 
 

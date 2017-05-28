@@ -49,23 +49,28 @@
 		* rebuild as your needs change
 
 
-* plan
-	* research
-		* grok what a shell is to begin with
-			* dive deep into gnu docs
-		* research recursively into how the shell works
-		* research all the allowed functions
-	* implement some prototypical use of functions
-		* get a feel for how they work
-	* design an architecture
-		* whiteboard problem sets
-		* solve the pronlem sets
-		* develop some tests for the solution of the problem set
-		* connect the problem and solution sets
-		* connect the tests into a testing framework
-	* implement the architecture
-		* while praying
-
+* plan 
+	* research errno and uderstand how it works
+		* design a shitty
+		* build a shitty errno
+	* refresh on bash interpreter
+		* design a shitty interpreter for this set of requirements
+		* build a shitty interpreter
+	* research the intricacies of how the PATH variable works
+		* design a proper PATH setup
+		* build a proper PATH setup
+	* design a decent environment variables set up
+		* build it
+	* start working on the built-ins
+		* build setenv
+		* build unsetenv
+		* build env
+		* build exit
+		* research echo
+		* research cd
+	* bonus
+		* research how to hook up man pages in my shell
+			* this probably works out of the box with the PATH
 
 
 

@@ -134,14 +134,17 @@
 				* parts of the documents are labled by the external mechanism
 		* techniques
 			* expectation maximization
+				* an iterative method to find maximum liklihood or maximum a posteriori (MAP) estimates of parameters in a statistical method where the model depends on unobserved latent variables
 			* naive bayes classifier
 				* a simple probabilistic classifier
 					* based on applying bayes theorem 
 					* strong independence assumptions between the features
 			* tf-idf
+				* a statistic intended to reflect how important a word is to a document in a collection of corpus
 			* instantaneously trained neural networks
 			* latent semantic indexing
 			* support vector machines
+				* supervised learning models with associated learning algorithms that analyze data used for classification and regression analysis
 			* artificial neural network
 			* k-nearest neighbour algorithms
 			* decision trees
@@ -183,6 +186,87 @@
 
 * how does [spam filtering work in the context of nlp](https://en.wikipedia.org/wiki/Naive_Bayes_spam_filtering)?
 
+* what is the [expectation-maximization algorithm](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm) and how does it work?
+	* an iterative method to find maximum liklihood or maximum a posteriori (MAP) estimates of parameters in a statistical method where the model depends on unobserved latent variables
+
+* what does [maximum a posteriori mean in the context of statistical modeling](https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation)?
+	* an estimate of an unknown quantity that equals the mode of the posterior distribution
+	* used to obtain a point estimate of an unobserved quantity on the basis of emperical data
+
+* what does [posterior probability mean in the context of statistical modeling](https://en.wikipedia.org/wiki/Posterior_probability)
+	* the posterior probability of a random event is the conditional probability that is assigned after the relevant evidence of background is taken into account
+	* posterior probability distribution is the probability distribution of an unknown quantity treated as random variables conditional on the evidence obtained from an experiment
+		* posterior here refers to after taking into account the relevant evidence related to the particular case being examined 
+
+* what does [point estimation mean in the context of statistics](https://en.wikipedia.org/wiki/Point_estimation)?
+	* point estimation involves the use of sample data to calculate a single value which is to serve as a best guess or best estimate of an unknown population parameter
+	* contrasted with interval estimation
+
+* what does [interval estimation mean in the context of statistics](https://en.wikipedia.org/wiki/Interval_estimation)?
+	* the use of sample data to calculate an interval of possible values of an unknown population parameter
+
+* what does [maximum likelihood estimation mean in the context of statistical modeling](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation)
+	* method of estimating the parameters of a statistical model given observations by finding the parameter values that maximize the likelihood of making the observations given the parameters
+	* can be thought of as a special case of the maximum a posteriori estimation
+		* either
+			* assumes a uniform prior distribution of parameters
+		* or
+			* unregularized variant
+				* a variant of maximum a posteriori that is ignores the prior
+
+* what does [regularization mean in the context of statistics](https://en.wikipedia.org/wiki/Regularization_(mathematics))?
+	* a process of itroducing additional information in order to solve an ill-posed problem or to prevent overfitting
+
+* what is a [well-posed problem in the context of mathematics](https://en.wikipedia.org/wiki/Well-posed_problem)?
+	* mathematical models of physical phenomena should have the following 3 properties
+		* a solution exists
+		* the solution is unique
+		* the solution's behavior changes continuously with the initial conditions
+	* ill-posed problems
+		* problems that do not satisfy the above criteria
+
+* what is an [inverse problem in the context of science](https://en.wikipedia.org/wiki/Inverse_problem)?
+	* the process of calculating from a set of observations the causal factors that produced them
+
+* what does [overfitting mean in the context of statistics](https://en.wikipedia.org/wiki/Overfitting)?
+	* statistical model describes random error or noise instead of the underlying relationship
+		* occurs when model is excessively complex
+			* too many parameters relative to the number of observations
+		* has poor predictive performance because it reacts to minor fluctuations in the training data
+
+* what are [latent variables in the context of statistics](https://en.wikipedia.org/wiki/Latent_variable)?
+	* variables that are not directly observed but are rather inferred from other variables that are observed
+
+* what is [tf-idf in the context of information retrieval](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)?
+	* short for term frequency-inverse document frequency
+		* a statistic intended to reflect how important a word is to a document in a collection of corpus
+	* used as a weighting factor in:
+		* information retrieval
+		* text mining
+		* user modeling
+	* the tf-idf value increases proportionally to the number of times a word appears in the document, but offset by the frequency of the word in the corpus
+		* helps adjust for the fact that some words appear more frequently in general 
+
+* what are [support vector machines in the context of machine learning](https://en.wikipedia.org/wiki/Support_vector_machine)?
+	* supervised learning models with associated learning algorithms that analyze data used for classification and regression analysis
+	* given a set of training examples each marked as belonging to one or the other of two categories an SVM training algorithm builds a model that assigns new examples to one category or the other
+		* non-probabilistic binary linear classifier
+
+* what does [word embedding mean in the context of natural language processing](https://en.wikipedia.org/wiki/Word_embedding)?
+	* a collective name for a set of language modeling and feature learning techniques where words or phrases from the vocabulary are mapped to vectors of real numbers
+
+* what does [n-gram mean in the context of probability](https://en.wikipedia.org/wiki/N-gram)?
+	* n-gram is a contiguous sequence of n items from a given sequence of text or speech
+	* items can be:
+		* phonemes
+		* syllables
+		* letters
+		* words
+		* base pairs
+	* when n-grams are words they may also be called shingles
+
+* what are [stop words in the context of computing](https://en.wikipedia.org/wiki/Stop_words)?
+	* words which are filtered out before or after processing of natual language data
 
 
 
