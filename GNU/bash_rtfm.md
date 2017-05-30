@@ -300,8 +300,60 @@
 			* comments are disabled
 		* default in interactive shells is for it to be turned on
 
+* how does bash [expand simple commands](https://www.gnu.org/software/bash/manual/bash.html#Simple-Command-Expansion)?
+	* when a simple command is executed the shell performs the following expansions assignments and redirections from left to right
+		* the words that the parser has marked as variable assignments and redirections are saved for later processing
+		* the words that are not variable assignments or redirections are expanded 
+			* if any words remain after expansion the first word is taken to be the name of the command and the remaining words are the arguments
+		* redirections are performed as described above
+		* the text after the `=` in each variable assignment undergoes tilde expansion, parameter expansion, command subsitution, arithmetic expansion, and quote removal before being assigned to the variable
+	* no command name results
+		* the variable assignments affect the current shell environment
+		* otherwise the variables are added to the environment of the executed command and do not affect the current shell environment 
+			* if any of the assignments attempt to assin a value to a readonly variable an error occurs and the command exits with a non-zero status
+		* redirections are performed but do not affect the current shell environment
+			* a redirection error causes the command to exit with a non-zero status
+	* command name left after expansion
+		* execution proceeds 
+		* command exits
 
+* how does bash [execute simple commands](https://www.gnu.org/software/bash/manual/bash.html#Command-Search-and-Execution)?
+	* command name contains no slashes
+		* the shell attempts to locate it
+			* if there exists a shell function by that name that function is invoked
+	* name does not match a shell function
+		* shell searches for it in the list of shell builtins
+			* if match found builtin is invoked
+	* name is neither a shell funciton or a builtin and contains no slashes
+		* shell searches each element of $PATH for a directory containing an executable file by that name
+		* uses a hashtable to remember the full pathnames of executable files to avoid multiple path searches 
+		* a full search of the directories in $PATH is performed only if the command is not found in the hash table
+			* if the search is unsuccessful the shell searches for a defined shell function named `command_not_found_handle` 
+			* if the function exists it is invoked with the original command and the original commands arguments as its arguments and the function's exit status becomes the exit status of the shell
+			* if the function is not defined the shell prints an error message and returns an exit status of 127
+	* search is successful or if the command name contains one or more slashes 
+		* the shell executes the named program in a separate execution environment
+	* execution fails because the file is not in executable format and the file is not a directory
+		* it is assumed to be a shell script and the shell executes it as described in shell scripts
+	* command was not begun asynchronously
+		* the shell waits for the command to complete and collects its exit status
 
+* how does bash [handle command exit status's](https://www.gnu.org/software/bash/manual/bash.html#Exit-Status)?
+	* the exit status of an executed command is the value returned by the waitpid system call or equivalent function 
+		* exit statuses fall between 0 and 255
+		* the shell may use values above 125 ina  special way
+		* exit statuses from shell builtins and compound commands are also limited to this range
+		* under certain circumstances the shell will use speciial values to indicate specific failure modes
+	* for the shell's purposes a command which exits with a zero exit status has succeeded
+		* a non-zero exit status indicates failure
+		* this seemingly counter-intuitive shceme is used so there is one well-defined way to indicate success and a variety of ways to indicate various failure modes
+		* when a command terminates on a fatal whose number is N bash uses the value 128+N as the exit status
+	* if a command is not found the child process created to execute it returns a status of 127
+		* if a command is found but is not executable the return status is 126
+	* if a command fails because of an error durinf expansion of redirection the exit status is greater than 0
+	* the exit status is used by the bash conditional commands and some of the list constructs
+	* all of the bash builtins return an exit status of zero if they succeed and a non-zero status on failure so they may be used by the conditional and list constructs 
+		* all builtins return an exist status of 2 to indicate incorrect usage, generally invalid options or missing arguments
 
 
 

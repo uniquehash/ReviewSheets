@@ -263,8 +263,38 @@ working on the interpreter. okay i was thinking way to complicated for the scope
 
 i've now finished all of the built ins except for echo and cd. these two will be slightly more difficult, but still relatively easy. the next step should be working on actually running these exectuables. doing the whole fork thing. this will require some research. in case i'm drunk tomorrow when i get back i should work on the remaining builtins and perhaps shell expansion.
 
+### May, 29th, 2017
 
+allright. interpreter is somewhat working. time to figure out this whole fork thing. 
 
+woah fork is awesome.
+
+so i have to review how i'm thinking about interpreting input. my previous method was too simple. 
+
+* interpret input
+	* tokenize
+	* expand
+	* classify
+		* builtin
+		* executable
+			* search
+				* in path directories for command
+					* validate
+						* make sure directories being searched have proper permissions
+			* validate
+				* make sure executable has proper permissions
+		* path
+			* validate
+				* make sure executable has proper permissions
+				* make sure executable exists
+		* not found
+		* do nothing
+	* execute
+		* fork process
+		* execv
+		* wait
+
+woooooooo that was dope. almost finished. now i need to do an extensive check through the correction page, and fix my get next line, and then clean my memory leaks and i am goooooood to go.
 
 
 
