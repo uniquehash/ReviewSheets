@@ -78,5 +78,11 @@ use `rails c` to run rails console
     task :get_roles => [ :environment ] do
 ```
 
+**setting up rails with postgres**
+-------------------------------------------------------------
+[digital ocean](https://www.digitalocean.com/community/tutorials/how-to-setup-ruby-on-rails-with-postgres)
+
+
+
 
 
