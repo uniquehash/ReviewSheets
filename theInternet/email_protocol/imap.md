@@ -48,5 +48,8 @@
 	* built-in extension mechanism
 		* reflecting the experience of earlier internet protocols imap defines an explicit mechanism by which it may be extended
 
-
-
+* are there good libraries for working with imap in python?
+	* [SO: High-Level IMAP library for Python](https://stackoverflow.com/questions/10968541/high-level-imap-library-for-python)
+	* [python native library low level](https://docs.python.org/2/library/imaplib.html)
+	* [python imap client](https://github.com/mjs/imapclient)
+		* use this probably

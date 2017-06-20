@@ -93,6 +93,117 @@ okay so gaetan recommended going straight ipop/whatever for the thing. the whate
 
 wow imap is super cool.
 
+### June, 9th, 2017
+
+* things on radar
+	* tech doc
+	* joint calendar
+	* contact email optimization
+	* mail app
+	* retreat planning
+	* ~build initial cv~
+		* ~42 -> getting there~
+		* ~regional -> 42~
+		* ~8 years old, to regional~
+	* make slideshow for wednesday townhall
+	* ~send the email to yolande friday 3pm~
+
+* events on the horizon
+	* june, 20th, speak and sell
+
+okay my first step is to look into imap. straight from the docs. no tutorials. straight docs yo.
+
+cool i found an [imap python client](https://github.com/mjs/imapclient) that should work. looks pretty complete, hopefully it's not a piece of shit.
+
+### June, 10th, 2017
+
+* things on radar
+	* tech doc
+	* joint calendar
+	* contact email optimization
+	* mail app
+	* retreat planning
+	* make slideshow for wednesday townhall
+	* send email to sebastion on Monday
+
+* events on the horizon
+	* june, 20th, speak and sell
+
+
+
+okay successfully connected to imap server for 42.
+
+
+### June, 12th, 2017
+
+* things on radar
+	* make slideshow for wednesday townhall
+		* need more data
+	* make cv better
+	* ~send email to sebastion on Monday~
+	* tech doc
+	* joint calendar
+	* contact email optimization
+	* mail app
+	* retreat planning
+
+* events on the horizon
+	* june, 20th, speak and sell
+
+  
+i need to focus on the non-technical stuff until it's finished. i only have a few days. this is going to really, really blow. fuck marketing.
+
+### June, 13th, 2017
+
+* things on radar
+	* ~make slideshow for wednesday townhall~
+		* ~need more data~
+	* make cv better
+	* tech doc
+	* joint calendar
+	* contact email optimization
+	* mail app
+	* retreat planning
+
+* events on the horizon
+	* june, 20th, speak and sell
+
+
+fuck resumes. fuck cvs.
+
+### June, 14th, 2017
+
+* things on radar
+	* make cv better
+	* tech doc
+	* joint calendar
+	* contact email optimization
+	* mail app
+	* retreat planning
+
+* events on the horizon
+	* june, 20th, speak and sell
+
+fuck resumes. fuck cvs. <-- this is still true.
+
+### June, 15th, 2017
+
+* things on radar
+	* ~~make cv better~~
+	* tech doc
+	* joint calendar
+	* contact email optimization
+	* mail app
+	* retreat planning
+
+* events on the horizon
+	* june, 20th, speak and sell
+
+finished the resume shit!!! woo.
+
+
+
+
 
 
 
