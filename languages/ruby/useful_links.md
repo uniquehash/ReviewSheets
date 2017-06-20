@@ -83,6 +83,10 @@ use `rails c` to run rails console
 [digital ocean](https://www.digitalocean.com/community/tutorials/how-to-setup-ruby-on-rails-with-postgres)
 
 
+**rails-composer, like rails new on steriods**
+-------------------------------------------------------------
+[rails-composer](https://github.com/RailsApps/rails-composer)
+
 
 
 
