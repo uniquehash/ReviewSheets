@@ -201,6 +201,27 @@ fuck resumes. fuck cvs. <-- this is still true.
 
 finished the resume shit!!! woo.
 
+### June, 24th, 2017
+
+* things on radar
+	* tech doc
+	* joint calendar
+	* contact email optimization
+	* mail app
+
+it's been a while since i written in this log. kinda silly it's a useful thing that enjoy. since the last time i've written here i've pretty much completed the mvp of the mail notification app. it is pretty simple. for the initial version i used rails. it contains two models, two controllers, two views, and one mailer. i forgot how much fun it was to build something in a short amount of time and see results.
+
+i have 2 models, cadets and lists. the lists only exist to organize the cadets. though this could have been done simply with a boolean in the cadets model called is_selected or something. but oh well.
+
+i have 2 views, the selection page and the add page. selection is to find and select cadets whom have received mail, and the add page is to add new cadets to the database.
+
+i have 2 controllers, the snail_controller and the cadets controller. the cadet controller deals with everything related to cadets, creating destroying ect..., the snail_mail controller handles everything else.
+
+there is currently one mailer used to alert people that they have mail. 
+
+right now what i'm working on is adding a ajax search to the selection page, allowing people to quick search people. i'm trying to use 2 gems filterific and pg_search. still trying to understand how they work together. props to Matias for being the hacker that he is and hacking together a possible version and finding these gems.
+
+wow pg_search is super easy. i love that postgres has a functional text_search built into it. pretty amazing. the pg_search gem just makes doing the actual postgres search on the models extremely easy and painless. this means that filterific probably is going to handle the js and ajax aspect, transporting the information between the client and backend.
 
 
 
