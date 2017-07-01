@@ -224,6 +224,58 @@ right now what i'm working on is adding a ajax search to the selection page, all
 wow pg_search is super easy. i love that postgres has a functional text_search built into it. pretty amazing. the pg_search gem just makes doing the actual postgres search on the models extremely easy and painless. this means that filterific probably is going to handle the js and ajax aspect, transporting the information between the client and backend.
 
 
+### June, 27th, 2017
+
+* things on radar
+	* 42
+		* tech doc
+		* joint calendar
+		* contact email optimization
+		* mail app
+	* tgf
+		* check airbrake and get back to philip
+
+
+mail app is pretty much done, now i just have these weird email bugs to figure out with the mailers. franky it's classic email problems. fucking deliverability issues. hard to test too.
+
+okay so apparently i have to look into something called an smtp relay.
+
+interesting. so i think it wasn't working because the smtp server did not know how to do the routing. the smtp relay contains that information.
+
+### June, 28th, 2017
+
+* things on radar
+	* 42
+		* tech doc <- focus most likely
+		* mail app
+			* looking pretty good at this point
+			* refactor into a sinatra app
+		* contact email optimization		
+		* joint calendar
+
+woooo used the app for the first time today. went well. it fucking worked!
+
+### June, 29th, 2017
+
+* things on radar
+	* 42
+		* tech doc <- focus most likely
+		* mail app
+			* refactor 
+				* user importing to include active piscines
+					* add column to table to detail whether in piscine or not
+					* delete all piscine users from none active piscines
+				* convert into sinatra app
+				* design and implement return to sender feature
+		* contact email optimization		
+		* joint calendar
+
+okay so i need to build an actual goal structure for the tech doc. usually i don't need to do this but if i don't build external structure it's not going to get done fast enough.
+
+it will probably take like an hour. ugh i'll make that schedule tomorrow. i fucking hate external structure. so i'm just gonna keep working on the mail app, because that's pretty fun and doesn't require much design juice at this point. 
+
+
+
 
 
 
