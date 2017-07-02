@@ -1,14 +1,11 @@
 # ReviewSheets
-Hey guys!
+Hello reader,
 
-If you find any of this stuff useful please give me a shoutout and a follow @otwizb!
+This repo contains my own personal documentation. In many ways it is a conglomeration and reformating of a bunch of different sources. Some of these notes date as far back as 2011 (highschool) and some (notably this page) are as recent as today. 
 
-These are all my review sheets and notes from college. 
-Right now I've added the majority of my CS stuff that I could easily find.
-In the future I will be adding all of my work from college including non Computer Science related things.
+Developing this resource is one of my main methods of learning, it is designed with me solely in mind. Invariably somethings are inaccurate, outdated, or just plain wrong. I am likely to correct these issues as I personally encouter the consequences they impose, but no sooner.
 
-If you have some nifty notes you want to contribute, you should totally shoot me a message, or make a pull request.
+If you come across anything in these notes that you feel should not be on the internet please do let me know. If I agree with your reasoning I will happily take action.
 
-If you see something in these notes (some of them date back to when I was 18) that should not be on the internet please please please let me know. Don't let me find out the hard way.
-
-Hope this stuff is useful!
+Read at your own risk, learn responsibly.
+oliver belanger
