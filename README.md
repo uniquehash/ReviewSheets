@@ -1,7 +1,7 @@
 # ReviewSheets
 Hello reader,
 
-This repo contains my own personal documentation. In many ways it is a conglomeration and reformating of a bunch of different sources. Some of these notes date as far back as 2011 (highschool) and some (notably this page) are as recent as today. 
+This repo contains my own personal documentation. In many ways it is a conglomeration and reformating of many different sources. Some of these notes date as far back as 2011 (highschool) and some (notably this page) are as recent as today. 
 
 Developing this resource is one of my main methods of learning, it is designed with me solely in mind. Invariably somethings are inaccurate, outdated, or just plain wrong. I am likely to correct these issues as I personally encouter the consequences they impose, but no sooner.
 
