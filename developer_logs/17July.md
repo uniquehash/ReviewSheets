@@ -29,3 +29,35 @@ i need to make a set list of tasks to do tomorrow.
 		* prepare data, send email
 	* wednesday
 		* send poke email to ids and numberly
+
+### July, 11th, 2017
+
+* things on radar
+	* 42
+		* tech doc <- focus most likely
+		* mail app
+			* deploy
+	* get job
+		* start combing through job ads to get a heuristic of vocab and desire
+		* start talking to people 
+		* build bomb ass scrapers
+	* cpp piscine
+		* continue to build cpp code generator :)
+			* twizform
+	* maintenance
+		* pay health insurance
+		* activate td card when it arrives
+		* send YC emails
+			* prepare and send (fingers crossed)
+
+time to build the twizform :). can't wait. metaprogramming is fun.
+
+okay so basically i'm gonna have a dictionary with recursive inclusion of classes.
+
+okay i'm going to have to catch qualifiers from a list.
+
+i'm also going to need the constructor/destructor edge case.
+
+if it has parenthesis it's a function.
+
+that was a lot of fun to build.
