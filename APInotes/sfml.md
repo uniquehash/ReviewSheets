@@ -41,4 +41,4 @@ sfml is a cross platform software development library designed to provide a simp
 		* on osx windows and events must be managed by the main thread
 
 * how does the [graphics module work](https://www.sfml-dev.org/tutorials/2.4/)?
-	* 
+	*  
