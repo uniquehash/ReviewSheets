@@ -3,7 +3,20 @@
 * what is the [rabin-karp algorithm](https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm)?
 	* a string searching algorithm
 	* uses hashing to find any one of a set of pattern strings in a text 
-	
+		* for text of length n and p patterns of combined length m
+			* average-best case
+				* time complexity
+					* O(n+m)
+				* space complexity
+					* O(p)
+			* worst case
+				* time complexity
+					* O(nm)
+				* space complexity
+					* O(p)
+	* cheating vector
+		* if two strings are equal theit hash values are also equal
+		* while iterating throught the input string you can hash the candidate string and then compare the hash to the original value
 
 * what are [string searching algorithms](https://en.wikipedia.org/wiki/String_searching_algorithm)?
 	* also known as string matching algorithms
