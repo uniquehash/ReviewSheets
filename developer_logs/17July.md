@@ -61,3 +61,86 @@ i'm also going to need the constructor/destructor edge case.
 if it has parenthesis it's a function.
 
 that was a lot of fun to build.
+
+### July, 19th, 2017
+
+* radar	
+	* 42
+		* tech doc <- focus most likely <-- ugh....
+		* mail app
+			* deploy
+			* fix tls issue
+		* figure out that angelist thing
+	* get job
+		* apply to triple byte 
+	* cpp piscine
+		* continue to build cpp code generator :)
+			* twizform
+	* maintenance
+		* pay health insurance
+		* activate td card when it arrives
+		* investigate jason friedman
+
+okay the angel list scraping is going well. so the way there system works is that they make a call for comapny id's and return a hex string that they then use as authentication when calling to grab the html. so basically i'm going to have to one by one grab each data set and throw each html response in a file marked for the appropriate page and then from each of those pages scrape as i normally would the relevant information. from the html i will be able to grab lots of information.
+
+* scrapable data
+	* angelist profile
+	* website 
+	* location
+	* number of employess
+	* stage 
+	* market
+	* amount raised
+
+i can put these in a format easy to copy paste into a spred sheet
+
+step 2 after this would be scraping the angel list profile to get the founder information
+
+step 3 after this would be testing various emails for contact
+
+kinda of annoying but totally doable.
+
+### July, 24th, 2017
+
+* radar	
+	* 42		
+		* mail app
+			* deploy
+			* fix tls issue
+		* tech doc <- this is hard, awful, and time consuming
+	* tgf
+		* go through philips lists and figure out how to contribute
+	* damon
+		* understand aframe and artik
+	* pdx monitor
+		* 7/25 - 6:30pm - phone meeting with ryley, levin, and cj
+
+	* maintenance
+		* activate td card when it arrives
+			* shouldn't this have arrived already
+
+
+
+whatttttt thheeeee fuckkkkkk. this weekend was insane. completely insane. oh well... monday starts and life moves on. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
