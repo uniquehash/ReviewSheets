@@ -357,10 +357,16 @@
 											* top secret
 										* cross-sectoral formations
 											* traffic light protocol
-												* white	
-												* green	
-												* amber	
-												* red
+												* a system for the originator to signal how widely they want their information to be circulated beyond the immediate recipient
+												* four labels
+													* white
+														* unlimited	
+													* green	
+														* community wide
+													* amber	
+														* limited distribution
+													* red
+														* personal for named recipients only
 							* define the criteria for information to be assigned a particular label
 								* how much value that information has to the organization
 								* how old the information is
@@ -368,63 +374,466 @@
 							* list the required security controls for each classification 
 							* all employees in the organization must be trained on the classification schema and understand the required security controls and handling procedures for each classification
 								* the classification of a particular information asset that has been assigned should be reviewed periodically to ensure the classification is still appropriate for the information and to ensure the security controls required by the classification are in place and are followed in their right procedures
-					
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				* access control
+					* access to protected information must be restricted to people who are authorized to access the information
+						* computer programs and the computers that process the information must also be authorized
+					* considered in three steps
+						* identification
+							* an assertion of who someone is or what something is
+						* authentication
+							* the act of verifying a claim of identity 
+							* types of information that can be used for authentication
+								* something you know
+									* pin, password, mother maiden name
+								* something you have
+									* driver license, magnetic swipe card
+								* something you are
+									* biometrics, palm prints fingerprints, voice prints, retina eye scans
+							* strong authentication requires providing more than one type of authentication information
+								* two-factor authentication	
+						* authorization
+							* determining what informational resources they are permitted to access and what actions they will be allowed to perform 	
+							* authorization to access information and other computing services begins with administrative policies and procedures
+								* describe what information and services can be accessed by whom and under what conditions
+							* access control mechanisms are then configured to enforce these policies
+								* different systems are equipped with different kinds of access control mechanisms
+								* three different approaches which can be combined as needed
+									* non-discretionary
+										* consolidates all access control under a centralized administration
+										* access to information and other resources is usually based on the individuals function in the organization or the tasks the individual must perform
+									* discretionary approach
+										* gives the creator or owner of the information resource the ability to control access to those resources 
+									* mandatory access control approach
+										* access is granted or denied basing upon the security classification assigned to the information resource
+								* examples of common access control mechanisms
+									* role-based access control
+										* an approach to restricting system access to authorized users 
+											* mandatory access control
+											* discretionary access control
+										* used by the majority of enterprises with more than 500 employees
+									* file permissions
+									* group policy objects
+										* a feature of the windows NT family OS	
+										* controls the working environment of user accounts and computer accounts
+										* provides centralized management and configuration in an active directory environment of
+											* operating systems
+											* applications
+											* user settings 
+									* kerberos
+										* a network authentication protocol that works on the basis of tickets to allow nodes communicating over a non-secure network to prove their identity to one another in a secure manner
+									* RADIUS
+										* Remote Authentication Dial-In User Service
+										* networking protocol that provides centralized management for users who connect and use a network service
+											* authentication
+											* authorization
+											* accounting
+									* TACACS
+										* Terminal Access Controller Access-Control System
+										* refers to a family of related protocols handling remote authentication and related services for networked access control through a centralized server
+							* policies and security controls must be enforceable and upheld
+								* effective policies ensure that people are held accountable for their actions
+							* audit trail
+								* all access to information must be logged
+								* all failed and successful authentication attempts must be logged
+					* need-to-know principle
+						* access rights should be allocated to a person to perform their job functions
+						* example
+							* two employees in different departments have top-secret clearance
+							* they must have a need-to-know in order for information to be exchanged
+						* within the need-to-know principle network administrators grant the employee the least amount of privileges to prevent employees access and doing more than what they are supposed to 
+				* cryptography
+					* encryption
+						* transforming usable information into a form that renders it unusable by anyone other than an authorized user
+					* cryptography is used in information security to protect information from unauthorized or accidental disclosure while the information is in transit and while the information is in storage
+	* process 
+		* USA federal sentencing guidelines now make it possible to hold corporate officers liable for failing to exercise due care and due diligence in the management of their information systems
+		* reasonable and prudent person
+			* stockholders, customers, business partners, governments have the expectation that corporate officers will run the business in accordance with accepted business practices and in compliance with laws and other regulatory requirements
+			* a prudent person takes due care to ensure that everything necessary is done to operate the business by sound business principles and in a legal ethical manner
+			* a prudent person is also diligent in their due care of the business
+		* due care
+			* steps are taken to show
+				* verified
+				* measured	
+				* produce tangible artifacts
+		* due diligence
+			* these are continual activities
+				* people are actually doing things to monitor and maintain the protection mechanisms	
+	* sources of standards
+		* ISO
+			* International Organization for Standardization
+				* a consortium of national standards institutes from 157 countries, coordinated through a secretariat in Geneva, Switzerland
+			* the worlds largest developer of standards
+		* NIST
+			* US National Institute of Standards and Technology
+				* a non-regulatory federal agency within the U.S. Department of Commerce
+			* NIST computer security division develops
+				* standards
+				* metrics
+				* tests and validation programs
+				* publishes standards and guidelines to increase secure IT planning, implementation, management, and operation
+			* the custodian of the US Federal Information Processing Standard publications
+		* The Internet Society
+			* a professional membership society with more than 100 organizations and over 20,000 individual members in over 180 countries
+				* provides leadership in addressing issues that confront the future of the internet and is the organization home for the groups responsible for internet infastructure standards
+					* IETF
+						* Internet Engineering Task Force
+					* IAB
+						* Internet Architecture Board
+		* Information Security Forum
+			* a global nonprofit organization of several hundred leading organizations
+				* financial services
+				* manufacturing
+				* telecommunications
+				* consumer goods
+				* government
+				* other areas
+			* it undertakes research into information security practices and offers advice in its biannual publications
+				* Standard of Good Practice
+		* IISP		
+			* Institute of Information Security Professionals
+				* an independent, non-profit body governed by its members with the principal objective of advancing the professionalism of information security practitioners and thereby the professionalism of the industry as a whole
+			* developed the IISP skills framework
+				* describes the range of the competencies expected of information security and information assurance professionals in the effective performance of their roles 
+		* BSI
+			* German Federal Office for Information Security
+				* german goverment info sec bureau
+			* BSI-Standards a series of standards and guides to follow 
 
 * what is [confidentiality](https://en.wikipedia.org/wiki/Confidentiality)?
+	* involves a set of rules or a promise that limits access or places restrictions on certain types of information
+	* info sec
+		* the property that information is not made available or disclosed to unauthorized individuals, entities, or processes
 
 * what is [data integrity](https://en.wikipedia.org/wiki/Data_integrity)?
+	* the maintenance of and the assurance of the accuracy and consistency of data over its entire life-cycle
+	* a crtitical aspect to the any system which stores, processes, or retrieves data
+		* design
+		* implementation
+		* usage
+	* data corruption
+		* the opposite of data integrity
+		* a form of data loss
+	* intent of data integrity techniques
+		* ensure data is recorded exactly as intended
+		* upon later retrieval ensure the data is the same as it was when it was originally recorded
+		* data integrity aims to prevent unintentional changes to information
+	* integrity types
+		* physical integrity
+			* deals with challenges associated with correctly storing and fetching the data itself
+				* may include
+					* electromechanical faults
+					* design flaws
+					* material fatigue
+					* corrosion
+					* power outages
+					* natural disasters
+					* acts of war and terrorism
+					* other special environmental hazards
+						* ionizing radiation
+						* extreme temperatures
+						* pressures and g-force
+			* ensuring physical integrity includes
+				* redundant hardware
+				* uninterruptible power supply
+				* certain types od RAID arrays
+				* radiation hardened chips
+				* error-correcting memory
+				* clustered file system
+				* file systems that employ block level checksums
+				* storage arrays that compute parity calculations such as exclusive or 
+				* cryptographic hash functions
+				* watchdog timer 
+			* error-correcting codes
+				* error detecting algorithm often used for physical integrity
+			* human-induced data integrity errors
+				* often detected through the use of simpler checks and algorithms
+					* damm algorithm
+					* luhn algorithm
+				* used to maintain data integrity after manual transcription from one computer system to another by humans
+			* computer-induced data integrity errors
+				* can be detected through hash functions
+		* logical integrity
+			* concerned with the correctness or rationality of a piece of data given a particular context
+			* in databases 
+				* referential integrity 
+					* a property of data which when satisfied requires every value of one attribute of a relation to exist as a value of another attribute in a different relation
+				* entity integrity
+					* a basic constraint of database relational model that refers to the morphology of the primary key but afterwards the same format is applied to the foreign key and also to any simple components of any of the two 
+					* every relation must have an identifier called a primary key in such way that every row of the same relation be identifiable by its content
+			* in robotic systems
+				* appropriately ignoring impossible sensor data
+			* these make sure that data make senses given its environment
+			* challenges
+				* software bugs
+				* design flaws
+				* human errors
+			* ensuring logical integrity includes
+				* check constraints
+				* foreign key constraints
+				* program assertions
+				* run-time sanity checks
+	* databases
+		* data retention
+			* the policies of persistent data and records management for meeting legal and business data archival requirements
+			* data integrity contains guidelines for data retention specifying or guaranteeing the length of time data can be retained in particular database
+				* in order to achieve data integrity these rules are consistently and routinely applied to all data entering the system and any relaxation of enforcement could cause errors in the data
+		* types of integrity constraints
+			* data integrity is normally enforced in database systems by a series of integrity constraints
+			* entity integrity
+				* every table must have a primary key and that column or columns chosen to be the primary key should be unique and not null
+			* referential integrity
+				* any foreign-key value can only be in one of two states
+					* usual state is that the foreign-key value refers to a primary key value of some table in the database
+					* a foreign-key may be null (not usual)
+			* domain integrity
+				* all columns in a relational database must be declared upon a defined domain
+				* the primary unit of data in the relational data model is the data item
+				* data items are said to be atomic or non-decomposable
+				* a domain is a set of values of the same type
+					* domains are pools of values from which actual values appearing in the columns of a table are drawn
+			* user-defined integrity
+				* a set of rules specified by a user that do not belong to the other three
+					* entity
+					* domain
+					* referential
+		* if the database supports the integrity features 
+			* it is the responsability of the DB to ensure data integrity as well as the consistency model for the data storage and retrival 
+		* else the DB does not support the features
+			* it is the responsability of the applications to ensure data integrity while the database supports the consistency model for the data storage and retrieval
+		* the benefits of having a single well-controlled and well-defined data-integrity system
+			* stability
+				* one centralized system performs all data integrity operations
+			* performance
+				* all data integrity operations are performed in the same tier as the consistency model
+			* re-usability
+				* all applications benefit from a single centralized data integrity system
+			* maintainability
+				* one centralized system for all data integrity administration
 
 * what is [authentication](https://en.wikipedia.org/wiki/Authentication)?
+	* the act of confirming the truth of an attribute of a single piece of data claimed true by an entity
+	* often involves verifying the validity of at least one form of identification
+	* authentication can be considered to be of three types
+		* accepting proof of identity given by a credible person who has first-hand evidence that the identity is genuine
+			* basically maps to "what you know"
+		* comparing the attributes of the object itself to what is known about objects of that origin
+			* basically maps to "what you are"
+		* relies on documentation or other external affirmations 
+			* basically maps to "what you have"
+	* authenticating people
+		* knowledge factors
+			* "what you know"
+			* something users know
+				* password
+				* pass phrase
+				* pin
+				* challenge response
+				* security question
+		* ownership factors
+			* "what you have"
+			* something the user has
+				* wrist band
+				* ID card
+				* security token
+				* software token
+		* inherence factors
+			* "what you are"
+			* something the user is or does
+				* fingerprint
+				* retinal pattern	
+				* dna sequence
+	* authentication styles
+		* single-factor authentication
+			* the weakest level of authentication
+			* only one factor is used to authenticat an individuals identity
+			* not recommended for financial or personally relevant transactions that warant a higher level of security
+		* two-factor authentication
+			* two factors are required for authentication
+			* example
+				* atm card
+					* need card (ownership)
+					* need pin (knowledge)
+		* multi-factor authentication
+			* instead of 2 factors using multiple authentication factors to enhance security
+		* strong authentication
+			* layered authentication approach relying on two or more authenticators to establish the identity of an originator or receiver of information
+		* continuous authentication 
+			* conventional systems authenticate users only at the initial log-in session
+				* security flaw
+			* systems can use continuous user authentication methods to continuously monitor and authenticate users based on some biometric traits
+	* digital authentication
+		* a group of processes where the confidence for user identities is established and presented via electronic methods to an information system
+		* secure digital authentication model according to NIST
+			* enrollment
+				* an individual applies to a credential service provider to initiate the enrollment process
+				* after successfully proving the applicants identity the CSP allows the applicant to become a subscriber
+			* authentication
+				* after becoming a subscriber the user receives an authentictor
+					* token
+					* credential
+					* username
+				* user is then permitted to perform online transactions within an authenticated session with a relying party
+					* must provide proof that user possesses one or more authenticators
+			* life-cycle maintenance
+				* the CSP is charged with the task of maintaining the users credential of the course of its lifetime 
+				* the subscriber is responsible for maintaining their authenticators
 
 * what is [non-repudiation](https://en.wikipedia.org/wiki/Non-repudiation)?
+	* refers to a state of affairs where the author of a statement will not be able to successfully challenge the authorship of the statement or validity of an associated contract
+	* in security example
+		* if a key card access system was put in place
+			* non-repudiation would be violated if it were not also a stricly enforced policy to prohibit sharing of the key cards and to immediately report lost or stolen cards
+	* in digital security
+		* non-repudiation means something slightly different
+			* a service that provides proof of the integrity and origin of data
+			* an authentication that can be asserted to be genuine with high assurance
+		* the most common method of asserting the digital origin of data is through digital certificates
+			* a form of public key infrastructure to which digital signatures belong
+		* verifying the digital origin means that the certified/signed data can be, with reasonable certainty, trusted to be from somebody who possesses the private key corresponding to the signing certificate 
+	* TTPs
+		* trusted third parties
+		* the way a in which a party may attempt to repudiate a signature presents a challenge to the trustworthiness of the signatures themselves
+			* standard approach to mitigating these risks is to involve a trusted third party
+		* the two most common analog TTPs are
+			* forensic analysts
+				* specializes in handwriting can look at a signature compare it to a known valid signature and make a reasonable assessment of the legitmacy of the first signature
+			* notaries
+				* provides witness whose job is to verify the identity of an individual by checking other credentials and affixing their certification that the party signing is who they claim to be 
+		* the most common digital TTP
+			* repository of public key certificates	
+				* provides the recipient with the ability to verify the origin of an item even if no direct exchange of the public information has ever been made
 
 * what is [encryption](https://en.wikipedia.org/wiki/Encryption)?
+	* the process of encoding information in such a way that only authorized parties can access it
+	* does not prevent interference, but denies the intelligble content to a would-be interceptor
+	* generic encryption scheme
+		* plaintext is encrypted using an encryption algorithm
+			* plaintext is that the intended information or message is referred as
+			* encryption algorithms are called ciphers
+		*  this generates a ciphertext that can only be read if decrypted
+		* for technical reasons encryption schemes usually use a pseudo-random encryption key generated by an algorithm
+	* in principle it is possible to decrypt the message without possessing the key but for a well-designed encryption scheme, considerable computational resources and skills are required 
+		* an authorized recipient can easily decrypt the message with the key provided by the originator
+	* types of encryption
+		* symmetric key / private key
+			* the encryption and decryption key are the same
+			* communicating parties must have the same key before they can achieve secure communication
+		* public key
+			* the encryption key is published for anyone to use and encrypt messages however only the receiving party has access to the decryption key that enables messages to be read
+			* first described in 1973
+	* types of attack
+		* cryptographic attacks
+		* stolen ciphertext attacks
+		* attacks on encryption keys
+		* insider attacks
+		* data corruption or integrity attacks
+		* data destruction attacks
+		* ransomware attacks
+	* message verification
+		* encryption can protect the confidentiality of messages 
+		* other techniques needed to protect the integrity and authenticity of a message 
+		* any error in the system design or execution of a secure system can allow successful attacks
+	* data erasure
+		* conventional methods for deleting data permanently from a storage device involve overwriting its whole content with 0, 1 or other patterns
+			* this can be very slow
+		* cryptography allows you to make the erasure almost instantaneous as long as all the data on a device is encryted and the key is stored on the same device
+			* just delete the key and then everything is garbage 
+			* iOS devices do this by keeping cryptographic key in dedicated effaceable storage
 
 * what are [computational hardness assumptions](https://en.wikipedia.org/wiki/Computational_hardness_assumption)?
+	
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 * what is a [risk assessment](https://en.wikipedia.org/wiki/Risk_assessment)
 
 * what is the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege)
+
+* what is the [traffic light protocol](https://en.wikipedia.org/wiki/Traffic_Light_Protocol)?
+
+* what is [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control)?
+
+* what are [group policy objects](https://en.wikipedia.org/wiki/Group_Policy)?
+
+* what is the [kerberos protocol](https://en.wikipedia.org/wiki/Kerberos_(protocol))?
+
+* what is the [radius protocol](https://en.wikipedia.org/wiki/RADIUS)?
+
+* what is the [tacacs protocol](https://en.wikipedia.org/wiki/TACACS)?
+
+* what is an [audit trail](https://en.wikipedia.org/wiki/Audit_trail)?
+
+* what is [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity)?
+
+* what is [entity integrity](https://en.wikipedia.org/wiki/Entity_integrity)?
+
+* what are [check constraints](https://en.wikipedia.org/wiki/Check_constraint)?
+
+* what is [data retention](https://en.wikipedia.org/wiki/Data_retention)?
+
+* what is a [consistency model](https://en.wikipedia.org/wiki/Consistency_model)?
+
+* what is a [trusted third party](https://en.wikipedia.org/wiki/Trusted_third_party)?
+
+* what are [public key certificates](https://en.wikipedia.org/wiki/Public_key_certificate)?
+
+* what are [ciphers](https://en.wikipedia.org/wiki/Cipher)?
+
+* what is a [symmetric-key algorithm](https://en.wikipedia.org/wiki/Symmetric-key_algorithm)?
+
+* what is [public-key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)?
+
+* what is [pretty good privacy (PGP)](https://en.wikipedia.org/wiki/Pretty_Good_Privacy)?
 
 * what are a bunch of first principles in security?
 	* the CIA triad
@@ -433,3 +842,4 @@
 	* controls / countermeasures
 	* principle of least privilege
 	* separation of duties
+	* need-to-know principle
