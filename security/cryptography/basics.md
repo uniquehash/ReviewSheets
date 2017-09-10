@@ -86,8 +86,8 @@
 		* a cryptosystem is an implementation of cryptographic techniques and their accompanying infastructure to provide information security services
 			* can also be referred to as a cipher system
 		* simple model
-			* ![simple cryptosystem](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg, "simple cryptosystem")
-			
+			* ![simple cryptosystem](https://www.tutorialspoint.com/cryptography/images/cryptosystem.jpg "simple cryptosystem")
+					
 				
 
 
