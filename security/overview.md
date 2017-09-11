@@ -843,3 +843,9 @@
 	* principle of least privilege
 	* separation of duties
 	* need-to-know principle
+	* kerckhoff principle for cryptosystems
+	* cryptographic attacks
+	* single sign-on
+
+
+
