@@ -367,19 +367,713 @@
 			* number of unique lambda functions you can connect to each scheduled event
 				* 5
 
+* what is the [AWS Virtual Private Cloud (VPC)](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_virtual_private_cloud.htm)?
+	* allows the user to use aws resources in a virtual network
+		* the users can customize their virtual network environment as they like
+			* selecting own IP address range
+			* creating subnets
+			* configuring route tables and network gateways
+	* AWS services that can be used with VPC
+		* EC2
+		* Route 53
+		* WorkSpaces
+		* Auto Scaling
+		* Elastic Load Balancing
+		* AWS Data Pipeline
+		* Elastic Beanstalk
+		* Elastic Cache
+		* EMR
+		* OpsWorks
+		* RDS
+		* Redshift
+	* features
+		* many connectivity options
+			* connect VPC directly to the internet via public subnets
+			* connect to the internet using network address translation via private subnets
+			* connect securely to your corporate datacenter via encrypted IPsec hardware VPN connection
+			* connect privately to other VPCs in which we can share resources across multiple virtual networks through AWS account
+			* connect to S3 without using an internet gateway and have good control over
+				* S3 buckets
+				* its user requests
+				* groups
+			* combine connection of VPC and datacenter is possible by configuring VPC route tables to direct all traffic to its destination
+		* easy to use
+			* Amazon provides a wizard to create the virtual private cloud automatically creating and configuring
+				* subnets
+				* IP ranges
+				* route tables
+				* security groups
+		* easy to backup data
+			* periodically backup data from the datacenter into EC2 instances by using EBS volumes
+		* easy to extand network using cloud
+			* connecting to a VPC allows to
+				* move applications
+				* lanch additional web servers 
+				* increase storage capacity
+
+* what is a [virtual private cloud](https://en.wikipedia.org/wiki/Virtual_private_cloud)?
+	* an on-demand configurable pool of shared computing resources allocated within a public cloud environment
+		* provides a certain level of isolation between the different organizations using the resources
+		* thses organizations are known as VPC users
+	* isolation between one VPC user and all other users of the same cloud (both VPC and public cloud users) is achieved normally through allocation for each user of
+		* private IP subnet
+		* virtual communication construct
+			* VLAN or encrypted communication channels
+	* each VPC user also gets a VPN function
+		* secures by means of authentication and encryption the remote access of the organization to its VPC cloud resources
+	* basically enables all the software control of a traditional network but using IaaS components and tooling
+
+* why does [AWS Virtual Private Cloud (VPC) exist](https://en.wikipedia.org/wiki/Amazon_Virtual_Private_Cloud)?
+	* Amazon Virtual Private Cloud
+		* a commercial cloud computing service that provides users a virtual private cloud by provisioning a logically isolated section of AWS cloud
+	* comparison to private clouds
+		* its the same thing just built virtually using public infastructure making it cheaper but less secure to some threats
+	* the point
+		* this is a hybrid approach
+		* public cloud is cheap, easy to use and maintain but lacks control and has some important secruity considerations
+		* private cloud provides complete and total control and thus allows for theoritically better security, but is expensive and difficult to maintain
+		* VPC is a private cloud built on top of the public cloud logically isolated through virtualization
+			* significantly simpler to maintain and cheaper than private cloud
+			* significantly greater control than public cloud, and thus the possibility for greater secruity
+			* still has some of the unique security threats that private cloud does not posses
+				* goverment snooping
+				* hardware access
+				* residual risk from being in contact with public
+
+* what is [AWS Route 53](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_route_53.htm)?
+	* a highly available and scalable domain name system web service
+	* designed for developers and corporates to route the end users to internet applications by translating human readable names into numeric IP addresses 
+	* features
+		* easy to register your domain
+		* highly reliable
+		* scalable
+			* automatically handles large volume queries without the users interaction
+		* can be used with other AWS services
+			* can be used to map domain names to 
+				* EC2 instances
+				* S3 buckets
+				* other AWS resources
+		* easy to use
+			* simple DNS configuration
+		* health check
+			* monitors the health of the application 	
+			* if outage is detected
+				* automatically redirects the users to a healthy resource
+		* cost-effective
+			* pay only for the domain service and the number of queries that the service answers for each domain
+		* secure
+			* integrated with AWS IAM
+				* allows complete control over every user within the AWS account 
+
+* what is a [DNS](https://en.wikipedia.org/wiki/Domain_Name_System)?	
+	* Domain Name System
+	* a hierarchical decentralized naming system for computers, services, or other resources connected to the internet or a private network
+		* associates various information with domain names assigned to each of the participating entitites
+		* generally translates more readily memorized domain names to their numerical IP addresses needed for locating and identifying computer services and devices with the underlying network protocols
+
+* why does [Route 53 exist](https://cloudacademy.com/blog/route53-dns-migration/)?
+	* the point
+		* gives you greater cost effective and programmatic control over your routing 
+	* compelling reasons
+		* simple routing policy
+			* allows the same simple DNS mappings that every other DNS does
+		* weighted routing policy
+			* assign different numeric weights to multiple servers providing a web service
+				* can direct higher or lower percentage of your incoming traffic to one particular server over another 
+				* useful for load balancing or A|B testing
+		* latency based routing policy
+			* directs traffic requests to the server that will be able to respond with the lowest possible latency
+				* run your application in multiple AWS regions
+				* Route 53 will automatically route users to those that will deliver the quickest
+		* failover routing policy
+			* will send all traffic to the server you set as primary for as long as the server is healthy
+			* when it fails will divert traffic to a designated backup resource
+		* geolocation routing policy
+			* designate resource targets based on your users geolocation
+
+* what is [AWS Direct Connect](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_direct_connect.htm)?
+	* permits to create a private network connection from our network to AWS locations
+		* uses 802.1q VLANs
+		* can be partitioned into multiple virtual interfaces to access public resources using the same connection
+			* reduced network cost and increased bandwidth
+		* virtual interfaces can be reconfigured at any time as per the requirement
+	* requirements to use
+		* network should be in the AWS Direct Connect location
+		* should be working with a AWS Direct Connect partner who is a member of the AWS Partner Network
+		* service provider must be portable to connect to AWS Direct Connect
+		* connections to AWS Direct Connect require
+			* auto negotiation for the port must be disabled
+			* support for 802.1Q VLANs across these connections should be available
+		* network must support BGP (Border Gateway Protocol) and BGP MD5 authentication
+			* optionally can configure to BFD (Bidirectional Forwarding Detection)
+	* features
+		* reduces bandwidth costs
+			* transfers data to and from AWS directly
+			* data transfered over dedicated connection is charged at reduces AWS Direct Connect data transfer rate rather than internet data transfer rates
+		* compatible with all AWS services
+		* private connectivity to Amazon VPC
+		* elastic 
+			* provides 1 Gbps and 10 Gbps connections
+		* easy and simple	
+
+* what are the use cases for [AWS Direct Connect](https://aws.amazon.com/directconnect/details/)?
+	* working with large data sets
+		* transferring large data sets over the internet can be time consuming and expensive
+	* real-time data feeds
+		* control of how data is routed allows for the possibility of low latency
+	* hybrid environments
+		* some regulation require the use of private connectivity
+	* the point
+		* basically exactly what it sounds like
+		* its a direct connection to AWS from your network (it available locations) giving you
+			* speed
+			* control
+			* reliability
+			* lower cost
+
+* what is [AWS S3](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_s3.htm)?
+	* Simple Storage Service
+	* scalable, high-speed, low-cost web-based service designed for online backup and archiving of data and application programs
+		* for any type of files up to 5 gb in size
+			* upload
+			* store
+			* download 
+	* subscriber has control over the accessibiity of data
+	* features
+		* low cost and easy to use
+			* user can store a large amount of data at very low charges
+		* secure
+			* S3 supports data transfer over SSL and the data gets encrypted automatically once it is uploaded
+			* user has complete control over data by configuring bucket policies using IAM
+		* scalable
+			* no need to worry about storage concerns
+			* can store as much data that you can pay for
+		* higher performance
+			* integrated with Amazon CloudFront
+				* distributes content to the end user with low latency and provides high data transfer speed 
+		* integrated with AWS services
 	
+* what is [AWS Elastic Block Store (EBS)](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_elastic_block_store.htm)?
+	* Elastic Block Store
+	* a block-level storage system used to store persistent data 
+	* EBS is suitable for EC2 instances by providing highly available block-level storage volumes
+	* IOPS
+		* Input Output Operations per Second
+	* types of volume
+		* general purpose (SSD)
+			* suitable for 
+				* small and medium workloads like root disk EC2 volumes
+				* small and medium database workloads
+				* frequent logs accessing workloads
+			* by default
+				* supports 3 IOPS/GB
+				* 1 GB volume will give 3 IOPS
+				* 10 GB volumw will give 30 IOPS
+		* provisioned IOPS (SSD)
+			* suitable for
+				* demanding I/O intensive transactional workloads
+				* large relational databases
+				* EMR and Hadoop workloads
+			* by default
+				* supports 30 IOPS/GB
+				* storage capacity ranges from 10GB to 1TB
+		* magnetic
+			* formerly known as standard volumes
+			* suitable for
+				* infrequently access data
+					* backups for recovery
+					* log storage
+			* by default
+				* storage capacity from 10GB to 1TB
+		* volumes attached to one instance
+			* EC2 instances can store data in local storage
+			* available while instance is running
+				* data lost when instance stopped
+			* each account will be limited to 20 EBS volumes
+			* can attach up to 20 volumes on a single instance 
+	* benefits
+		* reliable and secure storage
+			* each of the EBS volume will automatically respond to its availability zone to protect from component failure
+		* secure
+			* flexible access control policies allows to specify who can access which EBS volumes
+			* access control plus encryption offers strong defense-in-depth
+		* higher performance
+			* uses SSD technology to deliver data results with consistent I/O performance of application
+		* easy data backup
+			* data backup can be saved by taking point-in-time snapshots of EBS volumes
 
+* what is a [block-level storage](https://en.wikipedia.org/wiki/Block-level_storage)?
+	* in cloud-hosted data persistence where cloud services emulate the behavior of a traditional block device (hard drive)
+	* a form of NAS
+		* network attached storage
+	* filesystem must be the top level abstraction
+		* storage is organized as blocks
+			* emulates the type of behaviour seen in a traditional disk or tape storage
+		* blocks are identified by an arbitrary and assigned identifier by which they may be stored and retrieved
+			* this has no obvious meaning in terms of files or documents
+		* filesystem maps files onto a sequence of blocks
+	* Amazon EBS
+		* Elastic Block Store
+		* example of a cloud block store
+	* block-level storage is in contrast to object store/bucket store or to a database
+		* S3 is a bucket store 
+		* these operate on a higher level of abstraction
+			* able to work with entities
+				* files, documents, images, videos, db records
+	* instance stores
+		* another form of cloud-hosted block-level storage
+			* provided as part of an instance such as EC2
+				* EC2 instances are primarily provided as compute resources rather than storage resources, their storage is less robust
+				* their contents will be lost if the cloud instance is stopped
+				* these stores are part of the instances virtual server
+				* offer higher performance and bandwidth to the instance
+				* best used for temporary storage such as caching or temporary files
+					* persistent storage held on a different type of server
+	* history
+		* in the past block-level storage was provided by SAN and NAS provided file-level storage
+		* shift from on-premises hosting to cloud services this distinction shifted
+		* block-storage is now seen as dinstinct servers (thus NAS), rather than the previous arrays of bare dics
+		* basically NAS and SAN have more or less combined and maintained the NAS interface, working as SAN underthe hood
 
+* what is [(NAS) network attached storage](https://en.wikipedia.org/wiki/Network-attached_storage)?
+	* network attached storage
+	* a file-level compute data storage server connected to a computer network providing data access to a heterogeneous group of clinets
+	* specialized for serving files either by its hardware, software, or configuration
+	* NAS systems are networked appliences which contain one or more storage drives often arranged into logical, redundant storage containers
+		* known as RAID
+	* removes the responsibility of the file serving from the other servers on the network
+	* typically provide access to files using network file sharing protocols
+		* NFS
+		* SMB/CIFS
+		* AFP
+	* benefits
+		* faster data access
+		* easier administration
+		* simple configuration
+	* description
+		* NAS unit
+			* a computer connected to a network that provides only file-based data storage services to other devices on the network
+			* full-featured operating system is generally not needed
+			* contains one or more hard disk drives arranged into RAID
+			* rarely limit clients to a single protocol
+	* NAS vs SAN
+		* NAS 
+			* provides both storage and a file system
+			* appears to the client OS as a file server		
+		* SAN 
+			* provides only block-based storage
+			* appears to the client OS as a disk
+		* not mutually exclusive
+			* SAN-NAS hybrid exist
+	* implementation
+		* computer based NAS
+		* embedded system based NAS
+		* ASIC based NAS
+	* uses
+		* can provide storage services to simpler and lower cost systems such as 
+			* load-balancing 
+			* fault-tolerant email 
+			* web server systems 
+	
+* what is [(DAS) direct-attached storage](https://en.wikipedia.org/wiki/Direct-attached_storage)?
+	* direct-attached storage
+		* digital storage directly attached to the computer accessing it as opposed to storage accessed over a computer network
+			* hard drives
+			* solid-state drives
+			* optical disk drives
 
+* what is does [RAID mean in distributed systems](https://en.wikipedia.org/wiki/RAID)?
+	* redundant array of independent disks
+	* a data storage virtualization technology that combines multiple physical disk drive components into a single logical unit for the purposes of
+		* data redundancy
+		* performance improvement
+	* data is distributed across the drives in one of several ways depending on the required level of redundancy and performance
+		* RAID levels
+		* each scheme/data distribution layout are named by the word RAID followed by a number
+			* provides a different balance among the key goals
+				* reliability
+				* availability 
+				* performance
+				* capacity
+		* RAID levels greater than 0 provide protection against unrecoverabl sector read errors as well as against failures of whole physical drives
+	* overview
+		* many RAID levels employ an error protection scheme called parity
+			* a widely used method in information technology to provide fault tolerance in a given set of data
+			* most use simple XOR
+				* RAID 6 uses two separate parities based respectively on addition and multiplication in a particluar Galois field or Reed-Solomon error correction
+		* can also provide data security with solid-state drives without the expense of an all-SSD system
+			* a fast SSD can be mirrored with a mechanical drive
+			* hybrid RAID
+				* controller is needed that uses SSD for all read operations
+	* standard levels
+		* RAID 0
+		* RAID 1
+		* RAID 2
+		* RAID 3
+		* RAID 4
+		* RAID 5
+		* RAID 6
+	* nested hybrid RAID
+		* many storage controllers allow RAID levels to be nested 
+			* elements of a RAID may be either individual drives or arrays themselves 
+			* arrays are rarely nested more than one level deep
+	* weaknesses
+		* correlated failures
+			* in practice the drives are often the same age with similar wear and subject to the same environment
+				* many drive failures are dure to mechanical issues 
+				* violates the assumption of independent, identical rate of failure amongst drives
+					* failures are statistically correlated
+		* unrecoverable read errors during rebuild
+			* sector read failures
+				* also known as latent sector errors
+		* increasing rebuild time and failure probability
+			* drive capacity has grown much faster than transfer speed and error rates have only fallen slightly
+			* large drives may take hours if not days to rebuild 
+				* during this time more errors and failures may occur
+		* atomicity including parity inconsistency due to system crashes
+			* interuption of a write operation can result in states where the parity is inconsistent with the data due to non-atomicity of the write process
+				* parity cannot be used for recovery in the case of a disk failure
+		* write-cache reliability
+			* if system experiences a power loss or other major failure the data may be irrevocably lost from the cache before reaching the non-volatile storage
 
+* what is [storage virtualization in computer science](https://en.wikipedia.org/wiki/Storage_virtualization)?
+	* uses virtualization to enable better functionality and more advanced features in computer data storage systems
+	* storage systems
+		* also known as
+			* storage array
+			* disk array
+			* filer
+		* typically use special hardware and software along with disk drives in order to provide very fast and reliable storage
+		* special purpose computers designed to provide storage capacity along with advanced data protection features
+		* block accessed storage
+			* protocols
+				* Fibre Channel
+				* iSCSI
+				* SAS
+				* FICON
+		* file accessed storage
+			* protocols
+				* NFS
+				* SMB
+	* virtualization types
+		* block virtualization
+			* refers to the abstraction of logical storage from physical storage
+				* may be accessed without regard to physical storage or heterogeneous structure
+			* allows the administrators of the storage system greater flexibility in how they manage storage for end users
+		* file virtualization
+			* addresses the NAS challenges by eliminating the dependencies between the data accessed at the file level and the location where the files are physically stored
+			* provides opportunities to optimize storage use and server consolidation and to perform non-disruptive file migrations
+	* block virtualization
+		* address space remapping
+			* location independence by abstracting the physical location of the data
+			* system presents to the user a logical space for data storage and handles the process of mapping it to the actual physical location
+			* possible to have multiple layers of virtualization or mapping
+			* the ouput of one layer of virtualization can be used as the input for a higher layer of virtualization
+			* granularity
+				* single physical disk -> small subset of physical disk
+			* block-based storage environment
+				* sinlge block of information is addressed using a LUN (Logical Unit Number) identifier and an offset within that LUN known as a LBA (Logical Block Addressing)
+		* meta-data
+			* virtualization software or device is responsible for maintaining a consistent view of all the mapping information for the virtualized storage
+				* this is called meta-data
+			* stored as a mapping table
+			* address space may be limited by the capacity needed to maintain the mapping table
+			* granularity and total addressable space both directly impact the size of the meta-data
+			* common to have trade-offs between amount of addressable capacity and granularity
+			* using multiple levels of virtualization can allow you to address these limits
+				* many storage systems today utilize three layers of virtualization
+			* some implementations do not use a mapping table
+				* on access calculate locations using an algorithm
+		* I/O redirection
+			* virtualization software or device uses the meta-data to re-direct I/O requests
+				* receives incoming I/O request containing information about the location of the data in terms of logical disk
+					* vdisk
+				* translates this into a new I/O request to the physical disk location
+		* capabilities
+			* most implementations allow for heterogeneous management of multi-vendor storage devices within the scope of a given implementations support matrix
+				* capabilities are not limited to a single vendor device and can be used across many different vendor devices
+		* replication
+			* replication services must be implemented above the software or device that is performing the virtualization
+				* only above the virtualization layer can a consistent image of the vdisk be copied
+			* if virtualization is implemented in the network or higher
+				* renders any replication services provided by the underlying storage controller useless
+			* remote data replication for disaster recovery
+				* synchronous mirroring
+					* I/O completion is only returned when the remote site acknowledges the completion
+					* applicable for shorter distances
+						* < 200 km
+				* asynchronous mirroring
+					* I/O completion is returned before the remote site has acknowledged the completion
+					* applicable for much greater distances
+						* > 200 km
+			* point-in-time snapshots to copy or clone data for diverse uses
+				* when combined with thin provisioning enables space-efficient snapshots
+		* pooling
+			* the physical storage resources are aggregated into storage pools from which the logical storage is created
+			* more storage systems which may be heterogeneous in nature can be added as and when needed and the virtual space will scale up by the same amount
+				* fully transparent to the applications using the storage infastructure
+		* disk management
+			* virtualization software becomes a common disk manager in the virtualized environment
+				* vdisks are created by the virtualization software and are mapped to the required host or server
+				* provides a common place or way for managing all volumes in the environment
+			* enhanced features are easy to provide in this environment
+				* thin provisioning to maximize storage utilization
+					* relatively easy to implement as physical storage is only allocated in the mapping table when it is used
+				* disk expansion and shrinking
+					* more physical storage can be allocated by adding to the mapping table
+					* disks can be reduced in size by removing some physical storage from the mapping
+		* benefits
+			* non-disruptive data migration
+				* ability to migrate data while maintaining concurrent I/O access
+					* the host only knows about the logical disk (mapped LUN) 
+					* any changes to the meta-data is transparent to the host
+					* meta-data can simply be updataed to point to the new location when the data has been copied or moved
+				* mapping granularity dictates how quickly the meta-data can be updated
+		* improved utilization
+			* utilization can be increased by virtue of the pooling, migration, and thin provisioning services
+		* fewer points of management
+			* multiple independent storage devices even if scattered across a network appear to be a single monolithic storage device and can be managed centrally
+			* traditional stroage controller management is still required
+				* creation and maintenance of RAID arrays
+				* error and fault management
+		* risks
+			* backing out a failed implementation
+			* interoperability and vendor support
+			* complexity
+				* management of environment
+				* infrastructure design
+				* software or device itself
+			* meta-data management
+			* performance and scalability
+		* implementation approaches
+			* host-based
+				* requires additional software running on the host as a prvileged task or process
+					* volume management may be built into the operating system
+					* or offered as a separate product
+				* volumes (LUNs) presented to the host system are handled by a traditional physical device driver 
+					* a software layer (volume manager) resides above the disk device driver intercepts the I/O requests and provides the meta-data lookup and I/O mapping
+				* most operating systems have some form of logical volume management built-in that perform virtualization tasks
+				* host based volume managers were in use long before "storage virtualization" had been coined
+				* pros
+					* simple to design and code
+					* supports any storage type
+					* improves storage utilization without thin provisioning restrictions
+				* cons
+					* storage utilization optimized only on a per host basis
+					* replication and data migration only possible locally to that host
+					* software is unique to each operating system
+					* no easy way of keeping host instances in sync with other instances
+					* traditional data recovery following a server disk drive crash is impossible
+			* storage device-based
+				* has existed for years and only been recently classified as virtualization
+				* even the simplest disk array provides a logical to physical abstraction as they use RAID schemes to join multiple disks in a single array
+				* concept
+					* a primary storage controller provides the services and allows the direct attachment of other storage controllers
+					* depending on the implementation these may be from the same or different vendors
+					* primary controller provides pooling and meta-data management services
+				* pros
+					* no additional hardware or infastructure requirements
+					* provides most of the benefits of storage virtualization
+					* does not add latency to individual I/Os
+				* cons
+					* storage utilization optimized only across the connected controllers
+					* replication and data migration only possible across the connected controllers and same vendors device for long distance support
+					* downstream controller attachment limited to vendors support matrix
+					* I/O latency, non cache hits require the primary storage controller to issue a secondary downstream I/O request
+					* increase in storage infrastructure resource the primary storage controller requires the same bandwidth as the secondary controllers to maintain the same throughput
+			* network-based
+				* storage virtualization operating on a network based device (typically a standard server or smart switch) and using iSCSI or FC Fibre channel networks to connect as a SAN
+				* most commonly available and implemented form of storage virtualization
+				* pros
+					* true heterogeneous storage virtualization
+					* caching of data (performance benefit) is possible when in-band
+					* single management interface for all virtualized storage
+					* replication services across heterogeneous devices
+				* cons
+					* complex interoperability matrices 
+						* limited by vendors support
+					* difficult to implement fast meta-data updates in switched-based devices
+					* out-of-band requires specific host based software
+					* in-band may add latency to I/O 
+					* in-band the most complicated to design and code
+				* appliance-based vs switch-based
+					* both models can provide the same services
+						* disk management
+						* metadata lookup
+						* data migration 
+						* replication
+					* both models require some processing hardware to provide these services
+					* appliance-based
+						* dedicated hardware devices that provide SAN connectivity of one form or another
+						* sit between the hosts and storage and in the case of in-band symmetric appliances can provide all of the benefits and services discussed in this article 
+						* I/O requests are targeted at the appliance itself
+							* it performs the meta-data mapping before redirecting the I/O by sending its own I/O requestto the underlying storage
+						* the in-band appliance can also provide caching of data and most implementations provide some form of clustering of individual appliances to maintain an atomic view of the metadata as well as cache data
+					* switch-based
+						* resides in the physical swithc hardware used to connect the SAN devices
+						* sits between the hosts and storage but may use different techniques to provide the metadata mapping
+							* packet cracking to snoop on incoming I/O requests and perform I/O redirection 
+						* much more difficult to ensure atomic updates of metadata in a switched environment and services requiring fast updates of data and metadata may be limited in switched implementations
+				* in-band vs out-of-band
+					* in-band
+						* also known as symmetric
+						* devices sit in the path between the host and storage
+						* all I/O requests and their data pass through the device
+						* host perform I/O to the virtualization device and never interact with the actual storage device
+						* the virtualization device in turn performs I/O to the storage device 
+						* easy to implement
+							* caching of data
+							* statistics about data usage
+							* replications services
+							* data migration
+							* thin provisioning
+					* out-of-band
+						* also known as asymmetric
+						* virtualization devices sometimes called meta-data servers
+							* only perform the meta-data mapping functions
+						* requires additional software in the host which knows to first request the location of the actual data 
+						* I/O request from the host is intercepted before it leaves the host
+						* meta-data lookup is requested from the meta-data server
+							* returns the physical location of the data to the host
+						* information is then retrieved through an actual I/O request to the storage
+						* caching is not possible as the data never passes through the device
+	* file based virtualization
+		* a synonym used for NAS virtualization
 
+* what is [thin provisioning in computing](https://en.wikipedia.org/wiki/Thin_provisioning)?
+	* using virtualization technology to give the appearance of having more physical resources than are actually available
+	* in a shared-storage environment provides a method for optimizing utilization of available storage
+		* relies on on-demand allocation of block of data versus the traditional method of allocating all the blocks in advance
+		* eliminates all whitespace helping avoid the poor utilization rates that occur in the traditional storage allocation method where large pools of storage capacity are allocated to individual servers but remain unused 
+	* storage capacity utilization efficiency can be automatically driven up towards 100% with very little administrative overhead
+	* the point
+		* so basically you got 3 vm that each are allocated "100 gb" of disk space
+		* in thick provisioning you allocate 300 gb of disk space (1 for each vm) and that space sits there unused for ever
+		* in thin provisioning you allocate as you write meaning that of the 300 gb "allocated" initially only enough for the OS is actually used lets say 60 gb (20 gb each)
+			* now even though you have 300 gb "allocated" only 60 gb is actually used and the remaining disk space can be used for other things until needed
 
+* what is a [SAN in networking](https://en.wikipedia.org/wiki/Storage_area_network)?
+	* storage area network
+		* a network which provides access to consolidated, block level data storage
+	* primarily used to enhance storage devices accessible to servers so that the devices appear to the operating system as locally attached devices
+		* disk arrays
+		* tape libraries
+		* optical jukeboxes
+	* a SAN typcially has its own network of storage devices that are generally not accessible through the LAN by other devices
+	* doesn not provide file abstraction only block level operations
+	* SAN compared to NAS
+		* in both various computers in a network can share a more centralized collection of storage devices via a network connection
+		* conceptual difference
+			* NAS
+				* appears to the client OS as a file server
+			* SAN 
+				* appears to the client OS as a disk
 
+* what is [AWS storage gateways](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_storage_gateway.htm)?
+	* provides integration between the on-premises IT environment and the AWS storage infastructure
+	* user can store data in the AWS cloud for scalable, data security features and cost-efficient storage
+	* two types of storage
+		* volume based
+			* provides cloud-based storage volumes which can be mount as iSCSI devices from on-premises application servers
+				* Internet Small Computer System Interface
+			* gateway-cached volumes
+				* AWS storage gateway stores all the on-premises application data in a storage volume in S3
+				* storage volume ranges from 1gb to 32gb
+				* these can be attached with iSCSI devices from on-premises application servers
+					* cache storage disk
+						* used to initially store data when it is to be written to the storage volume in AWS
+						* the data from the cache storage disk is waiting to be uploaded in S3 from the upload buffer
+						* cache storage disk keeps the most recently accessed data for low-latency access
+							* when application needs data this is checked first before checking S3
+						* allocate at least 20% of the existing file store size as cache storage 
+							* should be more than the upload buffer
+						* upload buffer disk	
+							* used to store data before it is uploaded to S3 over SSL connection
+							* storage gateway uploads data from upload buffer over an SSL connection to AWS
+						* snapshots
+							* sometimes we need to back up storage volumes in S3
+							* these backups are incremental and are known as snapshots
+								* only the data that has changed since the last snapshot is backed up
+							* stored in S3 as EBS snapshots
+							* taken either at a scheduled interval or as per the requirement
+					* gateway-stored volumes
+						* when the VM is activated gateway volumes are created and mapped to the on-premises direct-attached storage disk
+						* when the application write/read the data from the gateway storage volumes it reads and writes the data from the mapped on premises disk
+						* allows to store primary data locally and provides on-premises applications with low-latency access to entire datasets
+							* mount them as iSCSI devices to the on-premises application servers
+		* gateway-virtual tape library (VTL)
+			* provides a virtual tape infrastructure that scales seamlessly with your business needs and eliminates the operational burden of physical tape infastructure
+				* provisioning
+				* scaling
+				* maintaining 
+			* each gateway-VTL is preconfigured with media changes and tape drives that are available with existing client backup applications as iSCSI devices
+			* vocabulary
+				* virtual tape
+					* similar to a physical tape catridge
+						* stored in the AWS cloud
+					* can create using console or API
+				* virtual tape library (VTL)
+					* each gateway-VTL comes with one VTL
+						* similar to a physical tape library available on-premises with tape drives
+					* gateway first stores data locally then asynchronously uploads it to virtual tapes of VTL
+				* tape drive
+					* a VTL tape drive is similar to a physical tape drive that can perform I/O operations on tape
+				* media changer
+					* a VTL media changer is similar to a robot that moves tapes around in physical tape librarys storage slot and tape drives
+					* each VTL comes with one media changer that is used for backup applications as iSCSI device
+				* virtual tape shelf (VTS)
+					* a VTS is used to archive tapes from gateway VTL to VTS and vice versa
+				* archiving tapes
+					* when the backup software ejects a tape the gateway moves the tape to the VTS for storage
+				* retrieving tapes
+					* tapes archived to the VTS cannot be read directly so to read an archived tape we need to retrieve the tape from gateway VTL either by using the AWS storage gateway console or API
 
+* what is [AWS CloudFront](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_cloudfront.htm)?
+	* retrieves data from S3 bucket and distributes it to multiple datacenter locations
+	* delivers the data through a network of data centers called edge locations
+	* the nearest edge location is routed when the user requests for data, resulting in lowest latency, low network traffic, fast access to data
+	* features
+		* fast
+			* the broad network of edge locations and CloudFront caches copies of content close to the end users that result in lowering latency, high data transfer rates and low network traffic 
+		* simple
+		* can be used with other AWS services
+		* cost-effective
+		* elastic
+		* reliable 
+		* global
+			* uses a global network of edge locations located in most of the regions
 
-
-
-
+* what is [AWS (RDS) Relational Database Service](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_relational_database_service.htm)?
+	* AWS Relational Database Service
+		* a fully managed SQL database cloud service that allows to create and operate relational databases
+		* access files and databases anywhere in a cost-effective and highly scalable way
+	* features
+		* scalable
+			* scale the relational database by using AWS management console or RDS-specific API
+			* increase or decrease RDS requirements within minutes
+		* host replacement
+			* sometimes the RDS hardware fails 
+			* automatically replaced by Amazon
+		* inexpensive
+		* secure
+		* automatic backups
+			* RDS backs up everything in the database including transaction logs up to last five minutes and also manages automatic backup timings
+		* software patching
+			* automatically gets all the latest patches for the database software
+			* specify when the software should be patched using DB Engine Version Management
+	* cost
+		* instance class
+			* pricing is based on the class of DB instances consumed
+		* running time
+			* price is calculated by the instance-hour
+			* equivalent to a single instance running per hour
+		* storage
+			* bill is calculated as per teh storage capacity plan chosen in terms of per GB
+		* I/O requests per month
+			* billing structure also includes total number of storage I/O requests made in a billing cycle
+		* backup storage
+			* there is no additional charges for backup storage up 100% of database
+			* free service only for active DB instances
 
 
 
