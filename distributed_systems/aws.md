@@ -1075,6 +1075,171 @@
 			* there is no additional charges for backup storage up 100% of database
 			* free service only for active DB instances
 
+* what is [Amazon DynamoDB](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_dynamodb.htm)?
+	* a fully managed NoSQL database service that allows the user to create database tables that can store and retrieve any amount of data
+		* automatically manages the data traffic of tables over multiple servers and maintains performance
+		* relieves the customer from the burden of operating and scaling a distributed database
+	* benefits
+		* managed service
+			* you pay amazon people to manage your stuff
+		* scalable
+		* fast
+			* high throughput
+			* low latency
+		* durable and highly available
+			* replicates data over at least 3 different data centers results
+		* flexible
+			* allows creation of dynamic tables
+				* table can have any number of attributes including multi-valued attributes
+		* cost-effective
+
+* what is [AWS Redshift](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_redshift.htm)?
+	* a fully managed data warehouse service in the cloud
+		* datasets range from 100s of GB to petabytes
+	* initial process to create a data warehouse is to launch a set of compute resources called nodes
+		* nodes are organized into groups called clusters
+	* features
+		* supports VPC
+			* can launch Redshift within VPC and control access to the cluster through the virtual networking environment
+		* encryption
+			* data stored in Redshift can be encrypted and configured while creating tables in Redshift
+		* SSL
+			* SSL encryption is used to encrypt connections between clients and Redshift
+		* scalable
+			* the number of nodes can easily be scaled as per requirement
+			* allows to scale over storage capacity without any loss in performance
+		* cost-effective
+
+* what is [AWS Kinesis](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_kinesis.htm)?
+	* a managed, scalable, cloud-based service that allows real-time processing of streaming large amount of data per second
+		* designed for real-time applications
+		* allows developers to take in any amount of data from several sources
+		* used to capture, store, and process data from large, distributed streams
+			* event logs
+			* social media feeds
+		* after processing the data Kinesis distributes it to multiple consumers simultaneously
+	* how to use Amazon KCL
+		* used in situations where we require rapidly moving data and its continuous processing
+			* data log and data feed intake
+				* push data to KCL stream as soon as the data is produced
+				* protects data loss in case of data producer fails
+				* system and application logs can be continuously added to a stream and can be available in seconds when required
+			* real-time graphs
+				* we can extract graphs/metrics using KCL stream to create results reports
+			* real-time data analytics
+				* we can run real-time streaming data analytics 
+	* limits of KCL
+		* records of a stream can be accessible up to 24 hours by default and can be extended up to 7 days by enabling extended data retention	
+		* maximum size of a data blob in one record is 1 mb
+			* data blob is the data payload before Base64 encoding
+		* one shard supports up to 1000 PUT records per second
+	* features
+		* real-time processing
+			* allows to collect and analyze information in real-time like stock trade prices 
+		* easy to use
+		* high throughput and elastic
+		* integrate with other Amazon services
+		* build Kinesis applications
+			* provides developers with client libraries that enable the design and operation of real-time data processing applications
+		* cost-efficient
+
+* what is [AWS (EMR) Elastic MapReduce](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_elastic_mapreduce.htm)?
+	* a web service that provides a managed framework to run data processing frameworks in an easy cost-effective and secure manner
+		* Apache Hadoop
+		* Apache Spark
+		* Presto
+	* use cases
+		* data analysis
+		* web indexing
+		* data warehousing
+		* financial analysis
+		* scientific simulation
+	* benefits
+		* easy to use
+			* cluster
+			* hadoop configuration
+			* node provisioning
+		* reliable
+			* retries failed tasks and automatically replaces poorly performing instances
+		* elastic
+		* secure
+			* automatically configures EC2
+				* firewall settings
+				* controls network access to instances
+				* launch clusters in an Amazon VPC
+		* flexible
+			* complete control over clusters and root access to every instance 
+		* cost-efficient
+
+* what is [AWS Data Pipeline](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_data_pipeline.htm)?
+	* a web service designed to make it easier for users to integrate data spread across multiple AWS services and analyse it from a single location
+		* data can be accessed from the source, processed, and then the results can be efficiently transferred to the respective AWS services
+	* features
+		* simple and cost-efficient
+			* drag and drop features makes it easy to create a pipeline on console
+			* visual pipeline creator provides a library of pipeline templates 
+				* templates make it easier to create pipelines for tasks like 
+					* processing log files
+					* archiving data to Amazon S3
+		* reliable
+			* designed for fault tolerant execution activities
+				* failure occur in the activity logic or data sources
+					* automatically retries the activity
+					* failure continues
+						* send a failure notification
+			* notification alerts can be configured
+		* flexible  
+			* scheduling
+			* tracking
+			* error handling
+			* can be configured to take actions like 
+				* run Amazon EMR jobs
+				* execute SQL queries directly against databases
+				* execute custom applications running on Amazon EC2
+
+* what is [AWS Machine Learning](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_machine_learning.htm)?
+	* a service that allows to develop predictive applications by using algorithms, and mathematical models based on the users data
+		* reads data through Amazon S3, Redshift, and RDS
+		* visualizes the data through the AWS Management Console and Amazon Machine Learning API
+		* data can be imported or exported to other AWS services via S3 buckets
+		* uses industry-standard logistic regression algorithm to generate models
+	* types of task performed 
+		* binary classification model can predict one of the two possible results
+		* multi-class classification model can predict multiple conditions
+		* a regression model results in an exact value
+	* features 
+		* easy to create machine learning models
+			* create ML models from data stored in Amazon S3, Redshift, RDS
+			* query these models for predictions 
+		* high performance
+			* Amazon ML prediction API can be used further to generate billions of predictions for the application 
+		* cost-efficient
+
+* what is [AWS Simple WorkFlow Service](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_simple_workflow_service.htm)?
+	* a task based API that makes it easy to coordinate work across distributed application components
+		* provides a programming model and infastructure for coordinating distributed components and maintaining their execution state in a reliable way
+		* focus on building the aspects of applications that differentiates it
+	* workflow
+		* a set of activities that carry out some objective including logic that coordinates the activities to achieve the desired output
+	* workflow history
+		* consists of complete and consistent record of each event that occurred since the workflow execution started
+	* Application Services Section
+		* Amazon CloudSearch
+		* Amazon Simple Queue Services
+		* Amazon Simple Notification Services
+		* Amazon Simple Email Services
+		* Amazon SWF
+	* benefits
+		* enables applications to be statelss because all information about a workflow execution is stored in its workflow history
+		* for each workflow execution the history provides a record of which activities were scheduled, their current statuses and results 
+		* the history provides steps in detail that can be used to monitor running workflow executions and verify completed workflow executions
+
+* what is [AWS WorkMail](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_workmail.htm)?
+	* formerly known as Zocalo
+	* a managed email and calendaring service that runs in cloud
+	* provides security controls and is designed to work with your existing PC and Mac-based outlook clitens 
+
+ 
 
 
 
