@@ -1057,49 +1057,433 @@
 			* identity of the communicating parties can be authenticated using public-key cryptography
 				* authentication can be made optional but is generally required for at least one of the parties
 			* connection ensures integrity because each message transmitted includes a message integrity check using a message authentication code to prevent undetected loss or alteration of the data during transmission
+		* careful configuration of TLS can provide additional privacy-related properties
+			* forward secrecy
+				* ensures that any future disclosure of encryption keys cannot be used to decrypt any TLS communciations recorded in the past
+		* supports many different methods for
+			* exchanging keys
+			* encrypting data
+			* authenticating message integrity
+		* two layers
+			* TLS record protocol
+			* TLS handshake protocol
+		* description
+			* client-server applications use the TLS protocol to communicate across a network in a way designed to prevent eavesdropping and tampering
+			* client must indicate to the server the setup of a TLS connection
+				* use a different port number for TLS connections
+					* HTTPS - 443
+				* client can make protocol-specific request to the server to switch the connection to TLS
+			* once client and server have agreed to use TLS they negotiate a stateful connection by using a handshaking procedure
+				* handshake with an asymmetric cipher to establish not only cipher settings but also a session-specific shared key with which further communication is encrypted using a symmetric cipher
+				* client and server agree on various parameters used to establish the connections security
+					* handshake begins when a client connects to a TLS-enabled server requesting a secure connection
+						* client presents a list of supported cipher suites
+							* ciphers and hash functions
+					* server picks a cipher and hash function that is also supports and notifies the client of the decision
+					* server usually then sends back its identification in the form of a digital certificate
+						* certificate contains
+							* server name
+							* CA vouching for authenticity of the certificate
+							* servers public encryption key
+					* the client confirms the validity of the certificate before proceeding
+					* to generate session keys used for the secure connection the client either
+						* encrypts a random number with the servers public key and sends the result to the server
+							* both parties use that random number to generate a unique session key for subsequent encryption and decryption of data during the session
+						* uses Diffie-Hellman key exchange to securely generate a random and unique session key for encryption and decryption that has the additional property of forward secrecy
+							* if server private key is disclosed in the future it cannot be used to decrypt the current session even if the session is intercepted and recorded by a third party
+					* any step above fails the connection is not created
+					* handshake is concluded and secure connection is started 
+						* encrypted and decrypted with the session key until connection closes
+			* OSI model
+				* applications treat TLS as though it were part of the transport layer
+			* security
+				* TLS security measures
+					* protection against a downgrade of the protocol to a previous version or a weaker cipher suite
+					* numbering subsequent application records with a sequence number and using this sequence number in the MACs
+					* using a message digest enhanced with a key
+						* only key-holder can check the MAC
+					* message that ends the handshake sends a hash of all the exchanged handshake messages seen by both parties
+					* the pseudorandom function splits the input data in half and processes each one with a different hashing algorithm
+						* MD5 and SHA-1
+						* performs XOR on them to create the MAC
+				* attacks against TLS/SSL
+					* renegotiation attack
+						* vulnerability of renegotiation procedure
+						* allows an attacker who can hijack an HTTPS connection to splice their own requests into the beginning of the conversation the client has with the web server
+						* attacker cannot actually decrypt the client-server communication
+						* proposed fix
+							* RFC 5746
+								* renegotiation indication extension requires the client and server to include and verify information about previous handshakes in any renegotiation handshakes
+					* downgrade attacks -> FREAK attack and Logjam attack
+						* also called a version rollback attack
+						* FREAK attack
+							* a security exploit of a cryptographic weakness in TLS protocols introduced decades earlier for compliance with US cryptographic export regulations
+							* involved limiting exportable software to use only public key pairs with RSA moduli of 512 bits or lesss with the intention of allowing them to be broken easily by the NSA but not by other organizations with lesser computing resources
+						* Logjam attack
+							* a security vulnerability against a Diffie-Hellman key exchange ranging from 512-bit to 1024-bit keys
+						* tricks a web server into negotiating connections with a previous version of TLS that have long since been abandoned as insecure
+					* cross-protocol attacks
+						* DROWN attack
+							* cross-protocol security bug that attacks the servers supporting modern TLS protocol suites by using their support for the obsolete, insecure, SSL v2 protocol to leverage an attack on connections using up-to-date protocols that would otherwise be secure
+						* exploits a vulnerability in the protocols used and the configuration of the server
+					* BEAST attack
+						* java applet to violate same origin policy constraints for a long-known cipher block chaining vulnerability in TLS 1.0
+						* Apple fixed BEAST vulnerability by implementing 1/n-1 split and turning it on by default in OS X Mavericks 
+					* CRIME and BREACH attacks
+						* allow an attacker to recover the content of web cookies when data compression is used along with TLS 
+							* used to recover the content of secret authentication cookies 
+							* allow an attacker to perform session hijacking on an authenticated web session
+						* known limitation of TLS as it is susceptible to chosen-plaintext attack against application-layer data it was meant to protect
+					* timing attacks on padding
+						* early TLS versions were vulnerable against padding oracle attack
+					* there are lots of attacks that i dont have enough data to understand
+				* forward secrecy
+					* ensures that a session key derived from a set of public and private keys will not be compromised if one of the private keys is compromised in the future
+						* without if the servers private key is compromised not only will all future TLS-encrypted sessions using that server certificate be compromised but also any past sessions that used it as well
+					* in practice unless a web service uses Diffie-Hellman key exchange to implement forward secrecy all of the encrypted web traffic to and from that service can be decrypted by a third party if it obtains the servers master private key
+			* dealing with MITM attacks
+				* certificate pinning
+					* add an extra step beyond normal X.509 certificate validation
+					* after obtaining the servers certificate in the standard way client checks the public keys in the servers certificate chain against a set of public keys for the server name
+					* typically the public keys are bundled with the application
+					
+				* perspectives project
+					* operates network notaries that clients can use to detect if a sites certificate has changed
+					* by their nature MITM attacks place the attacker between the destination and a single specific target
+					* perspectives would warn the target that the certificate delivered to the web browser does not match the certificate seen from other perspectives
+						* the perspective of other users in different time and place
+					* this makes it possible for a target to detect an attack even if a certificate appears to be completely valid
+				* DNSChain
+					* relies on the security that blockchains provide to distribute public keys
+					* uses one pin to secure the connection to the DNSChain server itself
+						* all other public keys become accessible over a secure channel
+			* protocol details
+				* the TLS protocol exchanges records
+					* encapsulate the data to be exchanged in a specific format 
+					* depending on the state of the connection records can be 
+						* compressed
+						* padded
+						* appended with a MAC
+						* encrypted
+					* each record has a content type field
+						* designates the type of data encapsulated
+						* a length field 
+						* TLS version field
+				* TLS handshake
+					* when connection starts the record encapsulates the handshake messaging protocol (content type 22)
+					* protocol used to exchange all the information required by both sides for exchange of the actual application data by TLS
+					* defines the format of messages and the order of their exchange
+					* basic TLS handshake
+						* negotiation phase
+							* client sends a *ClientHello* message specifying
+								* the highest TLS protocol version it supports
+								* a random number
+								* a list of suggested cipher suites
+								* suggested compression methods
+							* server responds with a *ServerHello* message containing
+								* the chosen protocol version
+								* a random number
+								* cipher suite from the choices offered by the client
+								* compression method from the choices offered by the client
+								* the chosen protocol version should be the highest that both the client and server support
+							* server sends its *Certificate* message
+								* may be omitted by server
+							* server sends its *ServerKeyExchange* message
+								* may be omitted by server
+							* server sends a *ServerHelloDone* message
+								* indicates it is done with handshake negotiation
+							* client responds with a *ClientKeyExchange* message which may contain
+								* PreMasterSecret
+									* encrypted using the public key of the server certificate
+								* public key
+								* nothing
+							* client and server then use the random numbers and the PreMasterSecret to comput a common secret called master secret
+								* all other key data for this connection is derived from this master secret
+									* passed through a carefully designed pseudorandom function
+						* the client now sends a *ChangeCipherSpec* record 
+							* tells the client that everything sent from this point forward will be authenticated and encrypted
+							* ChangeCipherSpec content type 20
+						* client sends an authenticated and encrypted *Finished* message containing a hash and MAC over the previous handshake messages
+							* server will attempt to decrypt the clients finished message and verify the hash and MAC
+							* if the decryption or verification fails the handshake is considered to have failed and connection is shutdown
+						* server sends a *ChangeCipherSpec* record
+							* tells the client everything i tell you from now on will be authenticated
+							* server sends its authenticated and encrypted *Finished* message
+							* client performs the same decryption and encryption
+						* application phase
+							* handshake is complete and application protocol is enabled
+							* messages exchanged between client and server will be authenticated and encrypted exactly like their Finished message									* otherwise the content type is 25 and client will not authenticate
+				* client-authenticated TLS handshake
+					* also known as mutual authentication
+					* clients can be authenticated too
+				* resumed TLS handshake
+					* also known as an abbreviated handshake, or restart handshake
+					* public key operations are relatively expensive in terms of computational power
+					* TLS provides a secure shortcut in the handshake mechanism to avoid these operations
+						* implemented using session IDs or session tickets
+					* can also be used for single sign-on 
+						* gurantees that both the original session and any resumed session originate from the same client
+				* session IDs
+					* in an ordinary full handshake the server sends a session id as part of the *ServerHello* message
+					* client
+						* associates this session id with the servers ip address and TCP port
+						* when the client connects again to that server it can use the session id to shortcut the handshake
+					* server
+						* session id maps to the cryptographic parameters previously negotiated, specifically the master secret
+					* both sides must have the same master secret or the resumed handshake will fail
+					* process
+						* negotiation phase
+							* client sends a *ClientHello* message specifying 
+								* the highest TLS protocol version it supports
+								* a random number
+								* list of suggested cipher suites
+								* compression methods
+								* the session id from the previous TLS connection
+							* server responds with a *ServerHello* message containing
+								* chosen protocol version
+								* random number
+								* cipher suite from the choices offered by the client
+								* compression method from the choices offered by the client
+								* if server recognizes the session id sent by the client 
+									* responds with the same session id
+									* client uses this to recognize that a resumed handshake is being performed
+								* else the server does not recognize the session id
+									* sends a different value for its session id
+									* client uses this to recognize that a resumed handshake will not be performed
+								* both client and server have the master secret and random data to generate the key data to be used
+						* server now sends a *ChangeCipherSpec* record
+							* tells the client that everything will be encrypted from this point forward
+							* server sends an encrypted *Finished* message containing a hash and MAC over the previous handshake messages
+							* client will attempt to decrypt the servers finnished message and verify the hash and MAC
+								* if decryption verification fails the handshake is considered to have failed
+						* client sends a *ChangeCipherSpec* record
+							* tells the server that everything will be encrypted from this point forward
+							* server performs the same decryption and verification
+						* application phase
+							* at this point the handshake is complete and the application protocol is enabled
+							* application messages exchanged between client and server will also be encrypted exactly like in their Finished messages
+				* session tickets
+					* RFC 5077
+						* extends TLS via the use of session tickets instead of session ids
+						* a way to resume a TLS session without requiring that session-specific state is stored at the TLS server
+					* TLS server stores its session-specific state in a session ticket and sends the session ticket to the TLS client for storing
+						* client resumes a TLS session by sending the session ticket to the server
+						* sessiont ticket is encrypted and authenticated by the server
+						* server verifies the validity of the session ticket before using its contents
+						* server resumes the TLS session according to the session-specific state in the ticket
+				* TLS record structure
+					* content type
+						* identifies the Record Layer Protocol Type contained in this record
+							* ChangeCipherSpec
+								* 20
+							* Alert
+								* 21
+							* Handshake
+								* 22
+							* Application
+								* 23
+							* Heartbeat
+								* 24
+					* version
+						* identifies the major and minor version of TLS for the contained message
+						* ClientHello message this need not be the highest version supported by the client
+					* length	
+						* length of protocol messages, MAC and Padding not to exceed 2^14 bytes (16KiB)
+					* protocol messages
+						* one or more messages identified by the protocol field
+						* this field may be encrypted depending on the state of the connection
+					* MAC and Padding
+						* a MAC is computed over the protocol message with additional key material included
+				* Handshake protocol
+					* message type
+						* HelloRequest
+							* 0
+						* ClientHello
+							* 1
+						* ServerHello
+							* 2
+						* NewSessionTicket
+							* 4
+						* Certificate
+							* 11
+						* ServerKeyExchange
+							* 12
+						* CertificateRequest
+							* 13
+						* ServerHelloDone
+							* 14
+						* CertificateVerify
+							* 15
+						* ClientKeyExchange
+							* 16
+						* Finished
+							* 20
+					* handshake message data length
+						* 3 byte field indicating the length of the handshake data not including the header
+						* multiple handshake messages may be combined within one record
+				* alert protocol
+					* this record should normally not be sent during normal handshaking or application exchanges
+					* sent at any time durint the handshake and up to the closure of the session
+					* if used to signal fatal error
+						* session closed immediately after sending record
+					* properties
+						* level
+							* identifies the level of alert
+							* fatal
+								* connection or security may be compromised or an unrecoverable error has occurred
+								* 2
+							* warning
+								* connection or security may be unstable
+								* 1
+						* description
+							* identifies which type of alert is being sent
+							* close notify
+								* 0
+								* warning/fatal
+							* unexpected message
+								* 10
+								* fatal
+							* bad record MAC
+								* possibly a bad SSL implementation or payload has been tampered with 
+								* 20
+								* fatal
+							* decryption failed
+								* TLS only reserved
+								* 21
+								* fatal
+							* recent overflow
+								* TLS only 
+								* 22
+								* fatal	
+							* decompression failure
+								* 30
+								* fatal
+							* handshake failure
+								* 40
+								* fatal
+							* no certificate
+								* ssl 3.0 only reserved
+								* 41
+								* warning fatal
+ 	
+* what is a [MAC (Message Authentication Code)](https://en.wikipedia.org/wiki/Message_authentication_code)?
+	* Message Authentication Code
+		* sometimes known as a tag
+		* a short piece of information used to authenticate a message
+			* confirm that the message came from the stated sender and has not been changed
+		* protects both a message data integrity as well as its authenticity 
+			* allows verifiers to detect any changes to the message content
+	* definitions
+		* consists of
+			* key generation algorithm selects a key from the key space uniformly at random
+			* signing algorithm efficiently returns a tag given the key and the message
+			* verifying algorithm efficiently verifies the authenticity of the message given the key and the tag
+				* accepted when the message and tag are not tampered with or forged
+				* rejected otherwise
+	* security
+		* though similar to cryptographic hash function possess different security requirements
+			* must resist existential forgery under chosen-plaintext attacks
+				* existential forgery
+					* the creation of at least one message/signature pair by an adversary where the adversary where the signature was not produced by the legitimatr signer
+				* chosen-plaintext attacks
+					* adversary has choice of message/signature pairs 
+				* even if an attacker has access to an oracle which possesses the secret key and generates MACs for messages of the attackers choosing the attacker cannot guess the MAC for other messages without performing infeasible amounts of computation
+		* differ from digital signatures
+			* MAC values are both generated and verified using the same secret key
+				* symmetric
+				* sender and receiver of a message must agree on the same key before initiating communications
+			* does not provide the property of non-repudiation offered by digital signatures
+				* specifically in the case of a network-wide shared secret key
+				* any user who can verify a MAC is also capable of generating MACs for other messages 
+				* non-repudiation can be provided
+					* systems that securely bind key usage information to the MAC key
+					* key in possession of two people
+						* one has key that can be used for MAC generation
+						* other has copy of the key in a hardware security module that only permits MAC verification
+						* commonly done in the finance industry
+		* MIC (Message Integrity Codes)
+			* frequently a substiture for MAC accronym especially in communications where MAC stands for Media Access Control address
+			* some use MIC to refer to a message digest 
+				* do not use secret keys
+			* other possible names for MAC
+				* checksum
+				* error detection code
+				* hash
+				* keyed hash
+				* Message Authentication Code
+				* protected checksum
+		* implementation
+			* can be constructed from other cryptographic primitives 
+				* cryptographic hash functions 
+				* block cipher algorithm
+				* universal hashing
+			* can combine two or more cryptographic primitives to maintain protection even if one of them is later found to be vulnerable
+				* TLS (Transport Layer Security)
+					* input data is split in halves that are each processed with a different hashing primitive
+						* MD5
+						* SHA-1
+					* then a XOR operation is performed to create the MAC output
+		* one-time MAC
+			* universal hashing and in particular pairwise independent hash functions provide a secure message authentication code as long as the key is used at most once
+				* can be seen as the one-time pad for authentication
+			* k-independent hashing functions provide a secure MAC as long as the key is used less than 
+				* k-times for k-wise independent hashing functions
 
+* what is a [HMAC (keyed-Hash Message Authentication Code)](https://en.wikipedia.org/wiki/HMAC)?
+	* keyed-hash message authentication code
+		* a specific type of message authentication code involving a cryptographic hash function and a secret cryptographic key
+		* used to simultaneously verify both the data integrity and the authentication of a message
+		* uses two passes of hash computation
+			* the secret key is first used to derive two keys
+				* inner
+				* outer
+			* the first pass of the algorithm produces an internal hash derived from the message and the inner key
+			* the second pass produces the final HMAC derived from the inner hash result and the outer key
+			* better immunity against length extension attacks
 
+* what is [universal hashing](https://en.wikipedia.org/wiki/Universal_hashing)?
+	* refers to selecting a hash function at random from a family of hash functions with certain mathematical properties
+		* gurantees a low number of collisions in expectation even if the data is chosen by an adversary
+	* many universal families are known and their evaluation is often very efficient
+		* for hashing integers, vectors, strings
 
+* what is [pairwise independence in probability theory](https://en.wikipedia.org/wiki/Pairwise_independence)?
+	* a pairwise independent collection of random variables is a set of random variables any two of which are independent
+		* any collection of mutually independent random variables is pairwise independent
+		* some pairwise independent collections are not mutually independent
+	* math is super cool
 
+* what is a [OTP (One-Time Pad)](https://en.wikipedia.org/wiki/One-time_pad)?
+	* One-Time Pad
+		* an encryption technique that cannot be cracked but requires the use of a one-time pre-shared key the same size as or longer than the message being sent
+	* plaintext is paired with a random secret key
+		* each bit or character of the plaintext is encrypted by combining it corresponding bit or character from the pad using modular addition
+		* ciphertext impossible to break so long that
+			* the key is truly random
+			* at least as long as the plaintext
+			* never reused in whole or in part
+			* kept completely secret
+	* any cipher with the perfect secrecy property must use keys with effectively the same requirements as OTP keys
+	* OTP is inpractical
+	* name comes from its use by spies in the cold war
+	* problems
+		* key distribution
+			* distributing very long OTP keys is inconvenient and usually posses a security risk
+			* high risk of compromise in transit
+		* authentication
+			* no system for message authentication
+		* true randomness
+			* high quality random numbers are difficult to generate
+			* must be one-time use
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-* what is a [message authentication code](https://en.wikipedia.org/wiki/Message_authentication_code)?
-	* 
+* what is [k-independent hashing](https://en.wikipedia.org/wiki/K-independent_hashing)?
+	* also known as k-universal
+	* selecting a function at random from the family gurantees that the hash codes of any designated k keys are independent random variables
+		* allow good average case performance in randomized algorithms or data structures even if the input data is chosen by an adversary
+	* basically better universal hashing
+		* gurantees random behavior to families of k designated keys
+		* adds a gurantee on the uniform distribution of hash codes
+	* math is seriously super cool
 
 * what is a [shared secret in cryptography](https://en.wikipedia.org/wiki/Shared_secret)?
 	* a piece of data known only to the parties involved in a secure communication
@@ -1161,11 +1545,6 @@
 		* and primitives are described as stateful as opposed to randomized
 			* IV need not be explicitely forwarded to a recipient but may be derived from a common state updated at both sender and receiver side
 
-
-
-
-
-
 * what is [semantic security](https://en.wikipedia.org/wiki/Semantic_security)?
 
 * what is a [cryptographic nonce](https://en.wikipedia.org/wiki/Cryptographic_nonce)?
@@ -1173,6 +1552,239 @@
 * what is [perfect forward secrecy](https://en.wikipedia.org/wiki/Forward_secrecy)?
 
 * what is the [TLS handshake protocol](https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake)?
+
+* what are [digital signature forgeries](https://en.wikipedia.org/wiki/Digital_signature_forgery)?
+
+* what is an [oracle machine](https://en.wikipedia.org/wiki/Oracle_machine)?
+
+* what is the [OSI model](https://en.wikipedia.org/wiki/OSI_model)?
+	* Open Systems Interconnection model
+		* a conceptual model that characterizes and standardizes the communication functions of a telecommunication or computing system without regard to their underlying internal structure and technology
+		* its goal is the interoperability of diverse communication systems with standard protocols
+		* the model partitions a communication system into abstraction layers
+			* original defined 7 layers
+		* layer serves the layer above it and is served by the layer below it
+	* description of OSI layers
+		* structure
+			* application layer
+				* function
+					* high-level APIs, including resource sharing, remote file access
+				* protocol data unit
+					* data
+			* presentation
+				* function
+					* translation of data between a networking service and an application 
+						* character encoding
+						* data compression
+						* encryption/decryption
+				* protocol data unit
+					* data
+			* session
+				* function
+					* managing communication sessions
+						* continuous exchange of information in the form of multiple back-and-forth transmissions between two nodes
+				* protocol data unit
+					* data
+			* transport
+				* function
+					* reliable transmission of data segments between points on a network
+						* segmentation
+						* acknowledgement
+						* multiplexing
+				* protocol data unit
+					* TCP
+						* segment
+					* UDP
+						* datagram
+			* network
+				* function
+					* structuring and managing a multi-node network
+						* addressing
+						* routing
+						* traffic control
+				* protocol data unit
+					* packet
+			* data link
+				* function
+					* reliable transmission of data frames between two nodes connected by a physical layer
+				* protocol data unit
+					* frame
+			* physical
+				* function
+					* transmission and reception of raw bit streams over a physical medium
+				* protocol data unit
+					* bit
+		* communication between layers
+			* at each level N	
+				* two entities at the communicating devices (layer N  peers) exchange PDUs (protocol data units) by means of a layer N protocol
+				* each PDU contains a payload called the SDU (service data unit)
+				* each PDU contains protocol-related headers or footers
+			* data processing by two communicating OSI compatible devices
+				* data to be transmitted is composed at the topmost layer of the transmitting device (layer N) into a PDU
+				* PDU is passed to layer N-1 where it is known as the SDU
+				* layer N-1 concatenates the SDU with a header, a footer, or both producing a layer N-1 PDU, this PDU is passed to layer N-2
+				* the process continues until reaching the lowermost level
+					* the data is transmitted to the receiving device
+				* receiving device passes the data from the lowest to the highest level as a series of SDUs while successively stripping each layers headers and footers until reaching the topmost layer
+					* the last of the data is consumed
+		* some aspects involve all of the layers
+			* management
+			* security
+	* indepth breakdown
+		* layer 1
+			* physical layer
+				* low-level networking equipment
+					* network adapters, repeaters, network hubs, modems, fiber media converters
+			* defines the electrical and physical specifications of the data connection
+			* defines the relationship between a device and a physical transmission medium
+				* pins
+				* voltages
+				* line impedance
+				* cable specifications
+				* signal timing and similar characteristics
+			* responsible for transmission and reception of unstructured raw data in a physical medium
+			* bit rate control is done at the physical layer
+			* define transmission mode
+				* simplex
+					* a communication channel that sends information in one direction only
+				* half duplex
+					* a communication channel that provides information in both directions but only one direction at a time
+				* full duplex
+					* a communication channel that provides information in both directions
+			* defines the network topology
+				* bus
+				* mesh
+				* ring
+		* layer 2
+			* data link layer
+				* provides node-to-node data transfer
+			* a link between two directly connected nodes
+			* detects and possibly corrects errors that may occur in the physical layer
+			* defines the protocol to establish and terminate a connection between two physically connected devices
+				* defines the protocol for flow control between them
+			* two sub layers
+				* MAC (Media Access Control) layer
+					* responsible for controlling how devices in a network gain access to a medium and permission to transmit data
+				* LLC (Logical Link Control)
+					* responsible for identifying and encapsulating network layer protocols and controls error checking and frame synchronization
+			* PPP (point-to-point protocol
+				* a data link layer protocol that can operate over several different physical layers 
+					* synchronous serial lines
+					* asynchronous serial lines
+		* layer 3
+			* network layer
+				* provides functionality and procedural means of transferring variable length data sequences called datagrams from one node to another connected in different networks 
+					* network is a medium to which many nodes can be connected on
+						* every node has an address
+						* permits nodes connecting to it to transfer messages to other nodes connected to it by
+							* providing the content of a message and the address of the destination node
+							* let the network find the way to deliver the message to the destination node
+								* possibly route through intermediate nodes
+			* if the message is too large to be transmitted from one node another on the data link layer between those nodes
+				* network may implement message delivery by splitting the message into several fragments at one node
+				* sending the fragments independently
+				* reassembling the fragments at another node 
+				* may but not obligated to report delivery errors
+			* message delivery at the network layer is not necessarily guaranteed to be reliable
+			* protocols
+				* routing protocol
+				* multicast group management
+				* network-layer information and error
+				* network-layer address assignment
+		* layer 4
+			* transport layer
+				* provides the functional and procedural means of transferring variabl-length data sequences from a source to a destination host via one or more networks while maintaining the quality of service functions 
+			* controls the reliability of a given link 
+				* flow control
+				* segmentation/desegmentation
+				* error control
+				* provides acknowledgement of successful data transmission and sends the next data if no errors occured
+			* creates packets out of the message received from the application layer
+				* divide long messages into smaller messages
+			* protocols
+				* TCP
+				* UDP
+		* layer 5
+			* session layer
+				* controls the connections between computers
+					* establishes
+					* manages
+					* terminates
+				* provides for
+					* full-duplex
+					* hald-duplex
+					* simplex
+				* establishes
+					* checkpointing
+					* adjournment
+					* termination
+					* restart procedures
+				* responsible for 
+					* graceful close of sessions
+					* session checkpointing and recovery
+		* layer 6
+			* presentation layer
+				* establishes context between application-layer entities
+			* application-layer entities may use different syntax and semantics
+				* presentation service provides a mapping between them
+				* if available presentation service data units are encapsulated into session protocol data units and passed down the protocol stack
+			* provides independence from data representation by translating between application and network formats
+				* transforms data into the form that the application accepts
+		* layer 7
+			* application layer
+				* layer closest to the end user
+				* both the application layer and the user interact directly with the software application
+				* functions typically include
+					* identifiying communication partners
+					* determining resource availability
+					* synchronizing communication
+				* when identifying communication partners the application layer determines the identity and availability of communication partners for an application with data to transmit
+	* cross-layer functions
+		* services not tied to a given layer
+		* security services
+		* management functions
+		* multiprotocol label switching
+		* ARP
+		* DHCP
+		* domain name service
+		* cross MAC and PHY scheduling
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
