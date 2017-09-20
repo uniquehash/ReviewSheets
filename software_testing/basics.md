@@ -234,9 +234,294 @@
 			* focus is on the performance while continuously running with normal input and under normal operational conditions as opposed to stress testing, or fuzz testing
 		* conformance testing or type testing
 			* conformance testing verifies that a product performs according to its specified standard
-	* testing process
-		* 
+	* testing artifacts
+		* test plan
+			* a document detailing the objectives, target market, internal beta team, and processes for a specific beta test
+		* traceability matrix
+			* a table that correlates requirements or design documents to test documents
+		* test case
+			* normally consists of a unique identifier, requirement references from a design specification, preconditions, events, a series of steps to follow, input, output, expected result, and actual result
+		* test script
+			* a procedure, or programming code that replicates user actions
+		* test suite
+			* most common term for a collection of test cases
+		* test fixture or test data
+			* multiple sets of values or data are used to test the same functionality of a particular feature
+		* test harness
+			* the software, tools, samples of data input and output, and configurations are all reffered to collectively as the test harness
 
+* what is [unit testing](https://en.wikipedia.org/wiki/Unit_testing)?
+	* a software testing method by which units are tested to determine whether they are fit to use
+		* individual units of source code
+		* sets of one or more computer program modules together with associated control data
+		* usage procedures
+		* operating procedures
+	* description
+		* one can view a unit as the smallest testable part of an application
+		* procedural programming
+			* unit could be an entire module
+			* more commonly an individual function or procedure
+		* object-oriented programming
+			* unit is often an entire interface such as a class
+			* can also be an individual method
+		* ideally each test case is independent from the others
+		* substitutes such as X can be used to assist testing a module in isolation
+			* method stubs
+			* mock objects
+			* fakes
+			* test harnesses
+		* some classes may have references to other classes and testing a class can frequently splii over into testing another class
+			* unit test should usually not go outside of its own class boundary
+			* especially should not cross such process/network boundaries
+				* can introduce unacceptable performance problems to the unit test-suite
+			* crossing such unit boundaries turns unit tests into integration tests
+				* when test cases fail makes it less clear which component is causing the failure
+			* swe should create an abstract interface around the database queries
+				* then implement that interface with their own mock object
+				* allows the unit to be more thoroughly tested than may have been previously achieved
+	* techniques
+		* unit testing is commonly automated
+		* objective in unit testing is to isolate a unit and validate its correctness
+		* to fully realize the effect of isolation while using an automated approach the unit or code body under test is executed within a framework outside of its natural environment
+	* advantages 
+		* the goal of unit testing is to isolate each part of the program and show that the individual parts are correct
+		* provides a strict written contract that the piece of code must satisfy
+		* find problems early
+			* bugs in implementation
+			* flaws or missing parts in the specification for the unit
+				* the process of writing thorough set of tests forces the author to think through inputs, outputs, and error conditions
+		* facilitates change
+			* allows programmers to refactor cord or upgrade system libraries at a later data, and still have certainty the module still works correctly
+		* simplifies integration
+			* may reduce uncertainty in the units themselves and can be used in a bottom-up testing style approach
+			* simplifies integration tests
+		* documentation
+			* provides a sort of living documentation of the system
+			* developers looking to learn what functionality is provided by a unit, and how to use it can look at the unit tests to gain a basic understanding of the units interface
+			* unit test cases embody characteristics that are critical to the success of the unit
+			* can indicate appropriate/inappropriate use of a unit as well as negative behaviors that are to be trapped by the unit
+		* design
+			* the combination of writing the unit test to specify the interface plus the refactoring activities performed after the test is passing may take the place of formal design
+	* disadvantages
+		* decision problem
+			* cannot cover every edge case
+		* not integration testing
+			* elaborate hierarchy of unit tests does not equal integration testing
+			* integration with peripheral units should be included in integration tests but not in unit tests
+			* integration testing typically relies heavily on humans testing manually
+			* high-level or global-scope testing can be difficult to automate 
+				* manual testing often appears faster and cheaper
+		* combinatorial problem
+			* testing code requires significantly more code than writing code
+			* some problems are intrinsically harder to test
+				* nondeterministic in nature
+				* involve multiple threads
+			* unit test code is likely to be as buggy as the code its testing
+		* realism
+			* difficulty of setting up realistic and useful tests 
+			* necessary to create relevant initial conditions so the part of the application being tested behaves like the part of the complete system
+		* record keeping
+			* to obtain the intended benefits from unit testing rigorous discipline is needed throughout the software development process
+			* essential to keep careful records not only of the tests that have been performed, but of all the changes that have been made to the source code of this or any other unit in the software
+		* sustainability challenges
+			* essential to implement a sustainable process for ensuring that the test case failures are reviewed regularly and addressed immediately
+		* platform differences
+			* unit testing embedded system software presents a unique challenge
+				* software is being developed on a different platform that the one it will eventually run on 
+				* cannot readily run a test program in the actual deployment environment	
+		* external work
+			* unit tests tend to be easiest when a method has input parameters and some output
+			* not as easy to create unit tests when a major function of the method is to interact with something external to the application
+				* mocks are not as comprehensive
+
+* what is a [method stub](https://en.wikipedia.org/wiki/Method_stub)?
+	* a piece of code used to stand in for some other programming functionality
+		* may simulate the behavior of existing code 
+		* temproary substitute for yet-to-be-developed code
+	* most useful in porting, distributed computing as well as general software development and testing
+	* a routine that does not actually do anything other than declaring itself and the parameters it accepts and returning something that is usually the values expected in one of the positive cases for the caller
+	* common as placeholders for implementation of a known interface, where the interface is designed but not yet implemented
+
+* what is a [mock object](https://en.wikipedia.org/wiki/Mock_object)?
+	* simulated objects that mimic the behavior of a real objects in controlled ways
+	* programmer typically creates a mock object to test the behavior of some other object 
+	* reasons for use
+		* can simulate the behavior of complex, real objects
+			* useful when a real object is impractical or impossible to incorporate into a unit test
+		* if object has any of the following characteristics use a mock object
+			* object supplies non-deterministic results
+			* has states that are difficult to create or reproduce
+			* is slow 
+			* does not yet exist or may change behavior
+			* would have to inlcude information and methods exclusively for testing purposes
+	* technical details
+		* mock objects have the same interface as the real objects they mimic allowing a client object to remain unaware of whether it is using a real object or a mock object
+		* many mock object frameworks allow programmers to specify which and in what order methods will be invoked on a mock object and what parameters will be passed to them as well as what values will be returned
+		* the behavior of a complex object such as a network socket can be mimicked by a mock object 
+			* allows the programmer to discover whether the object being tested responds appropriately to the wide variety of states such mock object may be in
+		* mocks, fakes, and stubs
+			* classification between these things is highly inconsistent across the literature
+				* consistently though they all represent a production object in a testing environment by exposing the same interface
+		* setting expectations
+			* you can set state
+			* you can set return values
+		* writing log strings
+			* within mocks you can add loging entries informing the ready of what happened
+	* limitations
+		* the use of mock objects can closely couple the unit tests to the implementation of the code that is being tested 
+		* if overdone can cause maintenance issues
+
+* what is a [test harness](https://en.wikipedia.org/wiki/Test_harness)?
+	* a collection of software and test data configured to test a problem unit by running it under varying conditions and monitoring its behavior and outputs	
+		* two main components	
+			* test execution engine
+			* test script repository
+	* allows for the automation of tests
+	* should 
+		* allow specific tests to run 
+		* orchestrate a runtime environment
+		* provide a capability to analyze results
+	* typical objectives 
+		* automate the testing process
+		* execute test suites of test cases
+		* generate associated test reports 
+	* may provide following benefits
+		* increased productivity due to automation of the testing process
+		* increased probability that regression testing will occur
+		* increased quality of software components and applications
+		* repeatability of subsequent test runs
+		* offline testing
+		* access to conditions and/or use cases that are otherwise difficult to simulate
+	* alternative definition
+		* software constructed to facilitate integration testing 
+
+* what is [test automation](https://en.wikipedia.org/wiki/Test_automation)?
+	* the use of special software to control the execution of tests and the comparison of actual outcomes with predicted outcomes
+	* can automate some repetitive but necessary tasks in a formalized testing process already in place 
+		* perform additional testing that would be difficult to do manually
+	* overview
+		* once automated tests have been developed they can be run quickly and repeatedly
+		* two main approaches
+			* graphical user interface testing
+				* testing framework that generates user interface events such as keystrokes and mouse clicks, and observes the changes that result in the user interface, to validate that the observable behavior of the program is correct
+			* api driven testing
+				* testing framework that uses a programming interface to the application to validate the behaviour under test
+				* typically api driven testing bypasses application user interfaces altogether 
+				* can also be testing public usually interfaces to classes 
+				* modules or libraries are tested with a variety of input arguments to validate that the results that are returned are correct
+		* can be expensive and are usually employe in combination with manual testing 
+			* cost-effective in the long term especially when used in regression testing
+		* one way to generate test cases automatically is model-based testing through the use of a model of the system for test case generaion
+		* 5 main factors to consider in test automation decision are
+			* SUT (System Under Test)
+			* the types and number of tests
+			* test-tool
+			* human and organizational topics
+			* cross-cutting factors
+		* most frequent individual factors identified in the study were
+			* need for regression testing
+			* economic factors
+			* maturity of SUT (System Under Test)
+	* unit testing
+		* growing trend in software development is the use of testing framework such as the xUnit framework that allow the execution of unit tests to determine whether various sections of the code are acting as expected under various circumstances
+	* GUI (Graphical User Interface) testing
+		* many test automation tools provide record and playback features that allow users to interactively record user action and replay them back any number of times, comparing actual results to those expected
+		* requires little to no software development
+		* reliance on these features poses major reliability and maintainability problems
+			* relabelling a button or moving it to another part of the window may require the test to be re-recorded
+		* for GUI testing on websites use headless browsers
+		* script-less test automation
+			* builds a model of the application and then enables the tester to create test cases by simply inserting test parameters and conditions 
+	* API driven testing
+		* widely used by software testers due to the difficulty of creating and maintaining GUI-based automation testing
+		* involves directly testing APIs as part of integration testing to determine if they meet expectations for functionality, reliability, performance, and security
+		* APIs lack a GUI 
+		* API testing is performed at the message layer
+		* considered critical when an API serves as the primary interface to application logic since GUI tests can be difficult to maintain with the short release cycles and frequent changes commonly used with agile software development
+	* continuous testing
+		* the process of executing automated tests as part of the software delivery pipeline to obtain immediate feedback on the business risks associated with a software release candidate
+		* scope of testing extends from validating bottom-up requirements or user stories to assessing the system requirements associated with overarching business goals
+	* what to test
+		* platform and OS independence
+		* data driven capability
+			* input data
+			* output data
+			* metadata
+		* customizable reporting
+		* easy debugging and logging
+		* version control friendly 
+		* extensible & customizable
+		* common driver
+		* support unattended test runs for integration with build processes and batch runs 
+		* email notification like bounce messages
+		* support distributed execution environment
+		* distributed application support
+	* framework approach in automation
+		* a test automation framework is an integrated system that sets the rules of automation of a specific product
+		* system integrates
+			* fuction libraries
+			* test data sources
+			* object details
+			* various reusable modules
+		* components act as small building blocks which need to be assembled to represent a business process
+		* main advantage is the low cost for maintenance
+		* various framework/scripting techniques are generally used
+			* linear
+				* procedural code, possibly generated by tools like those that use record and playback
+			* structured
+				* uses control structures
+			* data-driven
+				* data is persisted outside of tests in a database, spreadsheet, or other mechanism
+			* keyword-driven
+			* hybrid
+				* two or more of the patterns above are used
+			* agile automation framework	
+		* testing framework is responsible for
+			* defining the format in which to express expectations
+			* creating a mechanism to hook into or drive the application under test
+			* executing the tests
+			* reporting results
+		* test automation interface
+			* platforms that provide a single workspace for incorporating multiple testing tools and frameworks for system/intergration testing of application under test
+			* the goal of test automation interface is to simplify the process of mapping tests to business criteria without coding coming in the way of the process
+			* core modules	
+				* interface engine
+					* built on top of interface environment
+					* consists of a parser and a test runner
+					* parser is present to parse the object files coming from the object repository into the test specific scripting language
+					* test runner executes the test scripts using a test harness
+				* interface environment
+				* object repository
+					* are a collection of UI/Application object data recorded by the testing tool while exploring the application under test
+	* defining boundaries between automation framework and a testing tool
+		* tools are specifically designed to target some particular test environment 
+		* tools serve as a driving agent for an automation process
+		* automation framework is infrastructure that provides solutions where different tools can do their job in a unified manner
+	
+* what is [xUnit](https://en.wikipedia.org/wiki/XUnit)?
+	* the collective name for several unit testing frameworks that derive their structure and functionality from smalltalks SUnit
+	* xUnit architecture
+		* test runner
+			* an executable program that runs tests implemented using an xUnit framework and reports the test results
+		* test case
+			* the most elemental class
+			* all unit tests are inherited from here
+		* test fixtures
+			* also known as a test context
+			* the set of preconditions or state needed to run a test
+			* developer should set up a known good state before the tests and return to the original state after the tests
+		* test suites
+			* a set of tests that all share the same fixture
+		* test executions
+			* the execution of an individual unit test proceeds as follows
+		* test result formatter
+			* produces results in one or more output formats
+		* assertions
+			* a function or macro that verifies the behavior or the state of the unit under test
+			* usually assertion expresses a logical condition that is true for results expected in a correctly running system under test
+			* failure of an assertion typically throws an exception, aborting the execution of the current test
+
+		
 
 
 
