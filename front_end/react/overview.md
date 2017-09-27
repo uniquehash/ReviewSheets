@@ -53,4 +53,95 @@ little overview of react before diving in.
 
 * what are [props in the context of React](https://facebook.github.io/react/docs/components-and-props.html)?
 
+* why use [react in the first place](https://learn.tylermcginnis.com/courses/50507/lectures/760073)?
+	* composition
+		* composition of components
+			* components are strongly encapsulated
+		* individual components manage their own state 
+			* set clear boundaries
+	* unidirectional dataflow
+		* UI is updated from state
+	* declarative
+		* tell computer what you want not how you want it done
+		* benefits
+			* reduce side effects
+			* minimize mutability
+			* more readable code
+			* less bugs
+	* explicit mutations
+		* whenever we want to update state in application we must do so explicitely
+	* just javascript 
+
+* what are [the pieces in the react ecosystem](https://learn.tylermcginnis.com/courses/50507/lectures/760073)?
+	* react
+		* purely the view layer
+	* react router
+		* allow use to map a specific url with a specific component
+	* webpack
+		* bundler
+		* takes entry point and all files through data transformation modules 
+		* bundles them into a single file 
+		* output them into new file
+	* babel
+		* transpiler
+	* axios
+		* allow us to make http requests
+
+* how do we [basically use webpack](https://learn.tylermcginnis.com/courses/50507/lectures/762538#/questions/1)?
+	* webpack takes your code, transforms it, then bundles it
+	* three main things webpack needs to know 
+		* the starting point of your application 
+		* which transformations to make on your code
+		* which location it should save the new transformed code
+	* create a file `webpack.config.js` containing our webpack configuration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
