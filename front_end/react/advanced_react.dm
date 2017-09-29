@@ -35,7 +35,8 @@
     * receives the current application state as well as the current action
         * creates a new copy of the apps state modified with what is described by the action
         * sets the state with that new copy
-
+   * reducers can be composed
+ 
 * what is [a dispatch function in redux](https://learn.tylermcginnis.com/courses/51210/lectures/945048)?
     * passed an action
     * invokes reducer
