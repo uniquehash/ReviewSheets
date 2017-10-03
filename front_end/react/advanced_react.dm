@@ -44,11 +44,52 @@
     * react-redux
         * allows us to connect our component to redux and when we do it passes dispatch as props
         
+* what is [createStore in redux](https://learn.tylermcginnis.com/courses/redux/lectures/946346)?
+	* a method that will create a single state tree or a store in your application
+	* takes either a single reducer or an object with a many of reducers
+		* createStore will go through each reducer calling them with an undefined state to receive their initial state
+	* with react
+		* connect react components to the redux store using a Provider property
+		
+* what is [a Provider in redux-react](https://learn.tylermcginnis.com/courses/redux/lectures/9463460)?
+	*  a component that takes a redux store and allows all its children to access the store
 
+* what is the [connect method in redux-react](https://learn.tylermcginnis.com/courses/redux/lectures/973469)?
+	* a method that wraps around or presentation component and returns a container component connected to redux
+	* first argument that connect receives is a function
+		* specifies exactly what properties from our single state tree we want to pass into the component we are connecting
+		* this function is often called `mapStateToProps` by convention	
+	* second argument that connect receives is a function
+		* allows us to bind functions to dispatch
+		* often called `mapDispatchToProps` by convention
+* what is the [difference between a container component and a presentational component](https://learn.tylermcginnis.com/courses/redux/lectures/973469)?
+	* container component
+		* handles logic and is connected to redux
+	* presentational component
+		* receives props and renders UI
 
+* what is the [dispatch function in react-redux](https://learn.tylermcginnis.com/courses/redux/lectures/973469)?
+	* will take an action creater and if connected to redux with `connect` will be able to update the state of our store
 
+* what does [mapStateToProps do in redux-react](https://learn.tylermcginnis.com/courses/redux/lectures/973469)?
+	* a function that takes a state and returns the pieces of the state that should be mapped to props for the presentational component
 
+* what does [mapDispatchToProps do in redux-react(https://learn.tylermcginnis.com/courses/redux/lectures/973469)?
+	* a function that takes the dispatch function and returns the action creator objects wrapped in dispatch 
 
+* what does [importing * as actions do in redux-react](https://learn.tylermcginnis.com/courses/redux/lectures/973469)?
+	* imports the contents of file of actions as an object with action creators as keys
+
+* what is [redux thunks in redux](https://learn.tylermcginnis.com/courses/redux/lectures/946352)?
+	* a pattern of returning a function from an action creator
+	* allows us to ecapsulate a bunch of logic for cleaner code
+	* requires configuration
+
+* what is [middleware in the context of redux](https://learn.tylermcginnis.com/courses/redux/lectures/946353)?
+	* allows us to hook into the point between dispatching an actual action and the moment it reaches a reducer 
+		* take the action that is being dispatched
+		* do something with it
+		* pass it on to the reducer
 
 
 
