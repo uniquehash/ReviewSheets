@@ -52,7 +52,25 @@
       * return traffic must pass through the load balancer 
       * can be achieved pure software
   * load balancers mush check health of their components
+    * health checks
+      * periodically sending probes to ensure the component is still operational
+      * must be representative of the type of failure to address
+      * involve a few retries to cover occasional measuring errors
+      * period between checks must be small enough to ensure the faulty component is not used for too long after an error occurs
+    * sampling
+      * sampling the production traffic sent to a destination to observe if it is processed correctly or not, and to evince the components which return inappropriate responses
+        * sacrifice a part of the production traffic and this is not always acceptable 
+    * centralized reporting
+      * central monitoring agent periodically updates all load balancers about all components state
+      * gives a global view of the infrastructure to all components though sometimes with less accuracy or responsiveness 
+        * suited for environments with many load balancers and many servers
+  * layer 7 load balancers stickiness/persistence
+    * must generally have to direct multiple subsequent requests or connections from a same origin to the same target
+      * must persist the context of the user 
+      * layer 4 cannot do this
 
+    
+    
 
 * how and why is [HAProxy so performent](http://www.haproxy.org/#perf)?
   * 
