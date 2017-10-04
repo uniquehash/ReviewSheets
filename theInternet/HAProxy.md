@@ -5,6 +5,74 @@
   * written in C
   * fast and efficient
   * defacto open source solution
+  * [HAProxy technical breakdown](http://cbonte.github.io/haproxy-dconv/1.7/intro.html#chapter-3.2)
+    * HAProxy is a single-threaded, event-driven, non-blocking engine combining a very fast I/O layer with a priority-based scheduler
+    * architected to move data as fast as possible with the least possible operations
+    * implements a layered model offering bypass mechanisms at each level ensuring data does not reach higher levels when not needed
+    * most of the processing is performed in the kernel and data is preprocessed as much as possible to make this faster
+    * no need to run more than one instance
+    * only requires haproxy executable and a configuration file to run
+  * [technical features]((http://cbonte.github.io/haproxy-dconv/1.7/intro.html#chapter-3)
+    * TCP proxy
+      * can accept a TCP connection from a listening socket
+      * connect to a server and attach these sockets together allowing traffic to flow in both directions
+    * HTTP reverse-proxy (also known as a gateway)
+      * presents itself as a server
+      * receivtes HTTP requests over connections accepted on a listening TCP socket
+      * passes the requests from these connections to servers using different connections
+    * SSL terminator/initiator/offloader
+      * SSL/TLS may be used on the
+        * connection coming from the clinet
+        * connection going to the server
+        * both connections
+    * TCP normalizer
+      * connections are locally terminated by the operating system 
+        * no relation between both sides
+        * abnormal traffic will not be passed to the other side
+          * invalid packets
+          * flag combinations
+          * window advertisements
+          * sequence numbers
+          * incomplete connections (SYN floods)
+    * HTTP normalizer
+      * when configured to process HTTP traffic only valid complete requests are passed
+      * protects against protocol-based attacks
+    * HTTP fixing tool
+      * can manipulate the url or any request or response header
+        * modify
+        * fix
+        * add
+        * remove
+        * rewrite
+      * helps fixing interoperability issues in complex environments
+    * content-based switch
+      * can consider any element from the request to decide what server to pass the request or connection to 
+      * it is possible to handle multiple protocols over a same port
+    * server load balancer
+      * can load balance TCP connections and HTTP requests
+      * in TCP mode load balancing decisions are taken for the whole connection
+      * in HTTP mode decisions are taken per request
+    * traffic regulator
+      * can apply some rate limiting at various points
+      * protect the servers agains overloading
+      * adjust traffic priorities based on the contents
+      * pass information to lower layers and outer network components by marking packets
+    * protection against DDoS and service abuse
+      * can maintain a wide number of statistics and detect when an abuse is happening
+        * IP address
+        * URL
+        * cookie
+        * etc
+      * can take action
+        * slow down offenders
+        * block them 
+        * send them to outdated contents
+    * observation point for network troubleshooting
+      * logged information is very precise
+        * often used to narrow down some network-related issues
+    * HTTP compression offloader
+      * can compress responses which were not compressed by the server
+        * reduces page load time for clients with poor connectivity, or using high-latency, mobile networks
 
 * what is [load balancing and how do load balancers work](http://cbonte.github.io/haproxy-dconv/1.7/intro.html#chapter-2)?
   * load balancing consists in aggregating multiple components in order to achieve a total processing capacity above the individual capacity of each component
@@ -69,6 +137,24 @@
       * must persist the context of the user 
       * layer 4 cannot do this
 
+* how does [HAProxy work](http://cbonte.github.io/haproxy-dconv/1.7/intro.html#chapter-3.2)?
+  * startup
+    * configuration files are parsed before starting
+    * HAProxy tries to bind all listening sockets
+      * refuses to start if anything fails
+    * no runtime failures, it will work until it is stopped
+  * runtime
+    * processes incoming connections
+      * accept incoming connections from listening sockets that belong to a configuration entity known as a frontend
+        * references one or multiple listening addresses
+      * apply the frontend-specific processing rules to these connections that may result 
+        * in blocking them
+        * modifying some headers
+        * intercepting them to execute some internal applets such as the statistics page or the CLI
+      * pass these incoming connections to another configuration entity representing a server farm known as a backend
+        * backend contains the list of servers and the load balancing strategy for this server farm
+    * periodically check the servers status (health checks)
+    * exchange information with other haproxy nodes
     
     
 
