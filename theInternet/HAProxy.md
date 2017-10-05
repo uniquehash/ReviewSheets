@@ -153,10 +153,79 @@
         * intercepting them to execute some internal applets such as the statistics page or the CLI
       * pass these incoming connections to another configuration entity representing a server farm known as a backend
         * backend contains the list of servers and the load balancing strategy for this server farm
+      * apply the backend-specific processing rules to these connections
+      * decide which server to forward the connection to according to the load balancing strategy
+      * apply the backend-specific processing rules to the response data
+      * apply the frontend-specific processing rules to the response data
+      * emit a log to report what happened in fine details
+      * in HTTP
+        * loop back to the second step to wait for a new request
+        * otherwise close the connection
     * periodically check the servers status (health checks)
     * exchange information with other haproxy nodes
-    
-    
 
 * how and why is [HAProxy so performent](http://www.haproxy.org/#perf)?
-  * 
+  * a load balancers performance is generally announced for the best case 
+    * expect an average practical performance of half of maximal session and data rates for average sized objects
+  * measuring the performance of a load balancer  
+    * session rate
+      * directly determines when the load balancer will not be able to distribute all the requests it receives
+      * CPU-bound
+    * session concurrency
+      * session rate will drop when the number of concurrent sessions increases
+      * if load balancer receives 10,000 sessions per second and the servers respond in 100ms then the load balacner will have 1,000 concurrent sessions
+      * limited by the amount of memory and file descriptors the system can handle
+        * with 16kb buffers HAProxy will need 34kb per session
+          * 30,000 sessions per GB of ram
+          * in practice 20,000 per GB of ram
+    * data forwarding rate
+      * the opposite of the session rate
+      * measured in mb/s or gbps
+      * highest data rates are achieved with large objects to minimise the overhead cause by session setup and teardown
+        * large objects generally increase session concurrency
+      * high data rates butn a lot of CPU and bus cycleson software load balancers because the data has to be copied from the input interface to memory and then back to the output device
+  * techniques to achieve absolute maximal performance
+    * a single-process, event-driven model cosiderably reduces the cost of context switch and the memory usage
+      * processing several hundreds of tasks in a milisecond is possible and the memory usage is in the order of a few kb per session while memory consumed in preforked or threaded servers is more in the order of mb per process
+    * O(1) event checker on systems that allow it
+      * allows instantaneous detection of any event on any connection among tens of thousands
+    * delayed updates to the event checker using lazy event cache
+      * ensures that we never update an event unless absolutely required
+        * saves a lot of system calls
+    * single-buffering without any data copy between reads and writes whenever possible
+      * saves a lot of CPU cycles and useful memory bandwidth
+        * often the bottleneck will be the I/O busses between the CPU and the network interfaces
+    * zero-copu forwarding is possible using the splice() system call under linux    
+    * MRU memory allocator using fixed size memory pools for immediate memory allocation
+      * favors hot cache regions over cold cache ones
+      * dramatically reduces the time needed to create a new session
+    * work factoring such as multiple accept() at once and the ability to limit the number of accept() per iteration when running in multi-process mode
+      * load is evenly distributed among processes
+    * CPU-affinity is supported when running in multi-process mode
+      * or simply adapt to the hardware and be the closest possible to the CPU core managing the NICs while not conflicting with it
+    * tree-based storage
+      * making heavy use of the elastic binary tree, O(log(N)) cost to
+        * keep timers ordered
+        * keep the runqueue ordered
+        * manage round-robin and least-conn queues
+        * look up ACLs or keys in tables
+    * optimized timer queue
+      * timers are not moved in the tree if they are postponed 
+        * likeliness that they are met is close to zero since they're mostly used for timeout handling
+    * optimized HTTP header analysis
+      * headers are parsed and interpreted on the fly and the parsing is optimized to avoid an re-reading of any previously read memory area
+      * checkpointing is used when an end of buffer is reached with an incomplete header so that the parsing does not start again from the beginning when more data is read
+    * careful reduction of the number of expensive system calls 
+      * most work is done in user space by default 
+        * time reading
+        * buffer aggregation
+        * file-descriptor enabling/disabling
+    * content analysis is optimized to carry only pointers to original data and never copy unless the data needs to be transformed
+      * ensures that very small structures are carried over and that contents are never replicated when not absolutely necessary
+        
+    
+    
+    
+    
+    
+    
