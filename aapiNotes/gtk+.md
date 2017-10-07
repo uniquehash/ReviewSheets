@@ -1,5 +1,6 @@
 # notes on the gtk+ api 
 
+
 GTK+ is a cross-platform widget toolkit for creating gui's
 
 * [what is gtk+](https://en.wikipedia.org/wiki/GTK%2B)?

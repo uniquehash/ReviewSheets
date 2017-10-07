@@ -1,6 +1,7 @@
 #Notes on using FB 
 
 
+
 ## [js SDK initialization](https://developers.facebook.com/docs/javascript/quickstart/v2.1)
 * Make sure to register and retrieve your application id before you start!
 * Below is initialization code from the [FB documentation](https://developers.facebook.com/docs/javascript/quickstart/v2.1)

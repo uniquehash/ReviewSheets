@@ -1,5 +1,6 @@
 # notes on the sfml api 
 
+
 sfml is a cross platform software development library designed to provide a simple API to various multimedia components in computers
 
 * what is [sfml](https://en.wikipedia.org/wiki/Simple_and_Fast_Multimedia_Library)?
