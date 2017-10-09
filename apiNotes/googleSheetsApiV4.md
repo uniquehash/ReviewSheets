@@ -99,8 +99,8 @@
 
 
 
-
-
+* can [google sheets be used as a basic webscraper](https://www.benlcollins.com/spreadsheets/google-sheet-web-scraper/)?
+	* holy fuck it can.
 
 
 
