@@ -505,6 +505,40 @@
 						* process continues till either trusted CA is found in between or else continues till root CA	
 
 
+* what are [symmetric-key algorithms](https://en.wikipedia.org/wiki/Symmetric-key_algorithm)?
+	* algorithms for cryptography that use the same cryptographic keys for both encryption of plaintext and decryption of ciphertext
+	* may be identical or there may be a simple transformation to go between the two keys
+	* keys in practice represent a shared secret between two or more parties that can be used to maintain a private information link
+	* types of symmetric-key algorithms
+		* stream ciphers
+			* encrypt the digits (typically bytes) of a message one at a time
+		* block ciphers
+			* take a number of bits and encrypt them as a single unit, padding the plaintext so that it is a multiple of the block size
+			* blocks of 64 bits were commonly used 
+			* AES algorithm and the GCM block cipher mode of operation use 128-bit blocks
+	* implementation
+		* twofish
+		* serpent
+		* AES
+		* blowfish
+		* CAST5
+		* Kuzneychik
+		* RC4
+		* 3DES
+		* skipjack
+		* IDEA
+
+* what are [cryptographic primitives](https://en.wikipedia.org/wiki/Cryptographic_primitive)?
+	* well established low-level cryptographic algorithms that are frequently used to build cryptographic protocols for computer security systems
+	* rationale
+		* designers use cryptographic primitives as their most basic building blocks
+		* cryptographic primitives are designed to do one very specific task in a highly reliable fashion
+			* if an encryption routine is breakable in fewer computer operations than it claims it is known as a failed cryptographic primitive
+			* if a cryptographic primitive is found to fail almost every protocol that uses it becomes vulnerable
+			* it is never sensible to design a new cryptographic primitive to suit the needs of a new cryptographic system
+				* creating cryptographic routines is very hard and testing them to be reliable takes a long time
+				* designer might not be competent in the mathematical 
+			
 
 
 
