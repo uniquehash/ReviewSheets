@@ -91,7 +91,174 @@
 		* do something with it
 		* pass it on to the reducer
 
+* is there a [great resource on react forms](https://goshakkk.name/on-forms-react/)?
+	* yes, Gosha Arinich has great stuff
 
+* what are [controlled and uncontrolled form inputs](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/)?
+	* uncontrolled form inputs
+		* like traditional HTML form inputs
+		```
+			class Form extends Component {
+				render() {
+					return (
+						<div>
+							<input type="text"/>
+						</div>
+					);
+				}
+			}
+		```
+		* remembers what you typed 
+		* get their value using a ref
+			* pull the value from the field when you need it like on form submition
+		* example `onClick` handler of a button
+		```
+			class Form extends Component {
+				handleSubmitClick = () => {
+					const name = this._name.value
+					// do something with `name`
+				}
+				render() {
+					return (
+						<div>
+							<input type="text" ref={input => this._name = input}/>
+							<button onClick={this.handleSubmitClick}>Sign up</button>
+						</div>
+					);
+				}
+			}
+		```
+	* controlled input
+		* a form element is controlled if you set its value via a prop
+		* accepts 
+			* its current value as a prop
+			* a callback to change that value
+			* `<input value={someValue} onChange={handleChange}/>`
+		* value has to be in `state` somewhere
+			* typically component that renders the input saves that in its state
+				* though it can be saved in any `state`
+			```
+				class Form extends Component {
+					constructor() {
+						super()
+						this.state={name: '',}
+					}
+					handleNameChange = (event) => {
+						this.setState({name: event.target.value})
+					}
+					render() {
+						return (
+							<div>
+								<input
+									type="text"
+									value={this.state.name}
+									onChange={this.handleNameChange} />
+							</div>
+						)
+					}
+				}
+			```
+				* every time you type a new character `handleNameChange` is called
+					* takes new value of the input and sets it in the state
+			* this pattern pushes the value changes to the form component 
+				* state and UI are always in sync
+		* form component can respond to input changes immediately
+			* in-place feedback, like validations
+			* disabling the button unless all fields have valid data
+			* enforcing a specific input format, like credit card numbers
+	* feature set
+		* uncontrolled
+			* one-time value retrieval
+			* validating on submit
+		* controlled
+			* one-time value retrieval
+			* validating on submit
+			* instant field validation
+			* conditionally disabling submit button
+			* enforcing input format 
+			* several inputs for one piece of data
+			* dynamic inputs
+			
+* how to [collect data from a wizard form](https://goshakkk.name/wizard-form-collect-info/)?
+	* a wizard form is a multi-step form
+	* several ways to do this
+		* ask each step for its data 
+			* always render all the steps and use CSS to hide the currently invisible step 
+			* use refs to ask each step about its values
+			* unmanageable
+				* certain fields often need to be edited from several steps
+				* always keeping all steps rendered is pretty hacky
+				* users want to go back to the previous step and expect their data to be there still
+		* change the owner of the form state
+			* state lives in main form component 
+			* steps receive the values as props and call the callbacks when the fields change
+			* basically implement the controlled input pattern to whole forms
+			```
+				class CheckoutForm extends React.Component {
+					constructor() {
+						super()
+						this.state = {name: '', shipping_line: '', billing_line: ''} 
+						//not full code
+					}
+					goToNext() {
+						const {step} = this.state
+						if (step !== 3) { this.setState({step: step + 1}) }
+						else {
+							const values = {
+								name: this.state.name,
+								shipping_line: this.state.shipping_line,
+								billing_line: this.state.billing_line
+							}
+							//submit to api
+						}
+					}
+					// handleChange
+					render() {
+						switch (this.state.step) {
+							case 1:
+								return <Personal
+									name={this.state.name}
+									onChangeName={this.handleChange('name')}
+									onSubmit={this.goToNext} />
+							case 2:
+								return <Shipping
+									line={this.state.shipping_line}
+									onChangeLine={this.handleChange('shipping_line')}
+									onSubmit={this.goToNext} />
+							case 3:
+								return <Billing
+									line={this.state.billing_line}
+									onChangeLine={this.handleChange('billing_line')}
+									onSubmit={this.goToNext} />
+						}
+					}
+				}
+			```
+									
+						
+						
+		* naive approach
+			* render 3 different form components 
+			* doesn't work
+
+
+* what is a [ref in react](https://reactjs.org/docs/refs-and-the-dom.html)?
+	* in typical react dataflow props are the only way that a parent components interacts with children
+		* refs allows you to imperatively modify a chile outside of the typical dataflow
+	* ref is a special attribute that you can attach to any component
+		* ref attribute takes a callback function
+		* callback will be executed immediately after the component is mounted or unmounted
+		* when used on an HTML element
+			* ref callback received the underlying DOM element as its argument
+			* common pattern for accessing DOM elements
+		* when used on a class component
+			* ref call back receives the mounted instance on the component as its argument
+		* you cannot use ref on functional components
+	* when to use refs
+		* managing focus, text selection, or media playback
+		* triggering imperative animations
+		* integrating with third-party DOM libraries
+		* avoid using refs for anything that can be done declaratively
 
 
 
