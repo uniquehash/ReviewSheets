@@ -537,8 +537,32 @@
 			* if a cryptographic primitive is found to fail almost every protocol that uses it becomes vulnerable
 			* it is never sensible to design a new cryptographic primitive to suit the needs of a new cryptographic system
 				* creating cryptographic routines is very hard and testing them to be reliable takes a long time
-				* designer might not be competent in the mathematical 
-			
+				* designer might not be competent in the mathematical and practical considerations involved in cryptographic primitives
+				* designing a new cryptographic primitve is very time-consuming and very error prone even for experts in the field
+				* only algorithms tested by the cryptographic community over a long time are given any confidence to be secure
+	* commonly used primitives
+		* one-way hash function
+			* also known as one-way compression function
+			* computes a reduced hash value for a message 
+			* example
+				* SHA-256
+		* authentication
+		* symmetric key cryptography
+			* compute a ciphertext decodable with the same key used to encode
+		* asymmetric key cryptography
+			* compute a ciphertext decodable with a different key used to encode
+		* digital signatures
+			* confirm the author of the message
+		* mix network
+			* pool communications from many users to anonymize what came from whom
+		* private information retrieval
+			* get database information without server knowing which item was requested
+		* commitment scheme
+			* allows one to commit to a chosen value while keeping it hidden to others, with the ability to reveal itself
+		* cryptographically secure pseudorandom number generator
+		
+* is there a [full list of cryptographic primitives somewhere](https://en.wikipedia.org/wiki/Category:Cryptographic_primitives)?
+	* 
 
 
 
