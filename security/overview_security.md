@@ -741,59 +741,187 @@
 			* just delete the key and then everything is garbage 
 			* iOS devices do this by keeping cryptographic key in dedicated effaceable storage
 
+* what is [the structure of a x.509 certificate](https://en.wikipedia.org/wiki/X.509)?
+	* structure of a X.509 v3 digital certificate
+		* certificate
+			* version number
+			* serial number
+			* signature algorithm ID
+			* issuer name
+			* validity period
+				* not before
+				* not after
+			* subject name
+			* subject public key info
+				* public key algorithm
+				* subject public key
+			* issuer unique identifier
+			* subject unique identifier
+			* extensions
+		* certificate signature algorithm
+		* certificate signature
+	* extensions informing a specific usage of a certificate
+		* basic constraints
+			* {id-ce 19}
+			* used to indicate whether the certificate belongs to a ca
+		* key usage
+			* {id-ce 15}
+			* provide a bitmap specifying the cryptographic operations which may be performed using the public key contained in the certificate
+		* extended key usage
+			* {id-ce 37}
+			* used typically on a leaf certificate to indicate the purpose of the public key contained in the certificate 
+			* contains a list of object identifiers each of which indicate an allowed use
+	* certificate filename extensions
+		* .pem
+			* privacy-enhanced electronic mail
+			* base64 encoded der certificate enclosed between "begin certificate" and "end certificate"
+		* .cer, .crt, .der
+			* usually in binary DER form
+		* .p7b, .p7c
+			* PKCS#7 SignedData structure without data just certificate or CRL
+			* standard for enveloping data
+				* enveloping just means signing or encrypting
+		* .p12
+			* PKCS#12 
+			* may contain certificates, public and private keys
+		* .pfx
+			* PFX
+			* predecessor of PKCS#12
+	* wikipedias certificate
+	```
+		Certificate: 
+			Data:
+				Version: 3 (0x2)
+				Serial Number:
+					10:e6:fc:62:b7:41:8a:d5:00:5e:45:b6
+			Signature Algorithm: sha256WithRSAEncryption
+				Issuer: C=BE, O=GlobalSign nv-sa, CN=GlobalSign Organization Validation CA - SHA256 - G2
+				Validity
+					Not Before: Nov 21 08:00:00 2016 GMT
+					Not After: Nov 22 07:59:59 2017 GMT
+				Subject: C=US, ST=California, L=San Francisco, O=Wikimedia Foundation,Inc., CN=*.wikipedia.org
+				Subject Public Key Info:
+					Public Key Alogirthm: id-ecPublicKey
+						Public-Key: (256 bit)
+						pub:
+							04:c9:22:69:31:8a:d6:6c:ea:da:c3:7f:2c:ac:a5:
+							af:c0:02:ea:81:cb:65:b9:fd:0c:6d:46:5b:c9:1e:
+							ed:b2:ac:2a:1b:4a:ec:80:7b:e7:1a:51:e0:df:f7:
+							c7:4a:20:7b:91:4b:20:07:21:ce:cf:68:65:8c:c6:
+							9d:3b:ef:d5:c1	
+						ASN1 OID: prime256v1
+						NIST CURVE: P-256
+				X509v3 extensions:
+					X509v3 Key Usage: critical
+						Digital Signature, Key Agreement
+					Authority Information Access:
+						CA Issuers  - URI:
+							http://secure.globalsign.com/cacert/gsorganizationvalsha2g2r1.crt
+						OCSP - URI:
+							http://ocsp2.globalsign.com/gsorganizationvalsha2g2
+					X509v3 Certificate Policies:
+						Policy: 1.3.6.1.4.1.4146.1.20
+						  CPS: https://www.globalsign.com/repository/
+						Policy: 2.23.140.1.2.2
+					X509v3 Basic Constraints:
+						CA: FALSE
+					X509v3 CRL Distribution Points:
+						Full Name:
+							URI:http://crl.globalsign.com/gs/gsorganizationvalsha2g2.crl
+					X509v3 Subject Alternative Name:
+						DNS:*.wikipedia.org, DNS:*.m.mediawiki.org, DNS:*.m.wikibooks.org, DNS:*.m.wikidata.org, DNS:*.m.wikimedia.org, DNS:*.m.wikimediafoundation.org, DNS:*.m.wikinews.org, DNS:*.m.wikipedia.org, DNS:*.m.wikiquote.org, DNS:*.m.wikisource.org, DNS:*.m.wikiversity.org, DNS:*.m.wikivoyage.org, DNS:*.m.wiktionary.org, DNS:*.mediawiki.org, DNS:*.planet.wikimedia.org, DNS:*.wikibooks.org, DNS:*.wikidata.org, DNS:*.wikimedia.org, DNS:*.wikimediafoundation.org, DNS:*.wikinews.org, DNS:*.wikiquote.org, DNS:*.wikisource.org, DNS:*.wikiversity.org, DNS:*.wikivoyage.org, DNS:*.wiktionary.org, DNS:*.wmfusercontent.org, DNS:*.zero.wikipedia.org, DNS:mediawiki.org, DNS:w.wiki, DNS:wikibooks.org, DNS:wikidata.org, DNS:wikimedia.org, DNS:wikimediafoundation.org, DNS:wikinews.org, DNS:wikiquote.org, DNS:wikisource.org, DNS:wikiversity.org, DNS:wikivoyage.org, DNS:wiktionary.org, DNS:wmfusercontent.org, DNS:wikipedia.org
+					X509v3 Extended Key Usage:
+						TLS Web Server Authentication, TLS Web Client Authentication
+					X509v3 Subject Key Identifier:
+						28:2A:26:2A:57:8B:3B:CE:B4:D6:AB:54:EF:D7:38:21:2C:49:5C:36
+					X509v3 Authority Key Identifier:
+						keyid:96:DE:61:F1:BD:1C:16:29:53:1C:C0:CC:7D:3B:83:00:40:E6:1A:7C
+			Signature Algorithm: sha256WithRSAEncryption
+				8b:c3:ed:d1:9d:39:6f:af:40:72:bd:1e:18:5e:30:54:23:35:
+				...
+	```
+	* example of a self signed root certificate
+	```
+		Certificate:
+			Data:
+				Version: 3 (0x2)
+				Serial Number:
+					04:00:00:00:00:01:15:4b:5a:c3:94
+			Signature Algorithm: sha1WithRSAEncryption
+				Issuer: C=BE, O=GlobalSign nv-sa, OU=Root CA, CN=GlobalSign Root CA
+				Validity
+					Not Before: Sep 1 12:00:00 1998 GMT
+					Not After: Jan 28 12:00:00 2028 GMT
+				Subject: C=BE, O=GlobalSign nv-sa, OU=Root CA, CN=GlobalSign Root CA
+				Subject Public Key Info:
+					Public Key Algorithm: rsaEncryption
+						Public-Key: (2048 bit)
+						Modulus:
+							00:da:0e:e6:99:8d:ce:a3:e3:4f:8a:7e:fb:f1:8b:
+							...
+						Exponent: 65537 (0x10001)
+				X509v3 extensions:
+					X509v3 Key Usage: critical
+						Certificate Sign, CRL Sign
+					x509v3 Basic Constraints: critical
+						CA:TRUE
+					X509v3 Subkect Key Identifier:
+						60:7B:66:1A:45:0D:97:CA:89:50:2F:7D:04:CD:34:A8:FF:FC:FD:4B
+			Signature Algorithm: sha1WithRSAEncryption
+				d6:73:e7:7c:4f:76:d0:8d:bf:ec:ba:a2:be:34:c5:28:32:b5:
+				...
+	```
+							
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* what does [PKCS mean in the security context](https://en.wikipedia.org/wiki/PKCS)?
+
 * what are [computational hardness assumptions](https://en.wikipedia.org/wiki/Computational_hardness_assumption)?
-	
-		
-		
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 * what is a [risk assessment](https://en.wikipedia.org/wiki/Risk_assessment)
 
