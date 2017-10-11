@@ -561,8 +561,75 @@
 			* allows one to commit to a chosen value while keeping it hidden to others, with the ability to reveal itself
 		* cryptographically secure pseudorandom number generator
 		
-* is there a [full list of cryptographic primitives somewhere](https://en.wikipedia.org/wiki/Category:Cryptographic_primitives)?
-	* 
+* is there a [full list of cryptographic primitives or cryptographic primitive related topics somewhere](https://en.wikipedia.org/wiki/Category:Cryptographic_primitives)?
+	* block cipher
+	* commitment scheme
+	* comparison of cryptographic hash functions
+	* cryptographic hash function
+	* cryptographically secure pseudorandom number generator
+	* group signature
+	* homomorphic encryption
+	* key exchange
+	* mask generation function
+	* oblivious transfer
+	* one-way compression function
+	* one-way function
+	* physical unclonable function
+	* types of physical unclonable function
+	* private information retrieval
+	* pseudorandom function family
+	* pseudorandom permutation
+	* quantum readout of PUFs
+	* stream cipher
+	* t-function
+	* trapdoor function
+
+* what [concepts deppend on or relate to the computational hardness assumption](https://en.wikipedia.org/wiki/Category:Computational_hardness_assumptions)?
+	* computational diffie-hellman assumption
+	* computational hardness assumption
+	* decision linear assumption
+	* decisional composite residuosity assumption
+	* decisional diffie-hellman assumption
+	* diffie-hellman problem
+	* discrete logarithm
+	* discrete logarithm records
+	* exponential time hypothesis
+	* higher residuosity problem
+	* integer factorization
+	* lattice problem
+	* phi-hiding assumption
+	* quadratic residuosity problem
+	* rsa problem
+	* security level
+	* strong rsa assumption
+	* sub-group hiding
+	* unique game conjecture
+	* xdh assumption
+	
+* what [concepts depend on or are related to random number generation](https://en.wikipedia.org/wiki/Category:Random_number_generation)?
+	* list of random number generators
+	* random number generation
+	* an/cyz-9
+	* clock drift
+	* comparison of hardware random number generators
+	* counter-based random number generator
+	* /dev/random
+	* diceware
+	* diehard tests
+	* entropy estimation
+	* hardware random number generator
+	* lavarand
+	* low-discrepancy sequence
+	* a million random digits with 100,000 normal deviates
+	* mixmax generator
+	* random number book
+	* random number table
+	* random.org
+	* randomization
+	* randomness extractor
+	* randomness merger
+	* rdrand
+	* testu01
 
 
 
