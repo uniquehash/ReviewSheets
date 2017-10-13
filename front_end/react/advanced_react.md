@@ -260,8 +260,138 @@
 		* integrating with third-party DOM libraries
 		* avoid using refs for anything that can be done declaratively
 
+* what is [redux-form](https://redux-form.com/7.1.1/docs/gettingstarted.md/)?
+	* works with react redux and enables an html form in react to use redux to store all of it state
+	* connect React form component to redux store
+		* formReducer
+			* type
+				* reducer
+			* responsibility
+				* tells how to update the Redux store based on changes from the application
+				* changes are described by Redux actions
+		* `reduxForm()`
+			* type
+				* HOC
+			* responsibility
+				* takes configuration object and returns a new function
+				* use it to wrap your form component and bind user interaction to dispatch of redux actions
+		* `<Field/>`
+			* type
+				* component
+			* responsibility
+				* lives inside your wrapped form component
+				* use it to connect the input components to the redux-form logic
+	* data flow
+		* ![data flow](https://raw.githubusercontent.com/erikras/redux-form/master/docs/reduxFormDiagram.png "data flow")
+		* form component wrapped with `reduxForm()`
+			* text input inside wrapped with `<Field/>`
+		* flow
+			* user clicks on the input
+			* "focus action" is dispatched
+			* `formReducer` updates the corresponding state slice
+			* the state is then passed back to the the input
+	* lots of hooks for 
+		* validation
+		* formatting handler
+		* various properties
+		* action creators
 
+* what would be the [basic usage of redux-form](https://redux-form.com/7.1.1/docs/gettingstarted.md/#basic-usage-guide)?
+	* step 1 of 4: form reducer
+		* store needs to know how to handle actions coming from the form components
+		* pass the `formReducer` to store
+			* serves all form components only needs to be passed once
+		```
+			import {createStore, combineReducers} from 'redux'
+			import {reducer as formReducer} from 'redux-form'
+			const rootReducer = combineReducers({
+				// other reducers
+				// key matters
+				form: formReducer
+			})
+			const store = createStore(rootReducer)
+		```
+		* store now knows how to handle actions coming from the form components
+	* step 2 of 4: form component
+		* make form component communicate with the store, wrap it with `reduxForm()`
+		* will provide props about the form state and function to handle the submit process
+		```
+			import React from 'react'
+			import {Field, reduxForm} from 'redux-form'
+			let ContactForm = props => {
+				const {handleSubmit} = props
+				return (
+					<form onSubmit={handleSubmit}>
+						{/* form body */}
+					</form>
+				)
+			}
+			ContactForm = reduxForm({
+				// a uniue name for the form
+				form: 'contact'
+			})(ContactForm)
+			export default ContactForm			
+		```
+	* step 3 of 4: form `<Field/>` components
+		* the `<Field/>` component connects each input to the store
+			* `<Field name='inputName' component='input' type='text/>`
+				* creates an HTML `<input/>` element of type `text`
+				* passes additional props used to track and maintain input such as 
+					* `value`
+					* `onChange`
+					* `onBlur`
+					* ect...
+				* can take class or stateless components
+		```
+			import React from 'react'
+			import {Field, reduxForm} from 'redux-form'
+			let ContactForm = props => {
+				const {handleSubmit} = props
+				return (
+					<form onSubmit={handleSubmit}>
+						<div>
+							<label htmlFor='firstName'>First Name</label>
+							<Field name='firstName' component='input' type='text'/>
+						</div>
+						<div>
+							<label htmlFor='lastName'>Last Name</label>
+							<Field name='lastName' component='input' type='text'/>
+						</div>
+						<div>
+							<label htmlFor='email'>Email</label>
+							<Field name='email' component='input' type='email'/>
+						</div>
+						<button type='submit'>Submit</button>
+					</form>
+				)
+			}
+			
+			ContactForm = reduxForm({
+				// unique name for the form
+				form: 'contact'
+			})(ContactForm)
 
+			export default ContactForm
+		```
+		* store should be populated based on actions coming from your form component
+	* step 4 of 4: Reacting to submit
+		* submited data is passed as JSON to your onSubmit function
+		```
+			import React from 'react'
+			import ContactForm from './ContactForm'
+			
+			class ContactPage extends React.Component {
+				submit = (values) => {
+					//print the form values to the console
+					console.log(values)
+				}
+				render() {
+					return (
+						<ContactForm onSubmit={this.submit}/>
+					)
+				}
+			}
+		```
 
 
 

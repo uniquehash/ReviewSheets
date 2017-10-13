@@ -1,4 +1,4 @@
-# overview of cryptography - 8/22
+# overview of security
 
 * what is [cryptography](https://en.wikipedia.org/wiki/Cryptography)?
 	* derived from greek 
@@ -922,6 +922,64 @@
 * what does [PKCS mean in the security context](https://en.wikipedia.org/wiki/PKCS)?
 
 * what are [computational hardness assumptions](https://en.wikipedia.org/wiki/Computational_hardness_assumption)?
+	* major goal of cryptography is to create cryptographic primitives with provable security
+		* sometimes protocols have information theoretic security
+			* rarely useful or achievable
+		* cryptographers fall back on to computational security
+			* systems are secure assuming that any adversaries are computationally limited
+	
+* what does [provable security mean](https://en.wikipedia.org/wiki/Provable_security)?
+	* refers to any type or level of security that can be proved
+		* used differently in different fields
+	* usually refers to mathematical proofs
+		* capabilities of the attacker are defined by an adversarial model
+		* aim of the proof is to show that the attacker must solve the underlying hard problem in order to break the security of the modelled system
+		* they do not consider side-channel attacks or other implementation-specific attacks because they are usually impossible to model without implementing the system
+	* security coding / security by design engineers
+		* both of these fields rely on proofs to show the security of a particular approach
+		* involes attacker model and model of the system
+	* security software salesman
+		* they are usually selling snakeoil
+	* cryptography
+		* reduction
+			* proof of security
+		* system has provable security
+			* security requirements can be stated formally in an adversarial model
+			* assumption that attcker has access to the system as well as enough computational resources
+		* several lines of research in provable security
+			* establish the correct definition of security for a given intuitively understood task
+			* suggest constructions and proofs based on general assumptions as much as possible 
+
+* what is the [common criteria in security](https://en.wikipedia.org/wiki/Common_Criteria)?
+	* known as the Common Criteria for Information Technology Security Evaluation
+		* international standard (ISO/IEC 15408) for computer security certification
+	* a framework in which computer system users can specify their security functional and assurance requirements
+		* done through protection profiles
+		* vendors can implement and/or make claim about the security attributes of their products
+		* testing laboratories can evaluate the products to determine if they actually meet the claims
+	* common criteria provides assurance that a computer security product has been conducted in a rigorous, standard, and repeatable manner at a level that is commensurate with the target environment for use
+		* process of specification
+		* implementation
+		* evaluation
+
+* what is [concrete security](https://en.wikipedia.org/wiki/Concrete_security)?
+	* a practice-oriented approach that aims to give more precise estimates of the computational complexities of adversarial tasks than polynomial equivalence would allow
+	* traditonally asymptotic
+		* classifies the hardness of computational problem using polynomial-time reducibility
+	* secure schemas are defined to be those in which the advantage of any computational bounded adversary is negligible
+	* concrete security parametrizes all the resources available to the adversary	
+		* running time
+		* memory
+		* number of plaintexts
+		* number of queries it can make 
+	* advantage of the adversary is upper bounded as a function of these resources and of the problem size
+		* often possible to also give a lower bound matching the upper bound making it "concrete" or "exact"
+
+* what is a [computationally bounded adversary problem](https://en.wikipedia.org/wiki/Computationally_bounded_adversary)?
+	* a way of looking at the problem of sending data over a noisy channel
+	* adversary is restricted to only being able to perform a reasonable amount of computation to decide which bits of the code word need to change
+		* only considers how many errors could possibly be introduced given a reasonable amount of computing power
+		* with this restriction it becomes possible to construct codes that are both faster to encode and decode compared to previous methods that can also handle a large number of errors
 
 * what is a [risk assessment](https://en.wikipedia.org/wiki/Risk_assessment)
 

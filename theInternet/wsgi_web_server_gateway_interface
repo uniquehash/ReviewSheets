@@ -1,0 +1,109 @@
+# notes on WSGI Web Server Gateway Interface
+
+* what is [wsgi (Web Server Gateway Interface)](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface)?
+    * a specification for simple and universal interface between web servers and web applications or frameworks for the python programming language
+    * background
+        * web frameworks had been a problem for new python users since choice of framework would limit the choice of web servers
+        * python applications were often designed for only one of
+            * CGI
+            * FastCGI
+            * mod_python
+            * custom API of specific web server
+        * created as a low-level interface between web servers and web applications or frameworks 
+            * common ground for portable web application development
+    * specification overview
+        * two sides
+            * gateway/server side
+            * application/framework side
+        * process WSGI request
+            * server side executes the application
+                * provides environment information and a callback function
+            * application processes the request
+                * returns the response to the server side using the callback function it was provided
+        * wsgi middleware
+            * sits between the two sides and does things
+                * routing a request to different application objects based on the target URL after changing the environment variables accordingly
+                * allowing multiple applications or frameworks to run side-by-side in the same process
+                * load balancing and remote processing, by forwarding requests and responses over a network
+                * performing content post-processing, such as applying XSLT stylesheets
+    * WSGI-compatible applications and frameworks
+        * BlueBream
+        * Bottle
+        * CherryPy
+        * Django
+        * Flask
+        * Google App Engine's webapp2
+        * Gunicorn        
+        * Pylons
+        * Pyramid
+        * Tornado
+        * Trac
+        * TurboGears
+        * uWSGI
+        * web2py 
+    * wrappers
+        * the server or gateway invokes the application callable once for each request it receives from an HTTP client that is directed at the application
+
+* what is [uWSGI](https://en.wikipedia.org/wiki/UWSGI)?
+    * a software application that "aims at developing a full stack for building hosting services"
+    
+* [Why should I choose uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/FAQ.html#why-should-i-choose-uwsgi)?
+    * complete web application deployment solution
+        * ProcessManagement
+        * Management of long-running tasks
+        * uWSGI RPC stack
+        * Clustering
+        * LoadBalancing
+        * Monitoring
+        * ResourceLimiting
+    * if searching for simple server uWSGI may not be the appropriate solution
+    * "swizz army knife for your network applications"
+
+* [What are the most important options for performance and robustness in the uWSGI environment](https://uwsgi-docs.readthedocs.io/en/latest/FAQ.html#what-are-the-most-important-options-for-performance-and-robustness-in-the-uwsgi-environment)?
+    * default configured by author determined "good-for-all-cases" configuration
+    * tuning
+        * increasing (or decreasing) timeout
+        * modifying the socket listen queue size
+        * if running only a single application disable multiple interpreters
+        * always remember to enable the master process in production environments
+        * adding workers does not mean increasing performance
+            * choose a good value for the workers option based on the nature of your app
+               * IO bound, CPU bound, IO waiting
+
+* [Why not simply use HTTP as the protocol](https://uwsgi-docs.readthedocs.io/en/latest/FAQ.html#why-not-simply-use-http-as-the-protocol)?
+    * http parsing is slow, really slow
+    * basically made more machine readable as soon as possible and then back to human readable http when neccessary
+
+* [what is flask](https://en.wikipedia.org/wiki/Flask_(web_framework))?
+    * a micro web framework written in python
+        * based on the werkzeug toolkit and Jinja2 template engine
+    * does not require particular tools or libraries
+        * no db abstraction layer
+        * no form validation
+        * or any other components where pre-existing third party libraries provide common functions
+    * supports extensions that can add application features as though they were implemented in flask itself
+        * ORM
+        * form validation
+        * upload handling
+        * various open authentication technologies
+        * several common framework related tools
+    * history
+        * started as an april fools joke but was popular enough to become a real thing
+    * features
+        * contains development server and debugger
+        * integrated support for unit testing
+        * RESTful request dispatching
+        * uses Jinja2 templating
+        * support for secure cookies
+        * 100% WSGI 1.0 compliant
+        * unicode-based
+        * extensive documentation
+        * google app engine compatibility
+        * lots of extensions
+
+
+        
+        
+            
+
+
