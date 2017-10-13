@@ -981,6 +981,38 @@
 		* only considers how many errors could possibly be introduced given a reasonable amount of computing power
 		* with this restriction it becomes possible to construct codes that are both faster to encode and decode compared to previous methods that can also handle a large number of errors
 
+* what is an [audit trail](https://en.wikipedia.org/wiki/Audit_trail)?
+	* security-relevant chronological record, set of records, and/or destination and source of records that provide documentary evidence of the sequence of activities that have affected at any time a specific operation, procedure, or event
+	* typically result from activities such as
+		* financial transactions
+		* scientific research
+		* health care data transactions
+		* communications by individual people, systems, accounts, or other entities
+	* process that creates an audit trail is typically required to always run in privileged mode
+		* so it can access and supervise all actions from all users
+		* normal user should not be allowed to stop/change it
+		* for the same reason, trail file or database table with a trail should not be accessible to normal users
+	* another way of handling this issue is
+		* role-based security model in software
+	* industry uses of the audit trail
+		* telecommunications
+			* record of both completed and attempted accesses and service
+			* data forming a logical path linking a sequence of events used to trace the transaction that have affected the contents of a record
+		* information or communications security
+			* means a chronological record of system activities to enable the reconstruction and examination of the sequence of events and/or changes in an event
+		* nursing research
+			* refers to the act of maintaining a running log or journal of decisions relating to a research project thus making clear the steps taken and changes made to the original protocol
+		* accounting
+			* refers to documentation of detailed transaction supporting summary ledger entries
+			* may be on paper or electronic
+		* online proofing
+			* pertains to the version history of a piece of artwork, design, photograph, video, or web design proof in a project
+		* clinical research
+			* server based systems call clinical trial management systems require audit trails
+			* anything regulatory or QA/QC related also requires audit trails
+		* voter-verified paper audit trails
+			* a method of providing feedback to voters using a ballotless voting system
+
 * what is a [risk assessment](https://en.wikipedia.org/wiki/Risk_assessment)
 
 * what is the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege)
@@ -996,8 +1028,6 @@
 * what is the [radius protocol](https://en.wikipedia.org/wiki/RADIUS)?
 
 * what is the [tacacs protocol](https://en.wikipedia.org/wiki/TACACS)?
-
-* what is an [audit trail](https://en.wikipedia.org/wiki/Audit_trail)?
 
 * what is [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity)?
 
@@ -1018,8 +1048,6 @@
 * what is a [symmetric-key algorithm](https://en.wikipedia.org/wiki/Symmetric-key_algorithm)?
 
 * what is [public-key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)?
-
-* what is [pretty good privacy (PGP)](https://en.wikipedia.org/wiki/Pretty_Good_Privacy)?
 
 * what are a bunch of first principles in security?
 	* the CIA triad
