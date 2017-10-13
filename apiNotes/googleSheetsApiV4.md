@@ -193,6 +193,304 @@
 	* optionally you can choose to overwrite or insert 
 		* default overwrites?
 
+* can you [update spreadsheets other properties via the api](https://developers.google.com/sheets/api/guides/batchupdate)?
+	* spreadsheets include many types of data
+		* cell formats
+		* cell borders
+		* named ranges
+		* protected ranges
+		* conditional formatting
+	* `batchUpdate` method allows you to update any of these spreadsheet details
+		* changes are grouped together in a batch so that if one request fails none of the other potentially dependent changes are written
+	* categories of operation
+		* add (and duplicate)
+			* add new objects (sometimes based on old ones as in the duplicate requests)
+		* update (and set)
+			* update certain properties of an object
+			* usually leaves the old properties alone
+			* set will overwrite the prior data
+		* delete
+			* remove objects
+	* batch update operations
+		* works by taking one or more `Request` objects 
+			* each one specifyies a single kind of request to perform
+		* `Request` objects
+			* Spreadsheet Properties
+				* UpdateSpreadsheetPropertiesRequest
+					* updates properties of a spreadsheet
+			* Sheets
+				* AddSheetRequest
+					* adds a new sheet, when a sheet is added at a given index all subsequent sheet indexes are incremented
+				* DuplicateSheetRequest
+					* duplicates the contents of a sheet
+				* UpdateSheetPropertiesRequest
+					* updates properties of the sheet with the specified `sheetID`
+				* DeleteSheetRequest
+					* deletes the requested sheet
+			* Dimensions and their properties
+				* InsertDimensionRequest
+					* insert rows or columns in a sheet at a particular index
+				* AppendDimensionRequest
+					* appends rows or columns at the end of a sheet
+				* UpdateDimensionPropertiesRequest
+					* updates properties of dimensions within the specified range
+				* MoveDimensionRequest
+					* moves one or more rows or columns
+				* AutoResizeDimensionRequest
+					* automatically resizes one or more dimensions based on the contents of the cells in that dimension
+				* DeleteDimensionRequest
+					* deletes the dimensions from the sheet
+			* Cells (values, formats, data validations, ect...)
+				* RepeatCellRequest
+					* updates all cells in the range to the values in the given cell object
+					* only the fields listed in the `fields` field are updated others are unchanged
+					* formulas will be auto incremented within the range
+					* using the `$` indicator will keep the range static
+				* UpdateCellRequest
+					* updates all cells in a range with new data
+				* AppendCellsRequest
+					* adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary
+			* Named Ranges
+				* AddNamedRangeRequest
+					* adds a named range to the spreadsheet
+				* UpdateNamedRangeRequest
+					* updates properties of named range with the specified `namedRangeID`
+				* DeleteNamedRangeRequest
+					* removes the named range with the given ID from the spreadsheet
+			* Borders
+				* UpdateBordersRequest
+					* updates the borders of a range
+					* if a field is not set in the request that means the border remains as-is
+			* Filters (filter view & basic filter)
+				* AddFilterViewRequest
+					* adds a filter view
+				* DuplicateFilterViewRequest
+					* duplicates a particular filter view
+				* UpdateFilterViewRequest
+					* updates properties of the filter view
+				* SetBasicFilterRequest
+					* sets the basic filter associated with a sheet
+				* ClearBasicFilterRequest
+					* clears the basic filter, if any exists on the sheet
+			* Data Validation
+				* SetDataValidationRequest
+					* sets a data validation rule to every cell in the range
+					* to clear validation in a range call this with no rule specified
+			* Conditional Format Rules
+				* AddConditionalFormatRulesRequest
+					* adds a new conditional format rule at the given index. all subsequent rules indexes are incremented
+				* UpdateConditionalFormatRuleRequest
+					* updates a conditional format rule at the given index
+					* moves a contional format rule to another index
+				* DeleteConditionalFormatRuleRequest
+					* deletes a conditional format rule at the given index. all subsequent rules indexes are decremented
+			* Protected Ranges
+				* AddProtectedRangeRequest
+					* adds a new protected range
+				* UpdateProtectedRangeRequest
+					* updates an existing protected range with the specified `protectedRangeId`
+				* DeleteProtectedRangeRequest
+					* deletes the protected range with the given ID
+			* Embedded Objects (including charts)
+				* AddChartRequest
+					* adds a chart to a sheet in the spreadsheet
+				* UpdateChartSpecRequest
+					* updates a charts specifications
+					* does not move or resize a chart
+				* UpdateEmbeddedObjectPositionRequest
+					* update an embedded objects position such as moving or resizing a chart or image
+				* DeleteEmbeddedObjectRequest
+					* deletes the embedded object with the given ID
+			* Merges
+				* MergeCellsRequest
+					* merges all cells in the range
+				* UnmergeCellsRequest
+					* unmerges cells in the given range
+			* user actions
+				* AutoFillRequest
+					* fills in more data based on existing data
+				* CutPasteRequest
+					* moves data from the source to the destination
+				* CopyPasteRequest
+					* copies data from the source to the destination
+				* FindReplaceRequest
+					* finds and replaces data in cells over a range, sheet, or all sheets
+				* PasteDataRequest
+					* inserts data into the spreadsheet starting at the specified coordinate
+				* TextToColumnsRequest
+					* splits a column of text into multiple columns based on a delimiter in each cell
+				* SortRangeRequest
+					* sorts data in rows based on a sort order per column
+	* field masks
+		* comma-delimited list of fields that you want to update
+		* many of the update request require field masks
+		* required to make sure only fields you want to edit are updated
+		* use `*` as short-hand for updating every field
+			* no value will revert the field to default state
+	* responses
+		* when updating a spreadsheet some kinds of requests may return responses
+		* these are returned in an array with each response occupying the same index as the corresponding request
+			* add responses
+
+* how do [date and number formats work with GSA](https://developers.google.com/sheets/api/guides/formats)?
+	* date-time and number formats let you control how your data appears in a sheet 
+		* google provides some common formats but you can define your own
+	* use the `UpdateCells` or `RepeatCell` object request of the `batchUpdates` method
+	* locale is a property of the spreadsheet in `SpreadsheetProperties`
+	* date and time format patterns
+		* a string of token substrings that when parsed are replaced with the corresponding date-time elements
+		* date and time format tokens
+			* `+`
+				* indicates that previous character can appear one or more times and still match the pattern
+			* `h`
+				* hour of the day
+				* switches between 12 and 24 hour format depending on whether an am/pm indicator is present in the string
+			* `hh+`
+				* same as previous but with a leading 0 for 1-9
+			* `m`
+				* if previous token was hours or the subsequent one is seconds
+					* represents minutes in the hour
+				* else
+					* represents the month of the year as a number
+			* `mm`
+				* as above but with leading 0 for both cases
+			* `mmm`
+				* three letter month abbreviation
+			* `mmmm`
+				* full month name
+			* `mmmmm`
+				* first letter of the month
+			* `mmmmmm+`
+				* full month name
+			* `s`
+				* seconds in the minute
+			* `ss`
+				* seconds in the minute with a leading 0
+			* `[h+]`
+				* number of elasped hours in a time duration
+				* number of letters indicates minimum number of digits, adds leading 0s
+			* `[m+]`
+				* number of elasped minutes in a time duration
+				* number of letters indicates minimum number of digits, adds leading 0s
+			* `[s+]`
+				* numebr of elasped seconds in a time duration
+				* number of letters indicates minimum number of digits, adds leading 0s
+			* `d`
+				* day of the month, no leading 0 for numbers less than 10
+			* `dd`
+				* day of the month, with a leading 0 for numbers less than 10
+			* `ddd`
+				* day of the week, three letter abbreviation
+			* `dddd+`
+				* day of the week full name
+			* `y`
+				* 2-digit year
+			* `yy`
+				* 2-digit year
+			* `yyy`
+				* 4-digit year
+			* `yyyy`
+				* 4-digit year
+			* `a/p`
+				* displays `a` for AM and `p` for PM
+				* changes to 12-hour format
+				* if token is capitalized output is as well
+			* `am/pm`
+				* as above but displays `AM` or `PM` and is always capitalized
+			* `0`
+				* tenths of seconds 
+			* `00`
+				* tenths of seconds with 2 digit precision
+			* `000`
+				* tenths of seconds with 3 digit precision
+			* `\`
+				* treats the next character as a literal value 
+			* `"text"`
+				* displays whatever text is inside the quotation marks as a literal
+	* number format patterns
+		* a string or token substring that when parsed are replaced with the corresponding number representations
+			* can consist of up to four sections separated by semicolons which define the separate formats used for
+				* positive numbers
+				* negative numbers
+				* zero
+				* text
+			* `[positive format];[negative format];[zero format];[text format]`
+			* you do not need to include all four sections
+				* `[number format]`
+					* used for all values
+				* `[postive/zero format];[negative format]`
+					* first applied to zero and positive
+					* seconde to negative numbers
+				* `[positive format];[negative format];[zero format]`
+					* you get the idea
+			* if less than 4 and more than 1 adding `[text format]` subtracts from the other format
+		* parsing of a format into sections occurs prior to other parsing
+	* number format tokens
+		* `0`
+			* represents a digit in the number
+			* if the digit is an insignificant 0 it is rendered as 0
+		* `#`
+			* represents a digit in the number
+			* insignificant 0s not rendered
+		* `?`
+			* represents a digit in the number
+			* insignificant 0s rendered as a space
+		* `.`
+			* first period represents the decimal point in the number
+				* if included always rendered
+			* subsequent periods are rendered as literals 
+		* `%`
+			* appears as a literal but also causes the existing number to be multiplied by 100 before being rendered
+		* `,`
+			* if between two digit characters
+				* groups the number by thousands
+			* if it follows the digit characters 
+				* scales the digits by one thousand per comma
+		* `E-`
+		* `E+`
+		* `e-`
+		* `e+`
+			* renders the number in scientific notation 
+		* `/`
+			* if between two digits
+				* treats those digit groups as a fractional format
+		* `*`
+			* ignored there for compatibility with excell
+		* `-`
+			* skips the next character and renders a space
+			* used to line up number formats where the negative value is surrounded by parenthesis
+		* `"text"`
+			* displays whatever text is inside the quotation marks as a literal
+		* `@`
+			* inserts the raw text for the cell if cell has text input
+	* number format meta instructions
+		* each of the formats can have optional meta instructions enclosed in `[]` characters that precede the format 
+		* a given section can use two meta instructions types
+			* `[condition]`
+				* replaces the default positive, negative, zero comparisons of the section with another conditional expression
+				* `[<100]"Low";[>1000]"High";000`
+					* render low for values below 100, render high for values above 1000, and 000 for anything in between
+				* can only be used for the first two sections, third section used for everything else
+			* `[Color] or [Color#]`
+				* causes any value that is rendered by this subformat to appear with the given text color
+				* `Color` valid values
+					* Black
+					* Blue
+					* Cyan
+					* Green
+					* Magenta
+					* Red
+					* White
+					* Yellow
+				* `Color#` valid values
+					* 0 - 56
+
+
+
+
+
+
+
 
 
 
