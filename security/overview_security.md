@@ -1013,13 +1013,119 @@
 		* voter-verified paper audit trails
 			* a method of providing feedback to voters using a ballotless voting system
 
+* what is [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control)?
+	* also known as role-based security
+	* an approach to restricting system access to authorized users
+		* used by the majority of enterprises with more than 500 employees
+		* can implement 
+			* mandatory access control
+			* discretionary access control
+	* a policy neutral access control mechanism defined around roles and privileges
+	* some components make it simple to perform user assignment
+		* role-permissions
+		* user-role relationships
+		* role-role relationships
+	* design
+		* within an organization roles are created for various job functions
+		* permissions to perform certain operations are assigned to specific roles
+		* members or staff are assigned particular roles
+			* through those role assignments acquire the computer permissions to perform particular computer-system functions
+		* management of individual user rights becomes a matter of simply assigning appropriate roles to the user's accoun
+		* simplifies common operations adding a user or changing a users department 
+		* primary rules defined for RBAC (role based access control)
+			* role assignment
+				* subject can exercise a permission only if the subject has selected or been assigned a role
+			* role authorization
+				* subject's active role must be authorized for the subject
+				* subject can only take roles for which they are authorized
+			* permission authorization
+				* subject can exercise a permission only if the permission is authorized for the subject's active role
+				* ensures that users can exercise only permissions for which they are authorized 
+		* additional constraints may be applied and roles can be combined into a hierarchy
+			* RBAC (role based access control) can be made to simulate LBAC (lattice-based access control)
+				* RBAC can be considered a superset of LBAC
+		* constraint places a restrictive rule on the potential inheritance of permissions from opposing roles
+			* can be used to achieve appropriate separation of duties
+		* conventions and DSL
+			* S (subject)
+				* a person or automated agent
+			* R (role)
+				* job function or title which defines an authority level
+			* P (permissions)
+				* an approval of a mode of access to a resource
+			* SE (session)
+				* a mapping involving S, R, and/or P
+			* SA (subject assignment)
+				* subject assignment
+			* PA (permission assignmnet)
+				* permission assignment
+			* RH (partially ordered role hierarchy)
+				* can also be written with >=
+					* x >= y
+						* means that x inherits the permissions of y
+				* subject can have multiple roles
+				* role can have multiple subjects
+				* role can have many permissions
+				* permission can be assigned to many roles
+				* operation can be assigned many permissions
+				* permission can be assigned to many operations
+	* NIST recognizes 3 levels of RBAC (role based access control)
+		* core RBAC (role based access control)
+		* hierarchical RBAC (role based access control)
+			* adds support for inheritnce between roles
+		* constrained RBAC (role based access control)
+			* adds separation of duties
+	* relation to other models
+		* RBAC (role based access control) can implement
+			* DAC (discretionary access control)
+				* DAC with groups is implemented in the POSIX file system
+					* can emulate RBAC (role based access control)
+			* MAC (mandatory access control)
+				* can simulate RBAC (role based access control)
+					* if the role graph is restricted to a tree rather than a partially ordered set
+		* RBAC (role based access control) differs from ACLs (access control lists) used in traditional discretionary access-control systems	
+			* RBAC (role based access control) assigns permissions to specific operations with meaning in the organization
+			* ACLs (access control list) assigns permissions to low-level data objects
+
+* what is [lattice-based access control](https://en.wikipedia.org/wiki/Lattice-based_access_control)?
+	* a complex access control model based on the interaction between any combination of objects and subjects
+	* label-based mandatory access control model
+	* a lattice is used to define the levels of security that an object may have and that a subject may have access to
+		* subject is only allowed to access an object if the security level of the subject is greater than or equal to that of the object
+
+* what is a [lattice in the context of mathematics](https://en.wikipedia.org/wiki/Lattice_(order))?
+	* an abstract structure studied in the mathematical subdisciplines of order theory and abstract algebra
+	* consists of a partially ordered set in which every two elements have a unique supremum and a unique infimum
+	* can also be characterized as algebraic structures satisfying certain axiomatic identities
+	* i don't even know, but math is cool
+	
+* what is [role hierarchy in the context of access control](https://en.wikipedia.org/wiki/Role_hierarchy)?
+	* in RBAC (role based access control) role hierarchy defines an inheritance relationship among roles
+	* RBAC (role based access control) model treats role hierarchy as either a tree or a partially ordered set
+		* tree based is single inheritance
+		* partially ordered set allows multiple inheritance
+	* complications arise when constraints such as separation of duties exist between roles 
+
+* what is [access control list](https://en.wikipedia.org/wiki/Access_control_list)?
+	* a list of permissions attached to an object 
+	* specifies which users or system processes are granted access to objects as well as what operations are allowed on given objects
+	* each entry in a typical ACL (access control list) specifies a subject and an operation
+	* filesystem ACLs (access control lists)
+		* a data structure containing entries that specify individual user or group rights to specific system objects such as programs, processes, or files
+			* known as ACEs (access control entries)
+	* networking ACLs (access control lists)
+		* on some types of proprietary computer-hardware an ACL (access control list) provides rules that are applied to port numbers or IP addresses that are available on a host or other layer 3 each with list of hosts and/or networks permitted to use the service
+			* routers and switches
+		* device enforcing the a ACL (access control list) must separately resolve names to numeric addresses
+			* additional attack surface for an attacker who is seeking 
+	* sql implementations
+		* relational databases have these features as well now
+
 * what is a [risk assessment](https://en.wikipedia.org/wiki/Risk_assessment)
 
 * what is the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege)
 
 * what is the [traffic light protocol](https://en.wikipedia.org/wiki/Traffic_Light_Protocol)?
-
-* what is [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control)?
 
 * what are [group policy objects](https://en.wikipedia.org/wiki/Group_Policy)?
 
