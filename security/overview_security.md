@@ -500,10 +500,12 @@
 				* german goverment info sec bureau
 			* BSI-Standards a series of standards and guides to follow 
 
+
 * what is [confidentiality](https://en.wikipedia.org/wiki/Confidentiality)?
 	* involves a set of rules or a promise that limits access or places restrictions on certain types of information
 	* info sec
 		* the property that information is not made available or disclosed to unauthorized individuals, entities, or processes
+
 
 * what is [data integrity](https://en.wikipedia.org/wiki/Data_integrity)?
 	* the maintenance of and the assurance of the accuracy and consistency of data over its entire life-cycle
