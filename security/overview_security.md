@@ -1123,6 +1123,63 @@
 	* sql implementations
 		* relational databases have these features as well now
 
+* what is [DAC (discretionary access control)](https://en.wikipedia.org/wiki/Discretionary_access_control)?
+	* a type of access control defined as a means of restricting access to objects based on the identity of subjects and/or groups to which they belong
+	* discretionary
+		* a subject with certain access permission is capable of passing that permission on to any other subject 
+	* with owner
+		* DAC (discretionary access control) is commonly used in contexts that assume that every object has an owner that controls the permissions to access the object 
+		* owners have the ability to make policy decisions and/or assign security attributes 
+		* unix is an example of this
+	* with capabilities
+		* capability-based security is fundamentally not about restricting access based on identity of subject
+			* permit subjects to transfer their access to other subjects
+			* subject seeking to pass permission must have access to the receiving subject 
+				* subjcts do not generally have access to all subjects in the system
+
+* what is [MAC (mandatory access control)](https://en.wikipedia.org/wiki/Mandatory_access_control)?
+	* a type of access control by which operating system constrains the ability of a subject or initiator to access or generally perform some sort of operation on an object or target
+		* in practice 
+			* subject is usually a process or thread
+			* object are constructs such as files, directories, TCP/UDP ports, shared memory segments, ect...
+	* subjects and objects each have a set of security attributes 
+	* whenever a subject attempts to access an object an authorization rule enforced by the operating system kernel examines these security attributes and decides whether the access can take place
+		* any operation by any subject on any object is tested against the set of authorization rules to determine if the operation is allowed
+	* security policy is centrally controlled by a security policy administrator
+	* historically and traditionally MAC (mandatory access control) have been closely associated with MLS (multi-level security) and specialized militatry systems
+
+* what is [capability-based security](https://en.wikipedia.org/wiki/Capability-based_security)?
+	* refers to the principle of designing user programs such that they directly share capabilities with each other according to the principle of least privilege and to the operating system infrastructure necessary to make such transactions efficient and secure
+	* capability
+		* a communicable unforgeable token of authority 
+		* refers to a value that references an object along with an associated set of access rights
+	* designed with the goal of allowing the exchange of capabilities among possibly mutually untrusting entities to be the primary means of granting and distributing access rights throughout the system
+	* in theory a system with capabilities removes the need for any access control list of similar mechanism by giving all entities all and only the capabilities they will actually need
+	* less susceptible to the confused deputy problem
+
+* what is a [protection ring](https://en.wikipedia.org/wiki/Protection_ring)?
+	* also known as hierarchical protection domains
+	* mechanisms to protect data and functionality from faults and malicious behaviour
+	* a protection ring is one of two or more hierarchical levels or layers of privilege within the architecture of a computer system
+	* generally hardware enforced
+	* rings are arranged in a hierarchy from most privileged to least privileged
+	* special gates between rings are provided to allow an outer ring to access an inner rings resources in a predefined manner
+		* correctly grating access between rings can improve security by preventing programs from one ring or privilege level from misusing resources intended for programs in another
+
+* what is the [confused deputy problem](https://en.wikipedia.org/wiki/Confused_deputy_problem)?
+	* a computer program that is innocently fooled by some other party into misusing its authority
+	* a specific type of privilege escalation
+	* cited as an example of why capability-based security is important 
+	* examples
+		* CSRF (cross-site request forgery)
+			* uses web browser to perform sensitive actions against a web application 
+			* when a web application uses a cookie to authenticate all request transmitted by the browser
+				* an attacker can use JS to force a browser into transmitting authenticated HTTP requests
+		* clickjacking
+			* user thinks they are on harmlessly browsing a website but they are infact tricked into performing sensitive actions on another website
+		* FTP bounce attacks
+			* allow an attacker to connect indirectly to TCP ports to which the attackers machine has no access using remote FTP server as the confused deputy
+
 * what is a [risk assessment](https://en.wikipedia.org/wiki/Risk_assessment)
 
 * what is the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege)
