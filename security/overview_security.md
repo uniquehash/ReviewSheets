@@ -500,10 +500,12 @@
 				* german goverment info sec bureau
 			* BSI-Standards a series of standards and guides to follow 
 
+
 * what is [confidentiality](https://en.wikipedia.org/wiki/Confidentiality)?
 	* involves a set of rules or a promise that limits access or places restrictions on certain types of information
 	* info sec
 		* the property that information is not made available or disclosed to unauthorized individuals, entities, or processes
+
 
 * what is [data integrity](https://en.wikipedia.org/wiki/Data_integrity)?
 	* the maintenance of and the assurance of the accuracy and consistency of data over its entire life-cycle
@@ -981,13 +983,208 @@
 		* only considers how many errors could possibly be introduced given a reasonable amount of computing power
 		* with this restriction it becomes possible to construct codes that are both faster to encode and decode compared to previous methods that can also handle a large number of errors
 
+* what is an [audit trail](https://en.wikipedia.org/wiki/Audit_trail)?
+	* security-relevant chronological record, set of records, and/or destination and source of records that provide documentary evidence of the sequence of activities that have affected at any time a specific operation, procedure, or event
+	* typically result from activities such as
+		* financial transactions
+		* scientific research
+		* health care data transactions
+		* communications by individual people, systems, accounts, or other entities
+	* process that creates an audit trail is typically required to always run in privileged mode
+		* so it can access and supervise all actions from all users
+		* normal user should not be allowed to stop/change it
+		* for the same reason, trail file or database table with a trail should not be accessible to normal users
+	* another way of handling this issue is
+		* role-based security model in software
+	* industry uses of the audit trail
+		* telecommunications
+			* record of both completed and attempted accesses and service
+			* data forming a logical path linking a sequence of events used to trace the transaction that have affected the contents of a record
+		* information or communications security
+			* means a chronological record of system activities to enable the reconstruction and examination of the sequence of events and/or changes in an event
+		* nursing research
+			* refers to the act of maintaining a running log or journal of decisions relating to a research project thus making clear the steps taken and changes made to the original protocol
+		* accounting
+			* refers to documentation of detailed transaction supporting summary ledger entries
+			* may be on paper or electronic
+		* online proofing
+			* pertains to the version history of a piece of artwork, design, photograph, video, or web design proof in a project
+		* clinical research
+			* server based systems call clinical trial management systems require audit trails
+			* anything regulatory or QA/QC related also requires audit trails
+		* voter-verified paper audit trails
+			* a method of providing feedback to voters using a ballotless voting system
+
+* what is [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control)?
+	* also known as role-based security
+	* an approach to restricting system access to authorized users
+		* used by the majority of enterprises with more than 500 employees
+		* can implement 
+			* mandatory access control
+			* discretionary access control
+	* a policy neutral access control mechanism defined around roles and privileges
+	* some components make it simple to perform user assignment
+		* role-permissions
+		* user-role relationships
+		* role-role relationships
+	* design
+		* within an organization roles are created for various job functions
+		* permissions to perform certain operations are assigned to specific roles
+		* members or staff are assigned particular roles
+			* through those role assignments acquire the computer permissions to perform particular computer-system functions
+		* management of individual user rights becomes a matter of simply assigning appropriate roles to the user's accoun
+		* simplifies common operations adding a user or changing a users department 
+		* primary rules defined for RBAC (role based access control)
+			* role assignment
+				* subject can exercise a permission only if the subject has selected or been assigned a role
+			* role authorization
+				* subject's active role must be authorized for the subject
+				* subject can only take roles for which they are authorized
+			* permission authorization
+				* subject can exercise a permission only if the permission is authorized for the subject's active role
+				* ensures that users can exercise only permissions for which they are authorized 
+		* additional constraints may be applied and roles can be combined into a hierarchy
+			* RBAC (role based access control) can be made to simulate LBAC (lattice-based access control)
+				* RBAC can be considered a superset of LBAC
+		* constraint places a restrictive rule on the potential inheritance of permissions from opposing roles
+			* can be used to achieve appropriate separation of duties
+		* conventions and DSL
+			* S (subject)
+				* a person or automated agent
+			* R (role)
+				* job function or title which defines an authority level
+			* P (permissions)
+				* an approval of a mode of access to a resource
+			* SE (session)
+				* a mapping involving S, R, and/or P
+			* SA (subject assignment)
+				* subject assignment
+			* PA (permission assignmnet)
+				* permission assignment
+			* RH (partially ordered role hierarchy)
+				* can also be written with >=
+					* x >= y
+						* means that x inherits the permissions of y
+				* subject can have multiple roles
+				* role can have multiple subjects
+				* role can have many permissions
+				* permission can be assigned to many roles
+				* operation can be assigned many permissions
+				* permission can be assigned to many operations
+	* NIST recognizes 3 levels of RBAC (role based access control)
+		* core RBAC (role based access control)
+		* hierarchical RBAC (role based access control)
+			* adds support for inheritnce between roles
+		* constrained RBAC (role based access control)
+			* adds separation of duties
+	* relation to other models
+		* RBAC (role based access control) can implement
+			* DAC (discretionary access control)
+				* DAC with groups is implemented in the POSIX file system
+					* can emulate RBAC (role based access control)
+			* MAC (mandatory access control)
+				* can simulate RBAC (role based access control)
+					* if the role graph is restricted to a tree rather than a partially ordered set
+		* RBAC (role based access control) differs from ACLs (access control lists) used in traditional discretionary access-control systems	
+			* RBAC (role based access control) assigns permissions to specific operations with meaning in the organization
+			* ACLs (access control list) assigns permissions to low-level data objects
+
+* what is [lattice-based access control](https://en.wikipedia.org/wiki/Lattice-based_access_control)?
+	* a complex access control model based on the interaction between any combination of objects and subjects
+	* label-based mandatory access control model
+	* a lattice is used to define the levels of security that an object may have and that a subject may have access to
+		* subject is only allowed to access an object if the security level of the subject is greater than or equal to that of the object
+
+* what is a [lattice in the context of mathematics](https://en.wikipedia.org/wiki/Lattice_(order))?
+	* an abstract structure studied in the mathematical subdisciplines of order theory and abstract algebra
+	* consists of a partially ordered set in which every two elements have a unique supremum and a unique infimum
+	* can also be characterized as algebraic structures satisfying certain axiomatic identities
+	* i don't even know, but math is cool
+	
+* what is [role hierarchy in the context of access control](https://en.wikipedia.org/wiki/Role_hierarchy)?
+	* in RBAC (role based access control) role hierarchy defines an inheritance relationship among roles
+	* RBAC (role based access control) model treats role hierarchy as either a tree or a partially ordered set
+		* tree based is single inheritance
+		* partially ordered set allows multiple inheritance
+	* complications arise when constraints such as separation of duties exist between roles 
+
+* what is [access control list](https://en.wikipedia.org/wiki/Access_control_list)?
+	* a list of permissions attached to an object 
+	* specifies which users or system processes are granted access to objects as well as what operations are allowed on given objects
+	* each entry in a typical ACL (access control list) specifies a subject and an operation
+	* filesystem ACLs (access control lists)
+		* a data structure containing entries that specify individual user or group rights to specific system objects such as programs, processes, or files
+			* known as ACEs (access control entries)
+	* networking ACLs (access control lists)
+		* on some types of proprietary computer-hardware an ACL (access control list) provides rules that are applied to port numbers or IP addresses that are available on a host or other layer 3 each with list of hosts and/or networks permitted to use the service
+			* routers and switches
+		* device enforcing the a ACL (access control list) must separately resolve names to numeric addresses
+			* additional attack surface for an attacker who is seeking 
+	* sql implementations
+		* relational databases have these features as well now
+
+* what is [DAC (discretionary access control)](https://en.wikipedia.org/wiki/Discretionary_access_control)?
+	* a type of access control defined as a means of restricting access to objects based on the identity of subjects and/or groups to which they belong
+	* discretionary
+		* a subject with certain access permission is capable of passing that permission on to any other subject 
+	* with owner
+		* DAC (discretionary access control) is commonly used in contexts that assume that every object has an owner that controls the permissions to access the object 
+		* owners have the ability to make policy decisions and/or assign security attributes 
+		* unix is an example of this
+	* with capabilities
+		* capability-based security is fundamentally not about restricting access based on identity of subject
+			* permit subjects to transfer their access to other subjects
+			* subject seeking to pass permission must have access to the receiving subject 
+				* subjcts do not generally have access to all subjects in the system
+
+* what is [MAC (mandatory access control)](https://en.wikipedia.org/wiki/Mandatory_access_control)?
+	* a type of access control by which operating system constrains the ability of a subject or initiator to access or generally perform some sort of operation on an object or target
+		* in practice 
+			* subject is usually a process or thread
+			* object are constructs such as files, directories, TCP/UDP ports, shared memory segments, ect...
+	* subjects and objects each have a set of security attributes 
+	* whenever a subject attempts to access an object an authorization rule enforced by the operating system kernel examines these security attributes and decides whether the access can take place
+		* any operation by any subject on any object is tested against the set of authorization rules to determine if the operation is allowed
+	* security policy is centrally controlled by a security policy administrator
+	* historically and traditionally MAC (mandatory access control) have been closely associated with MLS (multi-level security) and specialized militatry systems
+
+* what is [capability-based security](https://en.wikipedia.org/wiki/Capability-based_security)?
+	* refers to the principle of designing user programs such that they directly share capabilities with each other according to the principle of least privilege and to the operating system infrastructure necessary to make such transactions efficient and secure
+	* capability
+		* a communicable unforgeable token of authority 
+		* refers to a value that references an object along with an associated set of access rights
+	* designed with the goal of allowing the exchange of capabilities among possibly mutually untrusting entities to be the primary means of granting and distributing access rights throughout the system
+	* in theory a system with capabilities removes the need for any access control list of similar mechanism by giving all entities all and only the capabilities they will actually need
+	* less susceptible to the confused deputy problem
+
+* what is a [protection ring](https://en.wikipedia.org/wiki/Protection_ring)?
+	* also known as hierarchical protection domains
+	* mechanisms to protect data and functionality from faults and malicious behaviour
+	* a protection ring is one of two or more hierarchical levels or layers of privilege within the architecture of a computer system
+	* generally hardware enforced
+	* rings are arranged in a hierarchy from most privileged to least privileged
+	* special gates between rings are provided to allow an outer ring to access an inner rings resources in a predefined manner
+		* correctly grating access between rings can improve security by preventing programs from one ring or privilege level from misusing resources intended for programs in another
+
+* what is the [confused deputy problem](https://en.wikipedia.org/wiki/Confused_deputy_problem)?
+	* a computer program that is innocently fooled by some other party into misusing its authority
+	* a specific type of privilege escalation
+	* cited as an example of why capability-based security is important 
+	* examples
+		* CSRF (cross-site request forgery)
+			* uses web browser to perform sensitive actions against a web application 
+			* when a web application uses a cookie to authenticate all request transmitted by the browser
+				* an attacker can use JS to force a browser into transmitting authenticated HTTP requests
+		* clickjacking
+			* user thinks they are on harmlessly browsing a website but they are infact tricked into performing sensitive actions on another website
+		* FTP bounce attacks
+			* allow an attacker to connect indirectly to TCP ports to which the attackers machine has no access using remote FTP server as the confused deputy
+
 * what is a [risk assessment](https://en.wikipedia.org/wiki/Risk_assessment)
 
 * what is the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege)
 
 * what is the [traffic light protocol](https://en.wikipedia.org/wiki/Traffic_Light_Protocol)?
-
-* what is [role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control)?
 
 * what are [group policy objects](https://en.wikipedia.org/wiki/Group_Policy)?
 
@@ -996,8 +1193,6 @@
 * what is the [radius protocol](https://en.wikipedia.org/wiki/RADIUS)?
 
 * what is the [tacacs protocol](https://en.wikipedia.org/wiki/TACACS)?
-
-* what is an [audit trail](https://en.wikipedia.org/wiki/Audit_trail)?
 
 * what is [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity)?
 
@@ -1018,8 +1213,6 @@
 * what is a [symmetric-key algorithm](https://en.wikipedia.org/wiki/Symmetric-key_algorithm)?
 
 * what is [public-key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)?
-
-* what is [pretty good privacy (PGP)](https://en.wikipedia.org/wiki/Pretty_Good_Privacy)?
 
 * what are a bunch of first principles in security?
 	* the CIA triad

@@ -774,49 +774,6 @@
 	* in SAML domain model
 		* SAML relying party is any system entity that receives and accepts information from another system entity
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 * what is a [federated identity](https://en.wikipedia.org/wiki/Federated_identity)?
 	* the means of linking a persons electronic identiy and attributes, stored across multiple distinct identity management systems
 
@@ -831,6 +788,68 @@
 	* a security principal has a single SID for life in a given domain
 	* all properties of the principal are associated with the SID
 		* including name
+
+* what is [PGP (Pretty Good Privacy)](https://en.wikipedia.org/wiki/Pretty_Good_Privacy)?
+	* an encryption program that provides cryptographic privacy and authentication for data communication
+	* used for signing encrypting and decrypting
+		* texts
+		* emails
+		* files
+		* directories
+		* whole disk partitions
+	* follow the OpenPGP standard
+		* RFC 4880
+	* design
+		* uses a serial combination
+			* hashing
+			* data compression
+			* symmetric-key cryptography
+			* asymmetric-key cryptography
+		* each public key is bound to a user name or email address
+		* includes both web of trust and x.509
+		* compatibility
+			* as PGP evolves versions that support newer features and algorithms are able to create encrypted messages that older PGP systems cannot decrypt
+				* even with a valid private key
+		* confidentiality
+			* PGP can be used to send messages confidentially
+			* messages encrypted using symmetric encryption
+				* symmetric key used once and known as a session key
+			* the message and session key is sent to receiver 
+				* enveloped with asymmetric encryption
+		* digital signatures
+			* PGP supports message authentication and integrity checking
+				* integrity checking is used to detect whether a message has been altered since it was completed
+				* message authentication is used to determine whether it was actually sent by the person or entity claimed to be the sender 
+		* web of trust
+			* networks of trusted users are created each authenticating the identity of the other
+		* certificates
+			* trust signatures
+				* can be used to support creation of certificate authorities
+				* indicates that both that the key belongs to its claimed owner and that the owner of the key is trustworthy to sign other keys at one level below their own
+			* PGP always included ways to revoke identity certificates
+				* now supports certificate expiration dates
+		* security quality
+			* no known method which will allow a person or group to break PGP encryption by cryptographic or computational means
+			* depends on the assumption that the algorithms used are unbreakable by direct cryptanalysis
+	* history
+		* PGP was exported out of the USA via books because free speach is america but software is war tool
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
