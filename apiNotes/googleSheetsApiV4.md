@@ -484,7 +484,136 @@
 					* Yellow
 				* `Color#` valid values
 					* 0 - 56
+* what are [pivot tables](https://developers.google.com/sheets/api/guides/pivot-tables)?
+	* provide a way to summarize data in your spreadsheet 
+		* automatically working on data
+			* aggregating
+			* sorting
+			* counting
+			* averaging
+	* displays the summarized results in a new table
+	* acts as a sort of query against a source data set
+		* represents a processed view of the data
+	* working with pivot tables
+		* a pivot table definition is associated with a single cell on a sheet
+			* its rendered appearance is many cells in both height and width
+			* programatically located at a single cell coordinate
+				* top-left hand corner of the rendered pivot table
+	* adding a pivot table
+		* use the `batchUpdate` method supplying an `updateCells` request
+			* supply a `PivotTable` definition as the content of a cell
+		```
+			"updateCells": {
+				"rows": {
+					"values": [{
+						"pivotTable": MyPivotTable
+					},
+					"start": {
+						"sheetId": sheetId,
+						"rowIndex": 0,
+						"columnIndex": 0
+					},
+					"fields": "pivotTable"
+				}
+			}
+		```
+		* `PivotTable` type lets you specify
+			* source data range
+			* fields whose data will form the rows of the pivot table
+			* fields whose data will form the columns of the pivot table
+			* filtering and aggregation criteria
+			* pivot table layout
+	* modifying and deleting pivot tables
+		* there are no explicit requests to modify or delete a pivote table 
+			* just use `updateCells` request with different cell contents
+	* use cases 
+		* many different uses for pivot tables across a broad range of areas including
+			* statistical analysis
+			* ERP applications
+			* financial reporting
+			* others
+		* classic use cases
+			* total sales by region and quarter
+			* average salary by title and gender
+			* count of incifents by product and time of day
+		* specific use cases
+			* explore incident data for most recent 24h period
+			* view/analyze aggregated data corresponding to the currently selected account
+			* examine sales data for territories belonging to the current user
 
+* what is [conditional formatting in GSA](https://developers.google.com/sheets/api/guides/conditional-format)?
+	* lets you format cells so that their appearance changes dynamically according to the value they contain or to values in other cells
+	* use cases
+		* highlight cells above some threshold
+		* format cells so their color varies with their values
+		* dynamically format cells based on the content of other celss
+	* conditional formatting rules
+		* each spreadsheet stores a list of formatting rules and applies them in the same order that they appear in the list
+		* GSA lets you add, update, delete these formatting rules
+		* each rule specifies
+			* a target range
+				* single cell
+				* range of cells
+				* multiple ranges
+			* type of rule
+				* boolean rules
+					* apply a format only if specific criteria are met
+				* gradient rules
+					* calculate the background color of a cell based on the value of the cell
+			* conditions for triggering the rule
+			* formatting to apply
+	* boolean rules
+		* define whether or not to apply a specific format based on a condition that evaluates to True or False
+		* form
+	```
+		{
+			"condition": {
+				object(BooleanCondition)
+			},
+			"format": {
+				object(CellFormat)
+			},
+		}
+	```
+		* condition can use one of the built-in condition types or it can use a custom formula for more complex evaluations
+			* built-in rules
+				* always evaluated with respect to the target cell
+				* let you apply formatting according to
+					* numeric thresholds
+					* text comparison
+					* whether a cell is populated
+			* custom formula
+				* a special condition type that lets you apply formatting according to an arbitrary expression 
+					* allows evaluation of any cell not just the target cell
+		* to define the formatting applied by a boolean rule you use a subset of the `CellFormat` type to define
+			* whether or not the text in the cell is bold, italic, or strikethrough
+			* the color of the text in the cell
+			* the background color of the cell
+	* gradient rules
+		* define a range of colors that correspond to a range of values 
+		* form
+	```
+		{
+			"minpoint": {
+				object(InterpolationPoint)
+			},
+			"midpoint": {
+				object(InterpolationPoint)
+			},
+			"maxpoint": {
+				object(InterpolationPoint)
+			},
+		}
+	```
+		* `InterpolationPoint` defines a color and its corresponding value
+			* three points defines a color gradient
+	* managing conditional formatting rules
+		* use `BatchUpdate` to
+			* add rules to the list using the `AddConditionalFormatRuleRequest`
+			* replace or reorder rules in the list using the `UpdateConditionalFormatRuleRequest`
+			* delete rules using the `DeleteConditionalFormatRuleRequest`
+		
+	
 
 
 
