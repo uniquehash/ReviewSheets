@@ -1180,6 +1180,38 @@
 		* FTP bounce attacks
 			* allow an attacker to connect indirectly to TCP ports to which the attackers machine has no access using remote FTP server as the confused deputy
 
+* what is [multilevel security](https://en.wikipedia.org/wiki/Multilevel_security)?
+	* the application of a computer system to process information with incompatible classifications at different security levels
+		* permit access by users with different security clearances and needs to know
+		* prevents users from obtaining access to information for which they lack authorization 
+	* two contexts for the use of multilevel security 
+		* a system that is adequate to protect itself from subversion and has robust mechanisms to separate information domains
+			* system that is trustworthy
+		* an application of a computer that will require the computer to be strong enough to protect itself from subversion and possess adequate mechanisms to separate information domains
+			* a system we must trust
+	* problem areas
+		* sanitization
+			* MLS (multilevel security) systems only allow sharing when it does not obviously violate security restrictions
+				* restrictions must be broken to pass information up and down security hierarchy
+		* covert channels
+			* for the system to keep secrets there must be no possible way for a top secret process to transmit signals of any kind to a secrete or lower process
+				* this is impossible in practice
+		* bypass
+			* you can abuse privileges to bypass the intense restrictions
+	* existential existance
+		* MLS (multilevel security) as an implementation is currently impossible
+		* MLS (multilevel security) as a design is theoritically possible
+
+* what is the [bell-lapadula model](https://en.wikipedia.org/wiki/Bell%E2%80%93LaPadula_model)?
+	* state machine model used for enforcing access control in government and military applications
+		* a formal state transition model of computer security policy that describes a set of access control rules which use security labels on objects and clearances for subjects
+
+* what is [TCSEC (trusted computer system evaluation criteria)](https://en.wikipedia.org/wiki/Trusted_Computer_System_Evaluation_Criteria)?
+	* a DoD standard that sets basic requirements for assessing the effectiveness of computer security controls built into a computer system
+		* frequently referred to as the orange book 
+	* was used to evaluate, classify and select computer systems being considered for the processing, storage and retrieval of sensitive or classified information
+	* replaced by common criteria in 2005
+
 * what is a [risk assessment](https://en.wikipedia.org/wiki/Risk_assessment)
 
 * what is the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege)
