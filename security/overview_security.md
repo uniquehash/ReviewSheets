@@ -955,14 +955,53 @@
 * what is the [common criteria in security](https://en.wikipedia.org/wiki/Common_Criteria)?
 	* known as the Common Criteria for Information Technology Security Evaluation
 		* international standard (ISO/IEC 15408) for computer security certification
-	* a framework in which computer system users can specify their security functional and assurance requirements
-		* done through protection profiles
+	* a framework in which computer system users can specify their SFR (security functional requirements) and SAR (security assurance requirements)
+		* done through PPs (protection profiles)
 		* vendors can implement and/or make claim about the security attributes of their products
 		* testing laboratories can evaluate the products to determine if they actually meet the claims
 	* common criteria provides assurance that a computer security product has been conducted in a rigorous, standard, and repeatable manner at a level that is commensurate with the target environment for use
 		* process of specification
 		* implementation
 		* evaluation
+	* used as the basis for a government driven certification scheme and typically evaluations are conducted for the use of federal government agencies and critical infrastructure
+	* key concepts
+		* common criteria evaluations are performed on computer security products and systems
+		* evaluation serves to validate claims made about the target by verifying the target's security features
+		* the evaluation process also tries to establish the level of confidence that may be placed in the products security features through quality assurance processes
+		* TOE (target of evaluation)
+			* product or system that is the subject of the evaluation
+		* PP (protection profiles)
+			* a document typically created by a user or use community
+			* identifies security requirements for a class of security devices relevant to that user for a particular purpose
+			* product vendors can choose to implement products that comply with one or more PPs (protection profiles) and have their products evaluated against those PPs (protection profiles)
+			* a PP (protection profile) may serve as a template for the products ST (security target) 
+			* customers looking for particular types of products can focus on those certified against the PP (protection profile) that meets their requirements
+		* ST (security target)
+			* the document identifies the security properties of the target of evaluation
+			* ST (security target) may claim conformance with one or more PPs (protection profiles)
+			* the TOE (target of evaluation) is evaluated against the SFRs (security functional requirements) established in its ST (security target)
+			* allows vendors to tailor the evaluation to accurately match the intended capabilities of their product
+			* the ST (security target) is usually published so that potential customers may determine the specific security features that have been certified by the evaluation
+		* SFRs (security functional requirements)
+			* specific individual security functions which may be provided by a product
+				* common criteria presents a standard catalogue of such functions
+			* a SFR (security functional requirement) may state how a user acting a particular role might be authenticated
+			* the list of SFRs (security functional requirements) can vary from one evaluation to the next 
+			* common criteria does not prescribe any SFRs (security functional requirements) to be included in an ST (security target) it identifies dependencies where the correct operation of one function is dependent on another
+		* SARs (security assurance requirements)
+			* descriptions of the measures taken during development and evaluation of the product to assure compliance with the claimed security functionality
+				* common criteria provides a catalogue of these and the requirements may vary from one evaluation to the next
+			* requirements for particular target types of products are documented in the ST (security target) and PP (protection profile) respectively
+		* EAL (evaluation assurance level)
+			* the numerical rating describing the depth and rigor of an evaluation
+			* each EAL (evaluation assurance level) corresponds to a package of SARs (security assurance requirements) which covers the complete development of a product with a given level of strictness
+			* common criteria lists seven levels
+				* EAL 1 being the most basic 
+				* EAL 7 being the mose stringent
+			* typically an ST (security target) or PP (protection profile) author will not select assurance requirements individually but choose one of these packages
+				* possibly augmenting requirements in a few areas with requirements from a higher level
+			* higher EALs (evaluation assurance levels) do not imply better security
+				* they only mean that the claimed security assurance of the TOE (target of evaluation) has been more extensively verified
 
 * what is [concrete security](https://en.wikipedia.org/wiki/Concrete_security)?
 	* a practice-oriented approach that aims to give more precise estimates of the computational complexities of adversarial tasks than polynomial equivalence would allow
