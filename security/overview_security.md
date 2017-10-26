@@ -873,9 +873,36 @@
 				d6:73:e7:7c:4f:76:d0:8d:bf:ec:ba:a2:be:34:c5:28:32:b5:
 				...
 	```
-							
-
-
+* what are [secure cookies in the security context](https://en.wikipedia.org/wiki/Secure_cookies)?
+	* a type of cookie which is transmitted over encrypted HTTP connection (HTTPS)
+	* secure attributes are included that instruct the browser to only return the cookie to the application over encrypted connections
+	* to fully protect a cookie HttpOnly and SameSite attribute should be applied to the cookie
+		* HttpOnly
+			* prevents the cookie from being accessed by JS
+		* SameSite
+			* only allows the cookie to be sent to the application if the request originated from the same domain
+	* cookie theft and hijacking
+		* network threats
+			* when sent over unencrypted channels cookies can be subject to eavesdropping and the contents can be read by an attacker
+		* end system threats
+			* cookies can be stolen or copied from the user
+				* giving an attacker access to the contents of the cookie and allowing them to impersonate the user
+		* cookie harvesting
+			* the attacker will try to impersonate a website by accepting cookies from the users
+			* once the attacker gets hold og the cookies he can use this harvested cookie for websites which accept them
+	
+* what is a [cookie in web world](https://en.wikipedia.org/wiki/HTTP_cookie)?
+	* a small piece of data sent from a website and stored on the computer of the user by the web browser while the user is using the browser
+	* designed to be a reliable mechanism for websites to remember stateful information or to record the browsing activity of the user
+	* can be used to remember arbitrary pieces of information
+	* two classes of cookies
+		* persistent cookies
+			* store information in the browser of the user for a long time
+		* non-persistent cookies
+			* generally expire once the browser is closed
+			
+* what is a [JWT (json web token)](https://en.wikipedia.org/wiki/JSON_Web_Token)?
+	* a json based open standard for creating access tokens that assert some number of claims 
 
 
 
