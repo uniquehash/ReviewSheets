@@ -903,6 +903,52 @@
 			
 * what is a [JWT (json web token)](https://en.wikipedia.org/wiki/JSON_Web_Token)?
 	* a json based open standard for creating access tokens that assert some number of claims 
+		* example
+			* server could generate a token that has the claim "logged in as admin"
+			* client could then use that token to prove that it is logged in as admin
+			* tokens are signed by the key of the server so the client and server are both able to verify that the token is legitimate
+	* tokens are designed to be compact, URL safe and usable especially in web browser single sign on
+	* JWT claims can be typically used to pass identity of authenticated users between an identity provider and a service provider or any other type of claim as required by business processes
+	* structure
+		* three parts
+			* header
+				* identifies which algorithm is used to generate the signature
+			* payload
+				* contains claims to make
+			* signature
+				* calculated by base64url encoding the header and payload and delimiting them with a period
+				* the signature is then base64url encoded 
+		* the three parts are then deliminated by periods and concatenated
+	* use
+		* when the user successfully logs in using their credentials a JWT (json web token) will be returned and must be saved locally
+			* typically in local or session storage
+			* cookies can also be used
+		* when the user wants to access a protected route or resource the user agent should send the JWT (json web token) typically in the `Authorization` header using the `Bearer` schema
+		* this is a stateless authentication mechanism as the user state is never saved in server memory
+		* JWT (json web tokens) are self contained so all necessary information are included within them
+	* standard fields
+		* `iss` (issuer)
+			* identifies principal that issued the JWT (json web token)
+		* `sub` (subject)
+			* identifies the subject of the JWT (json web token)
+		* `aud` (audience)
+			* the audience claim identifies the recipients that the JWT (json web token) is intended for
+			* each principal intended to process the JWT (json web token) must identify itself with a value in the audience claim
+		* `exp` (expiration time)
+			* the expiration time claim identifies the expiration time on or after which the JWT (json web token) must not be accepted for processing
+		* `nbf` (not before)
+			* not before claim identifies the time at which the JWT (json web token) will start to be accepted for processing 
+		* `iat` (issued at)
+			* the issued at claim identifies the time at which the JWT (json web token) was issued
+		* `jti` (JWT ID)
+			* case sensitive unique identifier of the token even among different issuers
+	* following fields can be used in authentication headers
+		* `typ` (token type)
+			* if present recommended to set this to `JWT`
+		* `cty` (content type)
+			* recommended to set to `JWT` or omit this field
+		* `alg` (message authentication algorithm)
+			* issuer can freely set an algorithm to verify the signature on the token
 
 
 
