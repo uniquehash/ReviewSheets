@@ -1,4 +1,4 @@
-# notes on the electron framework
+#   notes on the electron framework
 
 * what is [electron](https://en.wikipedia.org/wiki/Electron_(software_framework))?
     * allows for the development of desktop GUI applications using front and back end components originally developed for web applications 
@@ -86,9 +86,52 @@
                 HOME=~/.electron-gyp node-gyp rebuild --target=1.2.3 --arch=x64 --dist-url=https://atom.io/download/electron
             ```
 
-* 
+* what are the [implications and responsibilities of using electron](https://electronjs.org/docs/tutorial/security)?
+    * electron javascript isn't safe in a sandbox
+        * your js can be used to touch the file system and wreck havoc
+    * reporting security issues
+        * [info on properly disclosing an electron vulnerability](https://github.com/electron/electron/blob/master/SECURITY.md)
+        * chromium security issues and upgrades
+            * electron will often lag behind the latest version of chromium by either days or weeks
+    * node integration
+        * a security issue exists whenever you receive code from a remote destination and execute it locally
+            * if an attacker somehow manages to change the content they will be able to execute native code on the user's machine
+        * under no circumstance should you load and execute remote code with node integration enabled
+            * use only local files packaged together with your application to execute node code
+            * to display remote content use the `webview` tag and make sure to diable the `nodeIntegration`
+        * checklist
+            * only display secure (https) content
+            * diable node integration in all renderers that display remote content 
+                * setting `nodeIntegration` to `false` in `webPreferences`
+            * enable context isolation in all renderers that display remote content
+                * setting `contextIsolation` to `true`in `webPreferences`
+            * use `ses.setPermissionRequestHandler()` in all sessions that load remote content
+            * do not disable `webSecurity`
+                * disabling will disable same-origin policy
+            * define a `Content-Security-policy` and use restrictive rules i.e. `script-src 'self'`
+            * override and disable `eval` which allows strings to be executed as code
+            * do not set `allowRunningInsecureContent` to `true`
+            * do not enable `experimentalFeatures` or `experimentalCanvasFeatures` unless you know what you're doing
+            * do not use `blinkFeatures` unless you know what you're doing
+            * WebViews
+                * do not add the `nodeIntegration` attribute
+                * do not use `disablewebsecurity`
+                * do not use `allowpopups`
+                * do not use `insertCSS` or `executeJavaScript` with remote CSS/JS
+                * verify the options and params of all `<webview>` tags before they get attached using the `will-attach-webview` event
+                
 
 
+
+
+
+
+
+
+
+      
+
+    
 
 
 
