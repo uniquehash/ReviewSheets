@@ -120,7 +120,37 @@
                 * do not use `insertCSS` or `executeJavaScript` with remote CSS/JS
                 * verify the options and params of all `<webview>` tags before they get attached using the `will-attach-webview` event
                 
-
+* what are [electron basics](https://electronjs.org/docs/tutorial/quick-start)?
+    * main process
+        * the process that runs `package.json`'s `main` script
+        * can display a GUI by creating web pages
+    * renderer process
+        * electron uses chromium for displaying web pages 
+        * chromiums multi-process architecture is also used
+            * each web page in electron runs in its own process
+            * this is called the renderer process
+    * difference between main process and renderer process
+        * main process
+            * creates web pages by creating `BrowserWindow` instances
+                * `BrowserWindow` instance runs the web page in its own renderer process
+                    * when a `BrowserWindow` instance is destroyed the corresponding renderer process is also terminated
+            * manages all web pages and their corresponding renderer processes 
+                * each renderer process is isolated and only cares about the web page running it
+        * in web pages
+            * calling native GUI related APIs is not allowed
+                * managing native GUI resources in web pages is very dangerous and it is easy to leak resources
+            * to perform GUI operations in a web page the renderer process of the web page must communicate with the main process to request that the main process perform those operations
+    * several ways to communicate between main process and renderer processes
+        * ipcRenderer module
+            * send synchronous and asynchronous messages from the render process to the main process
+            * receive replies from the main process
+            * instance of the EventEmitter class
+        * ipcMain module
+            * handles asynchronous and synchronous messages sent from a renderer process
+            * messages sent from a renderer will be emitted to this module
+        * remote module
+            * a simple way to do inter-process communication between the renderer process and the main process
+            * you can invoke methods of the main process object without explicitly sending inter-process messages 
 
 
 
