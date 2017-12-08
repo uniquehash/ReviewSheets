@@ -834,6 +834,63 @@
 	* history
 		* PGP was exported out of the USA via books because free speach is america but software is war tool
 
+* What does [Group Policy refer to in the security ecosystem](https://en.wikipedia.org/wiki/Group_Policy)?
+	* a feature of microsoft windows NT family of operating systems that controls the working environment of user accounts and computer accounts
+	* provides centralized management and configuration in an Active Directory environment for
+		* operating systems
+		* applications
+		* user settings
+	* part of microsofts IntelliMirror technologies
+		* aims to reduce the cost of supporting users
+	* IntelliMirror technologies
+		* relate to the management of disconnected machines or roaming users and include
+			* roaming user profiles
+			* folder redirection
+			* offline files	
+	* Local Group Policy
+		* a version of Group Policy that allows Group Policy Object management on standalone and non-domain computers
+	* operation
+		* in part controls what users can and cannot do on a computer system
+			* enforce password complexity policy
+			* allow or prevent unidentified users from remote computers to connect to a network share
+			* block access to windows task manager
+			* restrict access to certain folders	
+	* GPO (Group Policy Object)
+		* a set of group policy configurations
+	* enforcement
+		* GPO (Group Policy Object) that resides on a single machine only applies to that computer
+		* to apply a GPO to a group of computers Group Policy relies on Active Directory for distribution
+		* Active Directory can distribute GPOs to computers which belong to a windows domain
+		* by windows refreshes its policy setting every 90 minutes with a random 30 minutes offset
+		* on domain controllers windows does so every 5 minutes
+		* for all GPOs that apply to the machine and to logged-on users during refresh it
+			* discovers
+			* fetches
+			* applies
+		* some settings only apply during startup or user logon
+	* Group Policy Objects processing order
+		* local
+			* any settings in the computers local policy
+			* individual group policies per user accounts
+		* site
+			* any group policies associated with the Active Directory site in which the computer resides
+			* if multiple policies are linked to a site they are processed in the order set by the admin
+		* domain
+			* any group policies associated with the windows domain in which the computer resides
+			* if multiple policies are set they are processed in the order set by the admin
+		* OU (Organizational Unit)
+			* group policies assigned to the Active Directory OU (Organizational Unit) in which the computer or user are placed
+			* if multiple policies are linked to OU they are processed in the order set by the admin
+	* RSoP (Resultant Set of Policy)
+		* the resulting Group Policy settings applied to a given computer or user
+	* inheritance
+		* policy set inside a hierarchical structure is ordinarily passed from parent to children
+		* can be blocked or enforced to control what policies are applied at each level
+		* if higher level admin creates a policy that has inheritance blocked by a lower level admin this policy will still be processed
+	* filtering
+		* WMI filtering is the process of customizing the scoper of the GPO (Group Policy Object) by choosing a WMI (Windows Management Instumentation) filter to apply
+		* allows admins to apply a GPO only to for example computers of specific models, RAM, installed software, ect...
+	
 
 
 
