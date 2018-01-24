@@ -886,11 +886,22 @@
 
 * what is a [HOTP (HMACK based one-time password algorithm)](https://en.wikipedia.org/w/index.php?title=HMAC-based_One-time_Password_Algorithm&oldid=784464634)?
 	* HMACK-based One-Time Password
-		* exactly what it sounds like, a one time password based on the HMAC protocol
+		* HMACK: a hash-based message authentication code 
+		* exactly what it sounds like, a one time password based on the hash-based message authentication protocol
+		* cornerstone for OATH (initiative for open authentication)
+	* relies on a counter to change the password
+	* event based
 	* applications
 		* can be used to authenticate a user in a system via an authentication server
 		* with extra steps the user can also authenticate the validation server
 
+* what is [TOTP (time-based one time password)](https://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm)?
+	* an algorithm that computes an otp from a shared secret key and the current time
+	* cornerstone for OATH (initiative for open authentication)
+	* relies on timestamps to change the password
+		* timestamp usually increases in 30-second intervals
+	* time based
+	
 * what is [universal hashing](https://en.wikipedia.org/wiki/Universal_hashing)?
     * refers to selecting a hash function at random from a family of hash functions with certain mathematical properties
         * gurantees a low number of collisions in expectation even if the data is chosen by an adversary
