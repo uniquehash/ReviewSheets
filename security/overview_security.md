@@ -1324,6 +1324,17 @@
 	* was used to evaluate, classify and select computer systems being considered for the processing, storage and retrieval of sensitive or classified information
 	* replaced by common criteria in 2005
 
+* what are [security principals](https://en.wikipedia.org/wiki/Principal_(computer_security))?
+	* an entity that can be authenticated by a computer system or network
+	* referred to as a security principal in Java and Microsoft literature
+	* can be individual people, computers, services, computational entities such as processes and threads or any group of such things
+	* typically has an associated identifier that allows it to be referenced for identification or assignment of properties and permissions
+
+* what is a [SID (security identifier)](https://en.wikipedia.org/wiki/Security_Identifier)?
+	* used in the context of Microsoft ecosystems
+	* a unique immutable identifier of a user, user group, or other security principal
+	* a security principal has a single SID (Security IDentifier) for life in a given domain and all properties of the principal are associated with the SID
+
 * what is a [risk assessment](https://en.wikipedia.org/wiki/Risk_assessment)
 
 * what is the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege)
