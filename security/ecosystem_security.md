@@ -890,7 +890,9 @@
 	* filtering
 		* WMI filtering is the process of customizing the scoper of the GPO (Group Policy Object) by choosing a WMI (Windows Management Instumentation) filter to apply
 		* allows admins to apply a GPO only to for example computers of specific models, RAM, installed software, ect...
-	
+
+* what is a [windows domain](https://en.wikipedia.org/wiki/Windows_domain)?
+	* a form of computer network in which all user accounts, computers, printers and other security principals 
 
 
 
