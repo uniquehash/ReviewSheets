@@ -962,35 +962,31 @@
 			* firefox
 			* opera
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 * what is a [windows domain](https://en.wikipedia.org/wiki/Windows_domain)?
-	* a form of computer network in which all user accounts, computers, printers and other security principals 
+	* a form of computer network in which all user accounts, computers, printers and other security principals are registered with a central database located on one or more clusters of central computers known as domain controllers
+	* authentication takes place on domain controllers
+	* each person who uses computers within a domain receives a unique user account that can then be assigned access to resources within the domain
+		* this is in contrast of a workgroup in which each computer maintains its own database of security principals
+	* configuration
+		* can connect to a domain via LAN, WAN, or VPN
+		* users of a domain are able to use enhanced security for their VPN connection due to the support for a certification authority which is gained when a domain is added to a network
+			* smart cards and digital certificates can be used to confirm identities and protect stored information
+		* domain controller
+			* directory resides on computers athat are configured as domain controllers
+			* suitable for networks with more than 10 PCs
+			* a domain is a logical grouping of controllers
+		* integration
+			* samba is software that can make non-windows computers part of the domain
 
-
-
-
+* what is a [domain controller](https://en.wikipedia.org/wiki/Domain_controller)?
+	* a server computer that responds to security authentication requests within a windows domain
+	* allows for a user to be granted access to a number of computer resources with the use of a single username and password combination
+	* windows servers can be one of three kinds
+		* AD domain controllers
+			* provides identity and authentication
+		* AD member servers
+			* provide complimentary services like file repositories and schema
+		* windows workgroup stand-alone servers
 
 
 
