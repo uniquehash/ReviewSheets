@@ -1052,11 +1052,6 @@
 		* I/O cancellation is almost impossible to get right
 		* thousands of lines of support code are required for every driver
 		* no support for writing pure user-mode drivers
-	
-
-
-
-
 
 * what are [IRPs (I/O Request Packets)](https://en.wikipedia.org/wiki/I/O_request_packet)?
 	* kernel mode structures that are used by WDM (Windows Driver Model) and Windows NT device drivers to communicate with each other and with the operating system
@@ -1069,7 +1064,20 @@
 	* the IRP with all of its parameters can be put on a queue if the I/O requests cannot be performed immediately
 	* I/O completion is reported back to the I/O manager by passing its address to a routine for that purpose called IoCompleteRequest
 
-
+* what is [WDF (Windows Driver Frameworks)](https://en.wikipedia.org/wiki/Windows_Driver_Frameworks)?
+	* a set of microsoft tools nad libraries that aid in the creation of device drivers for windows
+	* complements WDM (Windows Driver Model) abstracting away much of the boilerplace complexity in writing Windows drivers
+	* provides new object-oriented programming model for windows driver development
+	* the primary goals of WDF is conceptual scalability and reduced duplication
+	* there are 3 types of WDF drivers
+		* KMDF (Kernel-Mode Driver Framework)		
+			* standard kernel-mode device drivers
+		* UMDF v1 (User-Mode Driver Framework)
+			* user-mode drivers using a C++ COM-based API
+		* UMDF v2 (User-Mode Driver Framework)
+			* user-mode drivers with syntactic parity of KMDF
+		
+	
 
 
 
