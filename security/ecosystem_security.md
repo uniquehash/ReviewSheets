@@ -988,7 +988,86 @@
 			* provide complimentary services like file repositories and schema
 		* windows workgroup stand-alone servers
 
+* what is [WMI (Windows Management Instrumentation)](https://en.wikipedia.org/wiki/Windows_Management_Instrumentation)?
+	* a set of extensions to the windows driver model that provides an operating system interface through which instrumented components provide information and notification
+	
+	
+* what is the [ WDM (Windows Driver Model)](https://en.wikipedia.org/wiki/Windows_Driver_Model)?
+	* a framework for device drivers
+	* WDM drivers are layered in a complex hierarchy and communicate with each other via IRPs
+	* by conforming to WDM drivers can be binary compatible and source-compatible across
+		* Windows 98
+		* Windows Me
+		* Windows 2000
+		* Windows XP
+		* Windows Server 2003
+		* Windows Vista
+	* designed to be forward-compatible but not backwards compatible
+	* function driver
+		* the main driver for a device
+		* written by the device vendor and is required 
+		* can service more than one device
+		* class drivers
+			* types of function drivers that are kinda like built-in framework drivers that miniport and other class drivers can be built on top of 
+			* provide interfaces between different levels of WDM architecture
+			* common functionality between different classes of drivers can be written into the class driver and used by other class and miniport drivers
+			* the lower edge of the class driver will have its interface exposed to the miniport driver
+			* the upper edge of the top level class drivers is operating system specific 
+			* class drivers can be dynamically loaded and unloaded as well
+			* they can do class specific functions that are not hardware or bus-specific 
+		* miniport drivers
+			* there are also function drivers for USB, audio, SCSI, and network adapters
+			* hardware specific but control access to the hardware through a specific bus class driver
+		* bus drivers
+			* services a bus controller, adapter, or bridge
+			* microsoft provides bus drivers for the most common buses such as 
+				* PCI
+					* local computer bus for attaching hardware devices in a computer
+				* PnPISA
+					* a computer bus with a specification that facilitates the discovery of a hardware component in a system without the need for physical device configuration or user intervention in resolving resource conflicts
+				* SCSI
+					* a set of standards for physically connecting and transferring data between computers and peripheral devices
+				* USB
+					* universal serial bus is an industry standard that defines
+						* cables
+						* connectors
+						* communications protocols between computers and devices for
+							* connection
+							* communication
+							* power supply 
+				* FireWire
+					* an interface standard for a serial bus for high-speed communications and isochronous real-time data transfer
+			* each software vendor can create their own bus drivers if needed 
+			* bus driver can service more than one bus
+		* filter drivers
+			* optional drivers that aff value to or modify the behavior of a device and many be non-device drivers
+			* can also service one or more devices
+			* upper level filter drivers sit above the primary driver for the device 
+			* lower level filter drivers sit below the function driver and above the bus driver
+			* driver service
+				* a type of kernel-level  filter driver implemented as a windows service that enables applications to work with devices
+	* criticism
+		* interactions with power management events and plug and play are difficult
+			* leads to a variety of situations where windows machines cannot go to sleep or wake up correctly due to bugs in driver code
+		* I/O cancellation is almost impossible to get right
+		* thousands of lines of support code are required for every driver
+		* no support for writing pure user-mode drivers
+	
 
+
+
+
+
+* what are [IRPs (I/O Request Packets)](https://en.wikipedia.org/wiki/I/O_request_packet)?
+	* kernel mode structures that are used by WDM (Windows Driver Model) and Windows NT device drivers to communicate with each other and with the operating system
+	* they are data structures that describe I/O requests and can be thought of as "I/O request descriptors"
+	* by passing in the pointer to a data structure it prevents the need to pass many small arguments to the driver like
+		* buffer address
+		* buffer size
+		* I/O function type
+		* ect...
+	* the IRP with all of its parameters can be put on a queue if the I/O requests cannot be performed immediately
+	* I/O completion is reported back to the I/O manager by passing its address to a routine for that purpose called IoCompleteRequest
 
 
 
