@@ -63,7 +63,57 @@
         * unlike some SAN protocols it requires no dedicated cabling, running on existing IP infrastructure
             * performance of an iSCSI SAN deployment can be severely degraded if not operated on a dedicated network or subnet due to competition for a fixed amount of bandwidth
         * initiator
-            * 
+            * sends SCSI commands over an IP network to a target
+            * two types
+                * software initiators
+                    * uses network card and network stack to emulate SCSI devices for a computer by speaking the iSCSI protocol
+                * hardware initiators
+                    * uses hardware to optimize the shit out of this process
+        * target
+            * storage resource located on an iSCSI server
+            * often a dedicated network-connected hard disk storage device
+                * storage array
+                    * often using in data centers or enterprise environment
+                * software target
+                    * nearly all modern server operating systems can provide iSCSI target functionality either as a buit-in feature or with supplemental software
+                * LUN (Logical Unit)
+                    * specified by LUN numbers
+                    * LUN represents an individual addressable logical SCSI device that is part of a physical SCSI device target
+                    * essentially numbered disk drives
+                    * initiator negotiated with a target to establish connectivity to a LUN
+                        * results in an iSCSI connection that emulates a coonection to a SCSI hard dist
+                    * in enterprise deployments LUNs usually represent subsets of large RAID disk arrays often allocated one per client 
+                    * no rules or restrictions on multiple computers sharing individual LUNs 
+        * addressing
+            * iSCSI uses TCP typically port 860 and 3260 for the protocol itself with higher-level names used to address the objects within the protocol 
+
+* what is [Fibre Channel](https://en.wikipedia.org/wiki/Fibre_Channel)?
+    * is a high-speed network technology primarily used to connect computer data storge to servers
+    * mainly used in SAN in commercial data centers
+    * Fibre Channel networks form a switched fabric because they operate in unison as one big switch
+
+* what is a [routing table](https://en.wikipedia.org/wiki/Routing_table)?
+    * a data table stored in a router or a networked computer that lists the routes to particular network destinations and in some cases metrics associated with those routes
+    * contains information about the topology of the network immediately around it
+    * the construction of routing tables is the primary goal of routing protocols
+    * static routes are entries made in a routing table by non-automatic means and which are fixed rather than being the result of some network topology discovery procedure
+    * the primary function of a router is to forward a packet toward its destination network by searching the routing information stored in its routing table
+
+* what is [classless inter-domain routing](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)?
+    * a method for allocating ip addresses and ip routing 
+    * ip addresses are described as consisting of two groups of bits in the address
+        * the most significant bits are the network prefix
+            * identifies a whole network or subnet
+        * the least significant set forms the host identifier
+            * specifies a particular interface of a host on that network
+    * based on VLSM (variable-length subnet masking) technique
+        * allows the specification of arbitraty-length prefixes
+    * CIDR notation
+        * an address or routing prefix is written with a suffix indicating the number of bits of the prefix
+            * 192.168.2.0/24
+            
+        
+
 
 
 
