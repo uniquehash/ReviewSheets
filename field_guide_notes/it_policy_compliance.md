@@ -1,6 +1,6 @@
 # notes from [IT policy compliance for dummies](https://www.amazon.com/policy-compliance-dummies-Jason-Creech/dp/0470665351/ref=sr_1_3?ie=UTF8&qid=1516378101&sr=8-3&keywords=it+compliance+for+dummies)
 
-* stepping into the world of IT policy compliance
+#### stepping into the world of IT policy compliance
     * setting out the meaning of IT policy compliance
         * the implementation and management of information technology in accordance with accepted standards 
             * tax laws
@@ -36,7 +36,7 @@
     * understanding the importance of IT policy compliance
         * basically all modern business interacts with IT in one way or another
 
-* defining the problem of IT policy compliance
+#### defining the problem of IT policy compliance
     * wising up with a brief history of policy compliance
         * protection of PII (Personally Identifiable  Information)
             * HIPAA (Health Insurance Portability and Accountability Act)
@@ -104,7 +104,9 @@
             * what controls do we need in place to meet policy requirements?
             * what evidence do we need to substantiate compliance to auditors?
 
-* best practices for IT policy compliance management
+
+
+#### best practices for IT policy compliance management
     * keeping a balanced perspective on IT policy compliance
     * understanding the auditors perspective
     * aligning IT compliance/security with business processes
