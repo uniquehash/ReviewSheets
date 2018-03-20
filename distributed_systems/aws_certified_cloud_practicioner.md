@@ -43,11 +43,11 @@
     * you can replicate buckets of one bucket to another bucket automatically
         * using cross region replication
     * you can change storage classes and encryption of your objects on the fly
+    * you can use bucket policies to make entire s3 buckets public
+    * you can use s3 to host static websites 
+    * s3 scales automatically to meet your demand many enterprises serve static websites from s3
 
-
-
-
-
+* what are the basics of cloudfront?
 
 
 
