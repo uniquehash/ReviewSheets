@@ -25,6 +25,25 @@
     * SAAS (software as a service)
         * all you worry about is the software itself and how you want to use it
 
+* what are the basics of s3?
+    * a bucket is a place to store objects
+        * object storage
+    * s3 is a unique global namespace
+        * no two buckets with the same name exist
+    * successful uploads will generate http 200 status
+    * encrypt objects in transit using ssl
+    * encrypt objects at rest on s3
+    * s3 vs glacier 
+        * s3 is for current data
+        * glacier is for archived data where 3-5 hour retrieval time is acceptable
+    * to restrict access to an entire bucket 
+        * use bucket policy
+    * to restrict access to an individual object
+        * use access control list
+    * you can replicate buckets of one bucket to another bucket automatically
+        * using cross region replication
+    * you can change storage classes and encryption of your objects on the fly
+
 
 
 
