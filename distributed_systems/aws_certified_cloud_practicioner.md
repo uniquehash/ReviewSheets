@@ -145,6 +145,14 @@
         * Magnetic (Standard)
             * lowest cost per gb of all EBS volume types 
             * ideal for infrequent access where storage cost is important
+
+* what are the basics of roles?
+    * they are much more secure than using access key id's and secret access keys
+        * and they are easier to manage
+    * you can apply roles to EC2 instances at any time
+    * roles are universal
+        * no need to specify regions or az
+        
     
 
 
