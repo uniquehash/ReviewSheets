@@ -168,6 +168,11 @@
         }
     ```
 
+* what is aws cloudformation designer?
+    * a graphic tool for creating, viewing, and modifying cloudformation templates
+    * diagram template resources using a drag-and-drop interface
+    * edit details using integrated json text editor
+
 
 
 
