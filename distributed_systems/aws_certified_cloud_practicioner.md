@@ -152,7 +152,19 @@
     * you can apply roles to EC2 instances at any time
     * roles are universal
         * no need to specify regions or az
-        
+
+* what are the basics of RDS (Relational Data Service)?
+    * multi-az
+        * disaster recovery and fail over
+    * read replicas
+        * for performance
+
+* what are the basics of dynamoDB?
+    * used for non relational databases or for autoscaling on the fly
+
+* what are the basics of redshift?
+    * used for business intelligence or data warehousing
+    
     
 
 
