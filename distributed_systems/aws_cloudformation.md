@@ -98,6 +98,41 @@
     * Ref
         * returns the value of the specified parameter or resource
 
+* what are intrinsic conditional functions?
+    * used to conditionally create resources
+    * they do exactly what you expect
+    * Fn::If
+    * Fn::Not
+    * Fn::And
+    * Fn::Or
+    * Fn::Equals
+    
+* what are pseudo parameters?
+    * predefined parameters made by aws, used as arguments for the ref function
+    * basically aws constants linked to your account
+    * AWS::AccountId
+    * AWS::NoValue
+    * AWS::Region
+    * AWS::NotificationARNs
+    * AWS::StackId
+    * AWS::StackName
+
+* what are helper scripts?
+    * cloudformation provides a set of python helper scripts that you can install software and start services on an EC2 instance
+    * the helper scripts run on the EC2 instance as part of the stack creation process    
+    * the helper scripts are pre-installed on the latest versions of Amazon Linux AMIs
+    * cfn-init
+        * used to retrieve metadata
+        * installing software
+        * configuring files
+    * cfn-signal
+        * sends a signal to a cloudformation indicating the stack creation policy and a success or timeout
+    * cfn-get-metadata
+    * cfn-hup
+        * used when an update is made to our stack and we need to execute custom hooks
+
+
+
 
 
 
