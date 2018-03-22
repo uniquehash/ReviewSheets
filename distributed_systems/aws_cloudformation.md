@@ -131,6 +131,50 @@
     * cfn-hup
         * used when an update is made to our stack and we need to execute custom hooks
 
+* what are nested stacks?
+    * cloud formation stacks referenced from within a stack
+        * stacks basically treated as a resource
+    * useful for making reusable templates, segmenting resources and avoiding template size limitations
+    * launching a template with nested stacks will launch multiple sub-stacks
+    * deleting your launching stack will, by default delete all substacks
+    * example of nested stacks
+    ```
+        {
+            "AWSTemplateFormatVersion": "2010-09-09",
+            "Description": "Template for combining all templates into one nested template for testing.",
+            "Parameters": {
+                "VpcURL": {
+                    "Type": "String",
+                    "Default": "https://s3.amazonaws.com/bucket/vpc.template",
+                    "Description": "Template URL for BaseNetwork."
+                }
+            },
+            "Resources": {
+                "BaseNetwork": {
+                    "Type": "AWS::CloudFormation::Stack",
+                    "Properties": {
+                        "TemplateURL": {"Ref": "VpcURL"},
+                        "Parameters": {
+                            "CIDRRange": "10.250.0.0"
+                        }
+                    }
+                }
+            },
+            "Outputs": {
+                "BaseNetworkId": {
+                    "Value": {"Ref": "BaseNetwork"}
+                }
+            }
+        }
+    ```
+
+
+
+
+
+
+
+
 
 
 
