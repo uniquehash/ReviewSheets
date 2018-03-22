@@ -163,7 +163,38 @@
         * a template or pattern describing a solution to a common problem
         * identify design problem which has been thoroughly explored, and solve it with the proper solution
         
-            
+* what is [solid(object oriented design)](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design))?
+    * a mnemonic acronym for five design principles intended to make software design more understandable, flexible, and maintainable
+    * single responsibility principle
+        * a class should have only a single responsibility
+    * open/closed principle
+        * software entities should be open for expansion, but closed for modification
+    * liskov substitution principle
+        * objects in a program should be replacable with instances of their subtypes without altering the correctness of that program 
+        * also known as design by contract
+    * interface segregation principle
+        * many client-specific interfaces are better than one general-purpose interface
+    * dependency inversion principle 
+        * one should depend upon abstractions not concretions 
+
+* what is the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle)?
+    * is a computer programming principle that states that every module or class should have responsibility over a single part of the functionality provided by the software, and that responsibility should be entirely encapsulated by the class
+    * all of its services should be narrowly aligned with that responsibility 
+    * a class should have one reason to change
+
+* what is the [open/closed principle](https://en.wikipedia.org/wiki/Open/closed_principle)?
+    * software entities should allow its behaviour to be extended without modifying its source code 
+    * meyer's open/closed principle
+        * a module is open if it is still available for extension
+            * add fields to the data structure it contains, new elements to the set of functions it performs
+        * a module is closed if it is available for use by other modules 
+            * assumes that the module has been given a well-defined stable description
+        * solution is implementation inheritance 
+            * parent class is still closed but the child class can extend the functionality
+            * direct relationship between classes
+    * polymorphic open/closed principle 
+        * advocates inheritance from abstract base classes
+        * interface is still closed but new implementations are open but implement at minimum the interface
 
 
 
