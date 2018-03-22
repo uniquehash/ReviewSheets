@@ -165,6 +165,103 @@
 * what are the basics of redshift?
     * used for business intelligence or data warehousing
     
-    
+* what are basic best practices for architecting for the cloud?
+    * cloud computing difference
+        * IT assets become programmable resources
+        * global, available, and unlimited capacity
+        * higher level managed services
+        * security built in
+    * design principles
+        * scalability
+            * scale up
+                * increase resources inside a single VM
+            * scale out
+                * increasing the number of VMs
+                * stateless applications
+                    * application does not keep state, only works with passed in information
+                * stateless components
+                    * store the state in the client
+                * stateful components
+                    * state is saved in the component like a database
+                * distributed processing
+                    * break up data into pieces to work on them seperately / map reduce
+                * disposable resources instead of fixed servers
+                    * treat servers like cattle not puppies
+                    * bootstapping
+                        * scripts that bring the server to proper state
+                    * golden images
+                        * create images and spin servers from them
+                    * hybrid of the two
+                        * combination of previous ideas
+                * infrastructure as code
+                    * use cloudformation
+                    * elastic beanstalk
+                * automation
+                    * automate all the things
+                * loose coupling
+                    * allows you to have more modular and resiliant application
+                    * well defined interfaces
+                        * like rest
+                    * service discovery
+                        * use dns names instead of ip addresses, let aws services know about each other
+                    * asynchronous integration
+                        * use queues to make things async easily
+                    * graceful failure
+                        * handle when things go wrong, log and alert team
+                * services not servers
+                    * managed services
+                        * companies you pay to handle problem
+                    * serverless architecture
+                        * tech you use in a serverless method
+                * databases
+                    * relational databases 
+                        * for when there is a need for joins or complex transactions
+                        * aurora
+                            * scalability
+                            * high availability across AZs
+                    * non relational databases
+                        * for when there is no need for joins or complex transactions
+                        * dynamoDB
+                            * scalability
+                            * high availability across AZs
+                    * data warehousing
+                        * not meant for on line transaction processing
+                        * redshift
+                            * scalability
+                            * high availability
+                    * search
+                        * amazon cloud search
+                            * managed search service that requires little configuration scales automatically
+                        * amazon elastic search
+                            * offers open source api more control over configuration details 
+                        * both scalable and highly available
+                * remove single points of failure
+                    * introduce redundancy
+                        * have replication across availability zones
+                    * detect failures
+                        * with health checks and the like
+                    * durable data storage
+                        * don't store data on servers
+                    * automate multi-data center resilience
+                        * have replication across availability zones
+                    * fault isolation and traditional horizontal scaling
+                        * sharding
+                            * break data up so if one fails doesn't affect other
+                * optimize for cost
+                    * right sizing
+                    * elasticity
+                    * take advantage of the variety of purchasing options
+                * caching
+                    * application caching 
+                        * using elastic cache to cache common queries
+                    * edge caching 
+                        * cloudfront for assets
+                * security
+                    * utilize aws features for defense in depth
+                    * offload security responsibility to aws
+                    * reduce privileged access
+                    * security as code
+                    * real-time auditing 
+
 
 
