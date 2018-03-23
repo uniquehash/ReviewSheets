@@ -196,7 +196,69 @@
         * advocates inheritance from abstract base classes
         * interface is still closed but new implementations are open but implement at minimum the interface
 
+* what is a [inference rule](https://en.wikipedia.org/wiki/Rule_of_inference)?
+    * in logic a rule of inference, inference rule, transformation rule is a logical form consisting of a function which takes premises, analyzes their syntax, and returns a conclusion
 
+* what is [entailment](https://en.wikipedia.org/wiki/Logical_consequence)?
+    * means logical consequence
+    * a fundamental concept in logic which describes the relationship between statements that holds true when one statement logically follows from one or more statements 
+    * a valid logical argument is one in which the conclusion is entailed by the premises, because the conclusion is the consequence of the premises
+    
+* what are [free variables and bound variables](https://en.wikipedia.org/wiki/Free_variables_and_bound_variables)?
+    * in mathematics and other disciplines involving formal languages
+        * free variables
+            * a notation that specifies places in an expression where substitution may take place 
+        * bound variable
+            * a variable that was previously free but has been bound to a specific value or set of values called domain of discourse or universe 
+
+* what is a [formal system](https://en.wikipedia.org/wiki/Formal_system)?
+    * any well defined system of abstract thought based on the model of mathematics 
+    * need not be mathematical 
+    * basics
+        * each formal system uses a set of primitive symbols to finitely construct a formal language from a set of axioms through inferential rules of formation
+        * the system thus consist of valid formulas built up through finite combinations of the primitive symbols 
+            * combinations that are formed from the axioms in accordance with the stated rules
+        * formal definition
+            * a finite set of symbols that can be used for constructing formulas 
+            * a grammar which tells how well-formed formulas are constructed out of the symbols in the alphabet
+                * usually required that there be a decision procedure for deciding whether a formula is well formed or not
+            * a set of axioms or axiom schemata 
+                * each axiom must be a well formed formula
+            * a set of inference rules 
+    * properies of formal systems
+        * recursive 
+            * a formal system that if the set of axioms and the set of inference rules are decidable sets or semidecidable sets respectively
+        * inference and entailment 
+            * the entailment of the system by its logical foundation is what distinguishes a formal system from others which may have some basis in an abstract model
+        * formal language
+            * a language defined by a formal system
+        * logical system
+            * a logical system or for short logic is a formal system together with a form of semantics usually in the form of model-theoretic interpretation which assigns truth values to sentences of the formal language, that is, formulae that contain no free variables
+        * deductive inference
+            * a deductive system consists of axioms and rules of inference that can be used to derive theorems of the system 
+            * preserve deductive qualities in the formulas that are expressed in the system usually the quality we are concerned with is truth as opposed to falsehood
+
+* what is [type theory](https://en.wikipedia.org/wiki/Type_theory)?
+    * in mathematics, logic, and computer science a type theory is any of a class of formal systems, some of which can serve as alternatives to set theory as a foundation for all mathematics 
+
+* what is a [type constructor](https://en.wikipedia.org/wiki/Type_constructor)?
+    * in an area of mathematical logic and computer science known as type theory 
+
+* what are [variance, covariance and contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science))?
+    * variance
+        * refers to how subtyping between more complex types relates to subtyping between their components
+        * questions addressed
+            * how should a list of `Cat`s relate to a list of `Animal`s?
+            * how should a function returning `Cat` relate to a function returning `Animal`?
+        * depending on the variance of the type constructor 
+
+* what is the [liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle)?
+    * a principle of object-oriented programming stating that 
+        * if S is a subtype of T
+            * then objects of type T may be replaced with objects of type S
+                * without altering any of the desirable properties of the program
+    * also known as strong behavioral subtyping 
+        * a particular type of a subtype relation
 
 
 
