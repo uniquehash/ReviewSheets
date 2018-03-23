@@ -236,13 +236,22 @@
             * a logical system or for short logic is a formal system together with a form of semantics usually in the form of model-theoretic interpretation which assigns truth values to sentences of the formal language, that is, formulae that contain no free variables
         * deductive inference
             * a deductive system consists of axioms and rules of inference that can be used to derive theorems of the system 
-            * preserve deductive qualities in the formulas that are expressed in the system usually the quality we are concerned with is truth as opposed to falsehood
+            * preserve deductive qualities in the formulas that are expressed in the system
+                * usually the quality we are concerned with is truth as opposed to falsehood
+                * other things such as justification or belief may be preserved instead
+            * in order to sustain its deductive integrity a deductive aparatus must be defined without reference to any intended interpretation of the language 
+                * the aim is to ensure that each line of a derivation is merely a syntactic consequence of the lines that precede it 
+                * there should be no element of any interpretation of the language that gets involved with the deductive nature of the system 
 
 * what is [type theory](https://en.wikipedia.org/wiki/Type_theory)?
     * in mathematics, logic, and computer science a type theory is any of a class of formal systems, some of which can serve as alternatives to set theory as a foundation for all mathematics 
+    * in type theory every term has a type and operations are restricted to terms of a certain type
 
 * what is a [type constructor](https://en.wikipedia.org/wiki/Type_constructor)?
     * in an area of mathematical logic and computer science known as type theory 
+        * a feature of a typed formal language that builds new types from old ones
+        * basic types are considered to be built using nullary type constructors 
+        * some type constructors take another type as an argument
 
 * what are [variance, covariance and contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science))?
     * variance
@@ -250,7 +259,43 @@
         * questions addressed
             * how should a list of `Cat`s relate to a list of `Animal`s?
             * how should a function returning `Cat` relate to a function returning `Animal`?
-        * depending on the variance of the type constructor 
+        * depending on the variance of the type constructor the subtyping relation of the simple types to their respective complex types may be either
+            * preserved
+                * covariant
+            * reversed
+                * contravariant
+            * ignored 
+    * covariant
+        * the subtyping relation of the simple types are preserved for the complex types
+        * example
+            * `list of Cat` is a subtype of `list of Animal`
+    * contravariant 
+        * subtyping relation of the simple types is reversed for the complex types
+        * example
+            * `function from Animal to String` is a subtype of `function from Cat to String`
+    * programming language designers will consider variance when devising typing rules for language features such as arrays, inheritance, and generic datatypes
+    * formal definition
+        * within the type system of a programming language a typing rule or a type constructor is 
+            * covariant 
+                * if it preserves the ordering of types which orders types from more specific to more generic
+            * contravariant
+                * if it reverses this ordering
+            * bivariant
+                * if both apply at the same time
+            * invariant or nonvariant 
+                * if neither apply 
+    * data structures
+        * read-only data types, or sources,  can be covariant
+        * write-only data types, or sinks, can be contravariant
+        * mutable data types which act as both sources and sinks should be invariant 
+    * function types
+        * languages with first class functions have function types 
+            * `a function expecting a Cat and returning an Animal`
+        * these languages also need to specify when one function type is a subtype of another 
+            * when it is safe to use a function of one type in a context that expects a function of a different type
+        * it is safe to substitute a function f for a function g if f accepts a more general type of arguments and returns a more specific type than g
+            * both functions of type `Cat -> Cat` and `Animal -> Animal` can be used whenever a `Cat -> Animal` was expected
+        * the `->` type constructor is contravariant in the input type and covariant in the output type
 
 * what is the [liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle)?
     * a principle of object-oriented programming stating that 
@@ -259,7 +304,42 @@
                 * without altering any of the desirable properties of the program
     * also known as strong behavioral subtyping 
         * a particular type of a subtype relation
+    * imposes standard requirements on signatures 
+        * contravariance of method arguments in the subtype
+        * covariance of return types in the subtype
+        * no new exceptions should be thrown by methods of the subtype, except where those exceptions are themselves subtypes of exceptions thrown by the methods of the supertype
+    * imposes number of behavioral conditions
+        * preconditions
+            * cannot be strengthened in a subtype
+        * postconditions
+            * cannot be weakened in a subtype
+        * invariants
+            * of the supertype must be preserved in a subtype
+        * history constraint
+            * objects are regarded as being modifiable only through their methods
+            * subtypes are not allowed to introduce methods that are not present in the supertype
 
+* what is a [precondition](https://en.wikipedia.org/wiki/Precondition)?
+    * precondition for any routine defines any constraint on object state which are necessary for succesful execution
+        * the routine caller's portion of the contract 
+        * caller then is obligated to ensure that the precondition holds prior to calling the routine
+        * the reward for the caller's effort is expressed in the called routine's postcondition
+    * in the presence of inheritance the routines inherited by descendant classes do so with their preconditions in force 
+        * any implementation or redefinitions of inherited routines also have to be written to comply with their inherited contractor
+        * preconditions can be modified in redefined routines but they may only be weakened 
+            * the redefined routine may lessen the obligation of the client but not increase it 
+    
+* what is a [postcondition](https://en.wikipedia.org/wiki/Postcondition)?
+    * the postcondition of any routine is a declaration of the properties which are guaranteed upon completion of the routine's execution
+    * as it relates to the routine's contract, the postcondition offers assurance to the potential callers that in cases in which the routine is called in a state in which its precondition holds, the properties declared by the postcondition are assured
+    * in the presence of inheritance the routines inherited by descendant subclasses do so with their contracts, that is their preconditions and postconditions, in force
+        * this means that any implementation or redefinition of inherited routines also have to be written to comply with their inherited contracts
+        * postconditions can be modified in redefined routines, but they may only be strengthened
+            * the redefined routine may increase the benefits it provides the client, but may not decrease those benefits 
+
+* what is an [invariant](https://en.wikipedia.org/wiki/Invariant_(computer_science))?
+    * a condition that can be relied upon to be true during execution of a program, or during some portion of it 
+            
 
 
 
