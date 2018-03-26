@@ -107,12 +107,7 @@
 
 
 #### best practices for IT policy compliance management
-    * keeping a balanced perspective on IT policy compliance
-    * understanding the auditors perspective
-    * aligning IT compliance/security with business processes
-    * building an IT compliance policy and controls environment
-    * establishing and monitoring accountability
-    * using risk-based prioritized remediation of control weaknesses
-
+   * remember the big picture
+      * 
 
   
