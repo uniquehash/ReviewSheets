@@ -340,6 +340,118 @@
 * what is an [invariant](https://en.wikipedia.org/wiki/Invariant_(computer_science))?
     * a condition that can be relied upon to be true during execution of a program, or during some portion of it 
             
+* what is the [interface segregation principle](https://en.wikipedia.org/wiki/Interface_segregation_principle)?
+   * no client should be forced to depend on methods it does not use
+   * intended to keep a system decoupled and thus easier to refactor, change, and redeploy 
+   * split interfaces that are very large into smaller and more specific ones so that clients will only have to know about the methods that are of interest to them 
+      * also known as role interfaces 
+   * within object-oriented design, interfaces provide layers of abstraction that facilitate conceptual explanation of the code and create a barrier preventing coupling to dependencies 
+      * a system may become so coupled at multiple levels that it is no longer possible to make a change in one place wihtout necessitating many additional changes, thus using an interface or an abstract class can prevent this side effect
+
+* what is a [creational pattern](https://en.wikipedia.org/wiki/Creational_pattern)?
+   * the creational patterns aim to separate a system from how its objects are created, composed, and represented
+      * they increase the system's flexibility in terms of the what, who, how, and when of object creation
+   * design patterns that deal with object creation mechanisms, trying to create objects in a manner suitable to the situation 
+      * the basic form of object creation could result in design problems or in added complexity to the design 
+      * creational design patterns solve this problem by somehow controlling this object creation
+   * composed of two dominant ideas
+      * encapsulating knowledge about which concrete classes the system uses
+      * another is hiding how instances of these concrete classes are created and combined 
+   * categorized into
+      * object-creational patterns
+         * object creation
+         * defer part of its object creation to another object
+      * class-creational patterns
+         * class instantiation 
+         * defer its object creation to subclasses
+   * well known design patterns that are parts of creational patterns
+      * abstract factory pattern
+         * provides an interface for creating related or dependent objects without specifying the objects concrete classes
+      * builder pattern
+         * which separates the construction of a complex object from its representation so that the same construction process can create different representations 
+      * factory method pattern
+         * which allows a class to defer instantiation to subclasses
+      * prototype pattern
+         * which specifies the kind of object to create using a prototypical instance, and creates new objects by cloning this prototype
+      * singleton pattern
+         * which ensures that a class only has one instance, and provides a global point of access to it
+      * dependency injection pattern
+         * a class accepts the object it requires from an injector instead of creating the objects directly
+      * lazy initialization pattern
+         * tactic of delaying the creation of an object, the calculation of a value, or some other expensive process until the first time it is needed 
+      * object pool pattern
+         * avoid expensive acquisition and release of resources by recycling objects that are no longer in use
+   * modern usage
+      * modern software engineers depend more on object composition than class inheritance
+         * emphasis shifts away from hard-coding behaviors toward defining a smaller set of basic behaviors that can be composed into more complex ones
+      * hard-coded behaviors are inflexible because they require overriding or re-implementating the whole thing in order to change parts of the design
+      * consider using creational patterns when
+         * a system should be independent of how its objects and products are created
+         * a set of related objects is designed to be used together
+         * hiding the implementations of a class library or product, revealing only their interfaces
+         * constructing different representation of independent complex objects
+         * a class instantiations are specified at run-time 
+         * there must be a single instance and client can access this instance at all times
+         * instance should be extensible without being modified
+
+   
+   
+
+* what is the [dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)?
+   * refers to a specific form of decoupling software modules
+      * high-level modules should not depend on low-level modules, both should depend on abstractions
+      * abstractions should not depend on details, details should depend on abstractions
+   * traditional layers pattern
+      * policy layer -> mechanism layer -> utility layer
+      * in conventional application architecture
+         * lower-level components are designed to be consumed by higher-level components which enable increasingly complex systems to be built 
+         * higher-level components depend directly upon lower-level components to achieve some task
+         * dependency upon lower-level components limits the reuse opportunities of the higher-level components
+   * dependency inversion pattern
+      * policy layer -> (interface) policy service interface <- mechanism layer -> (interface) mechanism service interface <- utility layer
+      * by adding an abstract layer both high and lower-level layers reduce the traditional dependencies from top to bottom
+      * both layers depend on abstractions that draw the behavior needed by higher-level layers
+      * the inversion of dependencies and ownership encourages the re-usability of the higher/policy layers
+         * upper layers could use other implementations of the lower services 
+         * when the lower-level layer components are closed or when the application requires the reuse o existing services, it is common that an adapter mediates between the services and the abstractions 
+   * dependency inversion pattern generalization
+      * in many projects the dependency inversion principle and pattern are considered a single concept that should be generalized 
+         * it is simpler to see a good thinking principle as a coding pattern 
+         * once an abstract class or an interface has been coded the programmer may say "i have done the job of abstraction"
+      * if the used mocking tool relies only on inheritance, generalizing the dependency inversion pattern may become a necessity 
+         * simply implementing an interface over a class isn't sufficient and generally does not reduce coupling, only thinking about the potential abstraction of interactions can lead to a less coupled design 
+         * implementating generic interfaces everywhere in a project makes it by far harder to understand and maintain
+            * at each step the reader will ask themself what are the other implementations of this interface and the response is generally only mocks
+         * the interface generalization requires more plumbing code, in particular factories that generally rely on a dependency-injection framework
+         * interface generalization also restricts the usage of the programming language
+      * generalization restrictions
+         * the presence of interfaces to accomplish the depedency inversion pattern have other design implications in an object-oriented program 
+            * all member variables in a class must be interfaces or abstracts 
+            * all concrete class packages must connect only through interface or abstract class packages
+            * no class should derive from a concrete class
+            * no method should override an implemented method
+            * all variable instantiation requires the implementation of a creational pattern such as the factory method or the factory pattern, or the use of a dependency-injection framework
+      * interface mocking restrictions
+         * using inheritance-based mocking tools also introduces restrictions
+            * static externally visible members should systematically rely on dependency injection making them far harder to implement
+            * all testable methods should become an interface implementation or an override of an abstract definition
+      * future directions
+         * principles are ways of thinking
+         * patterns are common ways to solve problems
+         * programming languages will continue to evolve to allow to enforce stronger and more precise usage contracts in at least two directions
+            * enforcing usage conditions (pre, post, invariant)
+            * state-based interfaces
+         * more and more mocking tools now use code injection to solve the problem of replacing static and non-virtual members 
+            * programming languages will probably evolve to generate mocking-compatible bytecode
+               * one direction will restrict the usage of non-virtual members
+               * the other will be to generate, at least in test situations, a bytecode allowing non-inheritance based mocking 
+               
+
+
+
+
+
+
 
 
 
