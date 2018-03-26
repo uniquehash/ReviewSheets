@@ -108,6 +108,35 @@
 
 #### best practices for IT policy compliance management
    * remember the big picture
-      * 
+      * the goal of an IT policy compliance framework is to make your organization's operations secure and effective, and to ensure they run in harmony with the underlying objectives of policies that underpin the framework
+         * not doing this properly is how large organizations that are compliant on paper have major breaches
+      * understand your organization's policy control objectives
+         * what are you trying to protect or control?
+         * type of controls
+            * administrative controls
+               * policies, procedures, and processes associated with the control objectives
+            * physical and environmental controls
+               * the physical protection of electronic and non-electronic information or assets
+            * logical controls
+               * the control of access to specific networks and resources by an authorized user
+         * aligning and mapping the controls to standards and regulations is a useful practice 
+      * understand the auditor mentality
+         * an auditor's job is to render an opinion on whether or not your organization's policy controls are working, and if they were designed properly before deployment
+         * begins an audit by studying your control design
+         * plans their activities by evaluating audit risk
+         * audit risk
+            * the risk that an auditor has incorrectly issued an unqualified opinion on a set of financial statements or a control environment
+            * audit risk = inherent risk x control risk x detection risk
+         * inherent risk
+            * things that are built into the audit situation and that the auditor doesn't control, such as type of business, type of activity, or other environmental factors
+         * control risk
+            * refers to the likelihood that the control environment won't detect or prevent an error or misstatement
+            * when the client designs a better control environment, it automatically reduces control and audit risks
+         * detection risk
+            * the likelihood that an error or misstatement won't be captured by an auditor's testing 
+            * this area of audit risk is the one over which an auditor has the most control 
+         * an auditor's objective is to minimize overall audit risk 
+         * passing an audit ia all about what you can prove 
+         * failed audits always trigger an increase in scope for future audits 
 
   
