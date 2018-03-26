@@ -138,5 +138,31 @@
          * an auditor's objective is to minimize overall audit risk 
          * passing an audit ia all about what you can prove 
          * failed audits always trigger an increase in scope for future audits 
+   * align IT policy compliance and security with the business
+      * many models exist for describing organizational capabilities and maturity
+         * SEI (Software Engineering Institute) has CMMI (Common Maturity Model for Integration)
+            * initial
+               * chaotic, ad hoc, individual heroics
+               * the starting point for use of a new process               
+            * repeatable
+               * the process is able to be used repeatedly with roughly repeatable outcomes
+            * defined
+               * the process is defined/confirmed as a standard business process, and decomposed to levels 0, 1, and 2 the latter being work instructions
+            * managed
+               * the process is managed according to metrics described in the defined stage
+            * optimized
+               * process management includes deliberate process optimization/improvement
+         * Microsoft has SOA (Service Oriented Architecture) maturity model
+         * ultimately about specifying the operations og an organization
+      * aligning business with compliance starts by understanding the type of organization you're in and, most importantly, what has the best chance of working within that environment 
+         * initial
+            * design more controls that are preventive and detective in nature
+            * may not require in-depth policies
+      * address the business risk
+         * the focus of reporting must be the business process layer or specific business risk you are trying to asses 
+         * examples
+            * privacy audits for personally identifiable information
+            * audits for protection of intellectual property in research and development
+            * operational reviews of controls for critical lines of business such as e-commerce
 
   
