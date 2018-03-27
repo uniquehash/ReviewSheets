@@ -474,12 +474,51 @@
       * the subclass must reimplement all of the factory methods with exactly the same signature if it does force inheirtance by making the constructor protected instead of private
 
 * what is the [abstract factory pattern](https://en.wikipedia.org/wiki/Abstract_factory_pattern)?
+   * the essense of the abstract factory pattern is to provide an interface for creating families of related or dependent objects without specifying their concrete classes 
    * provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes
       * client software creates concrete implementation of the abstract factory and then uses the generic interface of the factory to create the concrete objects that are part of the theme 
       * client does not know which concrete objects it gets from each of these internal factories, since it uses only the generic interfaces of their products 
       * this pattern separates the details of implementation of a set of objects from their general usage and relies on object composition, as object creation is implemented in methods exposed in the factory interface 
    * the intent in employing the pattern is to insulate the creation of objects from their usage and to create families of related objects without having to depend on their concrete classes
       * allows for new derived types to be introduced with no change to code that uses the base class
+      * allows to interchange concrete implementations without changing the code that uses them even at runtime
+   * problems it solves
+      * how can an application be independent of how its objects are created
+      * how can a class be independent of how the objects it requires are created
+      * how can families of related or dependent objects be created
+   * solutions it creates
+      * encapsulates object creation in a separate (factory) object
+         * define an interface (AbstractFactory) for creating objects, and implement the interface
+      * a class delegates object creation to a factory object instead of creating objects directly 
+   * makes a class independent of how its objects are created
+      * a class can be configured with a factory object, which it uses to create objects, and even more, the factory object can be exchanged at run-time
+   * usage
+      * the factory determines the actual concrete type of object to be created, and it is here that the object is actually created
+         * factory only returns an abstract pointer to the created concrete object
+      * insulates client code from object creation by having client ask a factory object to create an object of the desired abstract type and to return an abstract pointer to the object    
+      * since the factory only returns an abstract pointer the client code does not know nor care what the actual concrete type of the object that was just created is
+      * the factory however does know the type of object it is creating through one method or another
+      * client only accesses created object through their abstract interface and only knows that they exist
+      * new derived types are easy to add
+
+* what is the [factory method pattern](https://en.wikipedia.org/wiki/Factory_method_pattern)?
+   * define an interface for creating an object, but let subclasses decide which class to instantiate
+      * factory method lets a class defer instantiation it uses to subclasses 
+   * in class based programming it is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created
+   * problems it solves
+      * how can an object be created so that subclasses can redefine which class to instantiate
+      * how can a class defer instantiation to subclasses 
+   * solution it creates
+      * define a separate operation for creating an object
+      * create an object by calling a factory method
+   * this enables writing of subclasses to change the way an object is created
+   * basically the same thing as the abstract factory pattern but less abstract
+
+
+
+
+
+
 
 
 
