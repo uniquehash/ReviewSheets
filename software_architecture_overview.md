@@ -394,9 +394,6 @@
          * there must be a single instance and client can access this instance at all times
          * instance should be extensible without being modified
 
-   
-   
-
 * what is the [dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)?
    * refers to a specific form of decoupling software modules
       * high-level modules should not depend on low-level modules, both should depend on abstractions
@@ -445,7 +442,44 @@
             * programming languages will probably evolve to generate mocking-compatible bytecode
                * one direction will restrict the usage of non-virtual members
                * the other will be to generate, at least in test situations, a bytecode allowing non-inheritance based mocking 
-               
+
+* what is a [factory in object oriented programming](https://en.wikipedia.org/wiki/Factory_(object-oriented_programming))?
+   * an object for creating other objects 
+   * a function or method that returns objects of a varying prototype or class from some method call, which is assumed to be new
+      * more broadly, a subroutine that returns a new object may be referred to as a factory, as in factory method or factory function
+   * class based programming
+      * a factory is an abstraction of a constructor of a class
+         * a constructor is concrete in that it creates objects as instances of a single class, and by a specified process through class instantiation 
+         * a factory can create objects by instantiating various classes or by using other allocation schemes
+   * while in prototype based programming
+      * a factory is an abstraction of a prototype object 
+         * a prototype object is concrete in that it is used to create objects by being cloned 
+         * a factory can create objects by cloning various prototypes, or by other allocation schemes
+   * syntax
+      * factory method
+         * when factories are methods of objects
+      * factory function
+         * when factories are callable objects 
+      * in some languages constructors and factories have identitical syntax while in others constructors have a special syntax
+         * python, perl, ruby, object pascal, f# are languages where constructors and factories have identical syntax
+   * semantics
+      * in languages where objects are dynamically allocated factories are semantically equivalent to constructors 
+      * basically the difference is that factories are allocated at run time, and constructors are allocated at compile time
+   * benefits
+      * descriptive names
+      * encapsulation
+   * limitations
+      * refactoring an existing class to use factories breaks existing clients, since constructor would become private
+      * the class cannot be extended, since the pattern relies on using a private constructor
+      * the subclass must reimplement all of the factory methods with exactly the same signature if it does force inheirtance by making the constructor protected instead of private
+
+* what is the [abstract factory pattern](https://en.wikipedia.org/wiki/Abstract_factory_pattern)?
+   * provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes
+      * client software creates concrete implementation of the abstract factory and then uses the generic interface of the factory to create the concrete objects that are part of the theme 
+      * client does not know which concrete objects it gets from each of these internal factories, since it uses only the generic interfaces of their products 
+      * this pattern separates the details of implementation of a set of objects from their general usage and relies on object composition, as object creation is implemented in methods exposed in the factory interface 
+   * the intent in employing the pattern is to insulate the creation of objects from their usage and to create families of related objects without having to depend on their concrete classes
+      * allows for new derived types to be introduced with no change to code that uses the base class
 
 
 
