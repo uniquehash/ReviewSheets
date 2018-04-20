@@ -949,7 +949,52 @@
 			* recommended to set to `JWT` or omit this field
 		* `alg` (message authentication algorithm)
 			* issuer can freely set an algorithm to verify the signature on the token
-
+* what is an [identity provider](https://en.wikipedia.org/wiki/Identity_provider)?
+	* also known as an IDP
+	* a system entity that creates, maintains, and manages identity information for principals while providing authentication services to relying party applications within a federation or distributed network 
+	* offers user authentication as a service
+		* relying party applications, such as web applications, outsource the user authentication step to a trusted identity provider
+		* such a relying party application is said to be federated, that is, it consumes federated identity
+	* an identity provider is "a trusted provider that lets you use single sign-on to access other websites"
+		* enhances usability by reducing password fatigue 
+		* provides better security by reducing potential attack surface
+	* types of identity providers
+		* SAML identity provider
+			* Security Assertion Markup Language
+			* a set of profiles for exchanging authentication and authorization data across security domains
+				* an IDP is a special type of authentication authority 
+				* a SAML identity provider is a system entity that issues authentication assertions in conjunction with an SSO profile of SAML
+				* a relying party that consumes these authentication assertions is called a SAML service provider
+		* OpenID provider
+			* (OIDC) OpenID Connect is an identity layer on top of OAuth
+				* an identity provider is a special type of OAuth 2.0 authorization server
+				* a system entity called an OpenID Provider issues JSON-formatted identity tokens to OIDC relying parties via rest api
+	* example of IDPs
+		* Ping Identity
+			* on-prem and cloud based IDP (and SP) for enterprise, OIDC/SAML/OAuth
+		* Cierge
+			* open source, provides email-based OIDC passwordless authentication
+		* Keycloak
+			* open source, Java-based OIDC/SAML Idp
+		* Auth0
+			* commercial OIDC Idp
+		* Gluu
+			* commercial OIDC/SAML Idp
+		
+* what is an [SAML identity provider](https://en.wikipedia.org/wiki/Identity_provider_(SAML))?
+	* an identity provider implemented with the SAML system
+	* a system entity that issues authentication assertions in conjunction with a single sign-on profile of the SAML
+	* a SAML authority is any system entity that issues SAML assertions 
+		* SAML authentication authority
+			* a system entity that produces SAML authentication assertions 
+		* SAML attribute authority
+			* a system entity that produces SAML attribute assertions
+	* SAML identity provider 
+	* a SAML authentication authority that participates in one or more SSO profiles of SAML
+	
+		
+* what does [federated identity](https://en.wikipedia.org/wiki/Federated_identity) mean?
+	* in information technology is the means of linking a person's electronic identity and attributes, stored across multiple distinct identity management systems
 
 
 
