@@ -98,11 +98,38 @@
     * advice
       * we can give advice to other game players on how to best move forward
       
+* games with sequential moves (ch 3)
+  * rollback
+    * also known as backward induction
+    * a method of solving sequential-move games by looking ahead and reasoning back to determine behavior 
+    * basically start at the desired terminal node and work backwards to reach the initial node
+  * rollback equilibrium
+    * when players choose their optimal strategies found by doing rollback analysis 
+  * rollback equilibrium outcome
+    * the outcome that results from all players choose their rollback strategy 
         
         
         
         
         
         
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
