@@ -122,18 +122,34 @@
     * ˈ
       * stress mark?
       
-      
-      
-      
-      
-      
-    
-    
-    
-    
-    
-    
-    
+* which vowels are weak?
+  * [source a](https://notendur.hi.is/peturk/KENNSLA/02/TOP/stress1.html)
+    * ə
+      * [a]bout, comm[o]n, stand[a]rd
+    * ɪ
+      * k[i]t, b[i]d, h[y]mn, m[i]n[u]te
+    * ʊ
+      * f[oo]t, g[oo]d, p[u]t
+  * [source b](https://www.slideshare.net/cupidlucid/presentation-on-weak-syllables-presentation-674241)
+    * four types of center
+      * the vowel ə    
+        * ə
+          * [a]bout, comm[o]n, stand[a]rd
+      * a close front unrounded vowel in the general area of iː and ɪ
+        * iː
+          * fl[ee]ce, s[ea], mach[in]e    
+        * ɪ	
+          * k[i]t, b[i]d, h[y]mn, m[i]nute
+      * a close back rounded vowel in the general area of uː and ʊ
+        * uː
+          * g[oo]se, tw[o], bl[ue], gr[ou]p
+        * ʊ
+          * f[oo]t, g[oo]d, p[u]t
+      * a syllabic consonant
+        * syllabic `l̩` with alveolar consonant preceding
+          * catt[le], bott[le], mudd[le], 
+        * syllabic `l̩` with non-alveolar consonant preceding
+          * coup[le], troub[le], knuck[le]
     
     
     
