@@ -107,8 +107,21 @@
     * when players choose their optimal strategies found by doing rollback analysis 
   * rollback equilibrium outcome
     * the outcome that results from all players choose their rollback strategy 
-        
-        
+  * path of play
+    * a path through a decision tree drawn for a particular game
+  * equilibrium path of play
+    * the optimal path of play the game should take based on the rollback equilibrium if all players follow their pay off perfectly
+  * first-mover advantage
+    * a sittuation in games in which playing the first move offers a significant advantage, and may decide the game
+    * comes from the ability to commit oneself to an advantageous position and to force the other players to adapt to it 
+  * second-mover advantage
+    * a sittuation in games in which playing the second move offers a significant advantage and may decide the game
+    * comes from the flexibility to adapt oneself to the other's choices
+  * intermediate valuation function
+    * an indirect way of assigning plausible payoffs to nonterminal nodes
+    * usually used when the game is to comples to be able to explicitly roll back from a full look ahead
+  
+
         
         
         
