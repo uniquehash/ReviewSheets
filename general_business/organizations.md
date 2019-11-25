@@ -1,4 +1,4 @@
-# [what kind of organizational forms are common](https://en.wikipedia.org/wiki/Organizational_structure)?
+# what kind of [organizational forms](https://en.wikipedia.org/wiki/Organizational_structure) are common ?
   * Pre-bureaucratic structures
   * Bureaucratic structures
   * Post-bureaucratic
