@@ -1,4 +1,4 @@
-
+  
 # what kind of [organizational forms](https://en.wikipedia.org/wiki/Organizational_structure) are common ?
   * Pre-bureaucratic structures
     * lack standardization of tasks
@@ -12,35 +12,34 @@
         * "it's always been that way" leadership
       * [charismatic domination](https://en.wikipedia.org/wiki/Charismatic_authority)
         * a form of leadership where authority of an organization is largely derived from the charisma of the leader
-
-
-Decisions are made through an organizedaucratic structures, the authority is at the top and information is then flowed from top to bottom. 
-
-This causes for more rules and standards for the company which operational process is watched with close supervision. 
-
-Some advantages for bureaucratic structures for top-level managers are they have a tremendous control over organizational structure decisions. 
-
-This works best for managers who have a command and control style of managing. 
-
-Strategic decision-making is also faster because there are fewer people it has to go through to approve.[citation needed] 
-
-A disadvantage in bureaucratic structures is that it can discourage creativity and innovation in the organization. This can make it hard for a company to adapt to changing conditions in the marketplace.
-
-
   * Bureaucratic structures
     * tasks are standardized
     * most common in large scale organizations, usually as a tall structure
+    * information
+      * flows from top to bottom
     * decisions
       * tend to pass through many levels increasing organizational inertia
       * made through organized autocratic structures
-      * authority flows from top to bottom
+      * authority is at the top
     * rigid and tight procedures, policies and constraints
+      * operational processes are created and closely supervised to ensure that the information from the top is communicated down without being tampered
+    * advantage for top-level managers
+      * tremendous control over organizational structure decisions
+      * works best for managers who have a command and control style of managing
+      * the concentration of the decision making at the top allows for faster strategic decision making
+    * disadvantage for the org
+      * discourages creativity and innovation in the organizatio
+        * makes it hard for a company to adapt to contengencies
     * characteristics
       * clearly defined roles and responsabilities
         * organizational chart exist for every department, and everyone understands who is in charge and what their responsibilities are for every situation
       * a hierarchical structure
       * respect for merit
   * Post-bureaucratic
+    * variations of bureaucracy
+    * hierarchies still exist
+    * authority is still rational legal type
+    * organization is still rule bound
   * Functional structure
   * Divisional structure
   * Matrix structure
@@ -51,6 +50,7 @@ A disadvantage in bureaucratic structures is that it can discourage creativity a
   * Hierarchy-community phenotype model
 
 # what is the [tripartite classification of authority](https://en.wikipedia.org/wiki/Tripartite_classification_of_authority) model?
+  * authored by 
 
 # what is [organizational inertia](https://managingresearchlibrary.org/glossary/organizational-inertia)
   * the tendency of a mature organization to continue on its current trajectory, stems from
