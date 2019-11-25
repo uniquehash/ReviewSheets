@@ -1,5 +1,36 @@
-  
+# org words found here and there
+  * [multinational](https://en.wikipedia.org/wiki/Multinational_corporation)
+  * [flat structure](https://en.wikipedia.org/wiki/Flat_organization)
+  * [bureaucracy](https://en.wikipedia.org/wiki/Bureaucracy)
+  * [wirearchy](https://en.wikipedia.org/wiki/Wirearchy)
+  * [chain of command](https://en.wikipedia.org/wiki/Command_hierarchy)
+  * [matrix management](https://en.wikipedia.org/wiki/Matrix_management)
+  * [project manager](https://en.wikipedia.org/wiki/Project_manager)
+  * [functional manager](https://en.wikipedia.org/wiki/Functional_manager)
+  * [middle managers](https://en.wikipedia.org/wiki/Middle_manager)
+  * [project](https://en.wikipedia.org/wiki/Project)
+  * [consensus decision making](https://en.wikipedia.org/wiki/Consensus)
+  * [community organization](https://en.wikipedia.org/wiki/Community_organization)
+  * [cooperatives](https://en.wikipedia.org/wiki/Cooperatives)
+  * [housing cooperative](https://en.wikipedia.org/wiki/Housing_cooperatives)
+  * [total quality management](https://en.wikipedia.org/wiki/Total_quality_management)
+  * [Tripartite classification of authority](https://en.wikipedia.org/wiki/Tripartite_classification_of_authority)
+  * [standardization](https://en.wikipedia.org/wiki/Standardization)
+  * [organizations](https://en.wikipedia.org/wiki/Organizations)
+  * [branch](https://en.wikipedia.org/wiki/Branch_(banking))
+  * [department](https://en.wikipedia.org/wiki/Departmentalization)
+  * [workgroup](https://en.wikipedia.org/wiki/Working_group)
+  * [individual](https://en.wikipedia.org/wiki/Employee)
+  * [task allocation](https://en.wikipedia.org/wiki/Task_allocation)
+  * [management](https://en.wikipedia.org/wiki/Management)
+  * [departmentalization](https://en.wikipedia.org/wiki/Departmentalization)
+  * [power](https://en.wikipedia.org/wiki/Power_(social_and_political))
+  * [organizational architecture](https://en.wikipedia.org/wiki/Organizational_architecture)
+
 # what kind of [organizational forms](https://en.wikipedia.org/wiki/Organizational_structure) are common ?
+  * organizational structure is a structure that consists of activities such as coordination, supervsion, and task allocation
+      * organizational structure determines how the organization performs or operates
+      * specifically refers to how the people in an organizatin are grouped and to whom they report
   * Pre-bureaucratic structures
     * lack standardization of tasks
     * most common in smaller organizations and best used to solve simple tasks
@@ -41,14 +72,64 @@
     * authority is still rational legal type
     * organization is still rule bound
   * Functional structure
-    * 
+    * an organizational structure where people are organized by function
+    * operational efficiency is gained by employees becoming specialist within their own realm of expertise
+    * typical problems
+      * communication within the company becomes rigid, making the organization slow and inflexible
+        * lateral communication between functions becomes very important 
+      * communication can become very rigid becaus of the standardization of operation and high degreee of formalization
+    * best suited for organizations producing standardized goods and services at large volume and low cost
+    * coordination and specialization of tasks are centralized in a functional structure, which makes producing a limited number of products or services efficient and predictable
+    * functional units perform with a high level of efficiency their level of cooperation with each other is sometimes compromised
+      * groups may have difficulties working well with each other as they may be territorial
+      * infighting among units may cause delays, reduced commitment due to competing interests, wasted time, leading to project delays
+      * the overall of this can bring down production levels overall, and reduce company-wide employee commitment toward meeting organizational goals
   * Divisional structure
+    * an organizational structure that consists of self-contained divisions
+      * a division is a collection of functions which produe a product
+      * also utilizes a plan to compete and operate as a separate business or profit center
+      * employees who are responsible for certaiin market services or types of products are placed in divisional structure in order to increase their flexibility
+      * example divisions
+        * regional (u.s. division, eu division)
+        * consumer type (b2b, b2c)
+        * product type (trucks, SUVS, compacts)
+      * divisions may have their own departments and redundency
+    * advantage
+      * authority is delegated allowing performance to be directly measured within each group
+      * potentially more efficient in coordinating work between different divisions
+      * potentially more flexibility in responding to the market
+      * organizational change is simple as each division can be added or removed modularly since their are no external dependencies
+    * disadvantage
+      * can support unhealthy rivalries among divisions
+      * increased cost by requiring more qualified managers for each division and duplicated resources
+      * divisional goals may be emphasized over organizational goals resulting in duplication of resources and effort   
   * Matrix structure
-  * Organizational circle
+    * groups employees by 2 dimensions often times function and something else
+      * weak / functional marix
+        * a project manager with only limited authority is assigned to oversee the cross-functional aspects of the project
+        * a functional managers maintains control over their resources and project areas
+        * functioinal manager has the upper hand
+      * balanced / functional matrix
+        * a project manager is assigned to oversee the project
+        * power is shared equally between the project manager and functional manager
+        * difficult to setup and mantain but brings the best of both system if at all functional
+      * strong / project matrix
+        * a project manager is primarily responsible for the project
+        * functional manager provide technical expertise and assign resources as needed
+    * advantages
+      * improves upon the silo critique of functional management by aiming to diminish the vertical structure of functional and create more horizontal structure which allows the spread of information across task boundaries to happen much faster
+      * allows specializatioin to increase depth of knowledge and allows individuals to be chosen according to project needs
+    * disadvantages
+      * tends to lead to anarchy, power struggles, and sinking to group and division levels
+      * increases complexity of the chain of command
+      * can be confusing for employees to understand who is next in the chain of command
+      * higher manager to worker ratio that can result in conflicting loyalties of employees
   * Team
+    * 
   * Network
   * Virtual
   * Hierarchy-community phenotype model
+
 
 # what is the [tripartite classification of authority](https://en.wikipedia.org/wiki/Tripartite_classification_of_authority) model?
   * authored by Max Weber
