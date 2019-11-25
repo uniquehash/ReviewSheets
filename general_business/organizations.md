@@ -41,6 +41,7 @@
     * authority is still rational legal type
     * organization is still rule bound
   * Functional structure
+    * 
   * Divisional structure
   * Matrix structure
   * Organizational circle
@@ -50,7 +51,15 @@
   * Hierarchy-community phenotype model
 
 # what is the [tripartite classification of authority](https://en.wikipedia.org/wiki/Tripartite_classification_of_authority) model?
-  * authored by 
+  * authored by Max Weber
+  * three ideal types of legitimate political leadership, domination, and authority
+    * charismatic authority (character, heroism, leadership, religious)
+      * a form of leadership where authority of an organization is largely derived from the charisma of the leader
+    * traditional authority (patriarchs, patrimonialism, feaudalism)
+      * a form of leadership where authority of an organization is largely tied to tradition or custom
+      * "it's always been that way" leadership
+    * rational-legal authority (modern law and state, bureaucracy)
+      * a form of leadership where authority is tied to legal rationality, legal legitimacy, and bureaucracy
 
 # what is [organizational inertia](https://managingresearchlibrary.org/glossary/organizational-inertia)
   * the tendency of a mature organization to continue on its current trajectory, stems from
