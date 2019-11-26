@@ -1,4 +1,7 @@
 # org words found here and there
+  * [cat: types of organizations](https://en.wikipedia.org/wiki/Category:Types_of_organization)
+  * [cat: organizational structure](https://en.wikipedia.org/wiki/Category:Organizational_structure)
+  * [aspects: organizational structures](https://en.wikipedia.org/wiki/Organizational_structure#References)
   * [multinational](https://en.wikipedia.org/wiki/Multinational_corporation)
   * [flat structure](https://en.wikipedia.org/wiki/Flat_organization)
   * [bureaucracy](https://en.wikipedia.org/wiki/Bureaucracy)
@@ -26,6 +29,15 @@
   * [departmentalization](https://en.wikipedia.org/wiki/Departmentalization)
   * [power](https://en.wikipedia.org/wiki/Power_(social_and_political))
   * [organizational architecture](https://en.wikipedia.org/wiki/Organizational_architecture)
+  * [power structure](https://en.wikipedia.org/wiki/Power_structure)
+  * [command and control](https://en.wikipedia.org/wiki/Command_and_Control)
+  * [informal organization](https://en.wikipedia.org/wiki/Informal_organization)
+  * [formal organization](https://en.wikipedia.org/wiki/Formal_organization)
+  * [organizational ideology](https://en.wikipedia.org/wiki/Organisational_ideology)
+  * [henry mintzberg](https://en.wikipedia.org/wiki/Henry_Mintzberg)
+  * [adhocracy](https://en.wikipedia.org/wiki/Adhocracy)
+  * [organizational configurations](https://en.wikipedia.org/wiki/Organization_structure)
+  * 
 
 # what kind of [organizational forms](https://en.wikipedia.org/wiki/Organizational_structure) are common ?
   * organizational structure is a structure that consists of activities such as coordination, supervsion, and task allocation
@@ -125,11 +137,19 @@
       * can be confusing for employees to understand who is next in the chain of command
       * higher manager to worker ratio that can result in conflicting loyalties of employees
   * Team
-    * 
+    * teams can be both horizontal and vertical
+    * just groupings of people basically 
   * Network
+    * contracting out business functions to networks of providers
+    * managers spend most of their time coordinating and controlling external relations
   * Virtual
+    * defined as being closely coupled upstream with its suppliers and downstream with its customers such that where one begins and the other ends means little too those who manage the business processes within the entire organizations
+    * in essense a boundaryless organization
   * Hierarchy-community phenotype model
-
+    * an organization has both a hierarchy and a community structure
+      * both equally well established and occurring extensively throughout the organization
+    * uses org chart to analyse formal authority 
+    * uses social network analysis to map out the community structure within the organization
 
 # what is the [tripartite classification of authority](https://en.wikipedia.org/wiki/Tripartite_classification_of_authority) model?
   * authored by Max Weber
@@ -153,4 +173,30 @@
 
 # what does [authority](https://en.wikipedia.org/wiki/Authority) actually mean?
   * the right to exercise power and make decisions
+   
+# what are some [mechanisms of coordination](https://en.wikipedia.org/wiki/Henry_Mintzberg#Contribution_to_organization_theory)?
+  * mutual adjustment
+    * without formal, standardized mechanisms
+    * achieves coordination by the simple process of informal communication 
+      * as between two operating employees
+  * direct supervision
+    * when one person gives direct orders to others
+    * achieves coordination by having one person issue orders or instructions to several others whose work interrelates 
+      * as when a boss tells others what is to be done one step at a time
+  * standardization of work processes
+    * based on the documents that regulate work and are produced by technostructure
+    * achieves coordination by specifying the work processes of people carrying out interrelated tasks
+      * those standards usually being developed in the technostructure to be carried out in the operating coree as in the case of work instructions that come out of time-and-motion studies
+  * standardization of outputs
+    * only the results of work are regulated
+    * achives coordination by specifying the results of different work
+      * usually developed in the technostructure as in a financial plan that specfies subunit performance targets or specifications that outline the dimensions of a product to be produced
+  * standardization of skills and knowledge
+    * based on preparing the specialists outside the organization
+    * achieves coordination by virtue of the related training the workers have received
+      * as in medical specialists say a surgeon and anesthetist in an operating room responding almost automatically too each other's standardizd procedures
+  * standardization of norms
+    * based on organization's values, ideology
+    * achieves coordination through shared norms such that everyone functions according to the same set of beliefs
+      * as in a religious order
    
