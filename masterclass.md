@@ -24,3 +24,4 @@
   * doing events (mostly an excuse to get people to give money)
   * internet raise (requires compeling message, advertizing, and lists)
   * direct mail (mostly replaced by internet raise)
+  
