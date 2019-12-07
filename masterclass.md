@@ -15,7 +15,7 @@
   * figure out who would donate money to the candidate in the area
   * how many people have given to this kind of race in the past
   * how much can you raise from direct mail or internet
- 
+
 * (David Axelrod and Karl Rove) how many types of ways are there to raise money for political campaigns?
   * the candidate asking for money
   * the candidate writing a check themselves
