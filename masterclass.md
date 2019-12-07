@@ -1,3 +1,4 @@
+  
 * (David Axelrod and Karl Rove) how many types of political messages are there?
   * introductory or biographical
     * "who you are and why you're running"
@@ -24,4 +25,3 @@
   * doing events (mostly an excuse to get people to give money)
   * internet raise (requires compeling message, advertizing, and lists)
   * direct mail (mostly replaced by internet raise)
-  
