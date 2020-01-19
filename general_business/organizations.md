@@ -37,7 +37,7 @@
   * [henry mintzberg](https://en.wikipedia.org/wiki/Henry_Mintzberg)
   * [adhocracy](https://en.wikipedia.org/wiki/Adhocracy)
   * [organizational configurations](https://en.wikipedia.org/wiki/Organization_structure)
-  * 
+  * Benetton model
 
 # what kind of [organizational forms](https://en.wikipedia.org/wiki/Organizational_structure) are common ?
   * organizational structure is a structure that consists of activities such as coordination, supervsion, and task allocation
@@ -199,4 +199,6 @@
     * based on organization's values, ideology
     * achieves coordination through shared norms such that everyone functions according to the same set of beliefs
       * as in a religious order
-   
+
+* what is the benetton model?
+
