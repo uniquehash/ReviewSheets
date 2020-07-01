@@ -255,6 +255,37 @@
         * Software | 451030
           * Application Software | 45103010
           * Systems Software | 45103020
-      * 
+      * Technology Hardware & Equipment | 4520
+        * Communications Equipment | 452010
+          * Communications Equipment | 45201020
+        * Technology Hardware, Storage & Peripherals | 452020
+          * Technology Hardware, Storage & Peripherals | 45202030
+        * Electronic Equipment, Instruments & Components | 452030
+          * Electronic Equipment & Instruments | 45203010
+          * Electronic Components | 45203015
+          * Electronic Manufacturing Services | 45203020
+          * Technology Distributors | 45203030
+      * Semiconductors & Semiconductor Equipment | 4530
+        * Semiconductors & Semiconductor Equipment | 453010
+          * Semiconductor Equipment | 45301010
+          * Semiconductors | 45301020
+    * Communication Services | 50
+      * Communication Services | 5010
+        * Diversified Telecommunication Services | 501010
+          * Alternative Carriers | 50101010
+          * Integrated Telecommunication Services | 50101020
+        * Wireless Telecommunication Services | 501020
+          * Wireless Telecommunication Services | 50102010
+      * Media & Entertainment | 5020
+        * Media | 502010
+          * Advertising | 50201010
+          * Broadcasting | 50201020
+          * Cable & Satellite | 50201030
+          * Publishing | 50201040
+        * Entertainment | 502020
+          * Movies & Entertainment | 50202010
+          * Interactive Home Entertainment | 50202020
+        * Interactive Media & Services | 502030
+          * Interactive Media & Services | 50203010
       
          
