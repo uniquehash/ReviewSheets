@@ -220,4 +220,41 @@
           * Life Sciences Tools & Services | 35203010
     * Financials | 40
       * Banks | 4010
-        * 
+        * Banks | 401010
+          * Diversified Banks | 40101010
+          * Regional Banks | 40101015
+        * Thrifts & Mortgage Finance | 401020
+          * Thrifts & Mortgage Finance | 40102010
+      * Diversified Financials | 4020
+        * Diversified Financials Services | 402010
+          * Other Diversified Financial Services | 40201020
+          * Multi-Sector Holdings | 40201030
+          * Specialized Finance | 40201040
+        * Consumer Finance | 402020
+          * Consumer Finance | 40202010
+        * Capital Markets | 402030
+          * Asset Management & Custody Banks | 40203010
+          * Incestment Banking & Brokerage | 40203020
+          * Diversified Capital Markets | 40203030
+          * Financial Exchanges & Data | 40203040
+        * Mortgage Real Estate Investment Trusts (REITs) | 402040
+          * Mortgage REITs | 40204010
+      * Insurance | 4030
+        * Insurance | 403010
+          * Insurance Brokers | 40301010
+          * Life & Health Insurance | 40301020
+          * Multi-line Insurance | 40301030
+          * Property & Casualty Insurance | 40301040
+          * Reinsurance | 40301050
+    * Information Technology | 45
+      * Software & Services | 4510
+        * IT Services | 451020
+          * It Consulting & Other Services | 45102010
+          * Data Processing & Outsourced Services | 45102020
+          * Internet Services & Infrastructure | 45102030
+        * Software | 451030
+          * Application Software | 45103010
+          * Systems Software | 45103020
+      * 
+      
+         
