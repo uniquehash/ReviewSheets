@@ -111,5 +111,113 @@
           * Industrial Machinery | 20106020
         * Trading Companies & Distributors | 201070
           * Trading Companies & distributors | 20107010
-
-        
+      * Commercial & Professional Services | 2020
+        * Commercial Services & Supplies | 202010
+          * Commercial Printing | 20201010
+          * Environmental & Facilities Services | 20201050
+          * Office Services & Supplies | 20201060
+          * Diversified Support Services | 20201070
+          * Security & Alarm Services | 20201080
+      * Transportation | 2030
+        * Air Freight & Logistics | 203010
+          * Air Freight & Logistics | 20301010
+        * Airlines | 203020
+          * Airlines | 20302010
+        * Marine | 203030
+          * Marine | 20303010
+        * Road & Rail | 203040
+          * Railroads | 20304010
+          * Trucking | 20304020
+        * Transportation Infrastructure | 203050
+          * Airport Services | 20305010
+          * Highways & Railtracks | 20305020
+          * Marine Ports & Services | 20305030
+    * Consumer Discretionary | 25
+      * Automobiles & Components | 2510
+        * Auto Components | 251010
+          * Auto Parts & Equipment | 25101010
+          * Tires & Rubber | 25101020
+        * Automobiles | 251020
+          * Automobile Manufactures | 25102010
+          * Motorcycle Manufacturers | 25102020
+      * Consumer Durables & Apparel | 2520
+        * Household Durables | 252010
+          * Consumer Electronics | 25201010
+          * Home Furnishings | 25201020
+          * Homebuilding | 25201030
+          * Household Appliances | 25201040
+          * Housewares & Specialties | 25201050
+        * Leisure Products | 252020
+          * Leisure Products | 25202010
+        * Textiles, Apparel & Luxury Goods | 252030
+          * Apparel, Accessories & Luxury Goods | 25203010
+          * Footwear | 25203010
+          * Textiles | 25203030
+      * Consumer Services | 2530
+        * Hotels, Restaurants & Leisure | 253010
+          * Casinos & Gaming | 25301010
+          * Hotels, Resorts & Cruise Lines | 25301020
+          * Leisure Facilities | 25301030
+          * Restaurants | 25301040
+        * Diversified Consumer Services | 253020
+          * Education Services | 25302010
+          * Specialized Consumer Services | 25302020
+      * Retailing | 2550
+        * Distributors | 255010
+          * Distributors | 25501010
+        * Internet & Direct Marketing Retail | 255020
+          * Internet & Direct Marketing Retail | 25502020
+        * Multiline Retail | 255030
+          * Department Stores | 25503010
+          * General Merchandise Stores | 25503020
+        * Specialty Retail | 255040
+          * Apparel Retail | 25504010
+          * Computer & Electronics Retail | 25504020
+          * Home Improvement Retail | 25504030
+          * Specialty Stores | 25504040
+          * Automotive Retail 25504050
+          * Homefurnishing Retail | 25504060
+    * Consumer Staples | 30
+      * Food & Staples Retailing | 3010
+        * Food & Staples Retailing | 301010
+          * Drug Retail | 30101010
+          * Food Distributors | 30101020
+          * Food Retail | 30101030
+          * Hypermarkets & Super Centers | 30101040
+      * Food, Beverage & Tobacco | 3020
+        * Beverages | 302010
+          * Brewers | 30201010
+          * Distillers & Vintners | 30201020
+          * Soft Drinks | 30201030
+        * Food Products | 302020
+          * Agricultural Products | 30202010
+          * Packaged Foods & Meats | 30202030
+        * Tobacco | 302030
+          * Tobacco | 30203010
+      * Household & Personal Products | 3030
+        * Household Products | 303010
+          * Household Products | 30301010
+        * Personal Products | 303020
+          * Personal Products | 30302010
+    * Health Care | 35
+      * Health Care Equipment & Services | 3510
+        * Health Care Equipment & Supplies | 351010
+          * Health Care Equipment | 35101010
+          * Health Care Supplies | 35101020
+        * Health Care Providers & Services | 351020
+          * Health Care Distributors | 35102010
+          * Health Care Services | 35102015
+          * Health Care Facilities | 35102020
+          * Managed Health Care | 35102030
+        * Health Care Technology | 351030
+          * Health Care Technology | 35103010
+      * Pharmaceuticals, Biotechnology & Life Sciences | 3520
+        * Biotechnology | 352010
+          * Biotechnology | 35201010
+        * Pharmaceuticals | 352020
+          * Pharmaceuticals | 35202010
+        * Life Sciences Tools & Services | 352030
+          * Life Sciences Tools & Services | 35203010
+    * Financials | 40
+      * Banks | 4010
+        * 
