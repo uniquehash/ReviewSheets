@@ -287,5 +287,34 @@
           * Interactive Home Entertainment | 50202020
         * Interactive Media & Services | 502030
           * Interactive Media & Services | 50203010
+    * Utilities | 55
+      * Utilities | 5510
+        * Electric Utilities | 551010
+          * Electric Utilities | 55101010
+        * Gas Utilities | 551020
+          * Gas Utilities | 55102010
+        * Multi-Utilities | 551030
+          * Multi-Utilities | 55103010
+        * Water Utilities | 551040
+          * Water Utilities | 55104010
+        * Independent Power and Renewable Electricity Producers | 551050
+          * Independent Power Producers & Energy Traders | 55105010
+          * Renewable Electricity | 55105020
+    * Real Estate | 60
+      * Real Estate | 6010
+        * Equity Real Estate Investment Trusts (REITs) | 601010
+          * Diversified REITs | 60101010
+          * Industrial REITs | 60101020
+          * Hotel & Resort REITs | 60101030
+          * Office REITs | 60101040
+          * Health Care REITs | 60101050
+          * Residential REITs | 60101060
+          * Retail REITs | 60101070
+          * Specialized REITs | 60101080
+        * Real Estate Management & Development | 60102010
+          * Diversified Real Estate Activities | 60102010
+          * Real Estate Operating Companies | 60102020
+          * Real Estate Development | 60102030
+          * Real Estate Services | 60102040
       
          
