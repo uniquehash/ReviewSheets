@@ -316,5 +316,242 @@
           * Real Estate Operating Companies | 60102020
           * Real Estate Development | 60102030
           * Real Estate Services | 60102040
-      
+
+* how does the [ICB industry classification benchmark](https://www.investopedia.com/terms/i/industry-classification-benchmark.asp)?
+  * established by dow jones and financial times stock exchange
+  * each company is allocated to the subsector that most closely represents the nature of its business
+  * takes the production approach of classification
+  * contains 10 industries, 19 supersectors, 41 sectors, 114 subsectors
+  * companies are divided into providers of goods vs providers of services
+  * tree structure
+    * industry | code
+      * supersector | code
+        * sector | code 
+          * subsector | code
+  * taxonomy
+    * technology | 10
+      * technology | 1010
+        * software and computer sciences | 101010
+          * computer science | 10101010
+          * software | 10101015
+          * consumer digital services | 10101020
+        * technology hardware and equipment | 101020
+          * semiconductors | 10102010
+          * electronic components | 10102015
+          * production technology equipment | 10102020
+          * computer hardware | 10102030
+          * electronic office equipment | 10102035
+    * telecommunications | 15
+      * telecommunications | 1510
+        * telecommunications equipment | 151010
+          * telecommunications equipment | 15101010
+        * telecommunications service providers | 151020
+          * cable television services | 15102010
+          * telecommunications services | 15102015
+    * health care | 20
+      * health care | 2010
+        * health care providers | 201010
+          * health care facilities | 20101010
+          * health care management services | 20101020
+          * health care services | 20101025
+          * health care misc | 20101030
+        * medical equipment and services | 201020
+          * medical equipment | 20102010
+          * medical supplies | 20102015
+          * medical services | 20102020
+        * pharmaceuticals and biotechnology | 201030
+          * biotechnology | 20103010
+          * pharmaceuticals | 20103015
+          * cannabis producers | 20103020
+    * financials | 30
+      * banks | 3010
+        * banks | 301010
+          * banks | 30101010
+      * financial services | 3020
+        * finance and credit services | 302010
+          * consumer lending | 30201020
+          * mortgage finance | 30201025
+          * financial data providers | 30201030
+        * investment banking and brokerage services | 302020
+          * diversified financial services | 30202000
+          * asset managers and custodians | 30202010
+          * investment services | 30202015
+        * mortgage real estate investment trusts | 302030
+          * mortgage REITs: diversified | 30203000
+          * mortgage REITs: commercial | 30203010
+          * mortgage REITs: residential | 30203020
+        * closed end investments | 302040
+          * closed end investments | 30204000
+        * open end and miscellaneous investment vehicles | 302050
+          * open end and miscellaneous investment vehicles | 30205000
+      * insurance | 3030
+        * life insurance | 303010
+          * life insurance | 30301010
+        * nonlife insurance | 303020
+          * full line insurance | 30302010
+          * insurance brokers | 30302015
+          * reinsurance | 30302020
+          * property and casualty insurance | 30302025
+    * real estate | 35
+      * real estate | 3510
+        * real estate investment and services development | 351010
+          * real estate holding and development | 35101010
+          * real estate services | 35101015
+        * real estate investment trusts | 351020
+          * diversified REITs | 35102000
+          * health care REITs | 35102010
+          * hotel and lodging REITs | 35102015
+          * industrial REITs | 35102020
+          * infrastructure REITs | 35102025
+          * office REITs | 35102030
+          * residential REITs | 35102040
+          * retail REITs | 35102045
+          * storage REITs | 35102050
+          * timber REITs | 35102060
+          * otehr specialty REITs | 35102070
+    * consumer discretionary | 40
+      * automobiles and parts | 4010
+        * automobiles and parts | 401010
+          * auto services | 40101010
+          * tires | 40101015
+          * automobiles | 40101020
+          * auto parts | 40101025
+      * consumer products and services | 4020
+        * consumer services | 402010
+          * education services | 40201010
+          * funeral parlors and cemetery | 40201020
+          * printing and copying services | 40201030
+          * rental and leasing services: consumer | 40201040
+          * storage facilities | 40201050
+          * vending and catering service | 40201060
+          * consumer services: misc | 40201070
+        * household goods and home construction | 402020
+          * home construction | 40202010
+          * household furnishings | 40202015
+          * household appliance | 40202020
+          * household equipment and products | 40202025
+        * leisure goods | 402030
+          * consumer electronics | 40203010
+          * electronic entertainment | 40203040
+          * toys | 40203045
+          * recreational products | 40203050
+          * recreational vehicles and boats | 40203055
+          * photography | 40203060
+    * consumer staples | 45
+      * food, beverage, and tobacco | 4510
+        * beverages | 451010
+          * brewers | 45101010
+          * distillers and vintners | 45101015
+          * soft drinks | 45101020
+        * food producers | 451020
+          * farming, fishing, ranching and plantations | 45102010
+          * food products | 45102020
+          * fruit and grain processing | 45102030
+          * sugar | 45102035
+        * tobacco | 45103010
+          * tobacco | 45103010
+      * personal care, drug, and grocery stores | 4520
+        * personal care, drug, and grocery stores | 452010
+          * food retailers and wholesalers | 45201010
+          * drug retailers | 45201015
+          * personal products | 45201020
+          * nondurable household products | 45201030
+          * miscellaneous consumer staple goods | 45201040
+    * industrial | 50
+      * construction and materials | 5010
+        * construction and materials | 501010
+          * construction | 50101010
+          * engineering and contracting services | 50101015
+          * building, roofing/wallboard and plumbing | 50101020
+          * building: climate control | 50101025
+          * cement | 50101030
+          * building materials: other | 50101035
+      * industrial goods and services | 5020
+        * aerospace and defense | 502010
+          * aerospace | 50201010
+          * defense | 50201020
+        * electronic and electrical equipment | 502020
+          * electrical components | 50202010
+          * electronic equipment: control and filter | 50202020
+          * electronic equipment: gauges and meters | 50202025
+          * electronic equipment: pollution control | 50202030
+          * electronic equipment: other | 50202040
+        * general industrials | 502030
+          * diversified industrials | 50203000
+          * paints and coatings | 50203010
+          * plastics | 50203015
+          * glass | 50203020
+          * containers and packaging | 50203030
+        * industrial engineering | 502040
+          * machinery: industrial | 50204000
+          * machinery: agricultural | 50203010
+          * machinery: construction and handling | 50204010
+          * machinery: engines | 50204030
+          * machinery: tools | 50204040
+          * machinery: specialty | 50204050
+        * industrial support services | 502050
+          * industrial suppliers | 50205010
+          * transaction processing services | 50205015
+          * professional business support services | 50205020
+          * business training and employment agencies | 50205025
+          * forms and bulk printing services | 50205030
+          * security services | 50205040
+        * industrial transportation | 502060
+          * trucking | 50206010
+          * commercial vehicles and parts | 50206015
+          * railroads | 50206025
+          * railroad equipment | 50206025
+          * marine transportation | 50206030
+          * delivery services | 50206040
+          * commercial vehicle-equipment leasing | 50206050
+          * transportation services | 50206060
+    * basic materials | 55
+      * basic resources | 5510
+        * industrial materials | 551010
+          * diversified materials | 55101000
+          * forestry | 55101010
+          * textile products | 55101020
+        * industrial metals and mining | 551020
+          * general mining | 55102000
+          * iron and steel | 55102010
+          * metal fabricating | 55102015
+          * aluminum | 55102035
+          * copper | 55102040
+          * nonferrous metals | 55102050
+        * precious metals and mining | 551030
+          * diamonds and gemstones | 55103020
+          * gold mining | 55103025
+          * platinum and precious metals | 55103025
+      * chemicals | 5520
+        * chemicals | 552010
+          * chemicals: diversified | 55201000
+          * chemicals and synthetic fibers | 55201010
+          * fertilizers | 55201015
+          * specialty chemicals | 55201020
+    * energy | 60
+      * energy | 6010
+        * oil, gas, and coal | 601010
+          * integrated oil and gas | 60101000
+          * oil: crude producers | 60101010
+          * offshore drilling and other services | 60101015
+          * oil refining and marketing | 60101020
+          * oil equipment and services | 60101030
+          * pipelines | 60101035
+          * coal | 60101040
+        * alternative energy | 601020
+          * alternative fuels | 60102010
+          * renewable energy equipment | 60102020
+    * utilities | 65
+      * utilities | 6510
+        * electricity | 651010
+          * alternative electricity | 65101010
+          * conventional electricity | 65101015
+        * gas, water, and multi-utilities | 651020
+          * multi-utilities | 65102000
+          * gas distribution | 65102020
+          * water | 65102030
+        * waste and disposal services | 651030
+          * waste and disposal services | 65103035
+
+
          
