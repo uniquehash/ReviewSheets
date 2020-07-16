@@ -658,6 +658,102 @@
             * pesticides | 5110102012
             * organic fertilizers | 5110102013
             * agricultural chemicals wholesale | 5110102013
+          * specialty chemicals | 51101030
+            * specialty chemicals (NEC) | 5110103010
+            * coloring agents | 510103011
+            * synthetic fibers | 5110103012
+            * adhesives | 5110103013
+            * advanced polymers | 5110103014
+            * epoxy chemicals | 5110103015
+            * industrial biotechnology chemicals | 5110103016
+            * specialty chemicals wholesale | 51101017
+          * diversified chemicals | 51101090
+            * diversified chemicals | 5110109010
+      * mineral resources | 5120
+        * metals and mining | 512010
+          * non-gold precious metals and minerals | 51201010
+            * non-gold precious metals and minerals (NEC) | 5120101010
+            * silver mining | 5120101011
+            * platinum mining | 5120101012
+            * diamond mining | 5120101013
+            * semiprecious gem stones | 5120101014
+            * pearl cultivation | 5120101015
+            * rare earch minerals | 5120101016
+          * iron and steel | 51201020
+            * iron and steel (NEC) | 5120102010
+            * iron ore mining | 5120102011
+            * coke coal mining | 5120102012
+            * iron, steel mills and foundries | 5120102013
+            * metal service centers | 5120102014
+            * metallic rolling and drawing products | 5120102015
+            * metal merchant wholesalers | 5120102016
+          * aluminum | 51201030
+            * aluminum (NEC) | 5120103010
+            * primary aluminum production | 5120103011
+            * secondary smelting and alloying of aluminum | 5120103012
+            * aluminum rolling | 5120103013
+            * aluminum refining | 5120103014
+            * aluminum wholesalers | 5120103015
+            * bauxite mining | 5120103016
+          * specialty mining and metals | 51201050
+            * specialty mining and metals (NEC) | 5120105010
+            * lead ore mining | 5120105011
+            * copper ore mining | 5120105012
+            * nickel ore mining | 5120105013
+            * zinc ore mining | 5120105014
+            * nonferrous metal mining | 5120105015
+            * nonferrous metal processing | 5120105016
+            * specialty mining and metals wholesale | 5120105017
+          * gold | 51201060
+            * gold (NEC) | 5120106010
+            * gold mining | 5120106011
+            * gold refining | 5120106012
+          * mining support services and equipment | 51201070
+            * mining support services and equipment (NEC) | 5120107010
+            * geophysical surveying and mapping services | 5120107011
+            * mining support services | 5120107012
+            * mining machinery and equipment manufacturing | 5120107013
+          * diversified mining | 51201080
+            * diversified mining | 5120108010
+        * construction materials | 512020
+          * construction materials | 51202010
+            * construction materials (NEC) | 51202010
+            * construction material processing | 51202011
+            * cement and concrete manufacturing | 51202012
+            * tile and paving material manufacturing | 51202013
+            * rock mining | 5120201014
+            * construction material wholesale | 5120201014
+      * applied resources | 5130
+        * paper and forest products | 513010
+          * forest and wood products | 51301010
+            * forest and wood products (NEC) | 5130101010
+            * timber tract operations | 5130101011
+            * forest nurseries and gathering of forest products | 5130101012
+            * logging and sawmills | 5130101013
+            * forest support and services | 5130101014
+            * wood products | 5130101015
+            * wood product wholesale | 5130101016
+          * paper products | 51301020
+            * paper products (NEC) | 5130102010
+            * textile containers and packaging | 5130102011
+            * glass containers and packaging | 5130102012
+            * metal containers and packaging | 5130102013
+            * plastic containers and packaging | 5130102014
+            * wood container and packaging | 5130102015
+            * container and packaging material wholesale | 5130102016
+        * containers and packaging | 513020
+          * non-paper containers and packaging | 51302010
+            * non-paper containers and packaging (NEC) | 5130201010
+            * textile containers and packaging | 5130201011
+            * glass containers and packaging | 5130201012
+            * metal containers and packaging | 5130201013
+            * plastic containers and packaging | 5130201014
+            * wood containes and packaging | 5130201015
+            * container and packaging material wholesale | 5130201016
+          * paper packaging | 51302020
+            * paper packaging (NEC) | 5130202010
+            * paper packaging wholesale | 5130202011
+
       
 
 
