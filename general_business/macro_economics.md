@@ -30,6 +30,7 @@
       * defines companies according to who they sell to
   * GICS (global industry classification standard)
     * takes the market-orientated approach
+    * de facto framework
     * contains 11 sectors, 24 industry groups, 68 industries, and 157 sub-industries
     * sectors can be cyclical or non-cyclical
     * company is assigned a GIC classification codes at the sub-industry level by S & P and MSCI (morgan stanley capital international) according to their definition of the company's principal business
@@ -42,6 +43,19 @@
   * difference between the two
     * how consumer businesses are classified at the sector level
     * etf generally use one system or the other, if your trading etfs be consistent in the system you use
+  * [TRBC (Thomson Reuters Business Classification)](https://en.wikipedia.org/wiki/Thomson_Reuters_Business_Classification)
+    * developed in 2004
+    * market-based approach
+    * contains 10 economic sectors, 28 business sectors, 54 industry groups, 136 industries, and 837 activities
+    * assigned an activity based on largest revenue activity
+  * [NAICS (North American Industry Classification System)](https://en.wikipedia.org/wiki/North_American_Industry_Classification_System)
+    * developed in 1997
+    * production based
+    * used by government and business in north america, mostly replaced SIC
+  * [SIC (Standard Industrial Classidication)](https://en.wikipedia.org/wiki/Standard_Industrial_Classification)
+    * developed in 1937
+    * market based
+    * used by government and SEC, replaced by NAICS
 
 * how does the GICS system work](https://www.investopedia.com/terms/g/gics.asp)?
   * a method for assigning every public company to the economic sector and industry group which best defines its business in accordance to the market it services
@@ -552,6 +566,103 @@
           * water | 65102030
         * waste and disposal services | 651030
           * waste and disposal services | 65103035
+
+* [TRBC (Thomson Reuters Business Classification)](https://en.wikipedia.org/wiki/Thomson_Reuters_Business_Classification)
+  * developed in 2004
+  * market-based approach, assigned an activity based on largest revenue activity
+  * contains 10 economic sectors, 28 business sectors, 54 industry groups, 136 industries, and 837 activities
+  * taxonomy
+    * energy | 50
+      * energy - fossil fuels | 5010
+        * coal | 501010
+          * coal | 50101010
+            * coal (NEC) | 5010101010
+            * coal mining support | 5010101011
+            * coal wholesale | 5010101012
+        * oil and gas | 501020
+          * integrated oil and gas | 50102010
+            * integrated oil and gas | 5010201010
+          * oil and gas exploration and production | 50102020
+            * oil and gas exploration and production (NEC) | 5010202010
+            * oil exploration and production - onshore | 5010202011
+            * oil exploration and production - offshore | 5010202012
+            * natural gas exploration and production - onshore | 5010202013
+            * natural gas exploration and production - offshore | 5010202014
+            * unconventional oil and gas production | 5010202015
+          * oil gas refining and marketing | 50102030
+            * oil and gas refining marketing (NEC) | 5010203010
+            * petroleum refining | 5010203011
+            * gasoline stations | 5010203012
+            * petroleum product wholesale | 5010203013
+        * oil and gas related equipment and services | 501030
+          * oil and gas drilling | 50103010
+            * oil and gas drilling (NEC) | 5010301010
+            * oil drilling - onshore | 5010301011
+            * gas drilling - onshore | 5010301012
+            * oil drilling - offshore | 5010301013
+            * gas drilling - offshore | 5010301014
+            * unconventional oil and gas drilling | 5010301015
+          * oil-related services and equipment | 50103020
+            * oil-related services and equipment (NEC) | 5010302010
+            * oil-related services | 5010302011
+            * oil-related equipment | 5010302012
+            * oil-related - surveying and mapping services | 5010302013
+          * oil and gas transportation services | 50103030
+            * oil and gas transportation services (NEC) | 5010303010
+            * Lng transportation and storage | 5010303011
+            * natural gas pipeline transportation | 5010303012
+            * oil pipeline transportation | 5010303013
+            * sea-borne tankers | 5010303014
+            * oil and gas storage | 5010303015
+      * renewable energy | 5020
+        * renewable energy | 502010
+          * renewable energy equipment and services | 50201010
+            * renewable energy equipment and services (NEC) | 5020101010
+            * wind systems and equipment | 5020101011
+            * stationary fuel cells | 5020101012
+            * photovoltaic solar systems and equipment | 5020101013
+            * thermal solar systems and equipment | 5020101014        
+            * biomass power energy equipment | 5020101015
+            * waste to energy systems and equipment | 5020101016
+            * hydropower equipment | 5020101017
+            * wave power energy equipment | 5020101018
+            * renewable energy services | 5020101020
+            * geothermal equipment | 5020101020
+          * renewable fuels | 50201020
+            * renewable fuels (NEC) | 5020102010
+            * biodiesel | 5020102011
+            * ethanol fuels | 5020102012
+            * pyrolytic and synthetic fuels | 5020102013
+            * biomass and biogas fuels | 5020102014
+            * hydrogen fuel | 50205015
+      * uranium | 5030
+        * uranium | 503010
+          * uranium | 50301010
+            * uranium (NEC) | 5030101010
+            * uranium mining | 5030101011
+            * uranium processing | 5030101012
+    * basic materials | 51
+      * chemicals | 5110
+        * chemicals | 511010
+          * commodity chemicals | 51101010
+            * commodity chemicals (NEC) | 5110101010
+            * plastics | 5110101011
+            * paints and coatings | 5110101012
+            * tanning and softening agents | 5110101013
+            * explosives | 5110101014
+            * industrial gases | 5110101015
+            * commodity chemicals wholesale | 5110101016
+          * agricultural chemicals | 51101020
+            * agricultural chemicals (NEC) | 5110102010
+            * fertilizers | 5110102011
+            * pesticides | 5110102012
+            * organic fertilizers | 5110102013
+            * agricultural chemicals wholesale | 5110102013
+      
+
+
+
+* [NAICS (North American Industry Classification System)](https://en.wikipedia.org/wiki/North_American_Industry_Classification_System)
 
 
          
