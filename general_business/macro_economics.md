@@ -962,7 +962,16 @@
             * automotive batteries | 5310102013
             * automotive systems | 5310102014
             * automotive accessories | 5310102015
-            * 
+            * motorcycle parts and accessories | 5310102016
+            * auto and truck parts wholesale | 5310102017
+          * tires and rubber products | 53101030
+            * tires and rubber products (NEC) | 5310103010
+            * tire and tube manufacturing | 5310103011
+            * tire retreading | 5310103012
+            * industrial rubber products | 5310103013
+            * rubber plantations | 5310103014
+            * tires and rubber products wholesale | 5310103015
+
             
           
       
