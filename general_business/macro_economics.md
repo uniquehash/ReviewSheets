@@ -753,7 +753,218 @@
           * paper packaging | 51302020
             * paper packaging (NEC) | 5130202010
             * paper packaging wholesale | 5130202011
-
+      * industrial goods | 5210
+        * aerospace and defense | 521010
+          * aerospace and defense | 52101010
+            * aerospace and defense (NEC) | 5210101010
+            * arms and ammunitions manufactoring | 5210101011
+            * commercial aircraft manufactoring | 5210101012
+            * military aircraft manufactoring | 5210101013
+            * satellite design and manufacturing | 5210101014
+            * spacecraft manufacturing | 5210101015
+            * military clothing and accessories | 5210101016
+            * aircraft equipment wholesale | 5210101017
+        * machinery, tools, heavy vehicles, trains and ships | 511020
+          * industrial machinery and equipment | 52102010
+            * industrial machinery and equipment (NEC) | 5210201010
+            * industrial components | 5210201011
+            * industrial machinery | 5210201012
+            * ball and roller bearings | 5210201013
+            * testing and measuring equipment | 5210201014
+            * pump and pumping equipment | 5210201015
+            * air and gas compressors | 5210201016
+            * welding and soldering equipment | 5210201017
+            * industrial process furnance and ovens | 5210201018
+            * fluid power cylinder and actuators | 5210201019
+            * automatic vending machines | 5210201020
+            * industrial moulds | 5210201021
+            * machine tools | 5210201022
+            * industrial valve manufacturing | 5210201023
+            * industrial machinery and equipment wholesale | 5210201024
+          * heavy machinery and vehicles | 52102020
+            * heavy machinery and vehicles (NEC) | 5210202010
+            * construction machinery | 5210202011
+            * heavy trucks | 5210202012
+            * heavy buses and coaches | 5210202013
+            * locomotive engines and rolling stock | 5210202014
+            * agricultural machinery | 5210202014
+            * commercial landscaping equipment | 5210202015
+            * heavy machinery and vehicles wholesale | 5210202016
+          * electrical components and equipment | 52102030
+            * electrical components and equipment (NEC) | 5210203010
+            * batteries and uninterruptable power supplies | 5210203011
+            * wires and cables | 5210203012
+            * electrical components | 5210203013
+            * lighting equipment | 5210203014
+            * heating, ventillation and air conditioning systems | 5210203015
+            * electrical insulators | 5210203016
+            * switchgear | 5210203017
+            * portable motors and generators | 5210203018
+            * electrical measuring and testing instruments | 5210203019
+            * electric equipment wholesale | 5210203020
+          * heavy electrical equipment | 52102040
+            * heavy electrical equipment (NEC) | 5210204010
+            * electrical transmission and grid equipment | 5210204011
+            * elevator and conveying equipment | 5210204012
+            * turbine manufacturing | 5210204013
+            * heavy motors and generators | 5210204014
+            * industrial electrical switchgear | 5210204015
+            * nuclear generators and components | 5210204016
+          * shipbuilding | 52102050
+            * shipbuilding (NEC) | 5210205010
+            * ship parts manufacturing | 5210205011
+            * ship repairing and maintenance | 5210205012
+      * industrial and commercial services | 5220
+        * construction and engineering | 522010
+          * construction and engineering | 52201020
+            * construction and engineering (NEC) | 5220102010
+            * commercial buildings | 5220102011
+            * highway and bridge construction | 5220102012
+            * railway construction | 5220102013
+            * power and communications network construction | 5220102014
+            * civil engineers and architects | 5220102015
+            * building contractors | 5220102016
+            * industrial plant construction | 5220102017
+            * water and sewage construction | 5220102018
+            * land division and subdivision | 5220102019
+            * gas infrastructure construction | 5220102020
+            * electric power plant construction | 5220102021
+            * nuclear power plant construction | 5220102022
+            * telecommunication construction | 5220102023
+        * diversified industrial goods wholesalers | 522020
+          * diversified industrial goods wholesalers | 52202010
+            * diversified industrial goods wholesalers | 5220201010
+        * professional and commercial services | 522030
+          * environmental services and equipment | 52203010
+            * environmental services and equipment | 5220301010
+            * purification and treatment equipment | 5220301011
+            * waste management, disposal and recycling | 5220301012
+            * environmental consultancy services | 5220301013
+            * environmental randd services and biotechnology | 5220301014
+            * carbon capture and storage | 5220301015
+          * commercial printing services | 52203020
+            * commercial printing services (NEC) | 5220302010
+            * specialized printing services | 5220302011
+            * newspaper and magazine printing services | 5220302012
+            * book printing services | 5220302013
+          * employment services | 52203030
+            * employment services (NEC) | 5220303010
+            * human resources | 5220303011
+            * outsourcing and staffing services | 5220303012
+            * executive search services | 5220303013
+            * online job portals | 5220303014
+          * business support services | 52203040
+            * business support services (NEC) | 5220304010
+            * corporate accounting services | 5220304011
+            * legal services | 5220304012
+            * management consulting services | 5220304013
+            * security services | 5220304014
+            * commercial educational services | 5220304015
+            * cleaning services | 5220304016
+            * data processing services | 5220304017
+            * industrial equipment rental | 5220304018
+            * office equipment and supplies rental | 5220304019
+            * pest control services | 5220304020
+            * maintenance and repair services | 5220304021
+            * industrial design services | 5220304022
+            * translation and interpretation services | 5220304023
+            * testing laboratories | 5220304024
+            * call center services | 5220304025
+            * exihibition and conference services | 5220304026
+            * transaction and payment services | 5220304027
+          * business support supplies | 52203060
+            * business support supplies (NEC) | 5220306010
+            * office furniture | 5220306011
+            * office supplies | 5220306012
+            * health, safety and fire protection equipment | 5220306013
+            * office supplies wholesale | 5220306014
+          * professional information services | 52203070
+            * professional information services | 5220307010
+            * financial information providers | 5220307011
+            * compliance and investor communication | 5220307012
+            * rating agencies | 5220307013
+            * trade and business publishing | 5220307014
+            * legal and tax information providers | 5220307015
+            * education and training information providers | 5220307016
+            * journals and scholarly research | 5220307017
+            * news agencies | 5220307018
+      * industrial conglomerates | 5230
+        * industrial conglomerates | 523010
+          * industrial conglomerates | 52301010
+            * industrial conglomerates | 5230101010
+      * transportation | 5240
+        * freight and logistics services | 525050
+          * courier, postal, air freight and land-based logistics | 52405010
+            * courier, postal air freight and land-based logistics (NEC) | 5240501010
+            * freight logistics | 5240501011
+            * air freight | 5240501012
+            * courier services | 5240501013
+            * integrated logistics operators | 5240501014
+          * marine freight and logistics | 52405020
+            * marine freight and logistics (NEC) | 5240502010
+            * marine logistics | 5240502011
+            * inland water freight | 5240502012
+            * deep sea freight | 5240502013
+          * ground freight and logistics | 52405030
+            * ground freight and logistics (NEC) | 5240503010
+            * railway freight operators | 5240503011
+            * freight trucking | 5240503012
+            * warehousing | 5240503013
+            * truck rental | 5240503014
+        * passenger transportation services | 524060
+          * airlines | 52406010
+            * airlines (NEC) | 5240601010
+            * regional airlines | 5240601011
+            * charter and private air services | 5240601012
+            * specialized aviation services | 5240601013
+            * inter-modal passenger transportation | 5240601014
+          * passenger transportation, ground and sea | 52406020
+            * passenger transportation, ground and sea (NEC) | 5240602010
+            * commuting services | 5240602011
+            * charter bus services | 5240602012
+            * rail services | 5240602013
+            * marine passenger transportation | 5240602014
+            * commuter ferry operators | 5240602015
+            * taxis and limousines | 5240602016
+            * passenger car rental | 5240602017
+        * transport infrastructure | 524070
+          * airport operators and services | 52407010
+            * airport operators and services (NEC) | 5240701010
+            * airport operators | 5240701011
+            * duty free shops | 5240701012
+            * airport fueling services | 5240701013
+            * airline catering services | 5240701014
+          * marine port services | 52407020
+            * marine port services (NEC) | 5240702010
+            * port warehousing services | 5240702011
+            * port operators | 5240702012
+            * marine cargo handling services | 5240702013
+          * highways and rail tracks | 52407030
+            * highways and rail tracks (NEC) | 5240703010
+            * highway operators | 5240703011
+            * railway operators | 5240703012
+            * parking lot operators | 5240703013
+    * consumer cyclicals | 53
+      * autombiles and auto parts | 5310
+        * automobiles and auto parts | 531010
+          * auto and truck manufacturers | 53101010
+            * auto and truck manufacturers (NEC) | 5310101010
+            * motorcycles and scooters | 5310101011
+            * automobiles and multi ultility vehicles | 5310101012
+            * light trucks | 5310101013
+            * electrical (alternative) vehicles | 5310101014
+            * luxury vehicles | 5310101015
+            * auto and truck wholesale | 5310101016
+          * auto, truck, and motorcycle parts | 53101020
+            * auto, truck and motorcycle parts (NEC) | 5310102010
+            * automotive body parts | 5310102011
+            * engine and powertrain systems | 5310102012
+            * automotive batteries | 5310102013
+            * automotive systems | 5310102014
+            * automotive accessories | 5310102015
+            * 
+            
+          
       
 
 
