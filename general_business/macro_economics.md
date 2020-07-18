@@ -971,8 +971,319 @@
             * industrial rubber products | 5310103013
             * rubber plantations | 5310103014
             * tires and rubber products wholesale | 5310103015
-
-            
+      * cyclical consumer products | 5320
+        * textiles and apparel | 532020
+          * textiles and leather goods | 53202010
+            * textiles and leather goods (NEC) | 5320201010
+            * synthetic fabrics | 5320201011
+            * natural fabrics | 5320201012
+            * organic and ecologically produced fabric | 5320201013
+            * leather goods | 5320201014
+            * fur goods | 5320201015
+            * fabric dyeing and finishing | 5320201016
+            * yarn goods | 5320201017
+            * cotton farming | 5320201018
+            * textiles and leather goods wholesale | 5320201019
+          * apparel and accessories | 53202020
+            * apparel and accessories (NEC) | 5320202010
+            * men's clothing | 532020201011
+            * women's clothing | 532020201012
+            * chiledren's and infant's clothing | 532020201013
+            * sportswear and outdoors clothing | 532020201014
+            * jeans | 532020201015
+            * knitwear | 532020201016
+            * lingerie | 532020201017
+            * hosiery and socks | 532020201018
+            * industrial clothing and uniforms | 532020201019
+            * fair trade and ethical clothing | 532020201020
+            * luxury accessories | 532020201021
+            * accessories | 532020201022
+            * jewelry | 532020201023
+            * watches | 532020201024
+            * handbags and luggage | 532020201025
+            * fashion eyewear | 532020201026
+            * apparel wholesale | 532020201027
+          * footwear | 53202030
+            * footwear (NEC) | 5320203010
+            * men's footwear | 5320203011
+            * women's footwear | 5320203012
+            * children's and infant's footwear | 5320203013
+            * sports and outdoor footwear | 5320203014
+            * luxury footwear | 5320203015
+            * functional footwear | 5320203016
+            * footwear wholesale | 5330303017
+        * homebuilding and construction supplies | 532030
+          * homebuilding | 53203010
+            * homebuilding (NEC) | 5320301010
+            * residential builders - single homes | 5320301011
+            * residential builders - multifamily homes | 5320301012
+            * prefabricated homes | 5320301013
+            * sustainable and energy-efficient home builders | 5320301014
+            * retirement home builders | 5320301015
+            * residential architectural and interior design services | 5320301016
+          * construction supplies and fixtures | 53203020
+            * construction supplies and fixtures (NEC) | 5320302010
+            * construction supplies | 5320302011
+            * luxury construction supplies and fixtures | 5320302012
+            * doors and window frames | 5320302013
+            * flooring and interior tile manufacturers | 5320302014
+            * plumbing fixtures and fittings | 5320302015
+            * kitchen cabinets | 5320302016
+            * bathroom fixtures | 5320302017
+            * roofing supplies | 5320302018
+            * lighting fixtures | 5320302019
+            * construction supplies and fixtures wholesale | 5320302020
+        * household goods | 532040
+          * appliances, tools and housewares (NEC) | 53204030
+            * appliances, tools and housewares (NEC) | 5320403010
+            * household appliances | 5320403011
+            * tools and housewares | 5320403012
+            * kitchen appliances | 5320403013
+            * cutlery and flatware | 5320403014
+            * appliance and houseware wholesale | 5320403015
+            * luxury appliances | 5320403016
+          * home furnishings | 53204040
+            * home furnishings (NEC) | 5320404010
+            * carpets and curtains | 5320404011
+            * wallpaper | 5320404012
+            * furniture and art | 5320404013
+            * luxury furnishing | 5320404014
+            * antiques | 5320404015
+            * home furnishings wholesale | 5320404016
+        * leisure products | 532050
+          * toys and children's product | 53205010
+            * toys and children's products (NEC) | 5320501010
+            * dolts and stuffed toys | 5320501011
+            * games, toys and children's vehicles | 5320501012
+            * children's safety products | 5320501013
+            * children's furniture | 5320501014
+            * children's products and accessories | 5320401015
+            * toys and children's products wholesale | 5320401016
+          * recreational products | 53205020
+            * recreational products (NEC) | 5320502010
+            * sailing yachts and motorboats | 5320502011
+            * bicycle manufacturing | 5320502012
+            * sporting and outdoor goods | 5320502013
+            * musical instruments | 5320502014
+            * luxury recreational products | 5320502015
+            * leisure products wholesale | 5320502016
+      * cyclical consumer services | 5330
+        * hotels and entertainment services | 533010
+          * hotels, motels and cruise lines | 53301010
+            * hotels, motels and cruise lines | 5330101010
+            * hotels and motels | 533010101011
+            * cruise lines | 533010101012
+            * luxury hotels | 533010101013
+            * resort operators | 533010101014
+            * bed and breakfast | 533010101015
+            * self-catering accommodation | 533010101016
+            * campsite operators | 533010101017
+          * restaurants and bars | 53301020
+            * restaurants and bars (NEC) | 5330102010
+            * pubs, bars and night clubs | 5330102011
+            * commercial food services | 5330102012
+            * quick service restaurants | 5330102013
+            * mobile caterers | 5330102014
+            * banquet halls and catering | 5330102015
+            * cafes | 5330102016
+          * casinos and gaming | 53301030
+            * casinos and gaming (NEC) | 5330103010
+            * gambling and gaming machine manufacturers | 5330103011
+            * gambling machine operators | 5330103012
+            * casinos | 5330103013
+            * horse and dog race tracks | 5330103014
+            * lottery and operators | 5330103015
+          * leisrue and recreation | 53301040
+            * leisure and recreation (NEC) | 5330104010
+            * movie theatres and movie products | 5330104011
+            * theatres and performing arts | 5330104012
+            * museums and historic places | 5330104013
+            * travel agents | 5330104014
+            * amusement parks and zoos | 5330104015
+            * gyms, fitness and spa centers | 5330104016
+            * adventure sports facilities and ski resorts | 5330104017
+            * public sport facilities | 5330104018
+            * professional sports venues | 5330104019
+            * golf courses | 5330104020
+            * hunting and fishing | 5330104021
+            * marinas | 5330104022
+            * guided tour operators | 5330104023
+        * media and publishing | 533020
+          * advertising and marketing | 53302010
+            * advertising and marketing (NEC) | 5330201010
+            * advertising agency | 5330201011
+            * media buying agency | 5330201012
+            * signs and advertising specialty producers | 5330201013
+            * outdoor advetrtising | 5330201014
+            * direct marketing | 5330201015
+            * sales promotions and events management | 5330201016
+            * guerrilla marketing | 5330201017
+            * public relations | 5330201018
+            * digital media agencies | 5330201019
+            * branding and naming | 5330201020
+            * market research | 5330201021
+            * marketing consulting services | 5330201022
+          * broadcasing | 53302020
+            * broadcasting (NEC) | 5330202010
+            * television broadcasting | 5330202011
+            * radio broadcasting | 5330202012
+            * cable service providers | 5330202013
+          * entertainment production | 53302030
+            * entertainment production (NEC) | 5330203010
+            * movie, tv production and distribution | 5330203011
+            * music, music video production and distribution | 5330203012
+            * plays and concert production | 5330203013
+            * entertainment production equipment and services | 5330203014
+            * copyright management | 5330203015
+            * adult entertainment production and broadcasting | 5330203016
+          * consumer publishing | 53302040
+            * consumer publishing (NEC) | 5330204010
+            * newspaper publishing | 5330204011
+            * magazine publishing | 5330204012
+            * book publishing | 5330204013
+            * directory publishing | 5330204014
+            * digital publishing | 5330204015
+            * adult publishing | 5330204016
+      * retailers | 5340
+        * diversified retail | 534020
+          * department stores | 53402010
+            * department stores (NEC) | 5340201010
+            * general department stores | 5340201011
+            * luxury department stores | 5340201012
+            * internet and mail order department stores | 5340201013
+          * discount stores | 53402020
+            * discount stores (NEC) | 5340202010
+            * internet and mail order discount stores | 5340202011
+            * discount stores with grocery | 5340202012
+            * discount stores without grocery | 5340202013
+            * discount stores with gasoline | 5340202014
+            * discount stores without gasoline | 5340202015
+        * specialty retailers | 534030
+          * auto vehicles, parts and service retailers | 53403010
+            * auto vehicles, parts and service retailers (NEC) | 5340301010
+            * new car dealers | 5340301011
+            * used car dealers | 5340301012
+            * motorcycle dealers | 5340301013
+            * automotive parts and accessories retailers | 5340301014
+            * tire dealers | 5340301015
+            * luxury car dealers | 5340301016
+          * home improvement products and services retailers | 53403020
+            * home improvement products and services retailers (NEC) | 5340302010
+            * paint and wallpaper retailers | 5340302011
+            * builder merchants | 5340302012
+            * nursery and garden centers | 5340302013
+            * kitchen and bathroom retailers | 5340302014
+            * home decor retailers | 5340302015
+            * interior design services | 5340302016
+            * luxury home improvement product retailers | 5340302017
+          * home furnishings retailers | 53403030
+            * home furnishings retailers (NEC) | 5340303010
+            * furniture retailers | 5340303011
+            * floor covering retailers | 5340303012
+            * soft furnishing retailers | 5340303013
+            * luxury furnishing retailers | 5340303014
+            * antique dealers | 5340303015
+          * apparel and accessories retailers | 53403040
+            * apparel and accessories retailers (NEC) | 5340304010
+            * footwear retailers | 5340304011
+            * jewelry and watch retailers | 5340304012
+            * men's apparel retailers | 5340304013
+            * women's apparel retailers | 5340304014
+            * children's and infant's clothing retailers | 5340304015
+            * teen fashion retailers | 5340304016
+            * handbags and luggage retailers | 5340304017
+            * luxury apparel retailers | 5340304018
+            * sports and outdoors retailers | 5340304019
+          * computer and electronics retailers | 53403050
+            * computer and electronics retailers (NEC) | 5340305010
+            * computer hardware and software retailers | 5340305011
+            * consumer electronics retailers | 5340305012
+            * mobile phone retailers | 5340305013
+          * miscellaneous specialty retailers | 53403090
+            * miscellaneous specialty retailers (NEC) | 5340309010
+            * luxury beauty supply retailers | 5340309011
+            * personal care products retailers | 5340309012
+            * optical goods stores | 5340309013
+            * health food stores | 5340309014
+            * musical instrument retailers | 5340309015
+            * hobby and craft product retailers | 5340309016
+            * toys and games retailers | 5340309017
+            * book and magazine retailers | 5340309018
+            * florists | 5340309019
+            * office supplies and stationery stores | 5340309020
+            * gift, novelty and souvenir stores | 5340309021
+            * used merchandise stores | 5340309022
+            * sporting goods stores | 5340309023
+            * pet and pet supplies retailers | 5340309024
+            * adult products retailers | 5340309025
+    * consumer non-cyclicals | 54
+      * food and beverages | 5410
+        * beverages | 541010
+          * brewers | 54101010
+            * brewers (NEC) | 5410101010
+            * craft and micro brewers | 5410101011
+          * distillers and wineries | 54101020
+            * distillers and wineries (NEC) | 5410102010
+            * wineries | 5410102011
+            * distilleries | 5410102012
+            * malt producers | 5410102013
+          * non-alcoholic beverages | 54101030
+            * non-alcoholic beverages (NEC) | 5410103010
+            * carbonated soft drinks | 5410103011
+            * fruit drinks | 5410103012
+            * energy drinks | 5410103013
+            * bottled water and ice | 5410103014
+        * food and tobacco | 541020
+          * fishing and farming | 54102010
+            * fishing and farming | 5410201010
+            * grain (crop) production | 5410201011
+            * poultry farming | 5410201012
+            * sheep and specialty livestock farming | 5410201013
+            * vegetable, fruit and nut farming | 5410201014
+            * coffee, tea and cocoa farming | 5410201015
+            * sugarcane farming | 5410201016
+            * commercial nurseries | 5410201017
+            * commercial fishing | 5410201018
+            * aquaculture | 5410201019
+            * fur farming | 5410201020
+            * animal breeding | 5410201021
+            * agriculture support services | 5410201022
+            * organic farming | 5410201023
+            * animal feed | 5410201024
+            * agricultural consultance services | 5410201025
+            * fishing and farming wholesale | 5410201026
+            * agricultural biotechnology | 5410201027
+            * hog and pig farming | 5410201028
+            * cattle farming | 5410201029
+          * food processing | 54102020
+            * food processing (NEC) | 5410202010
+            * flour milling | 5410202011
+            * bread and bakery product manufacturing | 5410202012
+            * breakfast cereal manufacturing | 5410202013
+            * cookie, cracker and pasta manufacturing | 5410202014
+            * fruit and vegetable processing | 5410202015
+            * meat processing | 5410202016
+            * halal meat processing | 5410202017
+            * seafood product preparation and packaging | 5410202018
+            * dairy products | 5410202019
+            * starch, vegetable fat and oil manufacturing | 5410202020
+            * coffee and tea | 5410202021
+            * sugar and artificial sweeteners | 5410202022
+            * chocolate and confectionery | 5410202023
+            * snack food and non-chocolate confectionary | 5410202024
+            * special foods and wellbeing products | 5410202025
+            * food ingredients | 5410202026
+            * baby food | 5410202027
+            * ready-made meals | 5410202028
+            * all other food manufacturing | 5410202029
+            * frozen food manufacturing | 5410202030
+            * pet food manufacturing | 5410202031
+          * tobacco | 54102030
+            * tobacco (NEC) | 5410203010
+            * tobacco farming | 5410203011
+            * tobacco stemming and redrying | 5410203012
+            * cigars and cigarette manufacturing | 5410203013
+            * chewing tobacco products | 5410203014
           
       
 
